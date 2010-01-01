@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/runners-log/
 Description: This plugin let your convert your blog into a training log. Based on 4 custom fields it let you calculate your speed, time per km, and let you have a chart of your total distance and minutes per month.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
-Version: 1.0.3
+Version: 1.0.4
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -18,11 +18,22 @@ Requires WordPress 2.7 or later.
 	<?php runners_log_bar_hours(); ?>
 	<?php runners_log_graphmini_km(); ?>
 	<?php runners_log_graphmini_hours(); ?>
+
+== I only want my graphs to show up in a special category ==
+If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this:
+
+<?php if ( in_category('6') ): ?>
+<?php runners_log_basic(); ?>
+<?php runners_log_graph(); ?>
+<?php runners_log_graphmini_km(); ?>
+<?php runners_log_graphmini_hours(); ?>
+<?php runners_log_pie_km(); ?>
+<?php runners_log_pie_hours(); ?>
+<?php runners_log_bar_km(); ?>
+<?php runners_log_bar_hours(); ?>
+<?php endif; ?>
 	
 */
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if ( category ID = 6 ) {
  function runners_log_basic() {
  //Make $wpdb and $post global
 	global $wpdb, $post;
@@ -617,6 +628,4 @@ Requires WordPress 2.7 or later.
 
  //End function runners_log_bar_hours()
  }
-//End Category eg. 6
-//}
 ?>

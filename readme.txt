@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: sport, training, running, activity log, fitness, stats, statistics
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 This plugin lets you convert your blog to a training log. 
 

@@ -5,11 +5,21 @@ Plugin URI: http://wordpress.org/extend/plugins/runners-log/
 Description: This plugin let your convert your blog into a training log. Based on 4 custom fields it let you calculate your speed, time per km, and let you have a chart of your total distance and minutes per month.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
-Version: 1.0.1
+Version: 1.0.2
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
-*/
 
+== Use the follow tags in your template ==
+    <?php runners_log_basic(); ?>
+	<?php runners_log_graph(); ?>
+	<?php runners_log_pie_hours(); ?>
+	<?php runners_log_pie_km(); ?>
+	<?php runners_log_bar_km(); ?>
+	<?php runners_log_bar_hours(); ?>
+	<?php runners_log_graphmini_km(); ?>
+	<?php runners_log_graphmini_hours(); ?>
+	
+*/
 
 function runners_log_basic() {
 //Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 

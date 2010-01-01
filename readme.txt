@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: sport, training, running, activity log, fitness, stats, statistics
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 
 This plugin lets you convert your blog to a training log. 
 
@@ -63,20 +63,25 @@ If that's a problem either uninstall this plugin, help making it work with cache
 
 == Screenshots ==
 
-screenshot-1.png
-screenshot-2.png
-screenshot-3.png
-screenshot-4.png
-screenshot-5.png
-screenshot-6.png
-screenshot-7.png
-screenshot-8.png
-screenshot-9.png
+1. show you how your custom fields should look like
+2. gives gives an example of using `<?php runners_log_basic(); ?>`
+3. gives gives an example of using `<?php runners_log_graph(); ?>`
+4. gives gives an example of using `<?php runners_log_pie_hours(); ?>`
+5. gives gives an example of using `<?php runners_log_pie_km(); ?>`
+6. gives gives an example of using `<?php runners_log_bar_km(); ?>`
+7. gives gives an example of using `<?php runners_log_bar_hours(); ?>`
+9. gives gives an example of using `<?php runners_log_graphmini_hours(); ?>`
 
 == Changelog ==
 
 = 1.0.0 =
 * Initial Release
+
+= 1.0.1 =
+* Fixing Screenshots
+
+= 1.0.2 =
+* Fixing Screenshots again
 
 == Upgrade Notice ==
 
@@ -85,20 +90,18 @@ This was the initial release Januar 1st 2010
 
 == Screenshots explanation ==
 
-screenshot-1.png show you how your custom fields should look like
-screenshot-2.png gives gives an example of using `<?php runners_log_basic(); ?>`
-screenshot-3.png gives gives an example of using `<?php runners_log_graph(); ?>`
-screenshot-4.png gives gives an example of using `<?php runners_log_pie_hours(); ?>`
-screenshot-5.png gives gives an example of using `<?php runners_log_pie_km(); ?>`
-screenshot-6.png gives gives an example of using `<?php runners_log_bar_km(); ?>`
-screenshot-7.png gives gives an example of using `<?php runners_log_bar_hours(); ?>`
-screenshot-8.png gives gives an example of using `<?php runners_log_graphmini_km(); ?>`
-screenshot-9.png gives gives an example of using `<?php runners_log_graphmini_hours(); ?>`
+	* screenshot-1.png show you how your custom fields should look like
+	* screenshot-2.png gives gives an example of using `<?php runners_log_basic(); ?>`
+	* screenshot-3.png gives gives an example of using `<?php runners_log_graph(); ?>`
+	* screenshot-4.png gives gives an example of using `<?php runners_log_pie_hours(); ?>`
+	* screenshot-5.png gives gives an example of using `<?php runners_log_pie_km(); ?>`
+	* screenshot-6.png gives gives an example of using `<?php runners_log_bar_km(); ?>`
+	* screenshot-7.png gives gives an example of using `<?php runners_log_bar_hours(); ?>`
+	* screenshot-8.png gives gives an example of using `<?php runners_log_graphmini_km(); ?>`
+	* screenshot-9.png gives gives an example of using `<?php runners_log_graphmini_hours(); ?>`
 
 == To Do ==
 
-* enable cache
-* more graphs 
-* add miles support
-
-
+	* enable cache
+	* more graphs 
+	* add miles support

@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/runners-log/
 Description: This plugin let your convert your blog into a training log. Based on 4 custom fields it let you calculate your speed, time per km, and let you have a chart of your total distance and minutes per month.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
-Version: 1.0.2
+Version: 1.0.3
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -20,11 +20,10 @@ Requires WordPress 2.7 or later.
 	<?php runners_log_graphmini_hours(); ?>
 	
 */
-
-function runners_log_basic() {
 //Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
 //Rember to uncomment: //} at the button
-//if(in_category('6')) {
+//if ( category ID = 6 ) {
+ function runners_log_basic() {
  //Make $wpdb and $post global
 	global $wpdb, $post;
  //Get the running time 
@@ -86,15 +85,10 @@ function runners_log_basic() {
 	echo "<li><span class='post-meta-key'>Total meters run in 2009:</span> <strong>$meter_sum_2009</strong> in km: <strong>$km_sum_2009</strong></li>";
 	echo "</ul>";
 //End function runners_log_basic()
-	}
-//End Category eg 6
-//}
+ }
 
-function runners_log_graph() {
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if(in_category('6')) {
 
+ function runners_log_graph() {
  //Let us include the classes for the graph tool
  //Graph script by:  http://pchart.sourceforge.net/
 	include(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -232,15 +226,10 @@ function runners_log_graph() {
  //Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph.png', __FILE__ ) . '" alt="Training Graph" />';
 
-//End function runners_log_graph()
-	}
-//End Category eg 6
-//}
+ //End function runners_log_graph()
+ }
 
-function runners_log_graphmini_km() {
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if(in_category('6')) {
+ function runners_log_graphmini_km() {
 
  //Make $wpdb global
 	global $wpdb;
@@ -282,15 +271,10 @@ function runners_log_graphmini_km() {
 	//Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-mini-km.png', __FILE__ ) . '" alt="Training Graph Mini Km" />';
 
-//End function runners_log_graphmini_km()
-	}
-//End Category eg 6
-//}
+ //End function runners_log_graphmini_km()
+ }
 
-function runners_log_graphmini_hours() {
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if(in_category('6')) {
+ function runners_log_graphmini_hours() {
 
  //Make $wpdb global
 	global $wpdb;
@@ -334,15 +318,10 @@ function runners_log_graphmini_hours() {
 	//Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-mini-hours.png', __FILE__ ) . '" alt="Training Graph Mini Hours" />';
 
-//End function runners_log_graphmini_hours()
-	}
-//End Category eg 6
-//}
+ //End function runners_log_graphmini_hours()
+ }
 
-function runners_log_pie_km() {
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if(in_category('6')) {
+ function runners_log_pie_km() {
 
  //Make $wpdb global
 	global $wpdb;
@@ -410,15 +389,10 @@ function runners_log_pie_km() {
  //Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-km.png', __FILE__ ) . '" alt="Training Graph Pie Km" />';
 
-//End function runners_log_pie_km()
-	}
-//End Category eg 6
-//}
+ //End function runners_log_pie_km()
+ }
 
-function runners_log_pie_hours() {
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if(in_category('6')) {
+ function runners_log_pie_hours() {
 
  //Make $wpdb global
 	global $wpdb;
@@ -486,15 +460,10 @@ function runners_log_pie_hours() {
  //Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-hours.png', __FILE__ ) . '" alt="Training Graph Pie Hours" />';
 
-//End function runners_log_pie_hours()
-	}
-//End Category eg 6
-//}
+ //End function runners_log_pie_hours()
+ }
 
-function runners_log_bar_km() {
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if(in_category('6')) {
+ function runners_log_bar_km() {
 
  //Make $wpdb global
 	global $wpdb;
@@ -568,15 +537,10 @@ function runners_log_bar_km() {
  //Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-km.png', __FILE__ ) . '" alt="Training Bar Graph Km" />';
 
-//End function runners_log_bar_km()
-	}
-//End Category eg 6
-//}
+ //End function runners_log_bar_km()
+ }
 
-function runners_log_bar_hours() {
-//Set the Category ID where the running features are used if it's only for one category eg. "Sports" with the ID=6. 
-//Rember to uncomment: //} at the button
-//if(in_category('6')) {
+ function runners_log_bar_hours() {
 
  //Make $wpdb global
 	global $wpdb;
@@ -651,8 +615,8 @@ function runners_log_bar_hours() {
  //Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-hours.png', __FILE__ ) . '" alt="Training Bar Graph Hours" />';
 
-//End function runners_log_bar_hours()
-	}
-//End Category eg 6
+ //End function runners_log_bar_hours()
+ }
+//End Category eg. 6
 //}
 ?>

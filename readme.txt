@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: sport, training, running, activity log, fitness, stats, statistics
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 This plugin lets you convert your blog to a training log. 
 
@@ -35,11 +35,11 @@ This section describes how to install the plugin and get it working.
     * Total meters run in 2009: 171610 in km: 171.61
 4. Place `<?php runners_log_graph(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
 5. You only want to have the chart and stats to show up in the categori where the sports data is. If you eg. have a category called Sport with the ID=6 where you type in your activities.  
-You have to go to the 'Plugins' menu in WordPress. Edit the Plugin. Find `//if(in_category('6')) {` change to `if(in_category('6')) {`. 
-Find `//End Category eg 6` after that line change `//}` to `}`. You have to do this twice - for both functions: runners_log_basic and runners_log_graph.
-6. Every time you post an activity in your Sport or Traing Categori add the custom fields: `Meters` and `Time`. Its optional to put in `Pulsavg` and `GarminConnectLink` for your course.
+You have to go to the 'Plugins' menu in WordPress. Edit the Plugin. Find `//if ( category ID = 6 ) {` change to `if ( category ID = 6 ) {`. 
+Find `//End Category eg. 6` after that line change `//}` to `}`.
+6. Every time you post an activity in your Sport or Traing Category add the custom fields: `Meters` and `Time`. Its optional to put in `Pulsavg` and `GarminConnectLink` for your cours.
 7. `Time` needed to be formated as HH:MM:SS eg. like `00:37:20` for 37min and 20 seconds.
-8. It let you use the following tags in your template:
+8. Runners Log let you use the following tags in your template:
     * `<?php runners_log_basic(); ?>`
 	* `<?php runners_log_graph(); ?>`
 	* `<?php runners_log_pie_hours(); ?>`
@@ -82,6 +82,9 @@ If that's a problem either uninstall this plugin, help making it work with cache
 
 = 1.0.2 =
 * Fixing Screenshots again
+
+= 1.0.3 =
+* Fixing if ( category ID = 6 ) {
 
 == Upgrade Notice ==
 

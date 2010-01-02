@@ -96,6 +96,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 5. gives gives an example of using `<?php runners_log_pie_km(); ?>`
 6. gives gives an example of using `<?php runners_log_bar_km(); ?>`
 7. gives gives an example of using `<?php runners_log_bar_hours(); ?>`
+8. gives gives an example of using `<?php runners_log_graphmini_km(); ?>`
 9. gives gives an example of using `<?php runners_log_graphmini_hours(); ?>`
 
 == Changelog ==

@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/runners-log/
 Description: This plugin let your convert your blog into a training log. Based on 4 custom fields it let you calculate your speed, time per km, and let you have a chart of your total distance and minutes per month.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
-Version: 1.0.4
+Version: 1.0.5
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -20,7 +20,7 @@ Requires WordPress 2.7 or later.
 	<?php runners_log_graphmini_hours(); ?>
 
 == I only want my graphs to show up in a special category ==
-If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this:
+If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
 
 <?php if ( in_category('6') ): ?>
 <?php runners_log_basic(); ?>
@@ -32,6 +32,20 @@ If you only want your graphs to show up in the category "training" with the cate
 <?php runners_log_bar_km(); ?>
 <?php runners_log_bar_hours(); ?>
 <?php endif; ?>
+
+== I only want my graphs to show up in a special page ==
+If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
+BE WARE: <?php runners_log_basic(); ?> only works in categories
+
+<?php if (is_page('Training Stats')) { ?>
+<?php runners_log_graph(); ?>
+<?php runners_log_graphmini_km(); ?>
+<?php runners_log_graphmini_hours(); ?>
+<?php runners_log_pie_km(); ?>
+<?php runners_log_pie_hours(); ?>
+<?php runners_log_bar_km(); ?>
+<?php runners_log_bar_hours(); ?>
+<?php } ?>
 	
 */
  function runners_log_basic() {
@@ -75,11 +89,23 @@ If you only want your graphs to show up in the category "training" with the cate
 	$meter_sum_2009 = $wpdb->get_var($wpdb->prepare("
 	SELECT SUM($wpdb->postmeta.meta_value) 
 	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='Meters' 
+	WHERE $wpdb->postmeta.meta_key='Meters'
+	AND $wpdb->posts.post_status = 'publish'	
 	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 	AND year($wpdb->posts.post_date)='2009'"));
  //Convert meters to km
 	$km_sum_2009 = round($meter_sum_2009/1000, 2);
+	
+ //Connect to DB and calculate the sum of meters run in 2009
+	$meter_sum_2010 = $wpdb->get_var($wpdb->prepare("
+	SELECT SUM($wpdb->postmeta.meta_value) 
+	FROM $wpdb->postmeta, $wpdb->posts 
+	WHERE $wpdb->postmeta.meta_key='Meters'
+	AND $wpdb->posts.post_status = 'publish'
+	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+	AND year($wpdb->posts.post_date)='2010'"));
+ //Convert meters to km
+	$km_sum_2010 = round($meter_sum_2010/1000, 2);
 	
  //Print it all
 	echo "<ul class='post-meta'>";
@@ -93,7 +119,12 @@ If you only want your graphs to show up in the category "training" with the cate
 	if ($url) {
 	echo "<li><span class='post-meta-key'>Garmin Connect Link:</span> <a href='$url' target='_blank'>$url</a></li>";
 	}
-	echo "<li><span class='post-meta-key'>Total meters run in 2009:</span> <strong>$meter_sum_2009</strong> in km: <strong>$km_sum_2009</strong></li>";
+	if ($km_sum_2009) {
+	echo "<li><span class='post-meta-key'>Total Km run in 2009:</span> <strong>$km_sum_2009</strong></li>";
+	}
+	if ($km_sum_2010) {
+	echo "<li><span class='post-meta-key'>Total Km run in 2010:</span> <strong>$km_sum_2010</strong></li>";
+	}	
 	echo "</ul>";
 //End function runners_log_basic()
  }
@@ -115,7 +146,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Meters'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
@@ -126,7 +157,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Time'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
@@ -252,7 +283,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Meters'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
@@ -297,7 +328,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Time'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
@@ -344,7 +375,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Meters'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
@@ -415,7 +446,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Time'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
@@ -486,7 +517,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Meters'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
@@ -563,7 +594,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Time'
 	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -11 MONTH)
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 

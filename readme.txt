@@ -131,10 +131,10 @@ If that's a problem either uninstall this plugin, help making it work with cache
 This was the initial release Januar 1st 2010
 
 = 1.0.5 =
-This was the initial release Januar 2nd 2010
+This was release Januar 2nd 2010
 
 = 1.0.6 =
-This was the initial release Januar 3rd 2010
+This was release Januar 3rd 2010
 
 
 == Screenshots explanation ==

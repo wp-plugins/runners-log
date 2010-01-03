@@ -616,7 +616,7 @@ BE WARE: <?php runners_log_basic(); ?> only works in categories
 	
  //Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
 	$hours_per_month = $wpdb->get_results("
-	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, (SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) )/3600) AS runhours, sec_to_time( SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) ) ) AS runtime
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, ROUND((SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) )/3600), 2) AS runhours, sec_to_time( SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) ) ) AS runtime
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
 	WHERE $wpdb->postmeta.meta_key = 'Time'

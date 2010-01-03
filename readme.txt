@@ -123,6 +123,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 = 1.0.6 =
 * Added the number of run per year and avg per run like: Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
 * New runners_log_basic() screenshot
+* In runners_log_bar_hours() runhours is rounded to 2 instead of 4 decimals
 
 == Upgrade Notice ==
 

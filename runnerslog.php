@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/runners-log/
 Description: This plugin let your convert your blog into a training log. Based on 4 custom fields it let you calculate your speed, time per km, and let you have a chart of your total distance and minutes per month.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
-Version: 1.0.5
+Version: 1.0.6
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -22,30 +22,30 @@ Requires WordPress 2.7 or later.
 == I only want my graphs to show up in a special category ==
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
 
-<?php if ( in_category('6') ): ?>
-<?php runners_log_basic(); ?>
-<?php runners_log_graph(); ?>
-<?php runners_log_graphmini_km(); ?>
-<?php runners_log_graphmini_hours(); ?>
-<?php runners_log_pie_km(); ?>
-<?php runners_log_pie_hours(); ?>
-<?php runners_log_bar_km(); ?>
-<?php runners_log_bar_hours(); ?>
-<?php endif; ?>
+	<?php if ( in_category('6') ): ?>
+	<?php runners_log_basic(); ?>
+	<?php runners_log_graph(); ?>
+	<?php runners_log_graphmini_km(); ?>
+	<?php runners_log_graphmini_hours(); ?>
+	<?php runners_log_pie_km(); ?>
+	<?php runners_log_pie_hours(); ?>
+	<?php runners_log_bar_km(); ?>
+	<?php runners_log_bar_hours(); ?>
+	<?php endif; ?>
 
 == I only want my graphs to show up in a special page ==
 If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
 BE WARE: <?php runners_log_basic(); ?> only works in categories
 
-<?php if (is_page('Training Stats')) { ?>
-<?php runners_log_graph(); ?>
-<?php runners_log_graphmini_km(); ?>
-<?php runners_log_graphmini_hours(); ?>
-<?php runners_log_pie_km(); ?>
-<?php runners_log_pie_hours(); ?>
-<?php runners_log_bar_km(); ?>
-<?php runners_log_bar_hours(); ?>
-<?php } ?>
+	<?php if (is_page('Training Stats')) { ?>
+	<?php runners_log_graph(); ?>
+	<?php runners_log_graphmini_km(); ?>
+	<?php runners_log_graphmini_hours(); ?>
+	<?php runners_log_pie_km(); ?>
+	<?php runners_log_pie_hours(); ?>
+	<?php runners_log_bar_km(); ?>
+	<?php runners_log_bar_hours(); ?>
+	<?php } ?>
 	
 */
  function runners_log_basic() {
@@ -87,25 +87,49 @@ BE WARE: <?php runners_log_basic(); ?> only works in categories
 
  //Connect to DB and calculate the sum of meters run in 2009
 	$meter_sum_2009 = $wpdb->get_var($wpdb->prepare("
-	SELECT SUM($wpdb->postmeta.meta_value) 
+	SELECT SUM($wpdb->postmeta.meta_value)
 	FROM $wpdb->postmeta, $wpdb->posts 
 	WHERE $wpdb->postmeta.meta_key='Meters'
 	AND $wpdb->posts.post_status = 'publish'	
 	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 	AND year($wpdb->posts.post_date)='2009'"));
  //Convert meters to km
-	$km_sum_2009 = round($meter_sum_2009/1000, 2);
+	$km_sum_2009 = round($meter_sum_2009/1000, 1);
 	
- //Connect to DB and calculate the sum of meters run in 2009
+ //Connect to DB and calculate the number of runs in 2009
+	$number_of_runs_2009 = $wpdb->get_var($wpdb->prepare("
+	SELECT COUNT($wpdb->postmeta.meta_value)
+	FROM $wpdb->postmeta, $wpdb->posts 
+	WHERE $wpdb->postmeta.meta_key='Meters'
+	AND $wpdb->posts.post_status = 'publish'	
+	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+	AND year($wpdb->posts.post_date)='2009'"));
+	
+ //Calculate the avg km per run in 2009
+	$avg_km_per_run_2009 = ROUND(($meter_sum_2009/1000) / $number_of_runs_2009, 2);
+	
+ //Connect to DB and calculate the sum of meters run in 2010
 	$meter_sum_2010 = $wpdb->get_var($wpdb->prepare("
-	SELECT SUM($wpdb->postmeta.meta_value) 
+	SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun2010
 	FROM $wpdb->postmeta, $wpdb->posts 
 	WHERE $wpdb->postmeta.meta_key='Meters'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 	AND year($wpdb->posts.post_date)='2010'"));
  //Convert meters to km
-	$km_sum_2010 = round($meter_sum_2010/1000, 2);
+	$km_sum_2010 = round($meter_sum_2010/1000, 1);
+	
+ //Connect to DB and calculate the number of runs in 2010
+	$number_of_runs_2010 = $wpdb->get_var($wpdb->prepare("
+	SELECT COUNT($wpdb->postmeta.meta_value)
+	FROM $wpdb->postmeta, $wpdb->posts 
+	WHERE $wpdb->postmeta.meta_key='Meters'
+	AND $wpdb->posts.post_status = 'publish'	
+	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+	AND year($wpdb->posts.post_date)='2010'"));
+	
+ //Calculate the avg km per run in 2010
+	$avg_km_per_run_2010 = ROUND(($meter_sum_2010/1000) / $number_of_runs_2010, 2);
 	
  //Print it all
 	echo "<ul class='post-meta'>";
@@ -119,16 +143,19 @@ BE WARE: <?php runners_log_basic(); ?> only works in categories
 	if ($url) {
 	echo "<li><span class='post-meta-key'>Garmin Connect Link:</span> <a href='$url' target='_blank'>$url</a></li>";
 	}
-	if ($km_sum_2009) {
-	echo "<li><span class='post-meta-key'>Total Km run in 2009:</span> <strong>$km_sum_2009</strong></li>";
-	}
-	if ($km_sum_2010) {
-	echo "<li><span class='post-meta-key'>Total Km run in 2010:</span> <strong>$km_sum_2010</strong></li>";
+	if ($km_sum_2009 && $number_of_runs_2009 == 1 ) {
+	echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2009</strong></li>";
+	} else {
+	echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
+	}	
+	if ($km_sum_2010 && $number_of_runs_2010 == 1 ) {
+	echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2010</strong></li>";
+	} else {
+	echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
 	}	
 	echo "</ul>";
 //End function runners_log_basic()
  }
-
 
  function runners_log_graph() {
  //Let us include the classes for the graph tool

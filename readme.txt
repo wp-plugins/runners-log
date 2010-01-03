@@ -1,15 +1,15 @@
 === Runners Log ===
 Contributors: frold
 Donate link: http://www.liljefred.dk
-Tags: sport, training, running, activity log, fitness, stats, statistics
+Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 
 This plugin lets you convert your blog to a training log with an advance statistics and graphs.
 
 == Description ==
-
+This plugin lets you convert your blog to a training log with an advance statistics and graphs.
 Based on 4 custom fields:
 
 *   Meters
@@ -63,7 +63,7 @@ If you only want your graphs to show up in the category "training" with the cate
 	* `<?php runners_log_graphmini_hours(); ?>`
 	* `<?php endif; ?>`
 	
-== I only want my graphs to show up in a special page ==
+= I only want my graphs to show up in a special page =
 If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
 BE WARE: <?php runners_log_basic(); ?> only works in categories
 
@@ -90,14 +90,14 @@ If that's a problem either uninstall this plugin, help making it work with cache
 == Screenshots ==
 
 1. show you how your custom fields should look like
-2. gives gives an example of using `<?php runners_log_basic(); ?>`
-3. gives gives an example of using `<?php runners_log_graph(); ?>`
-4. gives gives an example of using `<?php runners_log_pie_hours(); ?>`
-5. gives gives an example of using `<?php runners_log_pie_km(); ?>`
-6. gives gives an example of using `<?php runners_log_bar_km(); ?>`
-7. gives gives an example of using `<?php runners_log_bar_hours(); ?>`
-8. gives gives an example of using `<?php runners_log_graphmini_km(); ?>`
-9. gives gives an example of using `<?php runners_log_graphmini_hours(); ?>`
+2. an example of using `<?php runners_log_basic(); ?>`
+3. an example of using `<?php runners_log_graph(); ?>`
+4. an example of using `<?php runners_log_pie_hours(); ?>`
+5. an example of using `<?php runners_log_pie_km(); ?>`
+6. an example of using `<?php runners_log_bar_km(); ?>`
+7. an example of using `<?php runners_log_bar_hours(); ?>`
+8. an example of using `<?php runners_log_graphmini_km(); ?>`
+9. an example of using `<?php runners_log_graphmini_hours(); ?>`
 
 == Changelog ==
 
@@ -111,7 +111,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * Fixing Screenshots again
 
 = 1.0.3 =
-* Fixing if ( category ID = 6 ) {
+* Fixing if ( category ID = 6 ) { and moved it to templates. This way its easier to upgrade Runners Log
 
 = 1.0.4 =
 * More info to readme.txt
@@ -119,6 +119,10 @@ If that's a problem either uninstall this plugin, help making it work with cache
 = 1.0.5 =
 * Optimazing code
 * Added 2010 to runners_log_basic()
+
+= 1.0.6 =
+* Added the number of run per year and avg per run like: Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
+* New runners_log_basic() screenshot
 
 == Upgrade Notice ==
 
@@ -128,17 +132,21 @@ This was the initial release Januar 1st 2010
 = 1.0.5 =
 This was the initial release Januar 2nd 2010
 
+= 1.0.6 =
+This was the initial release Januar 3rd 2010
+
+
 == Screenshots explanation ==
 
 	* screenshot-1.png show you how your custom fields should look like
-	* screenshot-2.png gives gives an example of using `<?php runners_log_basic(); ?>`
-	* screenshot-3.png gives gives an example of using `<?php runners_log_graph(); ?>`
-	* screenshot-4.png gives gives an example of using `<?php runners_log_pie_hours(); ?>`
-	* screenshot-5.png gives gives an example of using `<?php runners_log_pie_km(); ?>`
-	* screenshot-6.png gives gives an example of using `<?php runners_log_bar_km(); ?>`
-	* screenshot-7.png gives gives an example of using `<?php runners_log_bar_hours(); ?>`
-	* screenshot-8.png gives gives an example of using `<?php runners_log_graphmini_km(); ?>`
-	* screenshot-9.png gives gives an example of using `<?php runners_log_graphmini_hours(); ?>`
+	* screenshot-2.png an example of using `<?php runners_log_basic(); ?>`
+	* screenshot-3.png an example of using `<?php runners_log_graph(); ?>`
+	* screenshot-4.png an example of using `<?php runners_log_pie_hours(); ?>`
+	* screenshot-5.png an example of using `<?php runners_log_pie_km(); ?>`
+	* screenshot-6.png an example of using `<?php runners_log_bar_km(); ?>`
+	* screenshot-7.png an example of using `<?php runners_log_bar_hours(); ?>`
+	* screenshot-8.png an example of using `<?php runners_log_graphmini_km(); ?>`
+	* screenshot-9.png an example of using `<?php runners_log_graphmini_hours(); ?>`
 
 == To Do ==
 

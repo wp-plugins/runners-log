@@ -1,10 +1,10 @@
 === Runners Log ===
-Contributors: frold
+Contributors: frold, jaredatch
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 
 This plugin lets you convert your blog to a training log with an advance statistics and graphs.
 
@@ -25,57 +25,59 @@ This section describes how to install the plugin and get it working.
 
 1. Copy all files to `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Place `<?php runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
-    * Meters: 9270
-    * Time: 01:00:00
-    * Km/hour: 9.27
-    * Min/km: 06:28 minutes
-    * Puls average: 162
-    * Garmin Connect Link: http://connect.garmin.com/activity/21097094
-    * Total meters run in 2009: 171610 in km: 171.61
-4. Place `<?php runners_log_graph(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
+3. Place `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
+    * Meters: 10000
+    * Time: 01:04:36
+    * Km/hour: 9.29
+    * Min/km: 06:27 minutes
+    * Puls average: 169
+    * Garmin Connect Link: http://connect.garmin.com/activity/21569332
+    * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
+    * Km in 2010: 10 km based on 1 run with an avg of 10 km
+4. Place `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
 5. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 6. Every time you post an activity in your Sport or Traing Category add the custom fields: `Meters` and `Time`. Its optional to put in `Pulsavg` and `GarminConnectLink` for your cours.
 7. `Time` needed to be formated as HH:MM:SS eg. like `00:37:20` for 37min and 20 seconds.
 8. Runners Log let you use the following tags in your template:
-    * `<?php runners_log_basic(); ?>`
-	* `<?php runners_log_graph(); ?>`
-	* `<?php runners_log_pie_hours(); ?>`
-	* `<?php runners_log_pie_km(); ?>`
-	* `<?php runners_log_bar_km(); ?>`
-	* `<?php runners_log_bar_hours(); ?>`
-	* `<?php runners_log_graphmini_km(); ?>`
-	* `<?php runners_log_graphmini_hours(); ?>`
+`<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
+<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
+<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
+<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>`
 
 == Frequently Asked Questions ==
 
 = I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
 
-    * `<?php if ( in_category('6') ): ?>`
-    * `<?php runners_log_basic(); ?>`
-	* `<?php runners_log_graph(); ?>`
-	* `<?php runners_log_pie_hours(); ?>`
-	* `<?php runners_log_pie_km(); ?>`
-	* `<?php runners_log_bar_km(); ?>`
-	* `<?php runners_log_bar_hours(); ?>`
-	* `<?php runners_log_graphmini_km(); ?>`
-	* `<?php runners_log_graphmini_hours(); ?>`
-	* `<?php endif; ?>`
+`<?php if ( in_category('6') ): ?>
+<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
+<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
+<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
+<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+<?php endif; ?>`
+
 	
 = I only want my graphs to show up in a special page =
 If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
-BE WARE: <?php runners_log_basic(); ?> only works in categories
+BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?> only works in categories
 
-    * `<?php if (is_page('Training Stats')) { ?>`
-	* `<?php runners_log_graph(); ?>`
-	* `<?php runners_log_pie_hours(); ?>`
-	* `<?php runners_log_pie_km(); ?>`
-	* `<?php runners_log_bar_km(); ?>`
-	* `<?php runners_log_bar_hours(); ?>`
-	* `<?php runners_log_graphmini_km(); ?>`
-	* `<?php runners_log_graphmini_hours(); ?>`
-	* `<?php } ?>`
+`<?php if (is_page('Training Stats')) { ?>
+<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
+<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
+<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+<?php } ?>`
 
 = What does this plugin require =
 Runners Log is using pChart and therefore is using the GD library to create pictures. 
@@ -90,14 +92,14 @@ If that's a problem either uninstall this plugin, help making it work with cache
 == Screenshots ==
 
 1. show you how your custom fields should look like
-2. an example of using `<?php runners_log_basic(); ?>`
-3. an example of using `<?php runners_log_graph(); ?>`
-4. an example of using `<?php runners_log_pie_hours(); ?>`
-5. an example of using `<?php runners_log_pie_km(); ?>`
-6. an example of using `<?php runners_log_bar_km(); ?>`
-7. an example of using `<?php runners_log_bar_hours(); ?>`
-8. an example of using `<?php runners_log_graphmini_km(); ?>`
-9. an example of using `<?php runners_log_graphmini_hours(); ?>`
+2. an example of using `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>`
+3. an example of using `<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>`
+4. an example of using `<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>`
+5. an example of using `<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>`
+6. an example of using `<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>`
+7. an example of using `<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>`
+8. an example of using `<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>`
+9. an example of using `<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>`
 
 == Changelog ==
 
@@ -128,6 +130,13 @@ If that's a problem either uninstall this plugin, help making it work with cache
 = 1.0.7 =
 * The jared^ release
 
+= 1.0.8 =
+* Added WP version check
+* Now check is $hms, $meters is empty or not
+* Added GPL licens
+* Changed all templates tags to include if function exist
+* Update readme
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -139,18 +148,8 @@ This was release Januar 2nd 2010
 = 1.0.6 =
 This was release Januar 3rd 2010
 
-
-== Screenshots explanation ==
-
-	* screenshot-1.png show you how your custom fields should look like
-	* screenshot-2.png an example of using `<?php runners_log_basic(); ?>`
-	* screenshot-3.png an example of using `<?php runners_log_graph(); ?>`
-	* screenshot-4.png an example of using `<?php runners_log_pie_hours(); ?>`
-	* screenshot-5.png an example of using `<?php runners_log_pie_km(); ?>`
-	* screenshot-6.png an example of using `<?php runners_log_bar_km(); ?>`
-	* screenshot-7.png an example of using `<?php runners_log_bar_hours(); ?>`
-	* screenshot-8.png an example of using `<?php runners_log_graphmini_km(); ?>`
-	* screenshot-9.png an example of using `<?php runners_log_graphmini_hours(); ?>`
+= 1.0.8 =
+This was release Januar 2010
 
 == To Do ==
 

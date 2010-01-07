@@ -5,49 +5,75 @@ Plugin URI: http://wordpress.org/extend/plugins/runners-log/
 Description: This plugin let your convert your blog into a training log. Based on 4 custom fields it let you calculate your speed, time per km, and let you have a chart of your total distance and minutes per month.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
-Version: 1.0.7
+Version: 1.0.8
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
 == Use the follow tags in your template ==
-    <?php runners_log_basic(); ?>
-	<?php runners_log_graph(); ?>
-	<?php runners_log_pie_hours(); ?>
-	<?php runners_log_pie_km(); ?>
-	<?php runners_log_bar_km(); ?>
-	<?php runners_log_bar_hours(); ?>
-	<?php runners_log_graphmini_km(); ?>
-	<?php runners_log_graphmini_hours(); ?>
+	<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
+	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+	<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
+	<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
+	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
 
-== I only want my graphs to show up in a special category ==
+= I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
 
 	<?php if ( in_category('6') ): ?>
-	<?php runners_log_basic(); ?>
-	<?php runners_log_graph(); ?>
-	<?php runners_log_graphmini_km(); ?>
-	<?php runners_log_graphmini_hours(); ?>
-	<?php runners_log_pie_km(); ?>
-	<?php runners_log_pie_hours(); ?>
-	<?php runners_log_bar_km(); ?>
-	<?php runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
+	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+	<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
+	<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
+	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
 	<?php endif; ?>
-
-== I only want my graphs to show up in a special page ==
+	
+= I only want my graphs to show up in a special page =
 If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
-BE WARE: <?php runners_log_basic(); ?> only works in categories
+BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?> only works in categories
 
 	<?php if (is_page('Training Stats')) { ?>
-	<?php runners_log_graph(); ?>
-	<?php runners_log_graphmini_km(); ?>
-	<?php runners_log_graphmini_hours(); ?>
-	<?php runners_log_pie_km(); ?>
-	<?php runners_log_pie_hours(); ?>
-	<?php runners_log_bar_km(); ?>
-	<?php runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+	<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
+	<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
+	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
 	<?php } ?>
 	
 */
+/*  
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+/* Version check */
+global $wp_version;	
+
+$exit_msg='Runners Log requires WordPress 2.7 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please update!</a>';
+
+if (version_compare($wp_version,"2.7","<"))
+{
+	exit ($exit_msg);
+}
+
  function runners_log_basic() {
  //Make $wpdb and $post global
 	global $wpdb, $post;
@@ -72,11 +98,14 @@ BE WARE: <?php runners_log_basic(); ?> only works in categories
  //Call the function
 	$seconds = hms2sec($hms);
 
- //Calculate the avg running speed in km/hour
+ //Calculate the avg running speed in km/hour but only if $meters is not empty
+	if ($meters) {	
 	$km_per_hour = (($meters/1000) / ($seconds/3600));
 	$km_per_hour_round = round($km_per_hour, 2);
+	}
 
- //Calculate number of minutes per km
+ //Calculate number of minutes per km but only if $meters is not empty
+ 	if ($meters) {
 	$min_per_km = ($seconds) / ($meters/1000);
 	$minutes = floor($min_per_km/60);
 	$secondsleft = $min_per_km%60;
@@ -84,6 +113,7 @@ BE WARE: <?php runners_log_basic(); ?> only works in categories
 		$minutes = "0" . $minutes;
 	if($secondsleft<10)
 		$secondsleft = "0" . $secondsleft;
+	}
 
  //Connect to DB and calculate the sum of meters run in 2009
 	$meter_sum_2009 = $wpdb->get_var($wpdb->prepare("
@@ -133,10 +163,16 @@ BE WARE: <?php runners_log_basic(); ?> only works in categories
 	
  //Print it all
 	echo "<ul class='post-meta'>";
+	if ($meters) {
 	echo "<li><span class='post-meta-key'>Meters:</span> $meters</li>";
+	}
+	if ($hms) {	
 	echo "<li><span class='post-meta-key'>Time:</span> $hms</li>";
+	}	
+	if ($meters && $hms) {
 	echo "<li><span class='post-meta-key'>Km/hour:</span> $km_per_hour_round</li>";
 	echo "<li><span class='post-meta-key'>Min/km:</span> $minutes:$secondsleft minutes</li>";
+	}	
 	if ($pulsavg) {
 	echo "<li><span class='post-meta-key'>Puls average:</span> $pulsavg</li>";
 	}
@@ -144,12 +180,12 @@ BE WARE: <?php runners_log_basic(); ?> only works in categories
 	echo "<li><span class='post-meta-key'>Garmin Connect Link:</span> <a href='$url' target='_blank'>$url</a></li>";
 	}
 	if ($km_sum_2009 && $number_of_runs_2009 == 1 ) {
-	echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2009</strong></li>";
+	echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2009</strong> km</li>";
 	} else {
 	echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
 	}	
 	if ($km_sum_2010 && $number_of_runs_2010 == 1 ) {
-	echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2010</strong></li>";
+	echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2010</strong> km</li>";
 	} else {
 	echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
 	}	

@@ -137,6 +137,10 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * Changed all templates tags to include if function exist
 * Update readme
 
+* JA - Added support to hide/disable GarminConnectLink
+* JA - Added Runners Log write panel for post screen
+* JA - Started to add support for Miles
+
 == Upgrade Notice ==
 
 = 1.0.0 =

@@ -2,78 +2,123 @@
 /*
 Plugin Name: Runners Log
 Plugin URI: http://wordpress.org/extend/plugins/runners-log/
-Description: This plugin let your convert your blog into a training log. Based on 4 custom fields it let you calculate your speed, time per km, and let you have a chart of your total distance and minutes per month.
+Description: This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
-Version: 1.0.7
+Contributors: frold, jaredatch
+Version: 1.5.0
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
 == Use the follow tags in your template ==
-    <?php runners_log_basic(); ?>
-	<?php runners_log_graph(); ?>
-	<?php runners_log_pie_hours(); ?>
-	<?php runners_log_pie_km(); ?>
-	<?php runners_log_bar_km(); ?>
-	<?php runners_log_bar_hours(); ?>
-	<?php runners_log_graphmini_km(); ?>
-	<?php runners_log_graphmini_hours(); ?>
+	<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
+	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+	<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
+	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+	<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
+	<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
+	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+	<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
+	<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
+	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
 
-== I only want my graphs to show up in a special category ==
+= I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
 
 	<?php if ( in_category('6') ): ?>
-	<?php runners_log_basic(); ?>
-	<?php runners_log_graph(); ?>
-	<?php runners_log_graphmini_km(); ?>
-	<?php runners_log_graphmini_hours(); ?>
-	<?php runners_log_pie_km(); ?>
-	<?php runners_log_pie_hours(); ?>
-	<?php runners_log_bar_km(); ?>
-	<?php runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
+	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+	<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
+	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+	<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
+	<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
+	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+	<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
+	<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
+	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
 	<?php endif; ?>
-
-== I only want my graphs to show up in a special page ==
+	
+= I only want my graphs to show up in a special page =
 If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
-BE WARE: <?php runners_log_basic(); ?> only works in categories
+BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?> only works in categories
 
 	<?php if (is_page('Training Stats')) { ?>
-	<?php runners_log_graph(); ?>
-	<?php runners_log_graphmini_km(); ?>
-	<?php runners_log_graphmini_hours(); ?>
-	<?php runners_log_pie_km(); ?>
-	<?php runners_log_pie_hours(); ?>
-	<?php runners_log_bar_km(); ?>
-	<?php runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+	<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
+	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+	<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
+	<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
+	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+	<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
+	<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
+	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+	<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
 	<?php } ?>
 	
 */
+/*  
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
  /*
-JARED - 1/6/2010
+We will use 5 custom fields 
 
-$distancetype = get_option('runnerslog_distancetype');
-^^ will either be 'miles' or 'meters'
-defaults to 'meters' upon plugin activation
-
-note the field name changes in runners_log_basic!
-
+Time: _rl_time_value
+Distance _rl_distance_value
+GarminConnect: _rl_garminconnectlink_value
+Pulsavg: _rl_pulsavg_value
+Calories: _rl_calories_value
 */
 
+/* Version check */
+global $wp_version;	
 
+$exit_msg='Runners Log requires WordPress 2.7 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please update!</a>';
 
- function runners_log_basic() {
- //Make $wpdb and $post global
+if (version_compare($wp_version,"2.7","<"))
+{
+	exit ($exit_msg);
+}
+
+// Do this when user activates the plugin (Update Script)
+register_activation_hook(__FILE__, 'runners_log_update');
+
+/* Let us create the functions */
+function runners_log_basic() {
+
+	// Make $wpdb and $post global
 	global $wpdb, $post;
- //Get the running time 
-	$hms = get_post_meta($post->ID, "_rl_time_value", $single = true);
- //Get the distance
-	$meters = get_post_meta($post->ID, "_rl_meters_value", $single = true);
- //Get the Garmin Connect Link
-	$url = get_post_meta($post->ID, "_rl_GarminConnectLink_value", $single = true);
- //Get pulsavg.
-	$pulsavg = get_post_meta($post->ID, "_rl_pulsavg_value", $single = true);
 
- //Let us convert the total running time into seconds
+	// Get the running time 
+	$hms = get_post_meta($post->ID, "_rl_time_value", $single = true);
+	
+	// Get the distance
+	$distance = get_post_meta($post->ID, "_rl_distance_value", $single = true);
+	
+	// Get the Garmin Connect Link
+	$url = get_post_meta($post->ID, "_rl_garminconnectlink_value", $single = true);
+	
+	// Get pulsavg.
+	$pulsavg = get_post_meta($post->ID, "_rl_pulsavg_value", $single = true);
+	
+	// Get calories.
+	$calories = get_post_meta($post->ID, "_rl_calories_value", $single = true);	
+
+	
+	// Let us convert the total running time into seconds
 	function hms2sec ($hms) {
 	list($h, $m, $s) = explode (":", $hms);
 	$seconds = 0;
@@ -82,126 +127,234 @@ note the field name changes in runners_log_basic!
 	$seconds += (intval($s));
 	return $seconds;
 	}
- //Call the function
+	// Call the function
 	$seconds = hms2sec($hms);
+	
+	// Let us get the distancetype for further calculations
+	$distancetype = get_option('runnerslog_distancetype');	
 
- //Calculate the avg running speed in km/hour
-	$km_per_hour = (($meters/1000) / ($seconds/3600));
-	$km_per_hour_round = round($km_per_hour, 2);
+	//We test if it works... just for debugging
+	if ( $distancetype == meters ) {
+		//Let us calculate the speed in meters
+		echo "Meters is the setting atm";
+		//Else let us calculate the speed in miles
+	} else {
+		echo "Miles is the setting atm";
+	}
 
- //Calculate number of minutes per km
-	$min_per_km = ($seconds) / ($meters/1000);
+	// Calculate the avg running speed per hour
+	if ( $distance ) {
+	//First we calculate it per km and round it to 2 decimals
+	$km_per_hour = Round((($distance/1000) / ($seconds/3600)),2);
+	//Here we calculate it per miles and round it to 2 decimals
+	$miles_per_hour = Round((($distance) / ($seconds/3600)),2);
+	}
+
+	// Calculate number of minutes per km
+	if ( $distance ) {
+	$min_per_km= ($seconds) / ($distance/1000);
 	$minutes = floor($min_per_km/60);
 	$secondsleft = $min_per_km%60;
 	if($minutes<10)
 		$minutes = "0" . $minutes;
 	if($secondsleft<10)
 		$secondsleft = "0" . $secondsleft;
+	}
+		
+	// Calculate number of minutes per miles
+	if ( $distance ) {
+	$min_per_miles= ($seconds) / ($distance);
+	$minutes_miles = floor($min_per_miles/60);
+	$secondsleft_miles = $min_per_miles%60;
+	if($minutes_miles<10)
+		$minutes_miles = "0" . $minutes_miles;
+	if($secondsleft_miles<10)
+		$secondsleft_miles = "0" . $secondsleft_miles;
+	}
 
- //Connect to DB and calculate the sum of meters run in 2009
-	$meter_sum_2009 = $wpdb->get_var($wpdb->prepare("
+ /* 2 0 0 9 */
+	// Connect to DB and calculate the sum of distance runned in 2009
+	$distance_sum_2009 = $wpdb->get_var($wpdb->prepare("
 	SELECT SUM($wpdb->postmeta.meta_value)
 	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='Meters'
+	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 	AND $wpdb->posts.post_status = 'publish'	
 	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 	AND year($wpdb->posts.post_date)='2009'"));
- //Convert meters to km
-	$km_sum_2009 = round($meter_sum_2009/1000, 1);
+	// Convert distance to km when the user use "meters"
+	$km_sum_2009 = round($distance_sum_2009/1000, 1);
 	
- //Connect to DB and calculate the number of runs in 2009
+	// Connect to DB and calculate the number of runs in 2009
 	$number_of_runs_2009 = $wpdb->get_var($wpdb->prepare("
 	SELECT COUNT($wpdb->postmeta.meta_value)
 	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='Meters'
+	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 	AND $wpdb->posts.post_status = 'publish'	
 	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 	AND year($wpdb->posts.post_date)='2009'"));
 	
- //Calculate the avg km per run in 2009
-	$avg_km_per_run_2009 = ROUND(($meter_sum_2009/1000) / $number_of_runs_2009, 2);
-	
- //Connect to DB and calculate the sum of meters run in 2010
-	$meter_sum_2010 = $wpdb->get_var($wpdb->prepare("
+	// Calculate the avg per run in 2009
+	if ( $distance_sum_2009 ) {
+	$avg_km_per_run_2009 = ROUND(($distance_sum_2009/1000) / $number_of_runs_2009, 2);
+	$avg_miles_per_run_2009 = ROUND(($distance_sum_2009) / $number_of_runs_2009, 2);
+	}
+
+ /* 2 0 1 0 */	
+	// Connect to DB and calculate the sum of distance runned in 2010
+	$distance_sum_2010 = $wpdb->get_var($wpdb->prepare("
 	SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun2010
 	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='Meters'
+	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 	AND year($wpdb->posts.post_date)='2010'"));
- //Convert meters to km
-	$km_sum_2010 = round($meter_sum_2010/1000, 1);
+	// Convert distance to km when the user use "meters"
+	$km_sum_2010 = round($distance_sum_2010/1000, 1);
 	
- //Connect to DB and calculate the number of runs in 2010
+	//Connect to DB and calculate the number of runs in 2010
 	$number_of_runs_2010 = $wpdb->get_var($wpdb->prepare("
 	SELECT COUNT($wpdb->postmeta.meta_value)
 	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='Meters'
+	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 	AND $wpdb->posts.post_status = 'publish'	
 	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 	AND year($wpdb->posts.post_date)='2010'"));
 	
- //Calculate the avg km per run in 2010
-	$avg_km_per_run_2010 = ROUND(($meter_sum_2010/1000) / $number_of_runs_2010, 2);
+	// Calculate the avg per run in 2010
+	if ( $distance_sum_2010 ) {
+	$avg_km_per_run_2010 = ROUND(($distance_sum_2010/1000) / $number_of_runs_2010, 2);
+	$avg_miles_per_run_2010 = ROUND(($distance_sum_2010) / $number_of_runs_2010, 2);
+	}
 	
- //Print it all
+	//Print it all
 	echo "<ul class='post-meta'>";
-	echo "<li><span class='post-meta-key'>Meters:</span> $meters</li>";
+	// Distance
+	if ( $distancetype == meters ) {
+		//..let us print the distance in meters but only if distance is greather then 0...
+		if ( $distance > 0 ) {
+		echo "<li><span class='post-meta-key'>Meters:</span> $distance</li>";
+		}
+	} else {
+		//..else it must be miles and therefore print the distance in miles but only if distance is greather then 0...
+		if ( $distance > 0 ) {
+		echo "<li><span class='post-meta-key'>Miles:</span> $distance</li>";
+		}
+	}
+	// Time
+	if ( $hms ) {
 	echo "<li><span class='post-meta-key'>Time:</span> $hms</li>";
-	echo "<li><span class='post-meta-key'>Km/hour:</span> $km_per_hour_round</li>";
-	echo "<li><span class='post-meta-key'>Min/km:</span> $minutes:$secondsleft minutes</li>";
+	}
+	// Distance per hours
+	if ( $distancetype == meters ) {
+		//..let us get the speed in km/hours. (But only if km/hour is greather then 0...)
+		if ( $km_per_hour > 0 ) {
+		echo "<li><span class='post-meta-key'>Km/hour:</span> $km_per_hour</li>";
+		}
+	} else {
+		//..else it must be miles/hours. (But only if miles/hour is greather then 0...)
+		if ( $miles_per_hour > 0 ) {
+		echo "<li><span class='post-meta-key'>Miles/hour:</span> $miles_per_hour</li>";
+		}
+	}
+	// Min per distance
+	if ( $distancetype == meters ) {
+		//..let us get the speed in min per km... (But only if minutes is greather then 0...)
+		if ( $minutes > 0 ) {
+		echo "<li><span class='post-meta-key'>Min/km:</span> $minutes:$secondsleft minutes</li>";
+		}
+	} else {
+		//..else it must be min per miles. (But only if minutes_miles is greather then 0...)
+		if ( $minutes_miles > 0 ) {
+		echo "<li><span class='post-meta-key'>Min/miles:</span> $minutes_miles:$secondsleft_miles minutes</li>";
+		}
+	}
+	// Pulsavg
 	if ($pulsavg) {
 	echo "<li><span class='post-meta-key'>Puls average:</span> $pulsavg</li>";
 	}
+	// Caloríes
+	if ($calories) {
+	echo "<li><span class='post-meta-key'>Calories:</span> $calories C</li>";
+	}
+	//Garmin Connect Link
 	if ($url) {
 	echo "<li><span class='post-meta-key'>Garmin Connect Link:</span> <a href='$url' target='_blank'>$url</a></li>";
 	}
-	if ($km_sum_2009 && $number_of_runs_2009 == 1 ) {
-	echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2009</strong></li>";
+	// Totals 2009
+	if ($distancetype == meters) {
+			//Km
+			if ($number_of_runs_2009 == 1 ) {
+			echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
+			}
+			if ($number_of_runs_2009 > 1 ) {
+			echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
+			}
 	} else {
-	echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
-	}	
-	if ($km_sum_2010 && $number_of_runs_2010 == 1 ) {
-	echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>1</strong> run with an avg of <strong>$km_sum_2010</strong></li>";
+			//Miles
+			if ($number_of_runs_2009 == 1) {
+			echo "<li><span class='post-meta-key'>Miles in 2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
+			} 
+			if ($number_of_runs_2009 > 1 ) {
+			echo "<li><span class='post-meta-key'>Miles in 2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
+			}
+	}
+	// Totals 2010
+	if ($distancetype == meters) {
+			//Km
+			if ($number_of_runs_2010 == 1 ) {
+			echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
+			} 
+			if ($number_of_runs_2010 > 1 ) {
+			echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
+			}
 	} else {
-	echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
+			//Miles
+			if ($number_of_runs_2010 == 1) {
+			echo "<li><span class='post-meta-key'>Miles in 2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
+			} 
+			if ($number_of_runs_2010 > 1 ) {		
+			echo "<li><span class='post-meta-key'>Miles in 2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
+			}
 	}	
 	echo "</ul>";
-//End function runners_log_basic()
- }
+// End function runners_log_basic()
+}
 
- function runners_log_graph() {
- //Let us include the classes for the graph tool
- //Graph script by:  http://pchart.sourceforge.net/
+function runners_log_graph() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
 	include(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
 	include(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
  
- //Make $wpdb global
+	// Make $wpdb global
 	global $wpdb;
+
+	// Let us get the distancetype for further calculations
+	$distancetype = get_option('runnerslog_distancetype');	
 	
- //Connect to DB and get the sum of meters and convert them to km and list it per month
-	$km_per_month = $wpdb->get_results("
-	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, (SUM( $wpdb->postmeta.meta_value )/1000) AS runkm
+	// Connect to DB and get the distance sum either as km-->runkm or miles-->runmiles and list it per month
+	$distance_per_month = $wpdb->get_results("
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, (SUM( $wpdb->postmeta.meta_value )/1000) AS runkm,  SUM( $wpdb->postmeta.meta_value ) AS runmiles
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Meters'
+	WHERE $wpdb->postmeta.meta_key = '_rl_distance_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
- //Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
+	// Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
 	$hours_per_month = $wpdb->get_results("
 	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, ((SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) ) )/3600) AS runhours
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Time'
+	WHERE $wpdb->postmeta.meta_key = '_rl_time_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
- //Convert the Value 1 -> Jan, etc
+	// Convert the Value 1 -> Jan, etc
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
@@ -217,39 +370,53 @@ note the field name changes in runners_log_basic!
 		12 => 'Dec',
 	);
 	
- //Dataset definition 
+	// Dataset definition 
 	$DataSet = new pData;
- //Add the datapoint one by one...
- 	foreach ($km_per_month as $row) {
- //The Y-axis "Km per month"
-	$DataSet->AddPoint($row->runkm,"Serie1");
- //The X-axis "The months" and we transform 1,2,3.. to Jan, Feb, Marts... using $month2str
-	$DataSet->AddPoint($month2str[$row->runmonth],"Serie3");
+
+	foreach ($distance_per_month as $row) {
+		if ($distancetype == meters) {
+			// The Y-axis is "Km per month" when meters is the choice
+			$DataSet->AddPoint($row->runkm,"Serie1");
+		} else {
+			// The Y-axis is "Miles per month"
+			$DataSet->AddPoint($row->runmiles,"Serie1");
+		}
+			// The X-axis is "The months" and we transform 1,2,3.. to Jan, Feb, Marts... using $month2str
+			$DataSet->AddPoint($month2str[$row->runmonth],"Serie3");
 	}
- 	foreach ($hours_per_month as $row) {
- //Y-axis to the right "Hours per month" - Later add database for this too
-	$DataSet->AddPoint($row->runhours,"Serie2");
+ 	
+	foreach ($hours_per_month as $row) {
+		// Y-axis to the right "Hours per month"
+		$DataSet->AddPoint($row->runhours,"Serie2");
 	}
 	$DataSet->AddSerie("Serie1"); 
 	$DataSet->SetAbsciseLabelSerie("Serie3");
- //Here you can set the titel of the Data Serie 1
-	$DataSet->SetSerieName("Km per month","Serie1");
- //Here you can set the titel of the Data Serie 2
+	// Here we set the titel of the Data Serie 1
+	if ($distancetype == meters) {
+		$DataSet->SetSerieName("Km per month","Serie1");
+	} else {
+		$DataSet->SetSerieName("Miles per month","Serie1");
+	}
+	// Here we set the titel of the Data Serie 2
 	$DataSet->SetSerieName("Hours per month","Serie2");
 
- //Initialise the graph
+	// Initialise the graph
 	$Test = new pChart(475,230);
 	$Test->drawGraphAreaGradient(90,90,90,90,TARGET_BACKGROUND);
 
- //Prepare the graph area
+	// Prepare the graph area
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
 	$Test->setGraphArea(60,40,428,190);
 
- //Initialise graph area
+	// Initialise graph area
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
 
- //Draw the "Km per month" graph
-	$DataSet->SetYAxisName("Km per month");
+	// Draw the Distance per month graph
+	if ($distancetype == meters) {
+		$DataSet->SetYAxisName("Km per month");
+	} else {
+		$DataSet->SetYAxisName("Miles per month");
+	}	
 	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,213,217,221,TRUE,0,0);
 	$Test->drawGraphAreaGradient(40,40,40,-50);
 	$Test->drawGrid(4,TRUE,230,230,230,10);
@@ -260,16 +427,16 @@ note the field name changes in runners_log_basic!
 	$Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);
 
 /*
- //Uncomment if you want to add labels to your "Km per month" graph 	
- //Write values on Serie1
+	//Uncomment if you want to add labels to your "Distance per month" graph 	
+	//Write values on Serie1
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);   
 	$Test->writeValues($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1");
 */
 
- //Clear the scale
+	// Clear the scale
 	$Test->clearScale();
 
- //Draw the 2nd graph the "Hours per month" graph
+	// Draw the 2nd graph the "Hours per month" graph
 	$DataSet->RemoveSerie("Serie1");
 	$DataSet->AddSerie("Serie2");
 	$DataSet->SetYAxisName("Hours per month");
@@ -282,61 +449,72 @@ note the field name changes in runners_log_basic!
 	$Test->drawPlotGraph($DataSet->GetData(),$DataSet->GetDataDescription(),3,2,255,255,255);
 
 /* 
- //Uncomment if you want to add labels to your "Hours per month" graph 	
- //Write values on Serie2
+	// Uncomment if you want to add labels to your "Hours per month" graph 	
+	// Write values on Serie2
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);   
 	$Test->writeValues($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie2");
 */
 
- //Write the legend (box less)
+	// Write the legend (box less)
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
 	$Test->drawLegend(360,5,$DataSet->GetDataDescription(),0,0,0,0,0,0,255,255,255,FALSE);
 
- //Write the title
+	// Write the title
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/MankSans.ttf',18);
 	$Test->setShadowProperties(1,1,0,0,0);
-	$Test->drawTitle(0,0,"Training Graph",255,255,255,472,30,TRUE);
+	$Test->drawTitle(0,0,"Distance and Hours Graph",255,255,255,472,30,TRUE);
 	$Test->clearShadow();
 	
- //Draw the title Copyright. Please dont edit this.  
+	// Draw the title Copyright. Please dont edit this.  
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/GeosansLight.ttf',8);
 	$Test->drawTitle(251,227,"Runners Log a Wordpress plugin by Frederik Liljefred",255,255,255); 
 
- //Render the picture with a relative path
+	// Render the picture with a relative path
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph.png');
  
- //Insert the image and give it a absolute path
+	// Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph.png', __FILE__ ) . '" alt="Training Graph" />';
 
- //End function runners_log_graph()
- }
+// End function runners_log_graph()
+}
 
- function runners_log_graphmini_km() {
 
- //Make $wpdb global
+// The function to generate a small image with a distance chart
+function runners_log_graphmini_distance() {
+
+	// Make $wpdb global
 	global $wpdb;
+	
+	// Let us get the distancetype for further calculations
+	$distancetype = get_option('runnerslog_distancetype');	
 
- //Connect to DB and get the sum of meters and convert them to km and list it per month
-	$km_per_month = $wpdb->get_results("
-	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, (SUM( $wpdb->postmeta.meta_value )/1000) AS runkm
+	// Connect to DB and get the distance sum either as km-->runkm or miles-->runmiles and list it per month
+	$distance_per_month = $wpdb->get_results("
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, (SUM( $wpdb->postmeta.meta_value )/1000) AS runkm,  SUM( $wpdb->postmeta.meta_value ) AS runmiles
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Meters'
+	WHERE $wpdb->postmeta.meta_key = '_rl_distance_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
- //Dataset definition 
+	// Dataset definition 
 	$DataSet = new pData;
- 	foreach ($km_per_month as $row) {
- //The Y-axis "Km per month"
-	$DataSet->AddPoint($row->runkm,"Serie1");
-	}
+
+	foreach ($distance_per_month as $row) {
+		if ($distancetype == meters) {
+			// The Y-axis is "Km per month" when meters is the choice
+			$DataSet->AddPoint($row->runkm,"Serie1");
+		} else {
+			// The Y-axis is "Miles per month"
+			$DataSet->AddPoint($row->runmiles,"Serie1");
+		}
+	}	
 	$DataSet->AddAllSeries();
 	$DataSet->SetAbsciseLabelSerie();
 
-	//Initialise the graph
+	// Initialise the graph
 	$Test = new pChart(100,30);
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
 	$Test->drawFilledRoundedRectangle(2,2,98,28,2,230,230,230);
@@ -344,46 +522,46 @@ note the field name changes in runners_log_basic!
 	$Test->drawGraphArea(255,255,255);
 	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);   
 
-	//Draw the line graph
+	// Draw the line graph
 	$Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
 
-	//Render the picture with a relative path
-	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-mini-km.png');
+	// Render the picture with a relative path
+	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-mini-distance.png');
  
-	//Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-mini-km.png', __FILE__ ) . '" alt="Training Graph Mini Km" />';
+	// Insert the image and give it a absolute path
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-mini-distance.png', __FILE__ ) . '" alt="Training Graph Mini distance" />';
 
- //End function runners_log_graphmini_km()
- }
+//End function runners_log_graphmini_distance()
+}
 
- function runners_log_graphmini_hours() {
+function runners_log_graphmini_hours() {
 
- //Make $wpdb global
+	// Make $wpdb global
 	global $wpdb;
 
- //Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
+	// Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
 	$hours_per_month = $wpdb->get_results("
 	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, ((SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) ) )/3600) AS runhours
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Time'
+	WHERE $wpdb->postmeta.meta_key = '_rl_time_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
- //Dataset definition 
+	// Dataset definition 
 	$DataSet = new pData;
  	foreach ($hours_per_month as $row) {
- //The Y-axis "Minutes per month"
-	$DataSet->AddPoint($row->runhours,"Serie1");
+		//The Y-axis "Minutes per month"
+		$DataSet->AddPoint($row->runhours,"Serie1");
 	}
 	$DataSet->AddAllSeries();
 	$DataSet->SetAbsciseLabelSerie();
 
-	//Initialise the graph
+	// Initialise the graph
 	$Test = new pChart(100,30);
-	//Change the plotgraf from green into red
+	// Change the plotgraf from green into red
 	$Test->setColorPalette(0,255,0,0);
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
 	$Test->drawFilledRoundedRectangle(2,2,98,28,2,230,230,230);
@@ -391,35 +569,84 @@ note the field name changes in runners_log_basic!
 	$Test->drawGraphArea(255,255,255);
 	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);   
 
-	//Draw the line graph
+	// Draw the line graph
 	$Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
 
-	//Render the picture with a relative path
+	// Render the picture with a relative path
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-mini-hours.png');
  
-	//Insert the image and give it a absolute path
+	// Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-mini-hours.png', __FILE__ ) . '" alt="Training Graph Mini Hours" />';
 
- //End function runners_log_graphmini_hours()
- }
+//End function runners_log_graphmini_hours()
+}
 
- function runners_log_pie_km() {
+function runners_log_graphmini_calories() {
 
- //Make $wpdb global
+	// Make $wpdb global
 	global $wpdb;
 
- //Connect to DB and get the sum of meters runned and list it per month
-	$km_per_month = $wpdb->get_results("
-	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, SUM( $wpdb->postmeta.meta_value ) AS runkm
+	// Connect to DB and get the sum of calories
+	$calories_per_month = $wpdb->get_results("
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, SUM( $wpdb->postmeta.meta_value ) AS runcalories
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Meters'
+	WHERE $wpdb->postmeta.meta_key = '_rl_calories_value'
+	AND $wpdb->posts.post_status = 'publish'
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
+	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
+	");
+	
+	// Dataset definition 
+	$DataSet = new pData;
+ 	foreach ($calories_per_month as $row) {
+		$DataSet->AddPoint($row->runcalories,"Serie1");
+	}
+	$DataSet->AddAllSeries();
+	$DataSet->SetAbsciseLabelSerie();
+
+	// Initialise the graph
+	$Test = new pChart(100,30);
+	// Change the plotgraf from into blue
+	$Test->setColorPalette(0,82,124,148);
+	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
+	$Test->drawFilledRoundedRectangle(2,2,98,28,2,230,230,230);
+	$Test->setGraphArea(5,5,95,25);
+	$Test->drawGraphArea(255,255,255);
+	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);   
+
+	// Draw the line graph
+	$Test->drawLineGraph($DataSet->GetData(),$DataSet->GetDataDescription());
+
+	// Render the picture with a relative path
+	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-mini-calories.png');
+ 
+	// Insert the image and give it a absolute path
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-mini-calories.png', __FILE__ ) . '" alt="Training Graph Mini Calories" />';
+
+//End function runners_log_graphmini_calories()
+}
+
+function runners_log_pie_distance() {
+
+	//Make $wpdb global
+	global $wpdb;
+	
+	// Let us get the distancetype for further calculations
+	$distancetype = get_option('runnerslog_distancetype');	
+
+	// Connect to DB and get the distance sum either as km-->runkm or miles-->runmiles and list it per month
+	$distance_per_month = $wpdb->get_results("
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, (SUM( $wpdb->postmeta.meta_value )/1000) AS runkm,  SUM( $wpdb->postmeta.meta_value ) AS runmiles
+	FROM $wpdb->postmeta
+	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
+	WHERE $wpdb->postmeta.meta_key = '_rl_distance_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
- //Convert the Value 1 -> Jan, etc
+	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
@@ -435,62 +662,75 @@ note the field name changes in runners_log_basic!
 		12 => 'Dec',
 	);
 	
- //Dataset definition 
-	$DataSet = new pData;
- 	foreach ($km_per_month as $row) {
- //The Y-axis "Km per month"
-	$DataSet->AddPoint($row->runkm,"Serie1");
-	$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
-	}
+	//Dataset definition 
+	$DataSet = new pData;	
+	foreach ($distance_per_month as $row) {
+		if ($distancetype == meters) {
+			// The Y-axis is "Km per month" when meters is the choice
+			$DataSet->AddPoint($row->runkm,"Serie1");
+			$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+		} else {
+			// The Y-axis is "Miles per month"
+			$DataSet->AddPoint($row->runmiles,"Serie1");
+			$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+		}
+	}	
 	$DataSet->AddAllSeries();
 	$DataSet->SetAbsciseLabelSerie("Serie2"); 
 
- //Initialise the graph
+	//Initialise the graph
 	$Test = new pChart(475,200);
- //Set ColorsPalette
+	
+	//Set ColorsPalette
 	$Test->loadColorPalette(ABSPATH.PLUGINDIR.'/runners-log/Palettes/piepalette.txt'); 
 	$Test->drawFilledRoundedRectangle(7,7,471,193,5,240,240,240);
 	$Test->drawRoundedRectangle(5,5,473,195,5,230,230,230);
 
- //Draw the pie chart
+	//Draw the pie chart
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
 	$Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),250,90,110,PIE_PERCENTAGE,TRUE,50,20,5);
 	$Test->drawPieLegend(410,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);
   
- //Write the title
+	//Write the title
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',10);
-	$Test->drawTitle(15,20,"The Percentage of Km per Month",0,0,0); 
+	
+	// Draw the Distance per month graph
+	if ($distancetype == meters) {
+		$Test->drawTitle(15,20,"The Percentage of Km per Month",0,0,0);
+	} else {
+		$Test->drawTitle(15,20,"The Percentage of Miles per Month",0,0,0);
+	}
  
- //Draw the title Copyright. Please dont edit this.  
+	//Draw the title Copyright. Please dont edit this.  
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/GeosansLight.ttf',8);
 	$Test->drawTitle(249,192,"Runners Log a Wordpress plugin by Frederik Liljefred",0,0,0); 
 
- //Render the picture with a relative path
-	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-pie-km.png');
+	//Render the picture with a relative path
+	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-pie-distance.png');
  
- //Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-km.png', __FILE__ ) . '" alt="Training Graph Pie Km" />';
+	//Insert the image and give it a absolute path
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-distance.png', __FILE__ ) . '" alt="Training Graph Pie distance" />';
 
- //End function runners_log_pie_km()
- }
+//End function runners_log_pie_distance()
+}
 
- function runners_log_pie_hours() {
+function runners_log_pie_hours() {
 
- //Make $wpdb global
+	//Make $wpdb global
 	global $wpdb;
 
- //Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
+	//Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
 	$hours_per_month = $wpdb->get_results("
 	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) ) AS runhours
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Time'
+	WHERE $wpdb->postmeta.meta_key = '_rl_time_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
- //Convert the Value 1 -> Jan, etc
+	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
@@ -506,62 +746,139 @@ note the field name changes in runners_log_basic!
 		12 => 'Dec',
 	);
 	
- //Dataset definition 
+	//Dataset definition 
 	$DataSet = new pData;
  	foreach ($hours_per_month as $row) {
- //The Y-axis "Hours per month"
-	$DataSet->AddPoint($row->runhours,"Serie1");
-	$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+		$DataSet->AddPoint($row->runhours,"Serie1");
+		$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
 	}
 	$DataSet->AddAllSeries();
 	$DataSet->SetAbsciseLabelSerie("Serie2");
 
- //Initialise the graph
+	//Initialise the graph
 	$Test = new pChart(475,200);
- //Set ColorsPalette
+ 
+	//Set ColorsPalette
 	$Test->loadColorPalette(ABSPATH.PLUGINDIR.'/runners-log/Palettes/piepalette.txt'); 
 	$Test->drawFilledRoundedRectangle(7,7,471,193,5,240,240,240);
 	$Test->drawRoundedRectangle(5,5,473,195,5,230,230,230);
 
- //Draw the pie chart
+	//Draw the pie chart
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
 	$Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),250,90,110,PIE_PERCENTAGE,TRUE,50,20,5);
 	$Test->drawPieLegend(410,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);
   
- //Write the title
+	//Write the title
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',10);
 	$Test->drawTitle(15,20,"The Percentage of Hours per Month",0,0,0); 
  
- //Draw the title Copyright. Please dont edit this.  
+	//Draw the title Copyright. Please dont edit this.  
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/GeosansLight.ttf',8);
 	$Test->drawTitle(249,192,"Runners Log a Wordpress plugin by Frederik Liljefred",0,0,0); 
 
- //Render the picture with a relative path
+	//Render the picture with a relative path
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-pie-hours.png');
  
- //Insert the image and give it a absolute path
+	//Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-hours.png', __FILE__ ) . '" alt="Training Graph Pie Hours" />';
 
+ 
  //End function runners_log_pie_hours()
- }
+}
 
- function runners_log_bar_km() {
+function runners_log_pie_calories() {
 
- //Make $wpdb global
+	//Make $wpdb global
 	global $wpdb;
-	
- //Connect to DB and get the sum of meters and convert them to km and list it per month
-	$km_per_month = $wpdb->get_results("
-	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, ROUND((SUM( $wpdb->postmeta.meta_value )/1000),1) AS runkm
+
+	// Connect to DB and get the sum of calories
+	$calories_per_month = $wpdb->get_results("
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, SUM( $wpdb->postmeta.meta_value ) AS runcalories
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Meters'
+	WHERE $wpdb->postmeta.meta_key = '_rl_calories_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
- //Convert the Value 1 -> Jan, etc
+	//Convert the Value 1 -> Jan, etc
+	$month2str = Array (
+		1 => 'Jan',
+		2 => 'Feb',
+		3 => 'Marts',
+		4 => 'April',
+		5 => 'May',
+		6 => 'June',
+		7 => 'July',
+		8 => 'Aug',
+		9 => 'Sep',
+		10 => 'Oct',
+		11 => 'Nov',
+		12 => 'Dec',
+	);
+	
+	//Dataset definition 
+	$DataSet = new pData;
+ 	foreach ($calories_per_month as $row) {
+		$DataSet->AddPoint($row->runcalories,"Serie1");
+		$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+	}
+	$DataSet->AddAllSeries();
+	$DataSet->SetAbsciseLabelSerie("Serie2");
+
+	//Initialise the graph
+	$Test = new pChart(475,200);
+ 
+	//Set ColorsPalette
+	$Test->loadColorPalette(ABSPATH.PLUGINDIR.'/runners-log/Palettes/piepalette.txt'); 
+	$Test->drawFilledRoundedRectangle(7,7,471,193,5,240,240,240);
+	$Test->drawRoundedRectangle(5,5,473,195,5,230,230,230);
+
+	//Draw the pie chart
+	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
+	$Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),250,90,110,PIE_PERCENTAGE,TRUE,50,20,5);
+	$Test->drawPieLegend(410,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);
+  
+	//Write the title
+	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',10);
+	$Test->drawTitle(15,20,"The Percentage of Calories per Month",0,0,0); 
+ 
+	//Draw the title Copyright. Please dont edit this.  
+	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/GeosansLight.ttf',8);
+	$Test->drawTitle(249,192,"Runners Log a Wordpress plugin by Frederik Liljefred",0,0,0); 
+
+	//Render the picture with a relative path
+	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-pie-calories.png');
+ 
+	//Insert the image and give it a absolute path
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-calories.png', __FILE__ ) . '" alt="Training Graph Pie Calories" />';
+
+ 
+ //End function runners_log_pie_calories()
+}
+
+
+function runners_log_bar_distance() {
+
+	//Make $wpdb global
+	global $wpdb;
+	
+	// Let us get the distancetype for further calculations
+	$distancetype = get_option('runnerslog_distancetype');
+	
+	// Connect to DB and get the distance sum either as km-->runkm or miles-->runmiles and list it per month
+	$distance_per_month = $wpdb->get_results("
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, (SUM( $wpdb->postmeta.meta_value )/1000) AS runkm,  SUM( $wpdb->postmeta.meta_value ) AS runmiles
+	FROM $wpdb->postmeta
+	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
+	WHERE $wpdb->postmeta.meta_key = '_rl_distance_value'
+	AND $wpdb->posts.post_status = 'publish'
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
+	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
+	");
+
+	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
@@ -579,15 +896,23 @@ note the field name changes in runners_log_basic!
 	
  //Dataset definition 
 	$DataSet = new pData;
- 	foreach ($km_per_month as $row) {
-	$DataSet->AddPoint($row->runkm,"Serie1");
-	$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
-	}
+	foreach ($distance_per_month as $row) {
+		if ($distancetype == meters) {
+			// The Y-axis is "Km per month" when meters is the choice
+			$DataSet->AddPoint($row->runkm,"Serie1");
+			$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+		} else {
+			// The Y-axis is "Miles per month"
+			$DataSet->AddPoint($row->runmiles,"Serie1");
+			$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+		}
+	}		
 	$DataSet->AddAllSeries();
 	$DataSet->SetAbsciseLabelSerie("Serie2");
 
- //Initialise the graph
+	//Initialise the graph
 	$Test = new pChart(475,230);
+	
 	//Change the color of the bar to a blue softtone
 	$Test->loadColorPalette(ABSPATH.PLUGINDIR.'/runners-log/Palettes/barpalette.txt'); 
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
@@ -598,47 +923,51 @@ note the field name changes in runners_log_basic!
 	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);   
 	$Test->drawGrid(4,TRUE,230,230,230,50);
 
- //Draw the bar graph
+	//Draw the bar graph
 	$Test->drawBarGraph($DataSet->GetData(),$DataSet->GetDataDescription(),TRUE);
   
- //Write values on Serie1
+	//Write values on Serie1
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);   
 	$Test->writeValues($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1");
   
- //Draw the title Copyright. Please dont edit this.  
+	//Draw the title Copyright. Please dont edit this.  
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/GeosansLight.ttf',8);
 	$Test->drawTitle(249,222,"Runners Log a Wordpress plugin by Frederik Liljefred",0,0,0); 
 
- //Write the title
+	//Write the title
  	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',10);
-	$Test->drawTitle(0,0,"Km per month",0,0,0,472,30,FALSE);
+	if ($distancetype == meters) {
+		$Test->drawTitle(0,0,"Km per month",0,0,0,472,30,FALSE);
+	} else {
+		$Test->drawTitle(0,0,"Miles per month",0,0,0,472,30,FALSE);
+	}
 
- //Render the picture with a relative path
-	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-bar-km.png');
+	//Render the picture with a relative path
+	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-bar-distance.png');
  
- //Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-km.png', __FILE__ ) . '" alt="Training Bar Graph Km" />';
+	//Insert the image and give it a absolute path
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-distance.png', __FILE__ ) . '" alt="Training Bar Graph Distance" />';
 
- //End function runners_log_bar_km()
- }
+//End function runners_log_bar_distance()
+}
 
- function runners_log_bar_hours() {
+function runners_log_bar_hours() {
 
- //Make $wpdb global
+	//Make $wpdb global
 	global $wpdb;
 	
- //Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
+	//Connect to DB and get the sum of minutes and convert them to hours and list it per month. And the minutes is rounded to 0 decimals.
 	$hours_per_month = $wpdb->get_results("
 	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, ROUND((SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) )/3600), 2) AS runhours, sec_to_time( SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) ) ) AS runtime
 	FROM $wpdb->postmeta
 	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
-	WHERE $wpdb->postmeta.meta_key = 'Time'
+	WHERE $wpdb->postmeta.meta_key = '_rl_time_value'
 	AND $wpdb->posts.post_status = 'publish'
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
- //Convert the Value 1 -> Jan, etc
+	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
@@ -655,17 +984,18 @@ note the field name changes in runners_log_basic!
 	);
 
   
- //Dataset definition 
+	//Dataset definition 
 	$DataSet = new pData;
  	foreach ($hours_per_month as $row) {
-	$DataSet->AddPoint($row->runhours,"Serie1");
-	$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+		$DataSet->AddPoint($row->runhours,"Serie1");
+		$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
 	}
 	$DataSet->AddAllSeries();
 	$DataSet->SetAbsciseLabelSerie("Serie2");
 
- //Initialise the graph
+	//Initialise the graph
 	$Test = new pChart(475,230);
+	
 	//Change the color of the bar to a blue softtone
 	$Test->loadColorPalette(ABSPATH.PLUGINDIR.'/runners-log/Palettes/barpalette.txt'); 
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
@@ -676,48 +1006,166 @@ note the field name changes in runners_log_basic!
 	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);   
 	$Test->drawGrid(4,TRUE,230,230,230,50);
 
- //Draw the bar graph
+	//Draw the bar graph
 	$Test->drawBarGraph($DataSet->GetData(),$DataSet->GetDataDescription(),TRUE);
   
- //Write values on Serie1
+	//Write values on Serie1
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);   
 	$Test->writeValues($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1");
   
- //Draw the title Copyright. Please dont edit this.  
+	//Draw the title Copyright. Please dont edit this.  
 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/GeosansLight.ttf',8);
 	$Test->drawTitle(249,222,"Runners Log a Wordpress plugin by Frederik Liljefred",0,0,0); 
 
- //Write the title
+	//Write the title
  	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',10);
 	$Test->drawTitle(0,0,"Hours per month",0,0,0,472,30,FALSE);
 
- //Render the picture with a relative path
+	//Render the picture with a relative path
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-bar-hours.png');
  
- //Insert the image and give it a absolute path
+	//Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-hours.png', __FILE__ ) . '" alt="Training Bar Graph Hours" />';
 
- //End function runners_log_bar_hours()
- }
-
-
-// Post Write Panel (Meta box)
- include('runnerslog_metabox.php');
-
-// Admin Options
- function runnerslog_admin() {  
-     include('runnerslog_admin.php');
- }  
- function runnerslog_admin_menu() {  
-     add_options_page("Runners Log Options", "Runners Log", 7, "runners-log", "runnerslog_admin");  
- }  
- add_action('admin_menu', 'runnerslog_admin_menu');
-
-// Set a few default options on plugin activation
-function runnerslog_activate() {
-  	update_option('runnerslog_distancetype', 'meters');
-	update_option('runnerslog_garminconnectlink', '1');
+//End function runners_log_bar_hours()
 }
-register_activation_hook( __FILE__, 'runnerslog_activate' );
+
+function runners_log_bar_calories() {
+
+	//Make $wpdb global
+	global $wpdb;
+	
+	// Connect to DB and get the sum of calories
+	$calories_per_month = $wpdb->get_results("
+	SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS runyearmonth, MONTH( $wpdb->posts.post_date ) AS runmonth, SUM( $wpdb->postmeta.meta_value ) AS runcalories
+	FROM $wpdb->postmeta
+	INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
+	WHERE $wpdb->postmeta.meta_key = '_rl_calories_value'
+	AND $wpdb->posts.post_status = 'publish'
+	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
+	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
+	");
+
+	//Convert the Value 1 -> Jan, etc
+	$month2str = Array (
+		1 => 'Jan',
+		2 => 'Feb',
+		3 => 'Marts',
+		4 => 'April',
+		5 => 'May',
+		6 => 'June',
+		7 => 'July',
+		8 => 'Aug',
+		9 => 'Sep',
+		10 => 'Oct',
+		11 => 'Nov',
+		12 => 'Dec',
+	);
+
+  
+	//Dataset definition 
+	$DataSet = new pData;
+ 	foreach ($calories_per_month as $row) {
+		$DataSet->AddPoint($row->runcalories,"Serie1");
+		$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
+	}
+	$DataSet->AddAllSeries();
+	$DataSet->SetAbsciseLabelSerie("Serie2");
+
+	//Initialise the graph
+	$Test = new pChart(475,230);
+	
+	//Change the color of the bar to a blue softtone
+	$Test->loadColorPalette(ABSPATH.PLUGINDIR.'/runners-log/Palettes/barpalette.txt'); 
+	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);
+	$Test->setGraphArea(50,30,462,190);
+	$Test->drawFilledRoundedRectangle(7,7,470,223,5,240,240,240);
+	$Test->drawRoundedRectangle(5,5,472,225,5,230,230,230);
+	$Test->drawGraphArea(255,255,255,TRUE);
+	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);   
+	$Test->drawGrid(4,TRUE,230,230,230,50);
+
+	//Draw the bar graph
+	$Test->drawBarGraph($DataSet->GetData(),$DataSet->GetDataDescription(),TRUE);
+  
+	//Write values on Serie1
+	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',8);   
+	$Test->writeValues($DataSet->GetData(),$DataSet->GetDataDescription(),"Serie1");
+  
+	//Draw the title Copyright. Please dont edit this.  
+	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/GeosansLight.ttf',8);
+	$Test->drawTitle(249,222,"Runners Log a Wordpress plugin by Frederik Liljefred",0,0,0); 
+
+	//Write the title
+ 	$Test->setFontProperties(ABSPATH.PLUGINDIR.'/runners-log/Fonts/tahoma.ttf',10);
+	$Test->drawTitle(0,0,"Calories per month",0,0,0,472,30,FALSE);
+
+	//Render the picture with a relative path
+	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-bar-calories.png');
+ 
+	//Insert the image and give it a absolute path
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-calories.png', __FILE__ ) . '" alt="Training Bar Graph Calories" />';
+
+//End function runners_log_bar_calories()
+}
+
+// Update the old custom fields to match the new one used from version 1.5.0
+function runners_log_update(){
+  
+	global $wpdb;
+
+	//Meters
+	$sql = $wpdb->get_results("
+	UPDATE $wpdb->postmeta
+	SET $wpdb->postmeta.meta_key = '_rl_distance_value'
+	WHERE $wpdb->postmeta.meta_key = 'Meters'
+	");
+	
+	//Time
+	$sql = $wpdb->get_results("
+	UPDATE $wpdb->postmeta
+	SET $wpdb->postmeta.meta_key = '_rl_time_value'
+	WHERE $wpdb->postmeta.meta_key = 'Time'
+	");
+	
+	//GarminConnectLink
+	$sql = $wpdb->get_results("
+	UPDATE $wpdb->postmeta
+	SET $wpdb->postmeta.meta_key = '_rl_garminconnectlink_value'
+	WHERE $wpdb->postmeta.meta_key = 'GarminConnectLink'
+	");
+	
+	//Pulsavg
+	$sql = $wpdb->get_results("
+	UPDATE $wpdb->postmeta
+	SET $wpdb->postmeta.meta_key = '_rl_pulsavg_value'
+	WHERE $wpdb->postmeta.meta_key = 'Pulsavg'
+	");
+  
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	
+    dbDelta($sql);
+}
+
+/* For the admin control in Wordpress */
+
+	// Post Write Panel (Meta box)
+	include('runnerslog_metabox.php');
+
+	// Admin Options
+	function runnerslog_admin() {  
+		include('runnerslog_admin.php');
+	}  
+	function runnerslog_admin_menu() {  
+		add_options_page("Runners Log Options", "Runners Log", 7, "runners-log", "runnerslog_admin");  
+	}  
+	add_action('admin_menu', 'runnerslog_admin_menu');
+
+	// Set a few default options on plugin activation
+	function runnerslog_activate() {
+		update_option('runnerslog_distancetype', 'meters');
+		update_option('runnerslog_garminconnectlink', '1');
+	}
+	register_activation_hook( __FILE__, 'runnerslog_activate' );
 
 ?>

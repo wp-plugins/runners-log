@@ -1,6 +1,7 @@
 <?php
 $distancetype = ucfirst(get_option('runnerslog_distancetype'));
 $garminconnect = get_option('runnerslog_garminconnectlink');
+$calories = get_option('runnerslog_caloriescount');
 
 $post_custom_fields =
 array(
@@ -8,14 +9,14 @@ array(
 		"name" => "_rl_time",
 		"std" => "",
 		"title" => "Time:",
-		"description" => "optional desc here",
+		"description" => "As HH:MM:SS eg 00:37:27=37min27sec",
 		"show" => "1"
 	),
-	"_rl_meters" => array(
-		"name" => "_rl_meters",
+	"_rl_distance" => array(
+		"name" => "_rl_distance",
 		"std" => "",
 		"title" => "$distancetype:",
-		"description" => "",
+		"description" => "Choose Meters or Miles in the Settings",
 		"show" => "1"
 	),
 	"_rl_pulsavg" => array(
@@ -25,15 +26,21 @@ array(
 		"description" => "",
 		"show" => "1"
 	),
-	"_rl_GarminConnectLink" => array(
-		"name" => "_rl_GarminConnectLink",
+		"_rl_calories" => array(
+		"name" => "_rl_calories",
 		"std" => "",
-		"title" => "GarminConnectLink:",
-		"description" => "optional desc here",
+		"title" => "Calories:",
+		"description" => "Type in your calories",
+		"show" => "$calories"
+	),
+	"_rl_garminconnectlink" => array(
+		"name" => "_rl_garminconnectlink",
+		"std" => "",
+		"title" => "Garmin Link:",
+		"description" => "Format like: http://www.google.com",
 		"show" => "$garminconnect"
 	)
 );
-
 function post_custom_fields() {
 	global $post, $post_custom_fields;
 	echo '<ul>';

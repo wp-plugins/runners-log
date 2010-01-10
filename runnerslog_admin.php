@@ -3,8 +3,10 @@
 		//Form data sent
 		$distancetype = $_POST['runnerslog_distancetype'];
 		$garminconnect = $_POST['runnerslog_garminconnectlink'];
+		$calories = $_POST['runnerslog_caloriescount'];
 		update_option('runnerslog_distancetype', $distancetype);
 		update_option('runnerslog_garminconnectlink', $garminconnect);
+		update_option('runnerslog_caloriescount', $calories);
 		?>
 		<div class="updated"><p><strong><?php _e('Options saved.' ); ?></strong></p></div>
 		<?php
@@ -12,6 +14,7 @@
 		//Normal page display
 		$distancetype = get_option('runnerslog_distancetype');
 		$garminconnect = get_option('runnerslog_garminconnectlink');
+		$calories = get_option('runnerslog_caloriescount');
 	}
 ?>
 
@@ -40,7 +43,14 @@
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_garminconnectlink">
 				<input name="runnerslog_garminconnectlink" id="runnerslog_garminconnectlink" value="1"<?php checked('1', get_option('runnerslog_garminconnectlink')); ?> type="checkbox">
-				<?php _e('use GarminConnectLink?') ?></label>
+				<?php _e('Enable link to Garmin.connect?') ?></label>
+				</th>
+			</tr>
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_caloriescount">
+				<input name="runnerslog_caloriescount" id="runnerslog_caloriescount" value="1"<?php checked('1', get_option('runnerslog_caloriescount')); ?> type="checkbox">
+				<?php _e('Enable calories count?') ?></label>
 				</th>
 			</tr>
 		</tbody>

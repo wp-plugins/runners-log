@@ -6,18 +6,19 @@ Requires at least: 2.7
 Tested up to: 2.9
 Stable tag: 1.0.8
 
-This plugin lets you convert your blog to a training log with an advance statistics and graphs.
+This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
 == Description ==
-This plugin lets you convert your blog to a training log with an advance statistics and graphs.
-Based on 4 custom fields:
+This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
+At the moment you can specify:
 
 *   Meters
 *   Time
 *   Pulsavg
-*   GarminConnectLink
+*	Calories
+*   Garmin Connect Link
 
-it lets you calculate your speed, time per km, and lets you have charts of your total distance and minutes per month.
+In "Settings" >> "Runners Log" you can now specify the fields you like to track.
 
 == Installation ==
 
@@ -31,22 +32,24 @@ This section describes how to install the plugin and get it working.
     * Km/hour: 9.29
     * Min/km: 06:27 minutes
     * Puls average: 169
+	* Calories: 700 C
     * Garmin Connect Link: http://connect.garmin.com/activity/21569332
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
     * Km in 2010: 10 km based on 1 run with an avg of 10 km
 4. Place `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
 5. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
-6. Every time you post an activity in your Sport or Traing Category add the custom fields: `Meters` and `Time`. Its optional to put in `Pulsavg` and `GarminConnectLink` for your cours.
-7. `Time` needed to be formated as HH:MM:SS eg. like `00:37:20` for 37min and 20 seconds.
-8. Runners Log let you use the following tags in your template:
+6. Runners Log let you use the following tags in your template:
 `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
 <?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
+<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
+<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
+<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
 <?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
-<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
-<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
+<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
+<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
 <?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
-<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
-<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>`
+<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
 
 == Frequently Asked Questions ==
 
@@ -56,12 +59,15 @@ If you only want your graphs to show up in the category "training" with the cate
 `<?php if ( in_category('6') ): ?>
 <?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
 <?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
-<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
-<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
-<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
-<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
-<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
 <?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
+<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
+<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
+<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
+<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
 <?php endif; ?>`
 
 	
@@ -71,12 +77,15 @@ BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic();
 
 `<?php if (is_page('Training Stats')) { ?>
 <?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
-<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
-<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>
-<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>
-<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
-<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>
+<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
 <?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
+<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
+<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
+<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
+<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
+<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
+<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
+<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
 <?php } ?>`
 
 = What does this plugin require =
@@ -91,15 +100,20 @@ If that's a problem either uninstall this plugin, help making it work with cache
 
 == Screenshots ==
 
-1. show you how your custom fields should look like
-2. an example of using `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>`
-3. an example of using `<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>`
-4. an example of using `<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>`
-5. an example of using `<?php if (function_exists(runners_log_pie_km)) echo runners_log_pie_km(); ?>`
-6. an example of using `<?php if (function_exists(runners_log_bar_km)) echo runners_log_bar_km(); ?>`
+1. show the Runners Log box
+2. the Settings in Admin
+3. an example of using `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>`
+4. an example of using `<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>`
+5. an example of using `<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>`
+6. an example of using `<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>`
 7. an example of using `<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>`
-8. an example of using `<?php if (function_exists(runners_log_graphmini_km)) echo runners_log_graphmini_km(); ?>`
+8. an example of using `<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>`
 9. an example of using `<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>`
+10. an example of using `<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>`
+11. an example of using `<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>`
+12. an example of using `<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
+13. an example of using `<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>`
+
 
 == Changelog ==
 
@@ -137,6 +151,21 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * Changed all templates tags to include if function exist
 * Update readme
 
+= 1.5.0 =
+* JA - Added support to hide/disable GarminConnectLink
+* JA - Added Runners Log write panel for post screen
+* JA - Started to add support for Miles
+* FL - Ended Miles support
+* FL - Added a new field called Calories
+* FL - Added support to hide/disable Calories thanks to JA
+* FL - Added runners_log_graphmini_calories(), runners_log_pie_calories(), runners_log_bar_calories()
+* FL - Renamed runners_log_graphmini_km() to runners_log_graphmini_distance()
+* FL - Renamed runners_log_pie_km() to runners_log_pie_distance()
+* FL - Renamed runners_log_bar_km() to runners_log_bar_distance()
+* FL - Database updater that rename the old custom fields to match the new one
+* FL - New screenshots
+* FL - Readme update
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -151,8 +180,12 @@ This was release Januar 3rd 2010
 = 1.0.8 =
 This was release Januar 2010
 
-== To Do ==
+= 1.5.0 =
+This is a major update with renaming the custom fields and adding admin support.
 
+== To Do ==
+	* shortcode support
 	* enable cache
 	* more graphs 
-	* add miles support
+	* gear list
+	* weather support

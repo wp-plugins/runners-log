@@ -158,8 +158,8 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Added support to hide/disable Calories thanks to JA
 * FL - Added runners_log_graphmini_calories(), runners_log_pie_calories(), runners_log_bar_calories()
 * FL - Renamed runners_log_graphmini_km() to runners_log_graphmini_distance()
-* FL - Renamed runners_log_pie_distance() to runners_log_pie_distance()
-* FL - Renamed runners_log_bar_distance() to runners_log_bar_distance()
+* FL - Renamed runners_log_pie_km() to runners_log_pie_distance()
+* FL - Renamed runners_log_bar_km() to runners_log_bar_distance()
 * FL - Database updater that rename the old custom fields to match the new one
 * FL - New screenshots
 * FL - Readme update

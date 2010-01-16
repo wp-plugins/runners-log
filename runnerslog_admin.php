@@ -2,9 +2,11 @@
 	if($_POST['runnerslog_op_hidden'] == 'Y') {
 		//Form data sent
 		$distancetype = $_POST['runnerslog_distancetype'];
+		$pulsavg = $_POST['runnerslog_pulsavg'];
 		$garminconnect = $_POST['runnerslog_garminconnectlink'];
 		$calories = $_POST['runnerslog_caloriescount'];
 		update_option('runnerslog_distancetype', $distancetype);
+		update_option('runnerslog_pulsavg', $pulsavg);		
 		update_option('runnerslog_garminconnectlink', $garminconnect);
 		update_option('runnerslog_caloriescount', $calories);
 		?>
@@ -13,6 +15,7 @@
 	} else {
 		//Normal page display
 		$distancetype = get_option('runnerslog_distancetype');
+		$pulsavg = get_option('runnerslog_pulsavg');
 		$garminconnect = get_option('runnerslog_garminconnectlink');
 		$calories = get_option('runnerslog_caloriescount');
 	}
@@ -20,7 +23,7 @@
 
 <div class="wrap">
 <?php echo "<h2>" . __( 'Runners Log Options', 'runnerslog_ops' ) . "</h2>"; ?>
-<p>Set the options below. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat.</p>
+<p>Set the options below.</p>
 
 <form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />
@@ -41,16 +44,23 @@
 			</tr>
 			<tr>
 				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_pulsavg">
+				<input name="runnerslog_pulsavg" id="runnerslog_pulsavg" value="1"<?php checked('1', get_option('runnerslog_pulsavg')); ?> type="checkbox">
+				<?php _e('Enable Pulse Average?') ?></label>
+				</th>
+			</tr>			
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_garminconnectlink">
 				<input name="runnerslog_garminconnectlink" id="runnerslog_garminconnectlink" value="1"<?php checked('1', get_option('runnerslog_garminconnectlink')); ?> type="checkbox">
-				<?php _e('Enable link to Garmin.connect?') ?></label>
+				<?php _e('Enable Garmin.connect Link?') ?></label>
 				</th>
 			</tr>
 			<tr>
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_caloriescount">
 				<input name="runnerslog_caloriescount" id="runnerslog_caloriescount" value="1"<?php checked('1', get_option('runnerslog_caloriescount')); ?> type="checkbox">
-				<?php _e('Enable calories count?') ?></label>
+				<?php _e('Enable Calories Count?') ?></label>
 				</th>
 			</tr>
 		</tbody>

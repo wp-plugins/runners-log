@@ -1,5 +1,6 @@
 <?php
 $distancetype = ucfirst(get_option('runnerslog_distancetype'));
+$pulsavg = get_option('runnerslog_pulsavg');
 $garminconnect = get_option('runnerslog_garminconnectlink');
 $calories = get_option('runnerslog_caloriescount');
 
@@ -23,8 +24,8 @@ array(
 		"name" => "_rl_pulsavg",
 		"std" => "",
 		"title" => "Pulse Average:",
-		"description" => "",
-		"show" => "1"
+		"description" => "The avg. pulse for your course",
+		"show" => "$pulsavg"
 	),
 		"_rl_calories" => array(
 		"name" => "_rl_calories",

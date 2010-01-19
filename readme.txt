@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin
 Requires at least: 2.7
 Tested up to: 2.9.1
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
@@ -151,7 +151,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * Changed all templates tags to include if function exist
 * Update readme
 
-= 1.5.0 =
+= 1.5.1 =
 * JA - Added support to hide/disable GarminConnectLink
 * JA - Added Runners Log write panel for post screen
 * JA - Started to add support for Miles
@@ -181,7 +181,7 @@ This was release Januar 3rd 2010
 = 1.0.8 =
 This was release Januar 2010
 
-= 1.5.0 =
+= 1.5.1 =
 This is a major update with renaming the custom fields and adding admin support.
 
 == To Do ==

@@ -3,19 +3,19 @@ Contributors: frold, jaredatch
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin
 Requires at least: 2.7
-Tested up to: 2.9
-Stable tag: 1.0.8
+Tested up to: 2.9.1
+Stable tag: 1.5.0
 
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
 == Description ==
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 At the moment you can specify:
-*   Meters
-*   Time
-*   Pulsavg
-*	Calories
-*   Garmin Connect Link
+	* Meters
+	* Time
+	* Pulsavg
+	* Calories
+	* Garmin Connect Link
 In "Settings" >> "Runners Log" you can now specify the fields you like to use.
 
 == Installation ==
@@ -158,8 +158,8 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Added support to hide/disable Calories thanks to JA
 * FL - Added runners_log_graphmini_calories(), runners_log_pie_calories(), runners_log_bar_calories()
 * FL - Renamed runners_log_graphmini_km() to runners_log_graphmini_distance()
-* FL - Renamed runners_log_pie_distance() to runners_log_pie_distance()
-* FL - Renamed runners_log_bar_distance() to runners_log_bar_distance()
+* FL - Renamed runners_log_pie_km() to runners_log_pie_distance()
+* FL - Renamed runners_log_bar_km() to runners_log_bar_distance()
 * FL - Database updater that rename the old custom fields to match the new one
 * FL - New screenshots
 * FL - Readme update
@@ -185,6 +185,6 @@ This is a major update with renaming the custom fields and adding admin support.
 == To Do ==
 	* shortcode support
 	* enable cache
-	* more graphs 
+	* more graphs (pulse avg?)
 	* gear list
 	* weather support

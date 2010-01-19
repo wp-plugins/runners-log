@@ -11,11 +11,13 @@ This plugin let you convert your blog into a training log and let you track your
 == Description ==
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 At the moment you can specify:
+
 	* Meters
 	* Time
 	* Pulsavg
 	* Calories
 	* Garmin Connect Link
+
 In "Settings" >> "Runners Log" you can now specify the fields you like to use.
 
 == Installation ==

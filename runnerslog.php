@@ -133,15 +133,6 @@ function runners_log_basic() {
 	// Let us get the distancetype for further calculations
 	$distancetype = get_option('runnerslog_distancetype');	
 
-	//We test if it works... just for debugging
-	if ( $distancetype == meters ) {
-		//Let us calculate the speed in meters
-		echo "Meters is the setting atm";
-		//Else let us calculate the speed in miles
-	} else {
-		echo "Miles is the setting atm";
-	}
-
 	// Calculate the avg running speed per hour
 	if ( $distance ) {
 	//First we calculate it per km and round it to 2 decimals

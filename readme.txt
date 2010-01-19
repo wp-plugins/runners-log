@@ -38,8 +38,7 @@ This section describes how to install the plugin and get it working.
     * Km in 2010: 10 km based on 1 run with an avg of 10 km
 4. Place `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
 5. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
-6. Runners Log let you use the following tags in your template:
-`<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
+6. Runners Log let you use the following tags in your template:`<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
 <?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
 <?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
 <?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>

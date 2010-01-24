@@ -6,11 +6,24 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, jaredatch
-Version: 1.5.5
+Version: 1.6.0
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
-== Use the follow tags in your template ==
+= Use the following short codes =
+	[runners_log_basic]
+	[runners_log_graph]
+	[runners_log_graphmini_distance]
+	[runners_log_graphmini_hours]
+	[runners_log_graphmini_calories]
+	[runners_log_pie_distance]
+	[runners_log_pie_hours]
+	[runners_log_pie_calories]
+	[runners_log_bar_distance]
+	[runners_log_bar_hours]
+	[runners_log_bar_calories]
+
+= Alternative: Use the follow tags in your template =
 	<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
 	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
 	<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
@@ -72,15 +85,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
- /*
-We will use 5 custom fields 
-
-Time: _rl_time_value
-Distance _rl_distance_value
-GarminConnect: _rl_garminconnectlink_value
-Pulsavg: _rl_pulsavg_value
-Calories: _rl_calories_value
 */
 
 /* Version check */
@@ -310,12 +314,13 @@ function runners_log_basic() {
 	echo "</ul>";
 // End function runners_log_basic()
 }
+add_shortcode('runners_log_basic', 'runners_log_basic');
 
 function runners_log_graph() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
-	include(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
-	include(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
  
 	// Make $wpdb global
 	global $wpdb;
@@ -468,11 +473,14 @@ function runners_log_graph() {
 
 // End function runners_log_graph()
 }
+add_shortcode('runners_log_graph', 'runners_log_graph');
 
-
-// The function to generate a small image with a distance chart
 function runners_log_graphmini_distance() {
-
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
+	
 	// Make $wpdb global
 	global $wpdb;
 	
@@ -524,8 +532,13 @@ function runners_log_graphmini_distance() {
 
 //End function runners_log_graphmini_distance()
 }
+add_shortcode('runners_log_graphmini_distance', 'runners_log_graphmini_distance');
 
 function runners_log_graphmini_hours() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
 
 	// Make $wpdb global
 	global $wpdb;
@@ -571,8 +584,13 @@ function runners_log_graphmini_hours() {
 
 //End function runners_log_graphmini_hours()
 }
+add_shortcode('runners_log_graphmini_hours', 'runners_log_graphmini_hours');
 
 function runners_log_graphmini_calories() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
 
 	// Make $wpdb global
 	global $wpdb;
@@ -617,8 +635,13 @@ function runners_log_graphmini_calories() {
 
 //End function runners_log_graphmini_calories()
 }
+add_shortcode('runners_log_graphmini_calories', 'runners_log_graphmini_calories');
 
 function runners_log_pie_distance() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
 
 	//Make $wpdb global
 	global $wpdb;
@@ -704,8 +727,13 @@ function runners_log_pie_distance() {
 
 //End function runners_log_pie_distance()
 }
+add_shortcode('runners_log_pie_distance', 'runners_log_pie_distance');
 
 function runners_log_pie_hours() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
 
 	//Make $wpdb global
 	global $wpdb;
@@ -776,9 +804,14 @@ function runners_log_pie_hours() {
  
  //End function runners_log_pie_hours()
 }
+add_shortcode('runners_log_pie_hours', 'runners_log_pie_hours');
 
 function runners_log_pie_calories() {
-
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
+	
 	//Make $wpdb global
 	global $wpdb;
 
@@ -848,9 +881,13 @@ function runners_log_pie_calories() {
  
  //End function runners_log_pie_calories()
 }
-
+add_shortcode('runners_log_pie_calories', 'runners_log_pie_calories');
 
 function runners_log_bar_distance() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
 
 	//Make $wpdb global
 	global $wpdb;
@@ -885,7 +922,7 @@ function runners_log_bar_distance() {
 		12 => 'Dec',
 	);
 	
- //Dataset definition 
+	//Dataset definition 
 	$DataSet = new pData;
 	foreach ($distance_per_month as $row) {
 		if ($distancetype == meters) {
@@ -941,8 +978,13 @@ function runners_log_bar_distance() {
 
 //End function runners_log_bar_distance()
 }
+add_shortcode('runners_log_bar_distance', 'runners_log_bar_distance');
 
 function runners_log_bar_hours() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
 
 	//Make $wpdb global
 	global $wpdb;
@@ -1020,8 +1062,13 @@ function runners_log_bar_hours() {
 
 //End function runners_log_bar_hours()
 }
+add_shortcode('runners_log_bar_hours', 'runners_log_bar_hours');
 
 function runners_log_bar_calories() {
+	// Let us include the classes for the graph tool
+	// Graph script by:  http://pchart.sourceforge.net/
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
 
 	//Make $wpdb global
 	global $wpdb;
@@ -1099,6 +1146,7 @@ function runners_log_bar_calories() {
 
 //End function runners_log_bar_calories()
 }
+add_shortcode('runners_log_bar_calories', 'runners_log_bar_calories');
 
 // Update the old custom fields to match the new one used from version 1.5.0
 function runners_log_update(){

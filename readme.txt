@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin
 Requires at least: 2.7
 Tested up to: 2.9.1
-Stable tag: 1.5.5
+Stable tag: 1.6.0
 
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
@@ -18,7 +18,7 @@ At the moment you can specify:
 	* Calories
 	* Garmin Connect Link
 
-In "Settings" >> "Runners Log" you can now specify the fields you like to use.
+In "Settings" >> "Runners Log" you can now specify the fields you like to use. NEW: Now supporting short codes
 
 == Installation ==
 
@@ -26,7 +26,7 @@ This section describes how to install the plugin and get it working.
 
 1. Copy all files to `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Place `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
+3. Use this short code `[runners_log_basic]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
     * Meters: 10000
     * Time: 01:04:36
     * Km/hour: 9.29
@@ -36,8 +36,18 @@ This section describes how to install the plugin and get it working.
     * Garmin Connect Link: http://connect.garmin.com/activity/21569332
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
     * Km in 2010: 10 km based on 1 run with an avg of 10 km
-4. Place `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
-5. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
+4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
+5. Runners Log support the following short codes `	[runners_log_basic]
+	[runners_log_graph]
+	[runners_log_graphmini_distance]
+	[runners_log_graphmini_hours]
+	[runners_log_graphmini_calories]
+	[runners_log_pie_distance]
+	[runners_log_pie_hours]
+	[runners_log_pie_calories]
+	[runners_log_bar_distance]
+	[runners_log_bar_hours]
+	[runners_log_bar_calories]`
 6. Runners Log let you use the following tags in your template:`<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
 <?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
 <?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
@@ -49,10 +59,26 @@ This section describes how to install the plugin and get it working.
 <?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
 <?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
 <?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
+7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 
 == Frequently Asked Questions ==
 
+= The supported short codes =
+
+	[runners_log_basic]
+	[runners_log_graph]
+	[runners_log_graphmini_distance]
+	[runners_log_graphmini_hours]
+	[runners_log_graphmini_calories]
+	[runners_log_pie_distance]
+	[runners_log_pie_hours]
+	[runners_log_pie_calories]
+	[runners_log_bar_distance]
+	[runners_log_bar_hours]
+	[runners_log_bar_calories]
+
 = I only want my graphs to show up in a special category =
+
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
 
 `<?php if ( in_category('6') ): ?>
@@ -69,8 +95,8 @@ If you only want your graphs to show up in the category "training" with the cate
 <?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
 <?php endif; ?>`
 
-	
 = I only want my graphs to show up in a special page =
+
 If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
 BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?> only works in categories
 
@@ -88,12 +114,14 @@ BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic();
 <?php } ?>`
 
 = What does this plugin require =
+
 Runners Log is using pChart and therefore is using the GD library to create pictures. 
 You must compile the GD library with the freetype extension when installing PHP on a linux server. 
 On windows operating system you must add the GD extension in your php.ini file. GD support is a mandatory prerequisite and cannot be overriden. 
 You can use the following tutorial http://www.e-gineer.com/v1/instructions/install-gd13-for-php-with-apache-on-linux.htm if you don't know how to install it on a linux server.
 
 = Why is my server load high? =
+
 If you have a very visited blog and using this plugin it could cause high server load as this plugin doesn't use cache for rendering the graphs.
 If that's a problem either uninstall this plugin, help making it work with cache :D or wait for a later release.
 
@@ -166,6 +194,9 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Readme update
 * FL - Added support to hide/disable Pulse Average
 
+= 1.6.0 =
+* FL - Added short codes support
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -183,9 +214,12 @@ This was release Januar 2010
 = 1.5.1 =
 This is a major update with renaming the custom fields and adding admin support.
 
+= 1.6.0 = 
+The short codes release
+
 == To Do ==
-	* shortcode support
 	* enable cache
 	* more graphs (pulse avg?)
 	* gear list
 	* weather support
+	* multi language support

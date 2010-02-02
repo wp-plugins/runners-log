@@ -6,10 +6,10 @@ Requires at least: 2.7
 Tested up to: 2.9.1
 Stable tag: 1.6.0
 
-This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
+This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and calculate your training zones. See screenshots.
 
 == Description ==
-This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
+This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and calculate your training zones. See screenshots.
 At the moment you can specify:
 
 	* Meters
@@ -18,10 +18,9 @@ At the moment you can specify:
 	* Calories
 	* Garmin Connect Link
 
-In "Settings" >> "Runners Log" you can now specify the fields you like to use. NEW: Now supporting short codes
+In "Settings" >> "Runners Log" you can now specify the fields you like to use. NEW: Now with Training Zone Calculation
 
 == Installation ==
-
 This section describes how to install the plugin and get it working.
 
 1. Copy all files to `/wp-content/plugins/` directory
@@ -64,7 +63,6 @@ This section describes how to install the plugin and get it working.
 == Frequently Asked Questions ==
 
 = The supported short codes =
-
 	[runners_log_basic]
 	[runners_log_graph]
 	[runners_log_graphmini_distance]
@@ -78,7 +76,6 @@ This section describes how to install the plugin and get it working.
 	[runners_log_bar_calories]
 
 = I only want my graphs to show up in a special category =
-
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
 
 `<?php if ( in_category('6') ): ?>
@@ -96,7 +93,6 @@ If you only want your graphs to show up in the category "training" with the cate
 <?php endif; ?>`
 
 = I only want my graphs to show up in a special page =
-
 If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
 BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?> only works in categories
 
@@ -114,32 +110,29 @@ BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic();
 <?php } ?>`
 
 = What does this plugin require =
-
 Runners Log is using pChart and therefore is using the GD library to create pictures. 
 You must compile the GD library with the freetype extension when installing PHP on a linux server. 
 On windows operating system you must add the GD extension in your php.ini file. GD support is a mandatory prerequisite and cannot be overriden. 
 You can use the following tutorial http://www.e-gineer.com/v1/instructions/install-gd13-for-php-with-apache-on-linux.htm if you don't know how to install it on a linux server.
 
 = Why is my server load high? =
-
 If you have a very visited blog and using this plugin it could cause high server load as this plugin doesn't use cache for rendering the graphs.
 If that's a problem either uninstall this plugin, help making it work with cache :D or wait for a later release.
 
 == Screenshots ==
-
 1. show the Runners Log box
 2. the Settings in Admin
-3. an example of using `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>`
-4. an example of using `<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>`
-5. an example of using `<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>`
-6. an example of using `<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>`
-7. an example of using `<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>`
-8. an example of using `<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>`
-9. an example of using `<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>`
-10. an example of using `<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>`
-11. an example of using `<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>`
-12. an example of using `<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
-13. an example of using `<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>`
+3. an example of using `[runners_log_basic]`
+4. an example of using `[runners_log_graph]`
+5. an example of using `[runners_log_pie_distance]`
+6. an example of using `[runners_log_bar_distance]`
+7. an example of using `[runners_log_bar_hours]`
+8. an example of using `[runners_log_graphmini_distance]`
+9. an example of using `[runners_log_graphmini_hours]`
+10. an example of using `[runners_log_pie_hours]`
+11. an example of using `[runners_log_pie_calories]`
+12. an example of using `[runners_log_bar_calories]`
+13. an example of using `[runners_log_graphmini_calories]`
 
 
 == Changelog ==
@@ -216,6 +209,11 @@ This is a major update with renaming the custom fields and adding admin support.
 
 = 1.6.0 = 
 The short codes release
+
+= 1.6.5 =
+* FL - 2 new fields in Admin: Resting Heart Rate and Maximum Heart Rate
+* FL - Calculation of Heart Rate Training Zones
+* FL - Edit runnerslog_basic to show data like: Puls average: 162 is 81% of Max HR and 74% of HRR
 
 == To Do ==
 	* enable cache

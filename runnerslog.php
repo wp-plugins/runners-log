@@ -120,8 +120,15 @@ function runners_log_basic() {
 	
 	// Get calories.
 	$calories = get_post_meta($post->ID, "_rl_calories_value", $single = true);	
-
 	
+	// We want to calculate the %of Max HR and the %of HRR
+	$hrrest = get_option('runnerslog_hrrest');
+	$hrmax = get_option('runnerslog_hrmax');
+	if ($hrmax && $hrrest) {
+	$procofmaxhr = ROUND(($pulsavg/$hrmax)*100,0); 	//Calculate %of Max HR
+	$procofhrr = ROUND((($pulsavg-$hrrest)/($hrmax-$hrrest)*100),0);	//Calculate %of Heart Rate Reserve
+	}
+
 	// Let us convert the total running time into seconds
 	function hms2sec ($hms) {
 	list($h, $m, $s) = explode (":", $hms);
@@ -265,7 +272,8 @@ function runners_log_basic() {
 	}
 	// Pulsavg
 	if ($pulsavg) {
-	echo "<li><span class='post-meta-key'>Puls average:</span> $pulsavg</li>";
+	echo "<li><span class='post-meta-key'>Puls average:</span> $pulsavg bpm"; if ($procofmaxhr && $procofhrr) { echo "is $procofmaxhr% of Max HR and $procofhrr% of HRR"; }
+		"</li>";
 	}
 	// Caloríes
 	if ($calories) {

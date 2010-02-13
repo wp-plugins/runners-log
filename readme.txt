@@ -1,24 +1,19 @@
 === Runners Log ===
 Contributors: frold, jaredatch
 Donate link: http://www.liljefred.dk
-Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin
+Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
 Tested up to: 2.9.1
-Stable tag: 1.6.0
+Stable tag: 1.6.5
 
-This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and calculate your training zones. See screenshots.
+This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and a variety of running related calculators. See screenshots.
 
 == Description ==
-This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and calculate your training zones. See screenshots.
-At the moment you can specify:
+This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
-	* Meters
-	* Time
-	* Pulsavg
-	* Calories
-	* Garmin Connect Link
+You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02maxulator Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
-In "Settings" >> "Runners Log" you can now specify the fields you like to use. NEW: Now with Training Zone Calculation
+In "Settings" >> "Runners Log" you can now specify the fields you like to use.
 
 == Installation ==
 This section describes how to install the plugin and get it working.
@@ -34,9 +29,9 @@ This section describes how to install the plugin and get it working.
 	* Calories: 700 C
     * Garmin Connect Link: http://connect.garmin.com/activity/21569332
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
-    * Km in 2010: 10 km based on 1 run with an avg of 10 km
+    * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
-5. Runners Log support the following short codes `	[runners_log_basic]
+5. Runners Log support the following short codes `[runners_log_basic]
 	[runners_log_graph]
 	[runners_log_graphmini_distance]
 	[runners_log_graphmini_hours]
@@ -133,6 +128,11 @@ If that's a problem either uninstall this plugin, help making it work with cache
 11. an example of using `[runners_log_pie_calories]`
 12. an example of using `[runners_log_bar_calories]`
 13. an example of using `[runners_log_graphmini_calories]`
+14. Heart Rate Training Zones Calculator
+15. VDOT and Training Zone Calculator
+16. V02max Calculator
+17. Race Time Calculator
+18. Predicted effect of change in weight
 
 
 == Changelog ==
@@ -190,6 +190,24 @@ If that's a problem either uninstall this plugin, help making it work with cache
 = 1.6.0 =
 * FL - Added short codes support
 
+= 1.6.5 =
+* FL - Adding Runners Log to its own side box
+* FL - New field in Admin: Resting Heart Rate
+* FL - New field in Admin: Maximum Heart Rate
+* FL - New field in Admin: Unit Type: Either metric or english
+* FL - New field in Admin: Height: Either centimeters or feet+inch(es)
+* FL - New field in Admin: Weight: Either kilograms or pounds
+* FL - New field in Admin: Age
+* FL - New field in Admin: Gender
+* FL - Adding Graphs and Stats to Admin
+* FL - Heart Rate Training Zone Calculator
+* FL - Edit runnerslog_basic to show data like: Puls average: 162 is 81% of Max HR and 74% of HRR
+* FL - Body Mass Index Calculator
+* FL - Weight Change Effect Calculator
+* FL - V02max Calculator
+* FL - Training Pace Calculator
+* FL - Moved calculators to a Includes folder
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -211,9 +229,7 @@ This is a major update with renaming the custom fields and adding admin support.
 The short codes release
 
 = 1.6.5 =
-* FL - 2 new fields in Admin: Resting Heart Rate and Maximum Heart Rate
-* FL - Calculation of Heart Rate Training Zones
-* FL - Edit runnerslog_basic to show data like: Puls average: 162 is 81% of Max HR and 74% of HRR
+The calculator release. Februar 2010.
 
 == To Do ==
 	* enable cache

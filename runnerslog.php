@@ -2,11 +2,11 @@
 /*
 Plugin Name: Runners Log
 Plugin URI: http://wordpress.org/extend/plugins/runners-log/
-Description: This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
+Description: This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and a variety of running related calculators. See screenshots.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, jaredatch
-Version: 1.6.0
+Version: 1.6.5
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -1202,15 +1202,57 @@ function runners_log_update(){
 	// Admin Options
 	function runnerslog_admin() {  
 		include('runnerslog_admin.php');
-	}  
-	function runnerslog_admin_menu() {  
-		add_options_page("Runners Log Options", "Runners Log", 7, "runners-log", "runnerslog_admin");  
-	}  
+	}
+
+	function runnerslog_training_zones() {  
+		include('Includes/runnerslog_training_zones.php');
+	}
+
+	function runnerslog_v02max() {  
+		include('Includes/runnerslog_v02max.php');
+	} 
+
+	function runnerslog_vdot_race_time() {  
+		include('Includes/runnerslog_vdot_race_time.php');
+	}
+	
+	function runnerslog_vdot_training_pace() {  
+		include('Includes/runnerslog_vdot_training_pace.php');
+	} 
+
+	function runnerslog_stats_graphs() {  
+		include('Includes/runnerslog_stats_graphs.php');
+	}
+
+	function runnerslog_body_mass_index() {  
+		include('Includes/runnerslog_body_mass_index.php');
+	} 
+
+	function runnerslog_weight_change_effect() {  
+		include('Includes/runnerslog_weight_change_effect.php');
+	} 
+
+	function runnerslog_admin_menu() {
+    // Add a new top-level menu: Runners Log with Submenus
+    add_menu_page('Runners Log', 'Runners Log', 'administrator', 'runners-log', 'runnerslog_admin');
+    add_submenu_page('runners-log', 'Graphs and Stats', 'Graphs and Stats', 'administrator', 'runners-log-stats-graphs', 'runnerslog_stats_graphs');
+    add_submenu_page('runners-log', 'HR Training Zones', 'HR Training Zones', 'administrator', 'runners-log-training-zones', 'runnerslog_training_zones');
+    add_submenu_page('runners-log', 'V0<sub>2</sub>max Calculator', 'V0<sub>2</sub>max Calculator', 'administrator', 'runners-log-v02max', 'runnerslog_v02max');
+    add_submenu_page('runners-log', 'Race Time Calc.', 'Race Time Calc.', 'administrator', 'runners-log-vdot-race-time', 'runnerslog_vdot_race_time');
+    add_submenu_page('runners-log', 'Training Pace Calc.', 'Training Pace Calc.', 'administrator', 'runners-log-vdot-training-pace', 'runnerslog_vdot_training_pace');
+	add_submenu_page('runners-log', 'Body Mass Index', 'Body Mass Index', 'administrator', 'runners-log-body-mass-index', 'runnerslog_body_mass_index');	
+	add_submenu_page('runners-log', 'Weight Change Effect', 'Weight Change Effect', 'administrator', 'runners-log-weight-change-effect', 'runnerslog_weight_change_effect');	
+	}
+	// Hook for adding admin menus
 	add_action('admin_menu', 'runnerslog_admin_menu');
 
 	// Set a few default options on plugin activation
 	function runnerslog_activate() {
 		update_option('runnerslog_distancetype', 'meters');
+		update_option('runnerslog_unittype', 'metric');
+		update_option('runnerslog_gender', 'male');
+		update_option('runnerslog_pulsavg', '1');
+		update_option('runnerslog_caloriescount', '1');
 		update_option('runnerslog_garminconnectlink', '1');
 	}
 	register_activation_hook( __FILE__, 'runnerslog_activate' );

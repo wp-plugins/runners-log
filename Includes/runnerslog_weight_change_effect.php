@@ -229,19 +229,21 @@ if ( $unittype == metric ) {
 	$weightplus2 = $weight+2;
 	$weightplus5 = $weight+5;
 }
-$vdot_timeplus5 = sec2hmsfull(hms2sec($vdot_time)*($weight+5*0.83)/$weight);
-$vdot_timeplus2 = sec2hmsfull(hms2sec($vdot_time)*($weight+2*0.83)/$weight);
-$vdot_timeminus2 = sec2hmsfull(hms2sec($vdot_time)*($weight-2*0.83)/$weight);
-$vdot_timeminus4 = sec2hmsfull(hms2sec($vdot_time)*($weight-4*0.83)/$weight);
-$vdot_timeminus6 = sec2hmsfull(hms2sec($vdot_time)*($weight-6*0.83)/$weight);
-$vdot_timeminus8 = sec2hmsfull(hms2sec($vdot_time)*($weight-8*0.83)/$weight);
-$vdot_timeminus10 = sec2hmsfull(hms2sec($vdot_time)*($weight-10*0.83)/$weight);
-$vdot_timeminus12 = sec2hmsfull(hms2sec($vdot_time)*($weight-12*0.83)/$weight);
+
+if ( $vdot_time &&  $weight) {
+	$vdot_timeplus5 = sec2hmsfull(hms2sec($vdot_time)*($weight+5*0.83)/$weight);
+	$vdot_timeplus2 = sec2hmsfull(hms2sec($vdot_time)*($weight+2*0.83)/$weight);
+	$vdot_timeminus2 = sec2hmsfull(hms2sec($vdot_time)*($weight-2*0.83)/$weight);
+	$vdot_timeminus4 = sec2hmsfull(hms2sec($vdot_time)*($weight-4*0.83)/$weight);
+	$vdot_timeminus6 = sec2hmsfull(hms2sec($vdot_time)*($weight-6*0.83)/$weight);
+	$vdot_timeminus8 = sec2hmsfull(hms2sec($vdot_time)*($weight-8*0.83)/$weight);
+	$vdot_timeminus10 = sec2hmsfull(hms2sec($vdot_time)*($weight-10*0.83)/$weight);
+	$vdot_timeminus12 = sec2hmsfull(hms2sec($vdot_time)*($weight-12*0.83)/$weight);
+}
 	
 if ( $vdot < 30 or $vdot >85 ) {
 	echo 'Sorry, but this calculator only supports a VDOT value between 30 and 85. The calculated VDOT is: <b>'.$vdot.'</b>';
-  } else {
-  if ( $gender && $weight && $age && $height) {
+		} else {
 	echo '<p>The calculated VDOT is: <b>'.$vdot.'</b> and the equivalent race performancens is:</p>';
 	echo'<table border="0" cellpadding="0" cellspacing="0" style="width: 750px;">
 	<thead>
@@ -352,9 +354,6 @@ if ( $vdot < 30 or $vdot >85 ) {
 	</tbody>
 </table>
 ';
-	} else {
-	echo '<b>To calculate the effect of changing in weight you have to type in your weight, gender, age and height in Runners Log Settings</b>';
- }
 }
 ?>
 

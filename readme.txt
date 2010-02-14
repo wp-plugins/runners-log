@@ -6,7 +6,7 @@ Requires at least: 2.7
 Tested up to: 2.9.1
 Stable tag: 1.6.5
 
-This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and a variety of running related calculators. See screenshots.
+This plugin let you convert your blog into a training log and let you track your running get advance statistics and a variety of running related calculators. See screenshots.
 
 == Description ==
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
@@ -21,13 +21,13 @@ This section describes how to install the plugin and get it working.
 1. Copy all files to `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Use this short code `[runners_log_basic]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
-    * Meters: 10000
-    * Time: 01:04:36
-    * Km/hour: 9.29
-    * Min/km: 06:27 minutes
-    * Puls average: 169
-	* Calories: 700 C
-    * Garmin Connect Link: http://connect.garmin.com/activity/21569332
+    * Meters: 8500
+    * Time: 00:49:59
+    * Km/hour: 10.2
+    * Min/km: 05:52 minutes
+    * Puls average: 172 bpmis 86% of Max HR and 80% of HRR
+    * Calories: 654 C
+    * Garmin Connect Link: http://connect.garmin.com/activity/id
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
     * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.

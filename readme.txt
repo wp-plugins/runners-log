@@ -3,8 +3,8 @@ Contributors: frold, jaredatch
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
-Tested up to: 2.9.1
-Stable tag: 1.6.5b
+Tested up to: 2.9.2
+Stable tag: 1.6.6
 
 This plugin let you convert your blog into a training log and let you track your running get advance statistics and a variety of running related calculators. See screenshots.
 
@@ -207,6 +207,12 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - V02max Calculator
 * FL - Training Pace Calculator
 * FL - Moved calculators to a Includes folder
+
+= 1.6.6 =
+* FL - Fix spelling error in pulsavg: bpmis 
+* FL - Fixing unclosed <li> tag in pulsavg in runners_log_basic
+* FL - Tested up to: 2.9.2
+
 
 == Upgrade Notice ==
 

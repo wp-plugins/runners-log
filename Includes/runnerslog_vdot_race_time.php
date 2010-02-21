@@ -134,7 +134,7 @@ A longer race (15K to 25K, for example) will usually be a better marathon predic
 //First we convert the time to second
 $hms = $vdot_time;
 
-function hms2sec ($hms) {
+function hms2secv2($hms) {
 	list($h, $m, $s) = explode (":", $hms);
   if (strlen($hms) <= 5) {
 	$seconds = 0;
@@ -151,9 +151,9 @@ function hms2sec ($hms) {
 	}
 }
 // Call the function
-$seconds = hms2sec($hms);
+$seconds = hms2secv2($hms);
 
-function sec2hms($sec, $padHours = false) {
+function sec2hmsv2($sec, $padHours = false) {
     $hms = "";
     $minutes = intval(($sec / 60) % 60); 
     $hms .= str_pad($minutes, 2, "0", STR_PAD_LEFT). ':';
@@ -194,77 +194,77 @@ if ( $vdot < 30 or $vdot >85 ) {
 		<tr style="background-color: rgb(252, 208, 195);">
 			<td>1500 m</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[1].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[1])/$vdotdistance[1]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[1])/$vdotdistance[1]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(244, 248, 203);">
 			<td>1 Mile</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[2].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[2])/$vdotdistance[2]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[2])/$vdotdistance[2]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(194, 237, 253);">
 			<td>3K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[3].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[3])/$vdotdistance[3]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[3])/$vdotdistance[3]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(194, 237, 253);">
 			<td>2 Mile</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[4].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[4])/$vdotdistance[4]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[4])/$vdotdistance[4]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(193, 215, 254);">
 			<td>5K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[5].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[5])/$vdotdistance[5]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[5])/$vdotdistance[5]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(193, 215, 254);">
 			<td>8K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[6].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[6])/$vdotdistance[6]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[6])/$vdotdistance[6]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(200, 201, 247);">
 			<td>5 Mile</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[7].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[7])/$vdotdistance[7]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[7])/$vdotdistance[7]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(200, 201, 247);">
 			<td>10K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[8].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[8])/$vdotdistance[8]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[8])/$vdotdistance[8]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(200, 201, 247);">
 			<td>15K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[9].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[9])/$vdotdistance[9]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[9])/$vdotdistance[9]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(204, 198, 243);">
 			<td>10 Mile</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[10].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[10])/$vdotdistance[10]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[10])/$vdotdistance[10]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(209, 195, 238);">
 			<td>20K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[11].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[11])/$vdotdistance[11]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[11])/$vdotdistance[11]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(209, 195, 238);">
 			<td>&frac12;Marathon</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[12].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[12])/$vdotdistance[12]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[12])/$vdotdistance[12]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(209, 195, 238);">
 			<td>25K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[13].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[13])/$vdotdistance[13]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[13])/$vdotdistance[13]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(214, 193, 233);">
 			<td>30K</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[14].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[14])/$vdotdistance[14]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[14])/$vdotdistance[14]) .'</td>
 		</tr>
 		<tr style="background-color: rgb(214, 193, 228);">
 			<td>Marahon</td>
 			<td style="text-align: center"; >'.${"vdot$roundvdot"}[15].'</td>
-			<td style="text-align: right"; >'. sec2hms(hms2sec(${"vdot$roundvdot"}[15])/$vdotdistance[15]) .'</td>
+			<td style="text-align: right"; >'. sec2hmsv2(hms2secv2(${"vdot$roundvdot"}[15])/$vdotdistance[15]) .'</td>
 		</tr>
 	</tbody>
 </table>';

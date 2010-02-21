@@ -69,7 +69,7 @@ $heightinches = get_option('runnerslog_inches');
 //First we convert the time to second
 $hms = $vdot_time;
 
-function hms2sec ($hms) {
+function hms2secv4($hms) {
 	list($h, $m, $s) = explode (":", $hms);
   if (strlen($hms) <= 5) {
 	$seconds = 0;
@@ -86,10 +86,10 @@ function hms2sec ($hms) {
 	}
 }
 // Call the function
-$seconds = hms2sec($hms);
+$seconds = hms2secv4($hms);
 
 // This function for use in paces - where hours not an option
-function sec2hms($sec, $padHours = false) {
+function sec2hmsv4($sec, $padHours = false) {
     $hms = "";
     $minutes = intval(($sec / 60) % 60); 
     $hms .= str_pad($minutes, 2, "0", STR_PAD_LEFT). ':';
@@ -231,20 +231,20 @@ if ( $unittype == metric ) {
 }
 
 if ( $vdot_time &&  $weight) {
-	$vdot_timeplus5 = sec2hmsfull(hms2sec($vdot_time)*($weight+5*0.83)/$weight);
-	$vdot_timeplus2 = sec2hmsfull(hms2sec($vdot_time)*($weight+2*0.83)/$weight);
-	$vdot_timeminus2 = sec2hmsfull(hms2sec($vdot_time)*($weight-2*0.83)/$weight);
-	$vdot_timeminus4 = sec2hmsfull(hms2sec($vdot_time)*($weight-4*0.83)/$weight);
-	$vdot_timeminus6 = sec2hmsfull(hms2sec($vdot_time)*($weight-6*0.83)/$weight);
-	$vdot_timeminus8 = sec2hmsfull(hms2sec($vdot_time)*($weight-8*0.83)/$weight);
-	$vdot_timeminus10 = sec2hmsfull(hms2sec($vdot_time)*($weight-10*0.83)/$weight);
-	$vdot_timeminus12 = sec2hmsfull(hms2sec($vdot_time)*($weight-12*0.83)/$weight);
+	$vdot_timeplus5 = sec2hmsfull(hms2secv4($vdot_time)*($weight+5*0.83)/$weight);
+	$vdot_timeplus2 = sec2hmsfull(hms2secv4($vdot_time)*($weight+2*0.83)/$weight);
+	$vdot_timeminus2 = sec2hmsfull(hms2secv4($vdot_time)*($weight-2*0.83)/$weight);
+	$vdot_timeminus4 = sec2hmsfull(hms2secv4($vdot_time)*($weight-4*0.83)/$weight);
+	$vdot_timeminus6 = sec2hmsfull(hms2secv4($vdot_time)*($weight-6*0.83)/$weight);
+	$vdot_timeminus8 = sec2hmsfull(hms2secv4($vdot_time)*($weight-8*0.83)/$weight);
+	$vdot_timeminus10 = sec2hmsfull(hms2secv4($vdot_time)*($weight-10*0.83)/$weight);
+	$vdot_timeminus12 = sec2hmsfull(hms2secv4($vdot_time)*($weight-12*0.83)/$weight);
 }
 	
 if ( $vdot < 30 or $vdot >85 ) {
 	echo 'Sorry, but this calculator only supports a VDOT value between 30 and 85. The calculated VDOT is: <b>'.$vdot.'</b>';
 		} else {
-	echo '<p>The calculated VDOT is: <b>'.$vdot.'</b> and the equivalent race performancens is:</p>';
+	echo '<p>The calculated VDOT is: <b>'.$vdot.'</b> and the predicted effect of change in weight is:</p>';
 	echo'<table border="0" cellpadding="0" cellspacing="0" style="width: 750px;">
 	<thead>
 		<tr>
@@ -311,45 +311,45 @@ if ( $vdot < 30 or $vdot >85 ) {
 			<td style="background-color: rgb(204, 204, 204);">
 				Pace</td>
 			<td style="background-color: rgb(102, 102, 153);">
-				'.sec2hms(hms2sec($vdot_timeplus5)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeplus5)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(102, 153, 255);">
-				'.sec2hms(hms2sec($vdot_timeplus2)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeplus2)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(255, 255, 0);">
-				'.sec2hms(hms2sec($vdot_time)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_time)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(255, 204, 0);">
-				'.sec2hms(hms2sec($vdot_timeminus2)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeminus2)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(255, 153, 0);">
-				'.sec2hms(hms2sec($vdot_timeminus4)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeminus4)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(255, 102, 0);">
-				'.sec2hms(hms2sec($vdot_timeminus6)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeminus6)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(255, 102, 0);">
-				'.sec2hms(hms2sec($vdot_timeminus8)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeminus8)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(255, 102, 0);">
-				'.sec2hms(hms2sec($vdot_timeminus10)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeminus10)/($vdot_distance/1000)).'</td>
 			<td style="background-color: rgb(255, 0, 0);">
-				'.sec2hms(hms2sec($vdot_timeminus12)/($vdot_distance/1000)).'</td>
+				'.sec2hmsv4(hms2secv4($vdot_timeminus12)/($vdot_distance/1000)).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(204, 204, 204);">
 				Time diff</td>
 			<td style="background-color: rgb(102, 102, 153);">
-				'.sec2hmsdiff(hms2sec($vdot_timeplus5)-hms2sec($vdot_time)).'</td>
+				'.sec2hmsdiff(hms2secv4($vdot_timeplus5)-hms2secv4($vdot_time)).'</td>
 			<td style="background-color: rgb(102, 153, 255);">
-				'.sec2hmsdiff(hms2sec($vdot_timeplus2)-hms2sec($vdot_time)).'</td>
+				'.sec2hmsdiff(hms2secv4($vdot_timeplus2)-hms2secv4($vdot_time)).'</td>
 			<td style="background-color: rgb(255, 255, 0);">
 				0</td>
 			<td style="background-color: rgb(255, 204, 0);">
-				-'.sec2hmsdiff(hms2sec($vdot_time)-hms2sec($vdot_timeminus2)).'</td>
+				-'.sec2hmsdiff(hms2secv4($vdot_time)-hms2secv4($vdot_timeminus2)).'</td>
 			<td style="background-color: rgb(255, 153, 0);">
-				-'.sec2hmsdiff(hms2sec($vdot_time)-hms2sec($vdot_timeminus4)).'</td>
+				-'.sec2hmsdiff(hms2secv4($vdot_time)-hms2secv4($vdot_timeminus4)).'</td>
 			<td style="background-color: rgb(255, 102, 0);">
-				-'.sec2hmsdiff(hms2sec($vdot_time)-hms2sec($vdot_timeminus6)).'</td>
+				-'.sec2hmsdiff(hms2secv4($vdot_time)-hms2secv4($vdot_timeminus6)).'</td>
 			<td style="background-color: rgb(255, 102, 0);">
-				-'.sec2hmsdiff(hms2sec($vdot_time)-hms2sec($vdot_timeminus8)).'</td>
+				-'.sec2hmsdiff(hms2secv4($vdot_time)-hms2secv4($vdot_timeminus8)).'</td>
 			<td style="background-color: rgb(255, 102, 0);">
-				-'.sec2hmsdiff(hms2sec($vdot_time)-hms2sec($vdot_timeminus10)).'</td>
+				-'.sec2hmsdiff(hms2secv4($vdot_time)-hms2secv4($vdot_timeminus10)).'</td>
 			<td style="background-color: rgb(255, 0, 0);">
-				-'.sec2hmsdiff(hms2sec($vdot_time)-hms2sec($vdot_timeminus12)).'</td>
+				-'.sec2hmsdiff(hms2secv4($vdot_time)-hms2secv4($vdot_timeminus12)).'</td>
 		</tr>
 	</tbody>
 </table>

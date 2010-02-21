@@ -85,6 +85,7 @@ if ( $coopers && $gender && $weight ) {
 	echo 'Based on your gender: ',$gender,' and your weight: ',$weight,' ',$weightlang,' and the distance ',$coopers,' ',$distancelang,' in 12min gives you the following "V0<sub>2</sub>max" and "absorption of oxygen value".';
 	echo '<p>V0<sub>2</sub>max <b>',ROUND($v02max,1),'</b> ml/kg/min</p>';
 	echo '<p>Absorption of oxygen <b>',ROUND($absorption02,1),'</b> l/min</p>';
+	echo '<p>Below you can compare the V0<sub>2</sub>max with your age. You find a chart for men, women and elite.</p>';
 		} else {
 	echo 'To calculate your "V0<sub>2</sub>max" and "Absorption of oxygen value" you need to specify your weight and gender in the settings. And a distance above.';
 }
@@ -276,7 +277,7 @@ if ( $coopers && $gender && $weight ) {
 	</tbody>
 </table>
 
-<h2>Women - Beginner</h2>
+<h2>Female - Beginner</h2>
 <table cellpadding="0" cellspacing="0" style="width: 510px;">
 	<tbody>
 		<tr>

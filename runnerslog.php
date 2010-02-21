@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, jaredatch
-Version: 1.6.6
+Version: 1.6.7
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -128,17 +128,8 @@ function runners_log_basic() {
 	$procofmaxhr = ROUND(($pulsavg/$hrmax)*100,0); 	//Calculate %of Max HR
 	$procofhrr = ROUND((($pulsavg-$hrrest)/($hrmax-$hrrest)*100),0);	//Calculate %of Heart Rate Reserve
 	}
-
-	// Let us convert the total running time into seconds
-	function hms2sec ($hms) {
-	list($h, $m, $s) = explode (":", $hms);
-	$seconds = 0;
-	$seconds += (intval($h) * 3600);
-	$seconds += (intval($m) * 60);
-	$seconds += (intval($s));
-	return $seconds;
-	}
-	// Call the function
+	
+	// Call the hms2sec function
 	$seconds = hms2sec($hms);
 	
 	// Let us get the distancetype for further calculations
@@ -1159,6 +1150,16 @@ function runners_log_bar_calories() {
 }
 add_shortcode('runners_log_bar_calories', 'runners_log_bar_calories');
 
+// Let us convert the total running time into seconds
+function hms2sec ($hms) {
+	list($h, $m, $s) = explode (":", $hms);
+	$seconds = 0;
+	$seconds += (intval($h) * 3600);
+	$seconds += (intval($m) * 60);
+	$seconds += (intval($s));
+	return $seconds;
+}
+
 // Update the old custom fields to match the new one used from version 1.5.0
 function runners_log_update(){
   
@@ -1233,7 +1234,11 @@ function runners_log_update(){
 
 	function runnerslog_weight_change_effect() {  
 		include('Includes/runnerslog_weight_change_effect.php');
-	} 
+	}
+
+	function runnerslog_converter_toolbox() {  
+		include('Includes/runnerslog_converter_toolbox.php');
+	} 	
 
 	function runnerslog_admin_menu() {
     // Add a new top-level menu: Runners Log with Submenus
@@ -1245,6 +1250,7 @@ function runners_log_update(){
     add_submenu_page('runners-log', 'Training Pace Calc.', 'Training Pace Calc.', 'administrator', 'runners-log-vdot-training-pace', 'runnerslog_vdot_training_pace');
 	add_submenu_page('runners-log', 'Body Mass Index', 'Body Mass Index', 'administrator', 'runners-log-body-mass-index', 'runnerslog_body_mass_index');	
 	add_submenu_page('runners-log', 'Weight Change Effect', 'Weight Change Effect', 'administrator', 'runners-log-weight-change-effect', 'runnerslog_weight_change_effect');	
+	add_submenu_page('runners-log', 'Coverter Toolbox', 'Coverter Toolbox', 'administrator', 'runners-log-converter_toolbox', 'runnerslog_converter_toolbox');	
 	}
 	// Hook for adding admin menus
 	add_action('admin_menu', 'runnerslog_admin_menu');

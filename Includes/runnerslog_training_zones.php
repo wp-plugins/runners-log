@@ -20,6 +20,7 @@ $hrr95 = ROUND((($hrmax-$hrrest)*0.95)+$hrrest,0);  // 95% of HRR
 $hrr100 = ROUND((($hrmax-$hrrest)*1)+$hrrest,0);	// 100% of HRR
 
 if ( $hrrest AND $hrmax ) {
+echo '<p>Based on a Resting Heart Rate at: <b>'.$hrrest.'</b> and a Maximum Heart Rate at: <b>' .$hrmax.'</b> the commanded training zones are:</p>';
 echo '
 <h2>
 	Heart Rate Training Zones (Beginner)</h2>

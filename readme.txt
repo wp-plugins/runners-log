@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
 Tested up to: 2.9.2
-Stable tag: 1.6.6
+Stable tag: 1.6.7
 
 This plugin let you convert your blog into a training log and let you track your running get advance statistics and a variety of running related calculators. See screenshots.
 
@@ -31,28 +31,30 @@ This section describes how to install the plugin and get it working.
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
     * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
-5. Runners Log support the following short codes `[runners_log_basic]
-	[runners_log_graph]
-	[runners_log_graphmini_distance]
-	[runners_log_graphmini_hours]
-	[runners_log_graphmini_calories]
-	[runners_log_pie_distance]
-	[runners_log_pie_hours]
-	[runners_log_pie_calories]
-	[runners_log_bar_distance]
-	[runners_log_bar_hours]
-	[runners_log_bar_calories]`
-6. Runners Log let you use the following tags in your template:`<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
-<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
-<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
-<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
-<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
-<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
-<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
-<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
-<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
-<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
-<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
+5. Runners Log support the following short codes 
+	* `[runners_log_basic]`
+	* `[runners_log_graph]`
+	* `[runners_log_graphmini_distance]`
+	* `[runners_log_graphmini_hours]`
+	* `[runners_log_graphmini_calories]`
+	* `[runners_log_pie_distance]`
+	* `[runners_log_pie_hours]`
+	* `[runners_log_pie_calories]`
+	* `[runners_log_bar_distance]`
+	* `[runners_log_bar_hours]`
+	* `[runners_log_bar_calories]`
+6. Runners Log let you use the following tags in your template:
+	* `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>`
+	* `<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>`
+	* `<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>`
+	* `<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>`
+	* `<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>`
+	* `<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>`
+	* `<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>`
+	* `<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>`
+	* `<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>`
+	* `<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>`
+	* `<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 
 == Frequently Asked Questions ==
@@ -133,7 +135,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 16. V02max Calculator
 17. Race Time Calculator
 18. Predicted effect of change in weight
-
+19. Converter Toolbox
 
 == Changelog ==
 
@@ -213,6 +215,10 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Fixing unclosed <li> tag in pulsavg in runners_log_basic
 * FL - Tested up to: 2.9.2
 
+= 1.6.7 =
+* FL - Fixed bug reported by klojo and fixed by klojo. You are now able to use [runners_log_basic] twice.
+* FL - Fixed some typos
+* FL - Added Coverter Toolbox including: Calculate Speed, Calculate Race Time, Calculate Distance, Convert speed to min per distance
 
 == Upgrade Notice ==
 
@@ -236,6 +242,9 @@ The short codes release
 
 = 1.6.5 =
 The calculator release. Februar 2010.
+
+= 1.6.7 =
+The Converter Toolbox release. Februar 21th 2010.
 
 == To Do ==
 	* enable cache

@@ -122,7 +122,7 @@ $pace85 = array("85", "3:27", "5:33", "4:37", "01:06", "02:13", "02:46", "03:02"
 //First we convert the time to second
 $hms = $vdot_time;
 
-function hms2sec ($hms) {
+function hms2secv3($hms) {
 	list($h, $m, $s) = explode (":", $hms);
   if (strlen($hms) <= 5) {
 	$seconds = 0;
@@ -139,9 +139,9 @@ function hms2sec ($hms) {
 	}
 }
 // Call the function
-$seconds = hms2sec($hms);
+$seconds = hms2secv3($hms);
 
-function sec2hms($sec, $padHours = false) {
+function sec2hmsv3($sec, $padHours = false) {
     $hms = "";
     $minutes = intval(($sec / 60) % 60); 
     $hms .= str_pad($minutes, 2, "0", STR_PAD_LEFT). ':';
@@ -167,7 +167,7 @@ if ($distancetype == meters) {
 if ( $vdot < 30 or $vdot >85 ) {
 	echo 'Sorry, but this calculator only supports a VDOT value between 30 and 85. The calculated VDOT is: <b>',$vdot,'</b>';
   } else {
-	echo '<p>The calculated VDOT is: <b>',$vdot, '</b> and the equivalent race performancens is:</p>';
+	echo '<p>The calculated VDOT is: <b>',$vdot, '</b> and the equivalent training zones are:</p>';
 	echo'<table border="0" cellpadding="2" cellspacing="0" style="width: 250px;">
 	<thead>
 		<tr>
@@ -188,7 +188,7 @@ if ( $vdot < 30 or $vdot >85 ) {
 		<tr style="background-color: rgb(244, 248, 203);">
 			<td rowspan="2"><b><font size="+2">M </font>Marathon Pace</b></td>
 			<td>km</td>
-			<td style="text-align: center;">'.sec2hms((hms2sec(${"pace$roundvdot"}[3])/1.609344)).'</td>
+			<td style="text-align: center;">'.sec2hmsv3((hms2secv3(${"pace$roundvdot"}[3])/1.609344)).'</td>
 		</tr>
 		<tr style="background-color: rgb(244, 248, 203);">
 			<td>mile</td>

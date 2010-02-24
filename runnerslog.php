@@ -500,6 +500,13 @@ function runners_log_graphmini_distance() {
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
+	// is there something to do?
+	if (sizeof($distance_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
+
 	// Dataset definition 
 	$DataSet = new pData;
 
@@ -556,6 +563,13 @@ function runners_log_graphmini_hours() {
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
+	// is there something to do?
+	if (sizeof($hours_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
+
 	// Dataset definition 
 	$DataSet = new pData;
  	foreach ($hours_per_month as $row) {
@@ -608,6 +622,13 @@ function runners_log_graphmini_calories() {
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 	
+	// is there something to do?
+	if (sizeof($calories_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
+
 	// Dataset definition 
 	$DataSet = new pData;
  	foreach ($calories_per_month as $row) {
@@ -661,6 +682,13 @@ function runners_log_pie_distance() {
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
+
+	// is there something to do?
+	if (sizeof($distance_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
 
 	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
@@ -751,6 +779,13 @@ function runners_log_pie_hours() {
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
+	// is there something to do?
+	if (sizeof($hours_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
+
 	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
 		1 => 'Jan',
@@ -827,6 +862,13 @@ function runners_log_pie_calories() {
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
+
+	// is there something to do?
+	if (sizeof($calories_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
 
 	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
@@ -907,6 +949,13 @@ function runners_log_bar_distance() {
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
+
+	// is there something to do?
+	if (sizeof($distance_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
 
 	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
@@ -1002,6 +1051,13 @@ function runners_log_bar_hours() {
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
 
+	// is there something to do?
+	if (sizeof($hours_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
+
 	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (
 		1 => 'Jan',
@@ -1085,6 +1141,13 @@ function runners_log_bar_calories() {
 	AND $wpdb->posts.post_date >= DATE_ADD( NOW(), INTERVAL -1 YEAR)
 	GROUP BY DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' )
 	");
+
+	// is there something to do?
+	if (sizeof($calories_per_month) == 0)
+	{
+		echo "No data available.<br/>\n";
+		return;
+	}
 
 	//Convert the Value 1 -> Jan, etc
 	$month2str = Array (

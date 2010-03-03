@@ -1,10 +1,10 @@
 === Runners Log ===
-Contributors: frold, jaredatch
+Contributors: frold, jaredatch, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
 Tested up to: 2.9.2
-Stable tag: 1.6.7
+Stable tag: 1.6.8
 
 This plugin let you convert your blog into a training log and let you track your running get advance statistics and a variety of running related calculators. See screenshots.
 
@@ -220,6 +220,10 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Fixed some typos
 * FL - Added Coverter Toolbox including: Calculate Speed, Calculate Race Time, Calculate Distance, Convert speed to min per distance
 
+= 1.6.8 =
+* FL - Fixed missing include of converter toolbox file
+* ML - Stats page throws error with zero data http://wordpress.org/support/topic/367176?replies=3
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -245,6 +249,9 @@ The calculator release. Februar 2010.
 
 = 1.6.7 =
 The Converter Toolbox release. Februar 21th 2010.
+
+= 1.6.8 =
+Marts 3rd 2010 
 
 == To Do ==
 	* enable cache

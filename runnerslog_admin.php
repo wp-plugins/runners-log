@@ -14,6 +14,16 @@
 		$age = $_POST['runnerslog_age'];
 		$hrrest = $_POST['runnerslog_hrrest'];
 		$hrmax = $_POST['runnerslog_hrmax'];
+		$show_distance = $_POST['runnerslog_show_distance'];
+		$show_time = $_POST['runnerslog_show_time'];
+		$show_speed = $_POST['runnerslog_show_speed'];
+		$show_speedperdistance = $_POST['runnerslog_show_speedperdistance'];
+		$show_pulse = $_POST['runnerslog_show_pulse'];
+		$show_calories = $_POST['runnerslog_show_calories'];
+		$show_garminconnect = $_POST['runnerslog_show_garminconnect'];
+		$show_distance2009 = $_POST['runnerslog_show_distance2009'];
+		$show_distance2010 = $_POST['runnerslog_show_distance2010'];
+		$show_garminmap = $_POST['runnerslog_show_garminmap'];
 		update_option('runnerslog_distancetype', $distancetype);
 		update_option('runnerslog_unittype', $unittype);
 		update_option('runnerslog_gender', $gender);
@@ -27,6 +37,16 @@
 		update_option('runnerslog_age', $age);
 		update_option('runnerslog_hrrest', $hrrest);
 		update_option('runnerslog_hrmax', $hrmax);
+		update_option('runnerslog_show_distance', $show_distance);
+		update_option('runnerslog_show_time', $show_time);
+		update_option('runnerslog_show_speed', $show_speed);
+		update_option('runnerslog_show_speedperdistance', $show_speedperdistance);
+		update_option('runnerslog_show_pulse', $show_pulse);
+		update_option('runnerslog_show_calories', $show_calories);
+		update_option('runnerslog_show_garminconnect', $show_garminconnect);
+		update_option('runnerslog_show_distance2009', $show_distance2009);
+		update_option('runnerslog_show_distance2010', $show_distance2010);
+		update_option('runnerslog_show_garminmap', $show_garminmap);
 		?>
 		<div class="updated"><p><strong><?php _e('Options saved.' ); ?></strong></p></div>
 		<?php
@@ -45,6 +65,16 @@
 		$age = get_option('runnerslog_age');
 		$hrrest = get_option('runnerslog_hrrest');
 		$hrmax = get_option('runnerslog_hrmax');
+		$show_distance = get_option('runnerslog_show_distance');
+		$show_time = get_option('runnerslog_show_time');
+		$show_speed = get_option('runnerslog_show_speed');
+		$show_speedperdistance = get_option('runnerslog_show_speedperdistance');
+		$show_pulse = get_option('runnerslog_show_pulse');
+		$show_calories = get_option('runnerslog_show_calories');
+		$show_garminconnect = get_option('runnerslog_show_garminconnect');
+		$show_distance2009 = get_option('runnerslog_show_distance2009');
+		$show_distance2010 = get_option('runnerslog_show_distance2010');
+		$show_garminmap = get_option('runnerslog_show_garminmap');
 	}
 ?>
 
@@ -52,11 +82,12 @@
 <?php echo "<h2>" . __( 'Runners Log Options', 'runnerslog_ops' ) . "</h2>"; ?>
 <p>Set the options below.</p>
 
+<div class="tool-box">
+<h3 class="title">Standard Options</h3>
 <form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />
 	<table class="form-table">
 		<tbody>
-
 			<!-- Distance type: runnerslog_distancetype -->
 			<tr valign="top">
 				<th scope="row"><label for="runnerslog_distancetype"><?php _e('Distance type') ?></label></th>
@@ -104,33 +135,6 @@
 				<span class="description">Choose your gender</span>
 				</td>
 				</td>
-			</tr>
-			
-			<!-- Enable Pulse Average: runnerslog_pulsavg -->
-			<tr>
-				<th scope="row" colspan="2" class="th-full">
-				<label for="runnerslog_pulsavg">
-				<input name="runnerslog_pulsavg" id="runnerslog_pulsavg" value="1"<?php checked('1', get_option('runnerslog_pulsavg')); ?> type="checkbox">
-				<?php _e('Enable Pulse Average') ?></label>
-				</th>
-			</tr>
-
-			<!-- Enable Link to Garmin Connect: runnerslog_garminconnectlink -->
-			<tr>
-				<th scope="row" colspan="2" class="th-full">
-				<label for="runnerslog_garminconnectlink">
-				<input name="runnerslog_garminconnectlink" id="runnerslog_garminconnectlink" value="1"<?php checked('1', get_option('runnerslog_garminconnectlink')); ?> type="checkbox">
-				<?php _e('Enable Link to Garmin Connect') ?></label>
-				</th>
-			</tr>
-			
-			<!-- Enable Calories Count: runnerslog_caloriescount -->
-			<tr>
-				<th scope="row" colspan="2" class="th-full">
-				<label for="runnerslog_caloriescount">
-				<input name="runnerslog_caloriescount" id="runnerslog_caloriescount" value="1"<?php checked('1', get_option('runnerslog_caloriescount')); ?> type="checkbox">
-				<?php _e('Enable Calories Count') ?></label>
-				</th>
 			</tr>
 			
 			<!-- Your Height: If metric: runnerslog_cm  If english: runnerslog_feets AND runnerslog_inches-->
@@ -191,9 +195,133 @@
 					<input name="runnerslog_hrmax" type="text" id="runnerslog_hrmax"  value="<?php form_option('runnerslog_hrmax'); ?>" class="small-text" />
 					<span class="description"><?php _e('"Maximum Heart Rate" is the highest number of times your heart can contract in one minute.') ?></span>
 				</td>
+			</tr>
+
+			<!-- Enable Pulse Average: runnerslog_pulsavg -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_pulsavg">
+				<input name="runnerslog_pulsavg" id="runnerslog_pulsavg" value="1"<?php checked('1', get_option('runnerslog_pulsavg')); ?> type="checkbox">
+				<?php _e('Enable Pulse Average') ?></label>
+				</th>
+			</tr>
+
+			<!-- Enable Link to Garmin Connect: runnerslog_garminconnectlink -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_garminconnectlink">
+				<input name="runnerslog_garminconnectlink" id="runnerslog_garminconnectlink" value="1"<?php checked('1', get_option('runnerslog_garminconnectlink')); ?> type="checkbox">
+				<?php _e('Enable Link to Garmin Connect') ?></label>
+				</th>
+			</tr>
+			
+			<!-- Enable Calories Count: runnerslog_caloriescount -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_caloriescount">
+				<input name="runnerslog_caloriescount" id="runnerslog_caloriescount" value="1"<?php checked('1', get_option('runnerslog_caloriescount')); ?> type="checkbox">
+				<?php _e('Enable Calories Count') ?></label>
+				</th>
 			</tr>			
 		</tbody>
 	</table>
+</div>
+<div class="tool-box">
+    <h3 class="title">Options for [runners_log_basic]</h3>
+	<table class="form-table">
+		<tbody>
+			<!-- Show distance: runnerslog_show_distance -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_distance">
+				<input name="runnerslog_show_distance" id="runnerslog_show_distance" value="1"<?php checked('1', get_option('runnerslog_show_distance')); ?> type="checkbox">
+				<?php _e('Show Distance') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show time: runnerslog_show_time -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_time">
+				<input name="runnerslog_show_time" id="runnerslog_show_time" value="1"<?php checked('1', get_option('runnerslog_show_time')); ?> type="checkbox">
+				<?php _e('Show Time') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show speed: runnerslog_show_speed -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_speed">
+				<input name="runnerslog_show_speed" id="runnerslog_show_speed" value="1"<?php checked('1', get_option('runnerslog_show_speed')); ?> type="checkbox">
+				<?php _e('Show Speed') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show speedperdistance: runnerslog_show_speedperdistance -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_speedperdistance">
+				<input name="runnerslog_show_speedperdistance" id="runnerslog_show_speedperdistance" value="1"<?php checked('1', get_option('runnerslog_show_speedperdistance')); ?> type="checkbox">
+				<?php _e('Show Speed per Distance') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show pulse: runnerslog_show_pulse -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_pulse">
+				<input name="runnerslog_show_pulse" id="runnerslog_show_pulse" value="1"<?php checked('1', get_option('runnerslog_show_pulse')); ?> type="checkbox">
+				<?php _e('Show Pulse Average') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show calories: runnerslog_show_calories -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_calories">
+				<input name="runnerslog_show_calories" id="runnerslog_show_calories" value="1"<?php checked('1', get_option('runnerslog_show_calories')); ?> type="checkbox">
+				<?php _e('Show Calories') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show link to garmin connect: runnerslog_show_garminconnect -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_garminconnect">
+				<input name="runnerslog_show_garminconnect" id="runnerslog_show_garminconnect" value="1"<?php checked('1', get_option('runnerslog_show_garminconnect')); ?> type="checkbox">
+				<?php _e('Show link to Garmin Connect') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show distance 2009: runnerslog_show_distance2009 -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_distance2009">
+				<input name="runnerslog_show_distance2009" id="runnerslog_show_distance2009" value="1"<?php checked('1', get_option('runnerslog_show_distance2009')); ?> type="checkbox">
+				<?php _e('Show Distance in 2009') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show distance 2010: runnerslog_show_distance2010 -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_distance2010">
+				<input name="runnerslog_show_distance2010" id="runnerslog_show_distance2010" value="1"<?php checked('1', get_option('runnerslog_show_distance2010')); ?> type="checkbox">
+				<?php _e('Show Distance in 2010') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show embed garmin map: runnerslog_show_garminmap -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_garminmap">
+				<input name="runnerslog_show_garminmap" id="runnerslog_show_garminmap" value="1"<?php checked('1', get_option('runnerslog_show_garminmap')); ?> type="checkbox">
+				<?php _e('Show embed Garmin Map') ?></label>
+				</th>
+			</tr>			
+		</tbody>
+	</table>
+</div>
 	<p class="submit">
 		<input type="submit" name="Submit" value="<?php _e('Save and update options', 'runnerslog_ops' ) ?>" />
 	</p>

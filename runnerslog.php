@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, jaredatch, michaellasmanis
-Version: 1.8.0
+Version: 1.8.1
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -119,7 +119,19 @@ function runners_log_basic() {
 	$pulsavg = get_post_meta($post->ID, "_rl_pulsavg_value", $single = true);
 	
 	// Get calories.
-	$calories = get_post_meta($post->ID, "_rl_calories_value", $single = true);	
+	$calories = get_post_meta($post->ID, "_rl_calories_value", $single = true);
+
+	// Get [runners_log_basic] settings
+	$show_distance = get_option('runnerslog_show_distance');
+	$show_time = get_option('runnerslog_show_time');
+	$show_speed = get_option('runnerslog_show_speed');
+	$show_speedperdistance = get_option('runnerslog_show_speedperdistance');
+	$show_pulse = get_option('runnerslog_show_pulse');
+	$show_calories = get_option('runnerslog_show_calories');
+	$show_garminconnect = get_option('runnerslog_show_garminconnect');
+	$show_distance2009 = get_option('runnerslog_show_distance2009');
+	$show_distance2010 = get_option('runnerslog_show_distance2010');
+	$show_garminmap = get_option('runnerslog_show_garminmap');
 	
 	// We want to calculate the %of Max HR and the %of HRR
 	$hrrest = get_option('runnerslog_hrrest');
@@ -221,7 +233,8 @@ function runners_log_basic() {
 	
 	//Print it all
 	echo "<ul class='post-meta'>";
-	// Distance
+// Distance
+if ($show_distance == '1') {
 	if ( $distancetype == meters ) {
 		//..let us print the distance in meters but only if distance is greather then 0...
 		if ( $distance > 0 ) {
@@ -233,11 +246,15 @@ function runners_log_basic() {
 		echo "<li><span class='post-meta-key'>Miles:</span> $distance</li>";
 		}
 	}
-	// Time
+}
+// Time
+if ($show_time == '1') {
 	if ( $hms ) {
 	echo "<li><span class='post-meta-key'>Time:</span> $hms</li>";
 	}
-	// Distance per hours
+}
+// Distance per hours
+if ($show_speed == '1') {
 	if ( $distancetype == meters ) {
 		//..let us get the speed in km/hours. (But only if km/hour is greather then 0...)
 		if ( $km_per_hour > 0 ) {
@@ -249,7 +266,9 @@ function runners_log_basic() {
 		echo "<li><span class='post-meta-key'>Miles/hour:</span> $miles_per_hour</li>";
 		}
 	}
-	// Min per distance
+}
+// Min per distance
+if ($show_speedperdistance == '1') {
 	if ( $distancetype == meters ) {
 		//..let us get the speed in min per km... (But only if minutes is greather then 0...)
 		if ( $minutes > 0 ) {
@@ -261,23 +280,31 @@ function runners_log_basic() {
 		echo "<li><span class='post-meta-key'>Min/miles:</span> $minutes_miles:$secondsleft_miles minutes</li>";
 		}
 	}
-	// Pulsavg
+}
+// Pulsavg
+if ($show_pulse == '1') {
 	if ($pulsavg) {
-	echo "<li><span class='post-meta-key'>Puls average:</span> $pulsavg bpm"; 
+	echo "<li><span class='post-meta-key'>Pulse average:</span> $pulsavg bpm"; 
 	if ($procofmaxhr && $procofhrr) { 
 		echo " is $procofmaxhr% of Max HR and $procofhrr% of HRR"; 
 	} 
 	echo "</li>";
 	}
-	// Caloríes
+}
+// Caloríes
+if ($show_calories == '1') {	
 	if ($calories) {
 	echo "<li><span class='post-meta-key'>Calories:</span> $calories C</li>";
 	}
-	//Garmin Connect Link
+}
+//Garmin Connect Link
+if ($show_garminconnect == '1') {
 	if ($url) {
 	echo "<li><span class='post-meta-key'>Garmin Connect Link:</span> <a href='$url' target='_blank'>$url</a></li>";
 	}
-	// Totals 2009
+}
+// Totals 2009
+if ($show_distance2009 == '1') {
 	if ($distancetype == meters) {
 			//Km
 			if ($number_of_runs_2009 == 1 ) {
@@ -295,7 +322,9 @@ function runners_log_basic() {
 			echo "<li><span class='post-meta-key'>Miles in 2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
 			}
 	}
-	// Totals 2010
+}
+// Totals 2010
+if ($show_distance2010 == '1') {	
 	if ($distancetype == meters) {
 			//Km
 			if ($number_of_runs_2010 == 1 ) {
@@ -312,7 +341,16 @@ function runners_log_basic() {
 			if ($number_of_runs_2010 > 1 ) {		
 			echo "<li><span class='post-meta-key'>Miles in 2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
 			}
-	}	
+	}
+}
+// Insert embed Garmin Connnect Map based on the used Garmin Connect Link
+if ($show_garminmap == '1') {
+	if ( $url) {
+	$mapurl = substr($url, strrpos($url, '/') + 1);
+	echo "<iframe width='465' height='548' frameborder='0' src='http://connect.garmin.com:80/activity/embed/".$mapurl."'></iframe>";
+	}
+}
+	
 	echo "</ul>";
 // End function runners_log_basic()
 }
@@ -1213,6 +1251,23 @@ function runners_log_bar_calories() {
 }
 add_shortcode('runners_log_bar_calories', 'runners_log_bar_calories');
 
+function runners_log_garminmap() {
+	// Make $wpdb and $post global
+	global $wpdb, $post;
+	
+	// Get the Garmin Connect Link
+	$url = get_post_meta($post->ID, "_rl_garminconnectlink_value", $single = true);
+	
+	// Insert embed Garmin Connnect Map based on the used Garmin Connect Link
+	if ( $url) {
+	$mapurl = substr($url, strrpos($url, '/') + 1);
+	echo "<iframe width='465' height='548' frameborder='0' src='http://connect.garmin.com:80/activity/embed/".$mapurl."'></iframe>";
+	}
+
+//End function runners_log_garminmap()
+}
+add_shortcode('runners_log_garminmap', 'runners_log_garminmap');
+
 // Let us convert the total running time into seconds
 function hms2sec ($hms) {
 	list($h, $m, $s) = explode (":", $hms);
@@ -1326,6 +1381,16 @@ function runners_log_update(){
 		update_option('runnerslog_pulsavg', '1');
 		update_option('runnerslog_caloriescount', '1');
 		update_option('runnerslog_garminconnectlink', '1');
+		update_option('runnerslog_show_distance', '1');
+		//Settings for [runners_log_basic]
+		update_option('runnerslog_show_time', '1');
+		update_option('runnerslog_show_speed', '1');
+		update_option('runnerslog_show_speedperdistance', '1');
+		update_option('runnerslog_show_pulse', '1');
+		update_option('runnerslog_show_calories', '1');
+		update_option('runnerslog_show_garminconnect', '1');
+		update_option('runnerslog_show_distance2009', '1');
+		update_option('runnerslog_show_distance2010', '1');
 	}
 	register_activation_hook( __FILE__, 'runnerslog_activate' );
 

@@ -4,16 +4,18 @@ Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
 Tested up to: 3.0.0
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 
-This plugin let you convert your blog into a training log and let you track your running get advance statistics and a variety of running related calculators. See screenshots.
+This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and a variety of running related calculators. See screenshots.
 
 == Description ==
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
 You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02maxulator Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
-In "Settings" >> "Runners Log" you can now specify the fields you like to use.
+In "Settings" >> "Runners Log" you can specify the fields you like to use.
+
+Now we support a embed Garmin Connnect Map
 
 == Installation ==
 This section describes how to install the plugin and get it working.
@@ -30,6 +32,7 @@ This section describes how to install the plugin and get it working.
     * Garmin Connect Link: http://connect.garmin.com/activity/id
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
     * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
+	* ~embed garmin connect map~
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
 5. Runners Log support the following short codes 
 	* `[runners_log_basic]`
@@ -43,6 +46,7 @@ This section describes how to install the plugin and get it working.
 	* `[runners_log_bar_distance]`
 	* `[runners_log_bar_hours]`
 	* `[runners_log_bar_calories]`
+	* `[runners_log_garminmap]`
 6. Runners Log let you use the following tags in your template:
 	* `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>`
 	* `<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>`
@@ -55,6 +59,7 @@ This section describes how to install the plugin and get it working.
 	* `<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>`
 	* `<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>`
 	* `<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
+	* `<?php if (function_exists(runners_log_garminmap)) echo runners_log_bar_garminmap(); ?>`
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 
 == Frequently Asked Questions ==
@@ -71,6 +76,7 @@ This section describes how to install the plugin and get it working.
 	[runners_log_bar_distance]
 	[runners_log_bar_hours]
 	[runners_log_bar_calories]
+	[runners_log_garminmap]
 
 = I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
@@ -136,6 +142,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 17. Race Time Calculator
 18. Predicted effect of change in weight
 19. Converter Toolbox
+20. Embed Garmin Connect Map in [runners_log_basic] and/or an example of using [runners_log_garminmap]
 
 == Changelog ==
 
@@ -224,7 +231,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Fixed missing include of converter toolbox file
 * ML - Stats page throws error with zero data http://wordpress.org/support/topic/367176?replies=3
 
-= 1.7.0 =
+= 1.8.0 =
 * FL - Wordpress 3.0 validated
 * FL - runnerslog_admin.php spell checking and more
 * FL - Includes/runnerslog_stats_graphs.php minor spelling fixes
@@ -235,6 +242,12 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Includes/runnerslog_body_mass_index.php minor spelling fixes and style changes
 * FL - Includes/runnerslog_weight_change_effect.php minor style changes
 * FL - Includes/runnerslog_converter_toolbox fixed to remember data i all fields
+
+= 1.8.1 =
+* FL - Added settings for [runners_log_basic] Now you can set what to show
+* FL - Pulse spelling error in [runners_log_basic]
+* FL - Added embed Garmin Connect map to [runners_log_basic] and you can enable or disable it
+* FL - Added a new shortcode [runners_log_garminmap] which let you insert a embed map of you route. The map is based on the path in "Garmin Connect Link"
 
 == Upgrade Notice ==
 
@@ -265,7 +278,7 @@ The Converter Toolbox release. Februar 21th 2010.
 = 1.6.8 =
 Marts 3rd 2010 
 
-= 1.8.0 =
+= 1.8.1 =
 June 27th 2010 
 
 == To Do ==

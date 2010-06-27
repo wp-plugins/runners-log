@@ -41,10 +41,10 @@ $heightinches = get_option('runnerslog_inches');
 				<td><?php
 					if ( $distancetype == meters ) {
 						echo '<input name="runnerslog_vdot_distance" type="text" id="runnerslog_vdot_distance"  value="', form_option('runnerslog_vdot_distance'), '" class="small-text" />';
-						echo '<span class="description"> meters</span>';
+						echo '<span class="description"> Meters (eg 2500)</span>';
 							} else {
 						echo '<input name="runnerslog_vdot_distance" type="text" id="runnerslog_vdot_distance"  value="', form_option('runnerslog_vdot_distance'), '" class="small-text" />';
-						echo '<span class="description"> miles (eg. 1.58)</span>';
+						echo '<span class="description"> Miles (eg. 1.58)</span>';
 					}
 					?>
 				</td>
@@ -53,7 +53,7 @@ $heightinches = get_option('runnerslog_inches');
 				<th scope="row"><label for="runnerslog_vdot_time"><?php _e('Time:') ?></label></th>
 				<td><?php
 						echo '<input name="runnerslog_vdot_time" type="text" id="runnerslog_vdot_time"  value="', form_option('runnerslog_vdot_time'), '" size="7" maxlength="8" />';
-						echo '<span class="description"> Must be formated as hh:mm:ss like 00:37:45 for 37min and 45sec</span>';
+						echo '<span class="description"> Must be formated as hh:mm:ss like 01:37:45 for 1 hour 37min and 45sec</span>';
 					?>
 				</td>
 			</tr>				
@@ -63,6 +63,21 @@ $heightinches = get_option('runnerslog_inches');
 		<input type="submit" name="Submit" value="<?php _e('Calculate VDOT-value', 'runnerslog_ops' ) ?>" />
 	</p>
 </form>
+
+<h3>
+	The calculation assumes that everything else is held constant.&nbsp; In real life, however, everything else would not be constant. A reduction in weight might be accompanied by:</h3>
+<ul>
+	<li>
+		A higher background level of training</li>
+	<li>
+		Lower muscle mass</li>
+	<li>
+		Reduced immunity</li>
+	<li>
+		Reduced glycogen stores</li>
+	<li>
+		Lower levels of hydration</li>
+</ul>
 
 <?php
 
@@ -356,19 +371,4 @@ if ( $vdot < 30 or $vdot >85 ) {
 ';
 }
 ?>
-
-<p>
-	The calculation assumes that everything else is held constant.&nbsp; In real life, however, everything else would not be constant. A reduction in weight might be accompanied by:</p>
-<ul>
-	<li>
-		A higher background level of training</li>
-	<li>
-		Lower muscle mass</li>
-	<li>
-		Reduced immunity</li>
-	<li>
-		Reduced glycogen stores</li>
-	<li>
-		Lower levels of hydration</li>
-</ul>
 </div>

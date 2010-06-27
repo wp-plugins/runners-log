@@ -23,7 +23,7 @@ $age = get_option('runnerslog_age');
 	}
 ?>
 
-<p>The Cooper test is a test of physical fitness. It was designed by Kenneth H. Cooper in 1968 for US military use. In the original form, the point of the test is to run as far as possible within 12 minutes.</p>
+<h3>The Cooper test is a test of physical fitness. It was designed by Kenneth H. Cooper in 1968 for US military use. In the original form, the point of the test is to run as far as possible within 12 minutes.</h3>
 
 <form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />
@@ -34,10 +34,10 @@ $age = get_option('runnerslog_age');
 				<td><?php
 					if ( $distancetype == meters ) {
 						echo '<input name="runnerslog_coopers" type="text" id="runnerslog_coopers"  value="', form_option('runnerslog_coopers'), '" class="small-text" />';
-						echo '<span class="description"> meters</span>';
+						echo '<span class="description"> Meters (eg 2500)</span>';
 							} else {
 						echo '<input name="runnerslog_coopers" type="text" id="runnerslog_coopers"  value="', form_option('runnerslog_coopers'), '" class="small-text" />';
-						echo '<span class="description"> miles (eg. 1.58)</span>';
+						echo '<span class="description"> Miles (eg. 1.58)</span>';
 					}
 					?>
 				</td>
@@ -82,7 +82,7 @@ if ($unittype == metric) {
 }
  
 if ( $coopers && $gender && $weight ) {
-	echo 'Based on your gender: ',$gender,' and your weight: ',$weight,' ',$weightlang,' and the distance ',$coopers,' ',$distancelang,' in 12min gives you the following "V0<sub>2</sub>max" and "absorption of oxygen value".';
+	echo 'Based on your gender <b>',$gender,'</b> and your weight <b>',$weight,'</b> <b>',$weightlang,'</b> and the distance <b>',$coopers,'</b> <b>',$distancelang,'</b> in 12min gives you the following "V0<sub>2</sub>max" and "absorption of oxygen value".';
 	echo '<p>V0<sub>2</sub>max <b>',ROUND($v02max,1),'</b> ml/kg/min</p>';
 	echo '<p>Absorption of oxygen <b>',ROUND($absorption02,1),'</b> l/min</p>';
 	echo '<p>Below you can compare the V0<sub>2</sub>max with your age. You find a chart for men, women and elite.</p>';

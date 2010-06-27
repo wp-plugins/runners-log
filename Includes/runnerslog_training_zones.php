@@ -20,7 +20,7 @@ $hrr95 = ROUND((($hrmax-$hrrest)*0.95)+$hrrest,0);  // 95% of HRR
 $hrr100 = ROUND((($hrmax-$hrrest)*1)+$hrrest,0);	// 100% of HRR
 
 if ( $hrrest AND $hrmax ) {
-echo '<p>Based on a Resting Heart Rate at: <b>'.$hrrest.'</b> and a Maximum Heart Rate at: <b>' .$hrmax.'</b> the commanded training zones are:</p>';
+echo '<p>Based on a Resting Heart Rate at <b>'.$hrrest.'</b> and a Maximum Heart Rate at <b>' .$hrmax.'</b> the commanded training zones are:</p>';
 echo '
 <h2>
 	Heart Rate Training Zones (Beginner)</h2>
@@ -127,7 +127,7 @@ echo '
 			<td style="background-color: rgb(255, 255, 0); width: 60px; text-align: center;">
 				'.$hrr55.'-'.$hrr65.'</td>
 			<td style="background-color: rgb(255, 255, 0); width: 70px; text-align: center;">
-				50-60%</td>
+				55-65%</td>
 			<td style="background-color: rgb(255, 255, 0); width: 120px; text-align: center;">
 				Moderate activity</td>
 			<td style="background-color: rgb(255, 255, 0); width: 380px; text-align: center;">
@@ -139,7 +139,7 @@ echo '
 			<td style="background-color: rgb(255, 204, 0); width: 60px; text-align: center;">
 				'.$hrr65.'-'.$hrr75.'</td>
 			<td style="background-color: rgb(255, 204, 0); width: 70px; text-align: center;">
-				60-70%</td>
+				65-75%</td>
 			<td style="background-color: rgb(255, 204, 0); width: 120px; text-align: center;">
 				The Energy Efficient or Recovery Zone</td>
 			<td style="background-color: rgb(255, 204, 0); width: 380px; text-align: center;">
@@ -151,7 +151,7 @@ echo '
 			<td style="background-color: rgb(255, 153, 0); width: 60px; text-align: center;">
 				'.$hrr75.'-'.$hrr85.'</td>
 			<td style="background-color: rgb(255, 153, 0); width: 70px; text-align: center;">
-				70-80%</td>
+				75-85%</td>
 			<td style="background-color: rgb(255, 153, 0); width: 120px; text-align: center;">
 				The Aerobic Zone</td>
 			<td style="background-color: rgb(255, 153, 0); width: 380px; text-align: center;">
@@ -163,7 +163,7 @@ echo '
 			<td style="background-color: rgb(255, 51, 0); width: 60px; text-align: center;">
 				'.$hrr85.'-'.$hrr95.'</td>
 			<td style="background-color: rgb(255, 51, 0); width: 70px; text-align: center;">
-				80-90%</td>
+				85-95%</td>
 			<td style="background-color: rgb(255, 51, 0); width: 120px; text-align: center;">
 				The Anaerobic Zone</td>
 			<td style="background-color: rgb(255, 51, 0); width: 380px; text-align: center;">
@@ -175,7 +175,7 @@ echo '
 			<td style="background-color: rgb(255, 0, 0); width: 60px; text-align: center;">
 				'.$hrr95.'-'.$hrr100.'</td>
 			<td style="background-color: rgb(255, 0, 0); width: 60px; text-align: center;">
-				90-100%</td>
+				95-100%</td>
 			<td style="background-color: rgb(255, 0, 0); width: 60px; text-align: center;">
 				VO<sub>2</sub>max or &quot;Red line zone&quot;</td>
 			<td style="background-color: rgb(255, 0, 0); width: 380px; text-align: center;">

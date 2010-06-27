@@ -3,8 +3,8 @@ Contributors: frold, jaredatch, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
-Tested up to: 2.9.2
-Stable tag: 1.6.8
+Tested up to: 3.0.0
+Stable tag: 1.7.0
 
 This plugin let you convert your blog into a training log and let you track your running get advance statistics and a variety of running related calculators. See screenshots.
 
@@ -224,6 +224,18 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Fixed missing include of converter toolbox file
 * ML - Stats page throws error with zero data http://wordpress.org/support/topic/367176?replies=3
 
+= 1.7.0 =
+* FL - Wordpress 3.0 validated
+* FL - runnerslog_admin.php spell checking and more
+* FL - Includes/runnerslog_stats_graphs.php minor spelling fixes
+* FL - Includes/runnerslog_training_zones.php fixed Heart Rate Training Zones (Elite)
+* FL - Includes/runnerslog_v02mac.php minor style changes
+* FL - Includes/runnerslog_vdot_race_time.php minor spelling fixes
+* FL - Includes/runnerslog_vdot_training_pace.php minor spelling fixes
+* FL - Includes/runnerslog_body_mass_index.php minor spelling fixes and style changes
+* FL - Includes/runnerslog_weight_change_effect.php minor style changes
+* FL - Includes/runnerslog_converter_toolbox fixed to remember data i all fields
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -252,6 +264,9 @@ The Converter Toolbox release. Februar 21th 2010.
 
 = 1.6.8 =
 Marts 3rd 2010 
+
+= 1.7.0 =
+June 27th 2010 
 
 == To Do ==
 	* enable cache

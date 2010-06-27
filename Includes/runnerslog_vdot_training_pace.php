@@ -94,10 +94,10 @@ $pace85 = array("85", "3:27", "5:33", "4:37", "01:06", "02:13", "02:46", "03:02"
 				<td><?php
 					if ( $distancetype == meters ) {
 						echo '<input name="runnerslog_vdot_distance" type="text" id="runnerslog_vdot_distance"  value="', form_option('runnerslog_vdot_distance'), '" class="small-text" />';
-						echo '<span class="description"> meters</span>';
+						echo '<span class="description"> Meters (eg. 2500)</span>';
 							} else {
 						echo '<input name="runnerslog_vdot_distance" type="text" id="runnerslog_vdot_distance"  value="', form_option('runnerslog_vdot_distance'), '" class="small-text" />';
-						echo '<span class="description"> miles (eg. 1.58)</span>';
+						echo '<span class="description"> Miles (eg. 1.58)</span>';
 					}
 					?>
 				</td>
@@ -106,7 +106,7 @@ $pace85 = array("85", "3:27", "5:33", "4:37", "01:06", "02:13", "02:46", "03:02"
 				<th scope="row"><label for="runnerslog_vdot_time"><?php _e('Time:') ?></label></th>
 				<td><?php
 						echo '<input name="runnerslog_vdot_time" type="text" id="runnerslog_vdot_time"  value="', form_option('runnerslog_vdot_time'), '" size="7" maxlength="8" />';
-						echo '<span class="description"> Must be formated as hh:mm:ss like 00:37:45 for 37min and 45sec</span>';
+						echo '<span class="description"> Must be formated as hh:mm:ss like 01:37:45 for 1 hour 37min and 45sec</span>';
 					?>
 				</td>
 			</tr>				

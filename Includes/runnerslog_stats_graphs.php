@@ -1,6 +1,6 @@
 <div class="wrap">
 <p><?php echo "<h2>" . __( 'Runners Log Stats and Graph' ) . "</h2>"; ?></p>
-Below the graphs you find the code you need to use in a page, post or templates to insert a simular graph as shown.
+<h3>Below the graphs you'll find the code you need to use it in a page, post or template to insert a simular graph as shown.</h3>
 
 <p><?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?></p>
 <div class="block-content">In pages or posts use: <code>[runners_log_graph]</code> in a template  <code>&lt;?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?&gt;</code></div> 

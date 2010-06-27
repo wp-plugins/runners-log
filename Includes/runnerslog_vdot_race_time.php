@@ -93,9 +93,9 @@ $vdot30 = array("30", "8:30", "9:11", "17:56", "19:19", "30:40", "50:32", "50:50
 ?>
 
 <p>This calculator use the VDOT tables found in <a href="http://www.amazon.co.uk/gp/product/0736054928/" target=_blank">Daniels' Running Formula - 2<sup>nd</sup> Edition.</a></p>
-<p>By using standard values for running economy and by having a timed Performance over at least one running distance, a fitness ("VDOT") value can be assigned to you for training and race-prediction purposes.</br>
+<h3>By using standard values for running economy and by having a timed Performance over at least one running distance, a fitness ("VDOT") value can be assigned to you for training and race-prediction purposes.</br>
 VDOT is an adjusted V02max (which may or may not match a laboratory-generated V02max), which tells you how you might race for other distances associated with the same VDOT.</br>
-A longer race (15K to 25K, for example) will usually be a better marathon predictor than would be a 1-mile or 5K race.</p>
+A longer race (15K to 25K, for example) will usually be a better marathon predictor than would be a 1-mile or 5K race.</h3>
 
 <form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />
@@ -106,10 +106,10 @@ A longer race (15K to 25K, for example) will usually be a better marathon predic
 				<td><?php
 					if ( $distancetype == meters ) {
 						echo '<input name="runnerslog_vdot_distance" type="text" id="runnerslog_vdot_distance"  value="', form_option('runnerslog_vdot_distance'), '" class="small-text" />';
-						echo '<span class="description"> meters</span>';
+						echo '<span class="description"> Meters (eg. 2500)</span>';
 							} else {
 						echo '<input name="runnerslog_vdot_distance" type="text" id="runnerslog_vdot_distance"  value="', form_option('runnerslog_vdot_distance'), '" class="small-text" />';
-						echo '<span class="description"> miles (eg. 1.58)</span>';
+						echo '<span class="description"> Miles (eg. 1.58)</span>';
 					}
 					?>
 				</td>
@@ -118,7 +118,7 @@ A longer race (15K to 25K, for example) will usually be a better marathon predic
 				<th scope="row"><label for="runnerslog_vdot_time"><?php _e('Time:') ?></label></th>
 				<td><?php
 						echo '<input name="runnerslog_vdot_time" type="text" id="runnerslog_vdot_time"  value="', form_option('runnerslog_vdot_time'), '" size="7" maxlength="8" />';
-						echo '<span class="description"> Must be formated as hh:mm:ss like 00:37:45 for 37min and 45sec</span>';
+						echo '<span class="description"> Must be formated as hh:mm:ss like 01:37:45 for 1 hour 37min and 45sec</span>';
 					?>
 				</td>
 			</tr>				

@@ -10,7 +10,7 @@ array(
 		"name" => "_rl_time",
 		"std" => "",
 		"title" => "Time:",
-		"description" => "As HH:MM:SS eg 00:37:27=37min27sec",
+		"description" => "hh:mm:ss eg 01:37:27 1h37min27sec",
 		"show" => "1"
 	),
 	"_rl_distance" => array(
@@ -38,7 +38,7 @@ array(
 		"name" => "_rl_garminconnectlink",
 		"std" => "",
 		"title" => "Garmin Link:",
-		"description" => "Format like: http://www.google.com",
+		"description" => "Format like: http://connect.garmin.com/activity/37503629",
 		"show" => "$garminconnect"
 	)
 );

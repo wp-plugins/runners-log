@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, jaredatch, michaellasmanis
-Version: 1.8.1
+Version: 1.8.2
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -97,6 +97,31 @@ if (version_compare($wp_version,"2.7","<"))
 	exit ($exit_msg);
 }
 
+// Add settings option
+function rl_filter_plugin_actions($links) {
+	$new_links = array();
+	
+	$new_links[] = '<a href="admin.php?page=runners-log">' . __('Settings', 'runners-log') . '</a>';
+	
+	return array_merge($new_links, $links);
+}
+add_action('plugin_action_links_' . plugin_basename(__FILE__), 'rl_filter_plugin_actions');
+
+// Add FAQ and support information and a little more
+function rl_filter_plugin_links($links, $file)
+{
+	if ( $file == plugin_basename(__FILE__) )
+	{
+		$links[] = '<a href="http://wordpress.org/extend/plugins/runners-log/faq/">' . __('FAQ', 'runners-log') . '</a>';
+		$links[] = '<a href="http://wordpress.org/tags/runners-log?forum_id=10">' . __('Support', 'runners-log') . '</a>';
+		$links[] = '<a href="http://wordpress.org/support/topic/358411">' . __('Share where you use it', 'runners-log') . '</a>';
+	}
+	
+	return $links;
+}
+add_filter('plugin_row_meta', 'rl_filter_plugin_links', 10, 2);
+
+
 // Do this when user activates the plugin (Update Script)
 register_activation_hook(__FILE__, 'runners_log_update');
 
@@ -131,6 +156,7 @@ function runners_log_basic() {
 	$show_garminconnect = get_option('runnerslog_show_garminconnect');
 	$show_distance2009 = get_option('runnerslog_show_distance2009');
 	$show_distance2010 = get_option('runnerslog_show_distance2010');
+	$show_distance_sum = get_option('runnerslog_show_distance_sum');
 	$show_garminmap = get_option('runnerslog_show_garminmap');
 	
 	// We want to calculate the %of Max HR and the %of HRR
@@ -231,6 +257,33 @@ function runners_log_basic() {
 	$avg_miles_per_run_2010 = ROUND(($distance_sum_2010) / $number_of_runs_2010, 2);
 	}
 	
+ /* S U M  A T  A L L */	
+	// Connect to DB and calculate the sum of distance runned at all
+	$distance_sum = $wpdb->get_var($wpdb->prepare("
+	SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun
+	FROM $wpdb->postmeta, $wpdb->posts 
+	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+	AND $wpdb->posts.post_status = 'publish'
+	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+	"));
+	// Convert distance to km when the user use "meters"
+	$km_sum = round($distance_sum/1000, 1);
+	
+	//Connect to DB and calculate the number of runs at all
+	$number_of_runs = $wpdb->get_var($wpdb->prepare("
+	SELECT COUNT($wpdb->postmeta.meta_value)
+	FROM $wpdb->postmeta, $wpdb->posts 
+	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+	AND $wpdb->posts.post_status = 'publish'	
+	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+	"));
+	
+	// Calculate the avg per run at all
+	if ( $distance_sum ) {
+	$avg_km_per_run = ROUND(($distance_sum/1000) / $number_of_runs, 2);
+	$avg_miles_per_run = ROUND(($distance_sum) / $number_of_runs, 2);
+	}
+	
 	//Print it all
 	echo "<ul class='post-meta'>";
 // Distance
@@ -308,18 +361,18 @@ if ($show_distance2009 == '1') {
 	if ($distancetype == meters) {
 			//Km
 			if ($number_of_runs_2009 == 1 ) {
-			echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
+			echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
 			}
 			if ($number_of_runs_2009 > 1 ) {
-			echo "<li><span class='post-meta-key'>Km in 2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
+			echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
 			}
 	} else {
 			//Miles
 			if ($number_of_runs_2009 == 1) {
-			echo "<li><span class='post-meta-key'>Miles in 2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
+			echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
 			} 
 			if ($number_of_runs_2009 > 1 ) {
-			echo "<li><span class='post-meta-key'>Miles in 2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
+			echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
 			}
 	}
 }
@@ -328,18 +381,38 @@ if ($show_distance2010 == '1') {
 	if ($distancetype == meters) {
 			//Km
 			if ($number_of_runs_2010 == 1 ) {
-			echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
+			echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
 			} 
 			if ($number_of_runs_2010 > 1 ) {
-			echo "<li><span class='post-meta-key'>Km in 2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
+			echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
 			}
 	} else {
 			//Miles
 			if ($number_of_runs_2010 == 1) {
-			echo "<li><span class='post-meta-key'>Miles in 2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
+			echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
 			} 
 			if ($number_of_runs_2010 > 1 ) {		
-			echo "<li><span class='post-meta-key'>Miles in 2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
+			echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
+			}
+	}
+}
+// Total at all
+if ($show_distance_sum == '1') {	
+	if ($distancetype == meters) {
+			//Km
+			if ($number_of_runs == 1 ) {
+			echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_km_per_run</strong> km</li>";
+			} 
+			if ($number_of_runs > 1 ) {
+			echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_km_per_run</strong> km</li>";
+			}
+	} else {
+			//Miles
+			if ($number_of_runs == 1) {
+			echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
+			} 
+			if ($number_of_runs_2010 > 1 ) {		
+			echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
 			}
 	}
 }

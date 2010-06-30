@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
 Tested up to: 3.0.0
-Stable tag: 1.8.1
+Stable tag: 1.8.2
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and a variety of running related calculators. See screenshots.
 
@@ -249,6 +249,10 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Added embed Garmin Connect map to [runners_log_basic] and you can enable or disable it
 * FL - Added a new shortcode [runners_log_garminmap] which let you insert a embed map of you route. The map is based on the path in "Garmin Connect Link"
 
+= 1.8.2 =
+* FL - Added more options to the plugin control panel like a link to setting, FAQ, Support and a link to Share where you use this plugin
+* FL - Added Km at all to [runners_log_basic]
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -279,6 +283,9 @@ The Converter Toolbox release. Februar 21th 2010.
 Marts 3rd 2010 
 
 = 1.8.1 =
+June 27th 2010 
+
+= 1.8.2 =
 June 27th 2010 
 
 == To Do ==

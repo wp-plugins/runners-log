@@ -252,6 +252,7 @@ If that's a problem either uninstall this plugin, help making it work with cache
 = 1.8.2 =
 * FL - Added more options to the plugin control panel like a link to setting, FAQ, Support and a link to Share where you use this plugin
 * FL - Added Km at all to [runners_log_basic]
+* FL - Minor changes to runnerslog_metabox.php
 
 == Upgrade Notice ==
 
@@ -286,7 +287,7 @@ Marts 3rd 2010
 June 27th 2010 
 
 = 1.8.2 =
-June 27th 2010 
+June 30th 2010 
 
 == To Do ==
 	* enable cache

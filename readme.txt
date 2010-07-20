@@ -4,7 +4,7 @@ Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index
 Requires at least: 2.7
 Tested up to: 3.0.0
-Stable tag: 1.8.2
+Stable tag: 1.8.5
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and a variety of running related calculators. See screenshots.
 
@@ -16,6 +16,8 @@ You'r now able to use a variety of calculators; Training Zones Calculator, VDOT 
 In "Settings" >> "Runners Log" you can specify the fields you like to use.
 
 Now we support a embed Garmin Connnect Map
+
+Now you can add graphs per month using eg: [runners_log year="2010" month="May" type="pie"] see FAQ for howto use it.
 
 == Installation ==
 This section describes how to install the plugin and get it working.
@@ -35,6 +37,7 @@ This section describes how to install the plugin and get it working.
 	* ~embed garmin connect map~
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
 5. Runners Log support the following short codes 
+	* `[runners_log]`
 	* `[runners_log_basic]`
 	* `[runners_log_graph]`
 	* `[runners_log_graphmini_distance]`
@@ -65,6 +68,7 @@ This section describes how to install the plugin and get it working.
 == Frequently Asked Questions ==
 
 = The supported short codes =
+	[runners_log]
 	[runners_log_basic]
 	[runners_log_graph]
 	[runners_log_graphmini_distance]
@@ -77,6 +81,22 @@ This section describes how to install the plugin and get it working.
 	[runners_log_bar_hours]
 	[runners_log_bar_calories]
 	[runners_log_garminmap]
+	
+= Howto use [runners_log] =
+This tag support: year, month, type.
+Year could be set to 2010 or 2009 or what you want
+
+Month could be "february", "FeBRUary" or just "feb". You need to specify at least the first 3 chars of the month name.
+
+Type could be: bar, graph, pie, mini
+
+By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
+Other exambles of using this tag could be:
+`[runners_log type="pie" month="marts" year="2009"]`
+Gives you a Pie chart of your tracked distances in Marts in 2009
+or
+`[runners_log type="mini"]`
+Gives you a mini-graph with distances for the whole 2010
 
 = I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
@@ -254,6 +274,10 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Added Km at all to [runners_log_basic]
 * FL - Minor changes to runnerslog_metabox.php
 
+= 1.8.5 =
+* FL - Fixing minor bug in the bar-charts in runnerslog.php
+* FL - By request by TheRealEyeless http://wordpress.org/support/topic/347464/page/2?replies=47 added a whole new tag [runners_log year="2010" month="May" type="pie"]. See FAQ for howto use it.
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -287,7 +311,10 @@ Marts 3rd 2010
 June 27th 2010 
 
 = 1.8.2 =
-June 30th 2010 
+June 30th 2010
+
+= 1.8.5 =
+July 20th 2010
 
 == To Do ==
 	* enable cache

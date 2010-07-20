@@ -6,11 +6,12 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, jaredatch, michaellasmanis
-Version: 1.8.2
+Version: 1.8.5
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
 = Use the following short codes =
+	[runners_log]
 	[runners_log_basic]
 	[runners_log_graph]
 	[runners_log_graphmini_distance]
@@ -35,6 +36,22 @@ Requires WordPress 2.7 or later.
 	<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
 	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
 	<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
+	
+= Howto use [runners_log] =
+This tag support: year, month, type.
+Year could be set to 2010 or 2009 or what you want
+
+Month could be "february", "FeBRUary" or just "feb". You need to specify at least the first 3 chars of the month name.
+
+Type could be: bar, graph, pie, mini
+
+By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
+Other exambles of using this tag could be:
+`[runners_log type="pie" month="marts" year="2009"]`
+Gives you a Pie chart of your tracked distances in Marts in 2009
+or
+`[runners_log type="mini"]`
+Gives you a mini-graph with distances for the whole 2010
 
 = I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
@@ -96,6 +113,9 @@ if (version_compare($wp_version,"2.7","<"))
 {
 	exit ($exit_msg);
 }
+
+/* Include runnerslog_new.php */
+include('runnerslog_tag.php');
 
 // Add settings option
 function rl_filter_plugin_actions($links) {
@@ -353,7 +373,7 @@ if ($show_calories == '1') {
 //Garmin Connect Link
 if ($show_garminconnect == '1') {
 	if ($url) {
-	echo "<li><span class='post-meta-key'>Garmin Connect Link:</span> <a href='$url' target='_blank'>$url</a></li>";
+	echo "<li><span class='post-meta-key'>Garmin Link:</span> <a href='$url' target='_blank'>$url</a></li>";
 	}
 }
 // Totals 2009
@@ -423,7 +443,7 @@ if ($show_garminmap == '1') {
 	echo "<iframe width='465' height='548' frameborder='0' src='http://connect.garmin.com:80/activity/embed/".$mapurl."'></iframe>";
 	}
 }
-	
+
 	echo "</ul>";
 // End function runners_log_basic()
 }
@@ -1097,7 +1117,7 @@ function runners_log_bar_distance() {
 			$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
 		}
 	}		
-	$DataSet->AddAllSeries();
+	$DataSet->AddSerie("Serie1");
 	$DataSet->SetAbsciseLabelSerie("Serie2");
 
 	//Initialise the graph
@@ -1192,7 +1212,7 @@ function runners_log_bar_hours() {
 		$DataSet->AddPoint($row->runhours,"Serie1");
 		$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
 	}
-	$DataSet->AddAllSeries();
+	$DataSet->AddSerie("Serie1");
 	$DataSet->SetAbsciseLabelSerie("Serie2");
 
 	//Initialise the graph
@@ -1283,7 +1303,7 @@ function runners_log_bar_calories() {
 		$DataSet->AddPoint($row->runcalories,"Serie1");
 		$DataSet->AddPoint($month2str[$row->runmonth],"Serie2");
 	}
-	$DataSet->AddAllSeries();
+	$DataSet->AddSerie("Serie1");
 	$DataSet->SetAbsciseLabelSerie("Serie2");
 
 	//Initialise the graph
@@ -1464,6 +1484,7 @@ function runners_log_update(){
 		update_option('runnerslog_show_garminconnect', '1');
 		update_option('runnerslog_show_distance2009', '1');
 		update_option('runnerslog_show_distance2010', '1');
+		update_option('runnerslog_show_distance_sum', '1');
 	}
 	register_activation_hook( __FILE__, 'runnerslog_activate' );
 

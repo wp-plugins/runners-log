@@ -47,8 +47,8 @@ Type could be: bar, graph, pie, mini
 
 By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
 Other exambles of using this tag could be:
-`[runners_log type="pie" month="marts" year="2009"]`
-Gives you a Pie chart of your tracked distances in Marts in 2009
+`[runners_log type="pie" month="March" year="2009"]`
+Gives you a Pie chart of your tracked distances in March in 2009
 or
 `[runners_log type="mini"]`
 Gives you a mini-graph with distances for the whole 2010
@@ -487,7 +487,7 @@ function runners_log_graph() {
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
-		3 => 'Marts',
+		3 => 'March',
 		4 => 'April',
 		5 => 'May',
 		6 => 'June',
@@ -510,7 +510,7 @@ function runners_log_graph() {
 			// The Y-axis is "Miles per month"
 			$DataSet->AddPoint($row->runmiles,"Serie1");
 		}
-			// The X-axis is "The months" and we transform 1,2,3.. to Jan, Feb, Marts... using $month2str
+			// The X-axis is "The months" and we transform 1,2,3.. to Jan, Feb, March... using $month2str
 			$DataSet->AddPoint($month2str[$row->runmonth],"Serie3");
 	}
  	
@@ -825,7 +825,7 @@ function runners_log_pie_distance() {
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
-		3 => 'Marts',
+		3 => 'March',
 		4 => 'April',
 		5 => 'May',
 		6 => 'June',
@@ -921,7 +921,7 @@ function runners_log_pie_hours() {
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
-		3 => 'Marts',
+		3 => 'March',
 		4 => 'April',
 		5 => 'May',
 		6 => 'June',
@@ -1005,7 +1005,7 @@ function runners_log_pie_calories() {
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
-		3 => 'Marts',
+		3 => 'March',
 		4 => 'April',
 		5 => 'May',
 		6 => 'June',
@@ -1092,7 +1092,7 @@ function runners_log_bar_distance() {
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
-		3 => 'Marts',
+		3 => 'March',
 		4 => 'April',
 		5 => 'May',
 		6 => 'June',
@@ -1193,7 +1193,7 @@ function runners_log_bar_hours() {
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
-		3 => 'Marts',
+		3 => 'March',
 		4 => 'April',
 		5 => 'May',
 		6 => 'June',
@@ -1284,7 +1284,7 @@ function runners_log_bar_calories() {
 	$month2str = Array (
 		1 => 'Jan',
 		2 => 'Feb',
-		3 => 'Marts',
+		3 => 'March',
 		4 => 'April',
 		5 => 'May',
 		6 => 'June',

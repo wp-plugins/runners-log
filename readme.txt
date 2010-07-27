@@ -15,7 +15,7 @@ You'r now able to use a variety of calculators; Training Zones Calculator, VDOT 
 
 In "Settings" >> "Runners Log" you can specify the fields you like to use.
 
-Now we support a embed Garmin Connnect Map
+Now we support a embed Garmin Connnect Map and we have a Gear Manager
 
 Now you can add graphs per month using eg: [runners_log year="2010" month="May" type="pie"] see FAQ for howto use it.
 
@@ -141,6 +141,9 @@ You can use the following tutorial http://www.e-gineer.com/v1/instructions/insta
 = Why is my server load high? =
 If you have a very visited blog and using this plugin it could cause high server load as this plugin doesn't use cache for rendering the graphs.
 If that's a problem either uninstall this plugin, help making it work with cache :D or wait for a later release.
+
+= Gear Manager =
+I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the gear manager is based on.
 
 == Screenshots ==
 1. show the Runners Log box
@@ -278,6 +281,9 @@ If that's a problem either uninstall this plugin, help making it work with cache
 * FL - Fixing minor bug in the bar-charts in runnerslog.php
 * FL - By request by TheRealEyeless http://wordpress.org/support/topic/347464/page/2?replies=47 added a whole new tag [runners_log year="2010" month="May" type="pie"]. See FAQ for howto use it.
 
+= 2.0.0 =
+* FL - Added a Gear List Manager Based on Thomas Genin WP-Task-Manager v.1.2.
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -315,6 +321,9 @@ June 30th 2010
 
 = 1.8.5 =
 July 20th 2010
+
+= 2.0.0 =
+
 
 == To Do ==
 	* enable cache

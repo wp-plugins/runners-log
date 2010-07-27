@@ -47,11 +47,14 @@ Type could be: bar, graph, pie, mini
 
 By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
 Other exambles of using this tag could be:
-`[runners_log type="pie" month="March" year="2009"]`
+`[runners_log type="pie" month="march" year="2009"]`
 Gives you a Pie chart of your tracked distances in March in 2009
 or
 `[runners_log type="mini"]`
 Gives you a mini-graph with distances for the whole 2010
+
+= Gear Manager =
+I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the gear manager is based on.
 
 = I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
@@ -109,20 +112,20 @@ global $wp_version;
 
 $exit_msg='Runners Log requires WordPress 2.7 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please update!</a>';
 
-if (version_compare($wp_version,"2.7","<"))
-{
+if (version_compare($wp_version,"2.7","<")) {
 	exit ($exit_msg);
 }
 
-/* Include runnerslog_new.php */
 include('runnerslog_tag.php');
+include('runnerslog_gear.php');
+
+/* Get the plugin-base-url for use of the gear-list */
+$gear_plugIn_base_url='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page='.plugin_basename (__FILE__);
 
 // Add settings option
 function rl_filter_plugin_actions($links) {
 	$new_links = array();
-	
 	$new_links[] = '<a href="admin.php?page=runners-log">' . __('Settings', 'runners-log') . '</a>';
-	
 	return array_merge($new_links, $links);
 }
 add_action('plugin_action_links_' . plugin_basename(__FILE__), 'rl_filter_plugin_actions');
@@ -1449,7 +1452,7 @@ function runners_log_update(){
 
 	function runnerslog_converter_toolbox() {  
 		include('Includes/runnerslog_converter_toolbox.php');
-	} 	
+	}
 
 	function runnerslog_admin_menu() {
     // Add a new top-level menu: Runners Log with Submenus
@@ -1461,7 +1464,7 @@ function runners_log_update(){
     add_submenu_page('runners-log', 'Training Pace Calc.', 'Training Pace Calc.', 'administrator', 'runners-log-vdot-training-pace', 'runnerslog_vdot_training_pace');
 	add_submenu_page('runners-log', 'Body Mass Index', 'Body Mass Index', 'administrator', 'runners-log-body-mass-index', 'runnerslog_body_mass_index');	
 	add_submenu_page('runners-log', 'Weight Change Effect', 'Weight Change Effect', 'administrator', 'runners-log-weight-change-effect', 'runnerslog_weight_change_effect');	
-	add_submenu_page('runners-log', 'Coverter Toolbox', 'Coverter Toolbox', 'administrator', 'runners-log-converter_toolbox', 'runnerslog_converter_toolbox');	
+	add_submenu_page('runners-log', 'Coverter Toolbox', 'Coverter Toolbox', 'administrator', 'runners-log-converter-toolbox', 'runnerslog_converter_toolbox');	
 	}
 	// Hook for adding admin menus
 	add_action('admin_menu', 'runnerslog_admin_menu');
@@ -1487,5 +1490,34 @@ function runners_log_update(){
 		update_option('runnerslog_show_distance_sum', '1');
 	}
 	register_activation_hook( __FILE__, 'runnerslog_activate' );
+	
+/* G E A R   L I S T */
+add_action('admin_menu', 'wp_gear_manager_create_menu');
+
+register_activation_hook(__FILE__, 'wp_gear_manager_install');
+
+	function wp_gear_manager_install()
+	{
+		global $wpdb;
+	    $table = $wpdb->prefix."gear";
+	    $structure = "CREATE TABLE $table (
+			`gear_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`gear_brand` VARCHAR( 100 ) NOT NULL ,
+			`gear_name` VARCHAR( 100 ) NOT NULL ,
+			`gear_price` VARCHAR( 100 ) NOT NULL ,
+			`gear_desc` TEXT NOT NULL ,
+			`gear_dateTo` DATE NOT NULL ,
+			`gear_isDone` TINYINT NOT NULL
+			) ENGINE = MYISAM";
+	    $wpdb->query( $structure );
+		//@todo test if the creation of the database don't bug if there is an okd database.	    
+	    update_option( OPTION_DATE_FORMAT, 'd/m/Y' );
+	}
+
+	function wp_gear_manager_create_menu(){
+			add_menu_page( 'Gear Manager', 'Gear Manager', 1, __FILE__, 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
+	    	add_submenu_page( __FILE__, 'New Gear', 'Add new gear', 1, __FILE__.'&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
+	}
+
 
 ?>

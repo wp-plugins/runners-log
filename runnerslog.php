@@ -122,344 +122,383 @@ include('runnerslog_gear.php');
 /* Get the plugin-base-url for use of the gear-list */
 $gear_plugIn_base_url='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page='.plugin_basename (__FILE__);
 
-// Add settings option
-function rl_filter_plugin_actions($links) {
-	$new_links = array();
-	$new_links[] = '<a href="admin.php?page=runners-log">' . __('Settings', 'runners-log') . '</a>';
-	return array_merge($new_links, $links);
-}
-add_action('plugin_action_links_' . plugin_basename(__FILE__), 'rl_filter_plugin_actions');
-
-// Add FAQ and support information and a little more
-function rl_filter_plugin_links($links, $file)
-{
-	if ( $file == plugin_basename(__FILE__) )
-	{
-		$links[] = '<a href="http://wordpress.org/extend/plugins/runners-log/faq/">' . __('FAQ', 'runners-log') . '</a>';
-		$links[] = '<a href="http://wordpress.org/tags/runners-log?forum_id=10">' . __('Support', 'runners-log') . '</a>';
-		$links[] = '<a href="http://wordpress.org/support/topic/358411">' . __('Share where you use it', 'runners-log') . '</a>';
-	}
-	
-	return $links;
-}
-add_filter('plugin_row_meta', 'rl_filter_plugin_links', 10, 2);
-
-
 // Do this when user activates the plugin (Update Script)
 register_activation_hook(__FILE__, 'runners_log_update');
+register_activation_hook(__FILE__, 'wp_gear_manager_install');
+
+// Update the old custom fields to match the new one used from version 1.5.0
+	function runners_log_update()
+	{ 
+		global $wpdb;
+		//Meters
+		$sql = $wpdb->get_results("
+			UPDATE $wpdb->postmeta
+			SET $wpdb->postmeta.meta_key = '_rl_distance_value'
+			WHERE $wpdb->postmeta.meta_key = 'Meters'");	
+		//Time
+		$sql = $wpdb->get_results("
+			UPDATE $wpdb->postmeta
+			SET $wpdb->postmeta.meta_key = '_rl_time_value'
+			WHERE $wpdb->postmeta.meta_key = 'Time'	");	
+		//GarminConnectLink
+		$sql = $wpdb->get_results("
+			UPDATE $wpdb->postmeta
+			SET $wpdb->postmeta.meta_key = '_rl_garminconnectlink_value'
+			WHERE $wpdb->postmeta.meta_key = 'GarminConnectLink'");	
+		//Pulsavg
+		$sql = $wpdb->get_results("
+			UPDATE $wpdb->postmeta
+			SET $wpdb->postmeta.meta_key = '_rl_pulsavg_value'
+			WHERE $wpdb->postmeta.meta_key = 'Pulsavg'");
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
+}
+//Add a new table in the DB for the gear manager
+	function wp_gear_manager_install()
+	{
+		global $wpdb;
+	    $table = $wpdb->prefix."gear";
+	    $structure = "CREATE TABLE $table (
+			`gear_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			`gear_brand` VARCHAR( 100 ) NOT NULL ,
+			`gear_name` VARCHAR( 100 ) NOT NULL ,
+			`gear_price` VARCHAR( 100 ) NOT NULL ,
+			`gear_desc` TEXT NOT NULL ,
+			`gear_dateTo` DATE NOT NULL ,
+			`gear_isDone` TINYINT NOT NULL
+			) ENGINE = MYISAM";
+	    $wpdb->query( $structure );
+	    update_option( OPTION_DATE_FORMAT, 'd/m/Y' ); //Standart date format for the use of the gear-manager
+	}
+
+// Add settings option
+	function rl_filter_plugin_actions($links) 
+	{
+		$new_links = array();
+		$new_links[] = '<a href="admin.php?page=runners-log">' . __('Settings', 'runners-log') . '</a>';
+		return array_merge($new_links, $links);
+	}
+	add_action('plugin_action_links_' . plugin_basename(__FILE__), 'rl_filter_plugin_actions');
+
+// Add FAQ and support information and a little more
+	function rl_filter_plugin_links($links, $file)
+	{
+		if ( $file == plugin_basename(__FILE__) )
+		{
+			$links[] = '<a href="http://wordpress.org/extend/plugins/runners-log/faq/">' . __('FAQ', 'runners-log') . '</a>';
+			$links[] = '<a href="http://wordpress.org/tags/runners-log?forum_id=10">' . __('Support', 'runners-log') . '</a>';
+			$links[] = '<a href="http://wordpress.org/support/topic/358411">' . __('Share where you use it', 'runners-log') . '</a>';
+		}
+	return $links;
+	}
+	add_filter('plugin_row_meta', 'rl_filter_plugin_links', 10, 2);
 
 /* Let us create the functions */
-function runners_log_basic() {
+	function runners_log_basic() 
+	{
+		global $wpdb, $post; 
+		$hms = get_post_meta($post->ID, "_rl_time_value", $single = true); // Get the running time
+		$distance = get_post_meta($post->ID, "_rl_distance_value", $single = true); // Get the distance
+		$url = get_post_meta($post->ID, "_rl_garminconnectlink_value", $single = true); // Get the Garmin Connect Link
+		$pulsavg = get_post_meta($post->ID, "_rl_pulsavg_value", $single = true); // Get pulsavg.
+		$calories = get_post_meta($post->ID, "_rl_calories_value", $single = true); // Get calories.
 
-	// Make $wpdb and $post global
-	global $wpdb, $post;
-
-	// Get the running time 
-	$hms = get_post_meta($post->ID, "_rl_time_value", $single = true);
+		// Get [runners_log_basic] settings
+		$show_distance = get_option('runnerslog_show_distance');
+		$show_time = get_option('runnerslog_show_time');
+		$show_speed = get_option('runnerslog_show_speed');
+		$show_speedperdistance = get_option('runnerslog_show_speedperdistance');
+		$show_pulse = get_option('runnerslog_show_pulse');
+		$show_calories = get_option('runnerslog_show_calories');
+		$show_garminconnect = get_option('runnerslog_show_garminconnect');
+		$show_distance2009 = get_option('runnerslog_show_distance2009');
+		$show_distance2010 = get_option('runnerslog_show_distance2010');
+		$show_distance_sum = get_option('runnerslog_show_distance_sum');
+		$show_garminmap = get_option('runnerslog_show_garminmap');
 	
-	// Get the distance
-	$distance = get_post_meta($post->ID, "_rl_distance_value", $single = true);
+		// We want to calculate the %of Max HR and the %of HRR
+		$hrrest = get_option('runnerslog_hrrest');
+		$hrmax = get_option('runnerslog_hrmax');
+		if ($hrmax && $hrrest) 
+		{
+			$procofmaxhr = ROUND(($pulsavg/$hrmax)*100,0); 	//Calculate %of Max HR
+			$procofhrr = ROUND((($pulsavg-$hrrest)/($hrmax-$hrrest)*100),0);	//Calculate %of Heart Rate Reserve
+		}
 	
-	// Get the Garmin Connect Link
-	$url = get_post_meta($post->ID, "_rl_garminconnectlink_value", $single = true);
+		$seconds = hms2sec($hms); // Use the hms2sec function on $hms (the running time)
 	
-	// Get pulsavg.
-	$pulsavg = get_post_meta($post->ID, "_rl_pulsavg_value", $single = true);
-	
-	// Get calories.
-	$calories = get_post_meta($post->ID, "_rl_calories_value", $single = true);
-
-	// Get [runners_log_basic] settings
-	$show_distance = get_option('runnerslog_show_distance');
-	$show_time = get_option('runnerslog_show_time');
-	$show_speed = get_option('runnerslog_show_speed');
-	$show_speedperdistance = get_option('runnerslog_show_speedperdistance');
-	$show_pulse = get_option('runnerslog_show_pulse');
-	$show_calories = get_option('runnerslog_show_calories');
-	$show_garminconnect = get_option('runnerslog_show_garminconnect');
-	$show_distance2009 = get_option('runnerslog_show_distance2009');
-	$show_distance2010 = get_option('runnerslog_show_distance2010');
-	$show_distance_sum = get_option('runnerslog_show_distance_sum');
-	$show_garminmap = get_option('runnerslog_show_garminmap');
-	
-	// We want to calculate the %of Max HR and the %of HRR
-	$hrrest = get_option('runnerslog_hrrest');
-	$hrmax = get_option('runnerslog_hrmax');
-	if ($hrmax && $hrrest) {
-	$procofmaxhr = ROUND(($pulsavg/$hrmax)*100,0); 	//Calculate %of Max HR
-	$procofhrr = ROUND((($pulsavg-$hrrest)/($hrmax-$hrrest)*100),0);	//Calculate %of Heart Rate Reserve
-	}
-	
-	// Call the hms2sec function
-	$seconds = hms2sec($hms);
-	
-	// Let us get the distancetype for further calculations
-	$distancetype = get_option('runnerslog_distancetype');	
-
-	// Calculate the avg running speed per hour
-	if ( $distance ) {
-	//First we calculate it per km and round it to 2 decimals
-	$km_per_hour = Round((($distance/1000) / ($seconds/3600)),2);
-	//Here we calculate it per miles and round it to 2 decimals
-	$miles_per_hour = Round((($distance) / ($seconds/3600)),2);
-	}
-
-	// Calculate number of minutes per km
-	if ( $distance ) {
-	$min_per_km= ($seconds) / ($distance/1000);
-	$minutes = floor($min_per_km/60);
-	$secondsleft = $min_per_km%60;
-	if($minutes<10)
-		$minutes = "0" . $minutes;
-	if($secondsleft<10)
-		$secondsleft = "0" . $secondsleft;
-	}
+		$distancetype = get_option('runnerslog_distancetype'); // Let us get the distancetype for further calculations
 		
-	// Calculate number of minutes per miles
-	if ( $distance ) {
-	$min_per_miles= ($seconds) / ($distance);
-	$minutes_miles = floor($min_per_miles/60);
-	$secondsleft_miles = $min_per_miles%60;
-	if($minutes_miles<10)
-		$minutes_miles = "0" . $minutes_miles;
-	if($secondsleft_miles<10)
-		$secondsleft_miles = "0" . $secondsleft_miles;
-	}
+		if ($distance) // Calculate the avg running speed per hour
+		{
+			$km_per_hour = Round((($distance/1000) / ($seconds/3600)),2); //First we calculate it per km and round it to 2 decimals
+			$miles_per_hour = Round((($distance) / ($seconds/3600)),2); //Here we calculate it per miles and round it to 2 decimals
+		}
+		
+		if ($distance) // Calculate number of minutes per km
+		{
+			$min_per_km= ($seconds) / ($distance/1000);
+			$minutes = floor($min_per_km/60);
+			$secondsleft = $min_per_km%60;
+			if($minutes<10)
+				$minutes = "0" . $minutes;
+			if($secondsleft<10)
+				$secondsleft = "0" . $secondsleft;
+		}		
+	
+		if ($distance) // Calculate number of minutes per miles
+		{ 
+			$min_per_miles= ($seconds) / ($distance);
+			$minutes_miles = floor($min_per_miles/60);
+			$secondsleft_miles = $min_per_miles%60;
+			if($minutes_miles<10)
+				$minutes_miles = "0" . $minutes_miles;
+			if($secondsleft_miles<10)
+				$secondsleft_miles = "0" . $secondsleft_miles;
+		}
 
  /* 2 0 0 9 */
-	// Connect to DB and calculate the sum of distance runned in 2009
-	$distance_sum_2009 = $wpdb->get_var($wpdb->prepare("
-	SELECT SUM($wpdb->postmeta.meta_value)
-	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
-	AND $wpdb->posts.post_status = 'publish'	
-	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-	AND year($wpdb->posts.post_date)='2009'"));
-	// Convert distance to km when the user use "meters"
-	$km_sum_2009 = round($distance_sum_2009/1000, 1);
+		// Connect to DB and calculate the sum of distance runned in 2009
+		$distance_sum_2009 = $wpdb->get_var($wpdb->prepare("
+			SELECT SUM($wpdb->postmeta.meta_value)
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'	
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2009'"));
+		$km_sum_2009 = round($distance_sum_2009/1000, 1); // Convert distance to km when the user use "meters"
+
+		// Connect to DB and calculate the number of runs in 2009
+		$number_of_runs_2009 = $wpdb->get_var($wpdb->prepare("
+			SELECT COUNT($wpdb->postmeta.meta_value)
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'	
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2009'"));
 	
-	// Connect to DB and calculate the number of runs in 2009
-	$number_of_runs_2009 = $wpdb->get_var($wpdb->prepare("
-	SELECT COUNT($wpdb->postmeta.meta_value)
-	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
-	AND $wpdb->posts.post_status = 'publish'	
-	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-	AND year($wpdb->posts.post_date)='2009'"));
-	
-	// Calculate the avg per run in 2009
-	if ( $distance_sum_2009 ) {
-	$avg_km_per_run_2009 = ROUND(($distance_sum_2009/1000) / $number_of_runs_2009, 2);
-	$avg_miles_per_run_2009 = ROUND(($distance_sum_2009) / $number_of_runs_2009, 2);
-	}
+		if ($distance_sum_2009) // Calculate the avg per run in 2009
+		{
+			$avg_km_per_run_2009 = ROUND(($distance_sum_2009/1000) / $number_of_runs_2009, 2);
+			$avg_miles_per_run_2009 = ROUND(($distance_sum_2009) / $number_of_runs_2009, 2);
+		}
 
  /* 2 0 1 0 */	
-	// Connect to DB and calculate the sum of distance runned in 2010
-	$distance_sum_2010 = $wpdb->get_var($wpdb->prepare("
-	SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun2010
-	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
-	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-	AND year($wpdb->posts.post_date)='2010'"));
-	// Convert distance to km when the user use "meters"
-	$km_sum_2010 = round($distance_sum_2010/1000, 1);
+		// Connect to DB and calculate the sum of distance runned in 2010
+		$distance_sum_2010 = $wpdb->get_var($wpdb->prepare("
+			SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun2010
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2010'"));
+		$km_sum_2010 = round($distance_sum_2010/1000, 1); // Convert distance to km when the user use "meters"
 	
-	//Connect to DB and calculate the number of runs in 2010
-	$number_of_runs_2010 = $wpdb->get_var($wpdb->prepare("
-	SELECT COUNT($wpdb->postmeta.meta_value)
-	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
-	AND $wpdb->posts.post_status = 'publish'	
-	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-	AND year($wpdb->posts.post_date)='2010'"));
+		//Connect to DB and calculate the number of runs in 2010
+		$number_of_runs_2010 = $wpdb->get_var($wpdb->prepare("
+			SELECT COUNT($wpdb->postmeta.meta_value)
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'	
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2010'"));
 	
-	// Calculate the avg per run in 2010
-	if ( $distance_sum_2010 ) {
-	$avg_km_per_run_2010 = ROUND(($distance_sum_2010/1000) / $number_of_runs_2010, 2);
-	$avg_miles_per_run_2010 = ROUND(($distance_sum_2010) / $number_of_runs_2010, 2);
-	}
+		if ( $distance_sum_2010 ) // Calculate the avg per run in 2010
+		{
+			$avg_km_per_run_2010 = ROUND(($distance_sum_2010/1000) / $number_of_runs_2010, 2);
+			$avg_miles_per_run_2010 = ROUND(($distance_sum_2010) / $number_of_runs_2010, 2);
+		}
 	
  /* S U M  A T  A L L */	
-	// Connect to DB and calculate the sum of distance runned at all
-	$distance_sum = $wpdb->get_var($wpdb->prepare("
-	SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun
-	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
-	AND $wpdb->posts.post_status = 'publish'
-	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-	"));
-	// Convert distance to km when the user use "meters"
-	$km_sum = round($distance_sum/1000, 1);
+		// Connect to DB and calculate the sum of distance runned at all
+		$distance_sum = $wpdb->get_var($wpdb->prepare("
+			SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id"));
+		$km_sum = round($distance_sum/1000, 1); // Convert distance to km when the user use "meters"
 	
-	//Connect to DB and calculate the number of runs at all
-	$number_of_runs = $wpdb->get_var($wpdb->prepare("
-	SELECT COUNT($wpdb->postmeta.meta_value)
-	FROM $wpdb->postmeta, $wpdb->posts 
-	WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
-	AND $wpdb->posts.post_status = 'publish'	
-	AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-	"));
+		//Connect to DB and calculate the number of runs at all
+		$number_of_runs = $wpdb->get_var($wpdb->prepare("
+			SELECT COUNT($wpdb->postmeta.meta_value)
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'	
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id"));
 	
-	// Calculate the avg per run at all
-	if ( $distance_sum ) {
-	$avg_km_per_run = ROUND(($distance_sum/1000) / $number_of_runs, 2);
-	$avg_miles_per_run = ROUND(($distance_sum) / $number_of_runs, 2);
-	}
+		if ( $distance_sum ) // Calculate the avg per run at all
+		{
+			$avg_km_per_run = ROUND(($distance_sum/1000) / $number_of_runs, 2);
+			$avg_miles_per_run = ROUND(($distance_sum) / $number_of_runs, 2);
+		}
 	
-	//Print it all
-	echo "<ul class='post-meta'>";
-// Distance
-if ($show_distance == '1') {
-	if ( $distancetype == meters ) {
-		//..let us print the distance in meters but only if distance is greather then 0...
-		if ( $distance > 0 ) {
-		echo "<li><span class='post-meta-key'>Meters:</span> $distance</li>";
-		}
-	} else {
-		//..else it must be miles and therefore print the distance in miles but only if distance is greather then 0...
-		if ( $distance > 0 ) {
-		echo "<li><span class='post-meta-key'>Miles:</span> $distance</li>";
-		}
-	}
-}
-// Time
-if ($show_time == '1') {
-	if ( $hms ) {
-	echo "<li><span class='post-meta-key'>Time:</span> $hms</li>";
-	}
-}
-// Distance per hours
-if ($show_speed == '1') {
-	if ( $distancetype == meters ) {
-		//..let us get the speed in km/hours. (But only if km/hour is greather then 0...)
-		if ( $km_per_hour > 0 ) {
-		echo "<li><span class='post-meta-key'>Km/hour:</span> $km_per_hour</li>";
-		}
-	} else {
-		//..else it must be miles/hours. (But only if miles/hour is greather then 0...)
-		if ( $miles_per_hour > 0 ) {
-		echo "<li><span class='post-meta-key'>Miles/hour:</span> $miles_per_hour</li>";
-		}
-	}
-}
-// Min per distance
-if ($show_speedperdistance == '1') {
-	if ( $distancetype == meters ) {
-		//..let us get the speed in min per km... (But only if minutes is greather then 0...)
-		if ( $minutes > 0 ) {
-		echo "<li><span class='post-meta-key'>Min/km:</span> $minutes:$secondsleft minutes</li>";
-		}
-	} else {
-		//..else it must be min per miles. (But only if minutes_miles is greather then 0...)
-		if ( $minutes_miles > 0 ) {
-		echo "<li><span class='post-meta-key'>Min/miles:</span> $minutes_miles:$secondsleft_miles minutes</li>";
-		}
-	}
-}
-// Pulsavg
-if ($show_pulse == '1') {
-	if ($pulsavg) {
-	echo "<li><span class='post-meta-key'>Pulse average:</span> $pulsavg bpm"; 
-	if ($procofmaxhr && $procofhrr) { 
-		echo " is $procofmaxhr% of Max HR and $procofhrr% of HRR"; 
-	} 
-	echo "</li>";
-	}
-}
-// Caloríes
-if ($show_calories == '1') {	
-	if ($calories) {
-	echo "<li><span class='post-meta-key'>Calories:</span> $calories C</li>";
-	}
-}
-//Garmin Connect Link
-if ($show_garminconnect == '1') {
-	if ($url) {
-	echo "<li><span class='post-meta-key'>Garmin Link:</span> <a href='$url' target='_blank'>$url</a></li>";
-	}
-}
-// Totals 2009
-if ($show_distance2009 == '1') {
-	if ($distancetype == meters) {
-			//Km
-			if ($number_of_runs_2009 == 1 ) {
-			echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
-			}
-			if ($number_of_runs_2009 > 1 ) {
-			echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
-			}
-	} else {
-			//Miles
-			if ($number_of_runs_2009 == 1) {
-			echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
-			} 
-			if ($number_of_runs_2009 > 1 ) {
-			echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
-			}
-	}
-}
-// Totals 2010
-if ($show_distance2010 == '1') {	
-	if ($distancetype == meters) {
-			//Km
-			if ($number_of_runs_2010 == 1 ) {
-			echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
-			} 
-			if ($number_of_runs_2010 > 1 ) {
-			echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
-			}
-	} else {
-			//Miles
-			if ($number_of_runs_2010 == 1) {
-			echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
-			} 
-			if ($number_of_runs_2010 > 1 ) {		
-			echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
-			}
-	}
-}
-// Total at all
-if ($show_distance_sum == '1') {	
-	if ($distancetype == meters) {
-			//Km
-			if ($number_of_runs == 1 ) {
-			echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_km_per_run</strong> km</li>";
-			} 
-			if ($number_of_runs > 1 ) {
-			echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_km_per_run</strong> km</li>";
-			}
-	} else {
-			//Miles
-			if ($number_of_runs == 1) {
-			echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
-			} 
-			if ($number_of_runs_2010 > 1 ) {		
-			echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
-			}
-	}
-}
-// Insert embed Garmin Connnect Map based on the used Garmin Connect Link
-if ($show_garminmap == '1') {
-	if ( $url) {
-	$mapurl = substr($url, strrpos($url, '/') + 1);
-	echo "<iframe width='465' height='548' frameborder='0' src='http://connect.garmin.com:80/activity/embed/".$mapurl."'></iframe>";
-	}
-}
+	echo "<ul class='post-meta'>"; //Print it all
 
-	echo "</ul>";
-// End function runners_log_basic()
+	if ($show_distance == '1') // Distance
+	{
+		if ( $distancetype == meters ) 
+		{
+			if ($distance > '0') //..let us print the distance in meters but only if distance is greather then 0...
+			{
+				echo "<li><span class='post-meta-key'>Meters:</span> $distance</li>";
+			}
+		} else {
+			if ($distance > '0') //..else it must be miles and therefore print the distance in miles but only if distance is greather then 0...
+			{
+				echo "<li><span class='post-meta-key'>Miles:</span> $distance</li>";
+			}
+		}
+	}
+	if ($show_time == '1') // Time
+	{
+		if ($hms) 
+		{
+			echo "<li><span class='post-meta-key'>Time:</span> $hms</li>";
+		}
+	}
+	if ($show_speed == '1') // Distance per hours
+	{
+		if ( $distancetype == meters ) //..let us get the speed in km/hours. (But only if km/hour is greather then 0...)
+		{
+			if ( $km_per_hour > '0') 
+			{
+				echo "<li><span class='post-meta-key'>Km/hour:</span> $km_per_hour</li>";
+			}
+		} else {
+			if ( $miles_per_hour > '0') //..else it must be miles/hours. (But only if miles/hour is greather then 0...)
+			{
+				echo "<li><span class='post-meta-key'>Miles/hour:</span> $miles_per_hour</li>";
+			}
+		}
+	}
+	if ($show_speedperdistance == '1') // Min per distance
+	{
+		if ( $distancetype == 'meters') //..let us get the speed in min per km... (But only if minutes is greather then 0...)
+		{
+			if ($minutes > '0') 
+			{
+				echo "<li><span class='post-meta-key'>Min/km:</span> $minutes:$secondsleft minutes</li>";
+			}
+		} else {
+			if ($minutes_miles > '0') //..else it must be min per miles. (But only if minutes_miles is greather then 0...)
+			{
+				echo "<li><span class='post-meta-key'>Min/miles:</span> $minutes_miles:$secondsleft_miles minutes</li>";
+			}
+		}
+	}
+	if ($show_pulse == '1') // Pulsavg
+	{
+		if ($pulsavg) 
+		{
+			echo "<li><span class='post-meta-key'>Pulse average:</span> $pulsavg bpm"; 
+			if ($procofmaxhr && $procofhrr) 
+			{ 
+				echo " is $procofmaxhr% of Max HR and $procofhrr% of HRR"; 
+			} 
+			echo "</li>";
+		}
+	}
+	if ($show_calories == '1') // Caloríes
+	{	
+		if ($calories) 
+		{
+			echo "<li><span class='post-meta-key'>Calories:</span> $calories C</li>";
+		}
+	}
+	if ($show_garminconnect == '1') //Garmin Connect Link
+	{
+		if ($url) 
+		{
+			echo "<li><span class='post-meta-key'>Garmin Link:</span> <a href='$url' target='_blank'>$url</a></li>";
+		}
+	}
+	if ($show_distance2009 == '1') // Totals 2009
+	{
+		if ($distancetype == 'meters') 
+		{
+			if ($number_of_runs_2009 == '1')
+			{
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
+			}
+			if ($number_of_runs_2009 > '1') 
+			{
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
+			}
+		} else {
+			if ($number_of_runs_2009 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
+			} 
+			if ($number_of_runs_2009 > '1') 
+			{
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
+			}
+		}
+	}
+	if ($show_distance2010 == '1') // Totals 2010
+	{	
+		if ($distancetype == 'meters') 
+		{
+			if ($number_of_runs_2010 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
+			} 
+			if ($number_of_runs_2010 > '1') 
+			{
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
+			}
+		} else {
+			if ($number_of_runs_2010 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
+			} 
+			if ($number_of_runs_2010 > '1') 
+			{		
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
+			}
+		}
+	}
+	if ($show_distance_sum == '1') // Total at all
+	{	
+		if ($distancetype == meters) 
+		{
+			if ($number_of_runs == '1') 
+			{
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_km_per_run</strong> km</li>";
+			} 
+			if ($number_of_runs > '1') 
+			{
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_km_per_run</strong> km</li>";
+			}
+		} else {
+			if ($number_of_runs == '1') 
+			{
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
+			} 
+			if ($number_of_runs_2010 > '1') 
+			{		
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
+			}
+		}
+	}
+	if ($show_garminmap == '1') // Insert embed Garmin Connnect Map based on the used Garmin Connect Link
+	{
+		if ($url) 
+		{
+			$mapurl = substr($url, strrpos($url, '/') + 1);
+			echo "<iframe width='465' height='548' frameborder='0' src='http://connect.garmin.com:80/activity/embed/".$mapurl."'></iframe>";
+		}
+	}
+	echo "</ul>"; // End function runners_log_basic()
 }
 add_shortcode('runners_log_basic', 'runners_log_basic');
 
 function runners_log_graph() {
-	// Let us include the classes for the graph tool
-	// Graph script by:  http://pchart.sourceforge.net/
-	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
-	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class'); 	// Let us include the classes for the graph tool
+	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');	// Graph script by:  http://pchart.sourceforge.net/
  
-	// Make $wpdb global
-	global $wpdb;
+	global $wpdb; // Make $wpdb global
 
 	// Let us get the distancetype for further calculations
 	$distancetype = get_option('runnerslog_distancetype');	
@@ -1299,7 +1338,6 @@ function runners_log_bar_calories() {
 		12 => 'Dec',
 	);
 
-  
 	//Dataset definition 
 	$DataSet = new pData;
  	foreach ($calories_per_month as $row) {
@@ -1365,59 +1403,19 @@ function runners_log_garminmap() {
 add_shortcode('runners_log_garminmap', 'runners_log_garminmap');
 
 // Let us convert the total running time into seconds
-function hms2sec ($hms) {
-	list($h, $m, $s) = explode (":", $hms);
-	$seconds = 0;
-	$seconds += (intval($h) * 3600);
-	$seconds += (intval($m) * 60);
-	$seconds += (intval($s));
-	return $seconds;
-}
-
-// Update the old custom fields to match the new one used from version 1.5.0
-function runners_log_update(){
-  
-	global $wpdb;
-
-	//Meters
-	$sql = $wpdb->get_results("
-	UPDATE $wpdb->postmeta
-	SET $wpdb->postmeta.meta_key = '_rl_distance_value'
-	WHERE $wpdb->postmeta.meta_key = 'Meters'
-	");
-	
-	//Time
-	$sql = $wpdb->get_results("
-	UPDATE $wpdb->postmeta
-	SET $wpdb->postmeta.meta_key = '_rl_time_value'
-	WHERE $wpdb->postmeta.meta_key = 'Time'
-	");
-	
-	//GarminConnectLink
-	$sql = $wpdb->get_results("
-	UPDATE $wpdb->postmeta
-	SET $wpdb->postmeta.meta_key = '_rl_garminconnectlink_value'
-	WHERE $wpdb->postmeta.meta_key = 'GarminConnectLink'
-	");
-	
-	//Pulsavg
-	$sql = $wpdb->get_results("
-	UPDATE $wpdb->postmeta
-	SET $wpdb->postmeta.meta_key = '_rl_pulsavg_value'
-	WHERE $wpdb->postmeta.meta_key = 'Pulsavg'
-	");
-  
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-	
-    dbDelta($sql);
-}
-
-/* For the admin control in Wordpress */
+function hms2sec ($hms)	{
+		list($h, $m, $s) = explode (":", $hms);
+		$seconds = 0;
+		$seconds += (intval($h) * 3600);
+		$seconds += (intval($m) * 60);
+		$seconds += (intval($s));
+		return $seconds;
+	}
 
 	// Post Write Panel (Meta box)
 	include('runnerslog_metabox.php');
 
-	// Admin Options
+	// Admin Options - Start adding the admin menu
 	function runnerslog_admin() {  
 		include('runnerslog_admin.php');
 	}
@@ -1469,8 +1467,11 @@ function runners_log_update(){
 	// Hook for adding admin menus
 	add_action('admin_menu', 'runnerslog_admin_menu');
 
-	// Set a few default options on plugin activation
-	function runnerslog_activate() {
+// Set a few default options on plugin activation
+register_activation_hook( __FILE__, 'runnerslog_activate' );
+
+	function runnerslog_activate() 
+	{
 		update_option('runnerslog_distancetype', 'meters');
 		update_option('runnerslog_unittype', 'metric');
 		update_option('runnerslog_gender', 'male');
@@ -1489,34 +1490,15 @@ function runners_log_update(){
 		update_option('runnerslog_show_distance2010', '1');
 		update_option('runnerslog_show_distance_sum', '1');
 	}
-	register_activation_hook( __FILE__, 'runnerslog_activate' );
+
 	
-/* G E A R   L I S T */
+//Create the gear-list menu-box
 add_action('admin_menu', 'wp_gear_manager_create_menu');
 
-register_activation_hook(__FILE__, 'wp_gear_manager_install');
-
-	function wp_gear_manager_install()
+	function wp_gear_manager_create_menu()
 	{
-		global $wpdb;
-	    $table = $wpdb->prefix."gear";
-	    $structure = "CREATE TABLE $table (
-			`gear_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`gear_brand` VARCHAR( 100 ) NOT NULL ,
-			`gear_name` VARCHAR( 100 ) NOT NULL ,
-			`gear_price` VARCHAR( 100 ) NOT NULL ,
-			`gear_desc` TEXT NOT NULL ,
-			`gear_dateTo` DATE NOT NULL ,
-			`gear_isDone` TINYINT NOT NULL
-			) ENGINE = MYISAM";
-	    $wpdb->query( $structure );
-		//@todo test if the creation of the database don't bug if there is an okd database.	    
-	    update_option( OPTION_DATE_FORMAT, 'd/m/Y' );
-	}
-
-	function wp_gear_manager_create_menu(){
-			add_menu_page( 'Gear Manager', 'Gear Manager', 1, __FILE__, 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
-	    	add_submenu_page( __FILE__, 'New Gear', 'Add new gear', 1, __FILE__.'&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
+		add_menu_page( 'Gear Manager', 'Gear Manager', 1, __FILE__, 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
+    	add_submenu_page( __FILE__, 'New Gear', 'Add new gear', 1, __FILE__.'&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
 	}
 
 

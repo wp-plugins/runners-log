@@ -47,6 +47,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			$brand		 = filter_input( INPUT_POST, 'brand', FILTER_SANITIZE_STRING );
 			$name 		 = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_STRING );
 			$price 		 = filter_input( INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT );
+			$distance 		 = filter_input( INPUT_POST, 'distance', FILTER_SANITIZE_NUMBER_INT );
 			$year 		 = filter_input( INPUT_POST, 'year', FILTER_SANITIZE_NUMBER_INT );
 			
 			if( empty( $brand ) ){
@@ -63,6 +64,11 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				$error['price'] = true;
 				$error[0] = true;
 				$msg .= '<span style="color:red">The&nbsp;<b>Price</b>&nbsp;of the gear must be set.</span><br/>';
+			}
+			if( empty( $distance ) ){
+				$error['distance'] = true;
+				$error[0] = true;
+				$msg .= '<span style="color:red">The&nbsp;<b>Distance</b>&nbsp;of the gear must be set.</span><br/>';
 			}
 			if( empty( $description ) ){
 				$error['description'] = true;
@@ -96,6 +102,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 													'gear_name' => $name,
 													'gear_desc' => $description,
 													'gear_price' => $price,
+													'gear_distance' => $distance,
 													'gear_dateTo' => "$year-$month-$day") , 
 											array('gear_id' => $id) );
 					$msg .= '<span style="color:green; background-color:#9ECA98">Gear correctly updated.</span>';
@@ -105,6 +112,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 													'gear_name' => $name,
 													'gear_desc' => $description,
 													'gear_price' => $price,
+													'gear_distance' => $distance,
 													'gear_dateTo' => "$year-$month-$day") );
 					$msg .= '<span style="color:green; background-color:#9ECA98">Gear correctly added.</span>';
 					$id = $wpdb->get_var('SELECT LAST_INSERT_ID()');
@@ -115,7 +123,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 		if( isset($action) && $action = 'edit'){
 			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			$table = $wpdb->prefix."gear";
-			$query = "SELECT gear_id,gear_brand,gear_name,gear_desc,gear_price,DAY(gear_dateTo) as `day`,MONTH(gear_dateTo) as `month`, YEAR(gear_dateTo) as `year` FROM $table WHERE gear_id = $id LIMIT 1;";
+			$query = "SELECT gear_id,gear_brand,gear_name,gear_desc,gear_price,gear_distance,DAY(gear_dateTo) as `day`,MONTH(gear_dateTo) as `month`, YEAR(gear_dateTo) as `year` FROM $table WHERE gear_id = $id LIMIT 1;";
 			$res = $wpdb->get_row($query);
 
 			$day 		 = filter_var( $res->day,FILTER_SANITIZE_NUMBER_INT );
@@ -124,6 +132,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			$name 		 = filter_var( $res->gear_name, FILTER_SANITIZE_STRING );
 			$brand 		 = filter_var( $res->gear_brand, FILTER_SANITIZE_STRING );
 			$price 		 = filter_var( $res->gear_price, FILTER_SANITIZE_NUMBER_INT );
+			$distance	 = filter_var( $res->gear_distance, FILTER_SANITIZE_NUMBER_INT );
 			$year 		 = filter_var( $res->year, FILTER_SANITIZE_NUMBER_INT );	
 			$id 		 = filter_var( $res->gear_id, FILTER_SANITIZE_NUMBER_INT );			
 		}
@@ -154,6 +163,10 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 					<tr <?php if( isset($error['price']) ) echo 'style="background-color:#D41346;"'?>>
 						<td>Price</td>
 						<td><input type="text" name="price" size="12" value="<?php if( isset($price) ) echo $price;?>"/></td>
+					</tr>
+					<tr <?php if( isset($error['distance']) ) echo 'style="background-color:#D41346;"'?>>
+						<td>Distance</td>
+						<td><input type="text" name="distance" size="12" value="<?php if( isset($distance) ) echo $distance;?>"/></td>
 					</tr>
 					<tr <?php if( isset($error['day']) || isset($error['month']) || isset($error['year']) ) echo 'style="background-color:#D41346;"'?>>
 						<td>Bought</td>
@@ -266,7 +279,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			echo '<br/><br/>';
 				
 			//prepare query
-				$query = "SELECT T.gear_id,T.gear_brand,T.gear_name,T.gear_desc,T.gear_price,T.gear_dateTo,T.gear_isDone FROM $table T ";				
+				$query = "SELECT T.gear_id,T.gear_brand,T.gear_name,T.gear_desc,T.gear_price,T.gear_distance,T.gear_dateTo,T.gear_isDone FROM $table T ";				
 				
 		switch($view){
 			default:
@@ -292,6 +305,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 						<th>Brand</th>
 						<th>Name(model)</th>
 						<th>Price</th>
+						<th>Distance</th>
 						<th>Bought</th>
 						<th>Age</th>
 						<th>In use</th>
@@ -307,6 +321,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				$brand = filter_var($gear['gear_brand'],FILTER_SANITIZE_STRING);
 				$name = filter_var($gear['gear_name'],FILTER_SANITIZE_STRING);
 				$price = filter_var($gear['gear_price'],FILTER_SANITIZE_NUMBER_INT);
+				$distance = filter_var($gear['gear_distance'],FILTER_SANITIZE_NUMBER_INT);
 				$dateTo = filter_var($gear['gear_dateTo'],FILTER_SANITIZE_STRING);
 				$age = 	ROUND(((time() - strtotime($dateTo))/(60*60*24)),0);
 				if ($age <= '1') {
@@ -329,6 +344,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $name; ?></td>
 					<td><?php echo $price; ?></td>
+					<td><?php echo $distance; ?></td>
 					<td><?php echo mysql2date( $format_lang, $dateTo ); ?></td>
 					<td><?php echo $age; ?> <?php echo $age_text; ?></td>
 					<td><?php echo wp_gear_manager_display_action( $id, $isDone, $view );  ?></td>

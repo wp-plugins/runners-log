@@ -163,6 +163,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			`gear_brand` VARCHAR( 100 ) NOT NULL ,
 			`gear_name` VARCHAR( 100 ) NOT NULL ,
 			`gear_price` VARCHAR( 100 ) NOT NULL ,
+			`gear_distance` VARCHAR( 100 ) NOT NULL ,
 			`gear_desc` TEXT NOT NULL ,
 			`gear_dateTo` DATE NOT NULL ,
 			`gear_isDone` TINYINT NOT NULL

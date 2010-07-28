@@ -10,6 +10,7 @@
 /* Define constant for the gear-list */
 define('DIRECTORY_NAME'				,'runners-log');
 define('IMG_DIRECTORY'				,'../wp-content/plugins/'.DIRECTORY_NAME.'/Images/');
+define('ADM_IMG_DIRECTORY'				,'../wp-admin/images/');
 define('JS_DIRECTORY'				,'../wp-content/plugins/'.DIRECTORY_NAME.'/Js/');
 define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 
@@ -284,24 +285,27 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 		switch($view){
 			default:
 			case 'active':
-				$query .= ' WHERE gear_isDone = 0 ORDER BY gear_dateTo;';
+				$query .= ' WHERE gear_isDone = 0 ORDER BY gear_id;';
 				break;
 				
 			case 'done':
-				$query .= ' WHERE gear_isDone = 1 ORDER BY gear_dateTo;';
+				$query .= ' WHERE gear_isDone = 1 ORDER BY gear_id;';
 				break;
 				
 			case 'all':
-				$query .= ' ORDER BY gear_dateTo;';				
+				$query .= ' ORDER BY gear_id;';				
 				break;
 		}
 		$list_task = $wpdb->get_results($query, ARRAY_A);
 		$format_lang = get_option(OPTION_DATE_FORMAT);
 		if($list_task) {
 ?>
+			<div class="clear"></div>
 				<table class="widefat">
+				  <thead>
 					<tr>
-						<th></th>
+						<th><img src="<?php echo ADM_IMG_DIRECTORY;?>comment-grey-bubble.png"></img></th>
+						<th>Id</th>
 						<th>Brand</th>
 						<th>Name(model)</th>
 						<th>Price</th>
@@ -312,6 +316,22 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 						<th>Edit</th>
 						<th>Del</th>
 					</tr>
+				  </thead>
+				  <tfoot>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+				  </tfoot>
 <?php
 			foreach ($list_task as $gear){
 				
@@ -341,6 +361,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 ?>
 				">
 					<td><img id="img<?php echo $id; ?>" src="<?php echo IMG_DIRECTORY;?>plus16.png"/></td>
+					<td><?php echo $id; ?></td>
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $name; ?></td>
 					<td><?php echo $price; ?></td>
@@ -359,6 +380,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			}
 ?>
 				</table>
+				<br class="clear"/>
 <?php 
 		}else{
 			echo "<p>No gear in the list</p>";

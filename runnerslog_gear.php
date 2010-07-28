@@ -1,11 +1,10 @@
 <?php
-/* Code Based on!
-Plugin Name: WP-Task-Manager
-Plugin URI: http://thomas.lepetitmonde.net/en/index.php/projects/wordpress-task-manager
-Description: Integrate in Wordpress, a small task manager system. The plugin is very young, so you should be kind with him.
-Author: Thomas Genin
-Author URI: http://thomas.lepetitmonde.net/
-Version: 1.2
+/* Code Based on WP-Task-Manager
+//Plugin URI: http://thomas.lepetitmonde.net/en/index.php/projects/wordpress-task-manager
+//Description: Integrate in Wordpress, a small task manager system. The plugin is very young, so you should be kind with him.
+//Author: Thomas Genin
+//Author URI: http://thomas.lepetitmonde.net/
+//Version: 1.2
 */
 
 /* Define constant for the gear-list */

@@ -61,16 +61,6 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				$error[0] = true;
 				$msg .= '<span style="color:red">The&nbsp;<b>Name</b>&nbsp;of the gear must be set.</span><br/>';
 			}
-			if( empty( $price ) ){
-				$error['price'] = true;
-				$error[0] = true;
-				$msg .= '<span style="color:red">The&nbsp;<b>Price</b>&nbsp;of the gear must be set.</span><br/>';
-			}
-			if( empty( $distance ) ){
-				$error['distance'] = true;
-				$error[0] = true;
-				$msg .= '<span style="color:red">The&nbsp;<b>Distance</b>&nbsp;of the gear must be set.</span><br/>';
-			}
 			if( empty( $description ) ){
 				$error['description'] = true;
 				$error[0]=true;
@@ -151,23 +141,23 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				<table>
 					<tr <?php if( isset($error['brand']) ) echo 'style="background-color:#D41346;"'?>>
 						<td>Brand</td>
-						<td><input type="text" name="brand" size="58" value="<?php if( isset($brand) ) echo $brand;?>"/></td>
+						<td><input type="text" name="brand" size="58" value="<?php if( isset($brand) ) echo $brand;?>"/><span class="description"> Eg. New Balance</span></td>
 					</tr>
 					<tr <?php if( isset($error['name']) ) echo 'style="background-color:#D41346;"'?>>
 						<td>Name</td>
-						<td><input type="text" name="name" size="58" value="<?php if( isset($name) ) echo $name;?>"/></td>
+						<td><input type="text" name="name" size="58" value="<?php if( isset($name) ) echo $name;?>"/><span class="description"> Eg. NB 1224</span></td>
 					</tr>
 					<tr <?php if( isset($error['description']) ) echo 'style="background-color:#D41346;"'?>>
 						<td>Description</td>
 						<td><textarea name="description" rows="8" cols="52"><?php if( isset($description) ) echo $description;?></textarea></td>
 					</tr>
-					<tr <?php if( isset($error['price']) ) echo 'style="background-color:#D41346;"'?>>
+					<tr>
 						<td>Price</td>
-						<td><input type="text" name="price" size="12" value="<?php if( isset($price) ) echo $price;?>"/></td>
+						<td><input type="text" name="price" size="12" value="<?php if( isset($price) ) echo $price;?>"/><span class="description"> Currency isnt supported</span></td>
 					</tr>
 					<tr <?php if( isset($error['distance']) ) echo 'style="background-color:#D41346;"'?>>
 						<td>Distance</td>
-						<td><input type="text" name="distance" size="12" value="<?php if( isset($distance) ) echo $distance;?>"/></td>
+						<td><input type="text" name="distance" size="12" value="<?php if( isset($distance) ) echo $distance;?>"/><span class="description"> Enter a start distance if the item is used. Further distances is calculated</span></td>
 					</tr>
 					<tr <?php if( isset($error['day']) || isset($error['month']) || isset($error['year']) ) echo 'style="background-color:#D41346;"'?>>
 						<td>Bought</td>
@@ -364,8 +354,8 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 					<td><?php echo $id; ?></td>
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $name; ?></td>
-					<td><?php echo $price; ?></td>
-					<td><?php echo $distance; ?></td>
+					<td><?php if ($price == '') { echo "-"; } else { echo $price; }?></td>
+					<td><?php if ($distance == '') { echo "Brand New"; } else { echo $distance; }?></td>
 					<td><?php echo mysql2date( $format_lang, $dateTo ); ?></td>
 					<td><?php echo $age; ?> <?php echo $age_text; ?></td>
 					<td><?php echo wp_gear_manager_display_action( $id, $isDone, $view );  ?></td>

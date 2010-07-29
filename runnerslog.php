@@ -120,7 +120,7 @@ include('runnerslog_tag.php');
 include('runnerslog_gear.php');
 
 /* Get the plugin-base-url for use of the gear-list */
-$gear_plugIn_base_url='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page='.plugin_basename (__FILE__);
+$gear_plugIn_base_url='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page=runners-log-gear';
 
 // Do this when user activates the plugin (Update Script)
 register_activation_hook(__FILE__, 'runners_log_update');
@@ -1499,8 +1499,12 @@ add_action('admin_menu', 'wp_gear_manager_create_menu');
 
 	function wp_gear_manager_create_menu()
 	{
-		add_menu_page( 'Gear Manager', 'Gear Manager', 1, __FILE__, 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
-    	add_submenu_page( __FILE__, 'New Gear', 'Add new gear', 1, __FILE__.'&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
+		add_menu_page( 'Gear Manager', 'Gear Manager', 1, 'runners-log-gear', 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
+    	add_submenu_page( 'runners-log-gear', 'New Gear', 'Add new gear', 1, 'runners-log-gear&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
+		
+		//add_menu_page('Runners Log', 'Runners Log', 'administrator', 'runners-log', 'runnerslog_admin');
+		//add_submenu_page('runners-log', 'Graphs and Stats', 'Graphs and Stats', 'administrator', 'runners-log-stats-graphs', 'runnerslog_stats_graphs');
+
 	}
 
 

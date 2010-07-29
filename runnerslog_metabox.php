@@ -10,7 +10,7 @@ array(
 		"name" => "_rl_time",
 		"std" => "",
 		"title" => "Time:",
-		"description" => "hh:mm:ss eg 01:37:27 1h37min27sec",
+		"description" => "hh:mm:ss eg 01:37:27",
 		"show" => "1"
 	),
 	"_rl_distance" => array(
@@ -27,7 +27,7 @@ array(
 		"description" => "The avg. pulse for your course",
 		"show" => "$pulsavg"
 	),
-		"_rl_calories" => array(
+	"_rl_calories" => array(
 		"name" => "_rl_calories",
 		"std" => "",
 		"title" => "Calories:",
@@ -42,6 +42,7 @@ array(
 		"show" => "$garminconnect"
 	)
 );
+
 function post_custom_fields() {
 	global $post, $post_custom_fields;
 	echo '<ul>';
@@ -102,4 +103,5 @@ function save_postdata( $post_id ) {
 }
 
 add_action('admin_menu', 'create_meta_box');
-add_action('save_post', 'save_postdata'); ?>
+add_action('save_post', 'save_postdata'); 
+?>

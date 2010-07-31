@@ -35,7 +35,7 @@ To gain your WOEID just go to the <a URL =http://weather.yahoo.com/> Yahoo Weath
 			<tr valign="top">
 				<th scope="row"><label for="runnerslog_woeid"><?php _e('New WOEID:') ?></label></th>
 				<td><?php
-					echo '<input name="runnerslog_woeid" type="text" size="10" maxlength="10" id="runnerslog_woeid"  value="" class="small-text" />';
+					echo '<input name="runnerslog_woeid" type="text" id="runnerslog_woeid"  value="" class="small-text" />';
 					echo '<span class="description"> WOEID for your city (eg 687337 for Ratisbona)</span>';
 					?>
 				</td>
@@ -50,7 +50,12 @@ To gain your WOEID just go to the <a URL =http://weather.yahoo.com/> Yahoo Weath
 </p>
 
 <?php 
-runnerslog_retrieveWeather($woeid,'c');
+if ($unittype == 'metric'){
+	$selectedType='c';
+} else {
+	$selectedType='f';
+}
+runnerslog_retrieveWeather($woeid,$selectedType);
 ?>
 
 

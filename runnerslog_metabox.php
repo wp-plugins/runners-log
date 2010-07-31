@@ -3,6 +3,7 @@ $distancetype = ucfirst(get_option('runnerslog_distancetype'));
 $pulsavg = get_option('runnerslog_pulsavg');
 $garminconnect = get_option('runnerslog_garminconnectlink');
 $calories = get_option('runnerslog_caloriescount');
+$temperature = get_option('runnerslog_temperature');
 
 $post_custom_fields =
 array(
@@ -40,6 +41,13 @@ array(
 		"title" => "Garmin Link:",
 		"description" => "Format like: http://connect.garmin.com/activity/37503629",
 		"show" => "$garminconnect"
+	),
+	"_rl_temperature" => array(
+		"name" => "_rl_temperature",
+		"std" => "",
+		"title" => "Temperature:",
+		"description" => "Temperature in full digits",
+		"show" => "$temperature"
 	)
 );
 

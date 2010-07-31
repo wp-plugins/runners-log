@@ -118,7 +118,6 @@ if (version_compare($wp_version,"2.7","<")) {
 
 include('runnerslog_tag.php');
 include('runnerslog_gear.php');
-
 /* Get the plugin-base-url for use of the gear-list */
 $gear_plugIn_base_url='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page=runners-log-gear';
 
@@ -198,6 +197,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 /* Let us create the functions */
 	function runners_log_basic() 
 	{
+		
 		global $wpdb, $post; 
 		$hms = get_post_meta($post->ID, "_rl_time_value", $single = true); // Get the running time
 		$distance = get_post_meta($post->ID, "_rl_distance_value", $single = true); // Get the distance
@@ -1453,6 +1453,10 @@ function hms2sec ($hms)	{
 	function runnerslog_converter_toolbox() {  
 		include('Includes/runnerslog_converter_toolbox.php');
 	}
+	
+	function runnerslog_weather() {  
+		include('Includes/runnerslog_weather.php');
+	}
 
 	function runnerslog_admin_menu() {
     // Add a new top-level menu: Runners Log with Submenus
@@ -1464,7 +1468,8 @@ function hms2sec ($hms)	{
     add_submenu_page('runners-log', 'Training Pace Calc.', 'Training Pace Calc.', 'administrator', 'runners-log-vdot-training-pace', 'runnerslog_vdot_training_pace');
 	add_submenu_page('runners-log', 'Body Mass Index', 'Body Mass Index', 'administrator', 'runners-log-body-mass-index', 'runnerslog_body_mass_index');	
 	add_submenu_page('runners-log', 'Weight Change Effect', 'Weight Change Effect', 'administrator', 'runners-log-weight-change-effect', 'runnerslog_weight_change_effect');	
-	add_submenu_page('runners-log', 'Coverter Toolbox', 'Coverter Toolbox', 'administrator', 'runners-log-converter-toolbox', 'runnerslog_converter_toolbox');	
+	add_submenu_page('runners-log', 'Coverter Toolbox', 'Coverter Toolbox', 'administrator', 'runners-log-converter-toolbox', 'runnerslog_converter_toolbox');
+	add_submenu_page('runners-log', 'Weather Setting', 'Weather Settings', 'administrator', 'runners-log-weather-settings', 'runnerslog_weather');	
 	}
 	// Hook for adding admin menus
 	add_action('admin_menu', 'runnerslog_admin_menu');

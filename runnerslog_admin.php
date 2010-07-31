@@ -7,6 +7,8 @@
 		$pulsavg = $_POST['runnerslog_pulsavg'];
 		$garminconnect = $_POST['runnerslog_garminconnectlink'];
 		$calories = $_POST['runnerslog_caloriescount'];
+		$temperature = $_POST['runnerslog_temperature'];
+		$woeid = $_POST['runnerslog_woeid'];
 		$heightcm = $_POST['runnerslog_cm'];
 		$heightfeets = $_POST['runnerslog_feets'];
 		$heightinches = $_POST['runnerslog_inches'];
@@ -31,6 +33,8 @@
 		update_option('runnerslog_pulsavg', $pulsavg);		
 		update_option('runnerslog_garminconnectlink', $garminconnect);		
 		update_option('runnerslog_caloriescount', $calories);
+		update_option('runnerslog_temperature', $temperature);
+		update_option('runnerslog_woeid',$woeid);
 		update_option('runnerslog_cm', $heightcm);
 		update_option('runnerslog_feets', $heightfeets);
 		update_option('runnerslog_inches', $heightinches);
@@ -60,6 +64,8 @@
 		$pulsavg = get_option('runnerslog_pulsavg');
 		$garminconnect = get_option('runnerslog_garminconnectlink');
 		$calories = get_option('runnerslog_caloriescount');
+		$temperature = get_option('runnerslog_temperature');
+		$woeid = get_option('runnerslog_woeid');
 		$heightcm = get_option('runnerslog_cm');
 		$heightfeets = get_option('runnerslog_feets');
 		$heightinches = get_option('runnerslog_inches');
@@ -224,6 +230,15 @@
 				<label for="runnerslog_caloriescount">
 				<input name="runnerslog_caloriescount" id="runnerslog_caloriescount" value="1"<?php checked('1', get_option('runnerslog_caloriescount')); ?> type="checkbox">
 				<?php _e('Enable Calories Count') ?></label>
+				</th>
+			</tr>
+			
+			<!-- Enable Temperature: runnerslog_temperature -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_temperature">
+				<input name="runnerslog_temperature" id="runnerslog_temperature" value="1"<?php checked('1', get_option('runnerslog_temperature')); ?> type="checkbox">
+				<?php _e('Enable Temperature Measurement') ?></label>
 				</th>
 			</tr>			
 		</tbody>

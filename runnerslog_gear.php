@@ -48,7 +48,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			$brand		 = filter_input( INPUT_POST, 'brand', FILTER_SANITIZE_STRING );
 			$name 		 = filter_input( INPUT_POST, 'name', FILTER_SANITIZE_STRING );
 			$price 		 = filter_input( INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT );
-			$distance 		 = filter_input( INPUT_POST, 'distance', FILTER_SANITIZE_NUMBER_INT );
+			$distance 	 = filter_input( INPUT_POST, 'distance', FILTER_SANITIZE_NUMBER_INT );
 			$year 		 = filter_input( INPUT_POST, 'year', FILTER_SANITIZE_NUMBER_INT );
 			
 			if( empty( $brand ) ){

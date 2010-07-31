@@ -554,7 +554,7 @@ function runners_log_gear_func($atts) {
 	// is there something to do?
 	if (sizeof($res) == '0')
 	{
-		echo "No data available. Did you specify a id like [runners_log_gear id=\"2\"]<br/>\n";
+		echo "No data available. Did you specify an id like [runners_log_gear id=\"2\"]<br/>\n";
 		return;
 	}
 		

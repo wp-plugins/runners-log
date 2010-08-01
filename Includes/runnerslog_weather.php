@@ -4,7 +4,7 @@
 <?php 
 	//load currently selected unit
 	$unittype = get_option('runnerslog_unittype');
-	
+	$woeid = get_option('runnerslog_woeid');
 	if($_POST['runnerslog_op_hidden'] == 'Y') {
 		//Form data sent and new WOEID saved
 		$woeid = $_POST['runnerslog_woeid'];
@@ -55,11 +55,14 @@ if ($unittype == 'metric'){
 } else {
 	$selectedType='f';
 }
+add_option('runnerslog_woeid', $woeid, '','yes');
 runnerslog_retrieveWeather($woeid,$selectedType);
 ?>
 
 
 <?php
+
+//retrieve information from Yahoo Weather channel depending on selected WOEID
 function runnerslog_retrieveWeather($woid,$unit) {
 $weather_feed = file_get_contents('http://weather.yahooapis.com/forecastrss?w='.$woid.'&u='.$unit.'');
 if(!$weather_feed) die('weather failed, check feed URL');
@@ -79,7 +82,8 @@ echo 'wind direction: '.$yw_channel[wind][direction].'<br />';
 echo 'wind speed:  '.$yw_channel[wind][speed].'<br />';
 echo '</div>';
 
-$item_yweather = $weather->channel->item->children("http://xml.weather.yahoo.com/ns/rss/1.0");
+//retrieve information from Yahoo Weather channel item depending on selected WOEID
+$item_yweather = $weather->channel->item->children('http://xml.weather.yahoo.com/ns/rss/1.0');
 
 foreach($item_yweather as $x => $yw_item) {
 	foreach($yw_item->attributes() as $k => $attr) {

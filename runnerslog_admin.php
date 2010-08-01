@@ -7,8 +7,7 @@
 		$pulsavg = $_POST['runnerslog_pulsavg'];
 		$garminconnect = $_POST['runnerslog_garminconnectlink'];
 		$calories = $_POST['runnerslog_caloriescount'];
-		$temperature = $_POST['runnerslog_temperature'];
-		$woeid = $_POST['runnerslog_woeid'];
+		$weather = $_POST['runnerslog_weather'];
 		$heightcm = $_POST['runnerslog_cm'];
 		$heightfeets = $_POST['runnerslog_feets'];
 		$heightinches = $_POST['runnerslog_inches'];
@@ -33,8 +32,7 @@
 		update_option('runnerslog_pulsavg', $pulsavg);		
 		update_option('runnerslog_garminconnectlink', $garminconnect);		
 		update_option('runnerslog_caloriescount', $calories);
-		update_option('runnerslog_temperature', $temperature);
-		update_option('runnerslog_woeid',$woeid);
+		update_option('runnerslog_weather', $weather);
 		update_option('runnerslog_cm', $heightcm);
 		update_option('runnerslog_feets', $heightfeets);
 		update_option('runnerslog_inches', $heightinches);
@@ -64,8 +62,7 @@
 		$pulsavg = get_option('runnerslog_pulsavg');
 		$garminconnect = get_option('runnerslog_garminconnectlink');
 		$calories = get_option('runnerslog_caloriescount');
-		$temperature = get_option('runnerslog_temperature');
-		$woeid = get_option('runnerslog_woeid');
+		$temperature = get_option('runnerslog_weather');
 		$heightcm = get_option('runnerslog_cm');
 		$heightfeets = get_option('runnerslog_feets');
 		$heightinches = get_option('runnerslog_inches');
@@ -233,12 +230,12 @@
 				</th>
 			</tr>
 			
-			<!-- Enable Temperature: runnerslog_temperature -->
+			<!-- Enable Weather: runnerslog_weather -->
 			<tr>
 				<th scope="row" colspan="2" class="th-full">
-				<label for="runnerslog_temperature">
-				<input name="runnerslog_temperature" id="runnerslog_temperature" value="1"<?php checked('1', get_option('runnerslog_temperature')); ?> type="checkbox">
-				<?php _e('Enable Temperature Measurement') ?></label>
+				<label for="runnerslog_weather">
+				<input name="runnerslog_weather" id="runnerslog_weather" value="1"<?php checked('1', get_option('runnerslog_weather')); ?> type="checkbox">
+				<?php _e('Enable Weather Measurement') ?></label>
 				</th>
 			</tr>			
 		</tbody>

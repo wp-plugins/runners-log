@@ -3,7 +3,7 @@ $distancetype = ucfirst(get_option('runnerslog_distancetype'));
 $pulsavg = get_option('runnerslog_pulsavg');
 $garminconnect = get_option('runnerslog_garminconnectlink');
 $calories = get_option('runnerslog_caloriescount');
-$temperature = get_option('runnerslog_temperature');
+$weather = get_option('runnerslog_weather');
 
 global $wpdb;
  
@@ -69,7 +69,7 @@ array(
 		"std" => "",
 		"title" => "Temperature:",
 		"description" => "Temperature in full digits",
-		"show" => "$temperature"
+		"show" => "$weather"
 	)
 );
 

@@ -74,13 +74,13 @@ array(
 );
 
 //runs trough the gear table and adds an option for each one
-$fin = array();
+$runner_log_gears = array();
 foreach ($res as $result) {
-	$fin[]=array("name" => $result->Id,"std" => "","title" => $result->Brand." ".$result->Name,"description" => $result->Desc,"show" => "1");
+	$runner_log_gears[]=array("name" => $result->Id,"std" => "","title" => $result->Brand." ".$result->Name,"description" => $result->Desc,"show" => "1");
 }
 	
 //merges the upper fields with the gear table
-$post_custom_fields = array_merge($post_custom_fields_old,$fin);
+$post_custom_fields = array_merge($post_custom_fields_old,$runner_log_gears);
 
 function post_custom_fields() {
 	global $post, $post_custom_fields;

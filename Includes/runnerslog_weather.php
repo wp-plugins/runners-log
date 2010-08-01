@@ -18,8 +18,8 @@
 	}
 ?>
 
-Here you can change your location and specify whether your data should be queried from the Yahoo Weather data via its Where On Earth Identifiers (WOEID) or not. More information on WOEID can be found <a URL=http://developer.yahoo.com/geo/geoplanet/guide/concepts.html#>here</a>.<br> 
-To gain your WOEID just go to the <a URL =http://weather.yahoo.com/> Yahoo Weather </a> service, search for your current location and copy it from the URL. It should be a number with about six digits at the end of the URL, separated from your city's name with a horizontal pipe.
+Here you can change your location and specify whether your data should be queried from the Yahoo Weather data via its Where On Earth Identifiers (WOEID) or not. More information on WOEID can be found <a href=http://developer.yahoo.com/geo/geoplanet/guide/concepts.html# target="_blank">here</a>.<br> 
+To gain your WOEID just go to the <a href=http://weather.yahoo.com/  target="_blank"> Yahoo Weather </a> service, search for your current location and copy it from the URL. It should be a number with about six digits at the end of the URL, separated from your city's name with a horizontal pipe.
 <p>
 <form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />

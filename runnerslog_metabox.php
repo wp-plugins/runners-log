@@ -5,7 +5,29 @@ $garminconnect = get_option('runnerslog_garminconnectlink');
 $calories = get_option('runnerslog_caloriescount');
 $temperature = get_option('runnerslog_temperature');
 
-$post_custom_fields =
+global $wpdb;
+ 
+$table = $wpdb->prefix."gear";
+     
+$query = "SELECT
+	gear_id AS `Id`,
+	gear_brand as `Brand`,
+	gear_name as `Name`,
+	gear_desc as `Description`,
+	gear_price as `Price`,
+	gear_distance as `Distance`,
+	gear_isDone as `Active`,
+	DAY(gear_dateTo) as `day`,
+	MONTH(gear_dateTo) as `month`,
+	YEAR(gear_dateTo) as `year`
+	FROM $table
+	WHERE gear_isDone = '0';";
+	
+
+	
+$res = $wpdb->get_results($query);
+        
+$post_custom_fields_old =
 array(
 	"_rl_time" => array(
 		"name" => "_rl_time",
@@ -50,6 +72,15 @@ array(
 		"show" => "$temperature"
 	)
 );
+
+//runs trough the gear table and adds an option for each one
+$fin = array();
+foreach ($res as $result) {
+	$fin[]=array("name" => $result->Id,"std" => "","title" => $result->Brand." ".$result->Name,"description" => $result->Desc,"show" => "1");
+}
+	
+//merges the upper fields with the gear table
+$post_custom_fields = array_merge($post_custom_fields_old,$fin);
 
 function post_custom_fields() {
 	global $post, $post_custom_fields;

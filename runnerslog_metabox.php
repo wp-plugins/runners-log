@@ -23,11 +23,19 @@ $query = "SELECT
 	FROM $table
 	WHERE gear_isDone = '0';";
 	
+	//print_r($res); // Print the whole Array
+	
+	//echo $res[0]->Id;  // Gives you the id for Array 0
+/*
+	foreach($res as $gear) { // Gives you a list of all the Ids
+		echo $gear->Id; 
+	};
+*/
 
 	
 $res = $wpdb->get_results($query);
         
-$post_custom_fields_old =
+$post_custom_fields =
 array(
 	"_rl_time" => array(
 		"name" => "_rl_time",
@@ -76,14 +84,17 @@ array(
 //runs trough the gear table and adds an option for each one
 $runner_log_gears = array();
 foreach ($res as $result) {
-	$runner_log_gears[]=array("name" => $result->Id,"std" => "","title" => $result->Brand." ".$result->Name,"description" => $result->Desc,"show" => "1");
+	$runner_log_gears[]=array(
+		"name" => $result->Id,
+		"std" => "",
+		"title" => $result->Brand." ".$result->Name,
+		"description" => $result->Desc,
+		"show" => "1"
+	);
 }
-	
-//merges the upper fields with the gear table
-$post_custom_fields = array_merge($post_custom_fields_old,$runner_log_gears);
 
 function post_custom_fields() {
-	global $post, $post_custom_fields;
+	global $post, $post_custom_fields, $runner_log_gears;
 	echo '<ul>';
 	foreach($post_custom_fields as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
@@ -102,6 +113,24 @@ function post_custom_fields() {
 				echo '</li>';
 			}
 	}
+	echo "<h2 align=\"center\">Gear List Items</h2>";
+	foreach($runner_log_gears as $meta_box) {
+		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
+
+		if($meta_box_value == "")
+			$meta_box_value = $meta_box['std'];
+			
+			if($meta_box['show'] == '1') {
+				echo '<li style="float: left; width: 32%; height: 20px;">';
+				echo'<input type="hidden" name="'.$meta_box['name'].'_noncename" id="'.$meta_box['name'].'_noncename" value="'.wp_create_nonce( plugin_basename(__FILE__) ).'" />';
+				echo'<div class="label" style="font-weight: bold; float: left; padding:4px 10px 0 0;">'.$meta_box['title'].'</div>';
+				echo'<input type="checkbox" name="'.$meta_box['name'].'_value" value="'.attribute_escape($meta_box_value).'" style="" align="TOP" /><br />';
+				if($meta_box['description'] != "") {
+					echo '<div class="description" style="padding-left: 38%; font-style: italic;"><small>' . $meta_box['description'] . '</small></div>';
+				}
+				echo '</li>';
+			}
+	}
 	echo '</ul>';
 	echo '<br style="clear: both;">';
 }
@@ -114,7 +143,7 @@ function create_meta_box() {
 }
 
 function save_postdata( $post_id ) {
-	global $post, $post_custom_fields;
+	global $post, $post_custom_fields, $runner_log_gears;
 
 	foreach($post_custom_fields as $meta_box) {
 		// Verify

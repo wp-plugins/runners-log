@@ -50,6 +50,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			$price 		 = filter_input( INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT );
 			$distance 	 = filter_input( INPUT_POST, 'distance', FILTER_SANITIZE_NUMBER_INT );
 			$year 		 = filter_input( INPUT_POST, 'year', FILTER_SANITIZE_NUMBER_INT );
+			$image 		 = filter_input( INPUT_POST, 'image' );
 			
 			if( empty( $brand ) ){
 				$error['brand'] = true;
@@ -93,6 +94,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 													'gear_name' => $name,
 													'gear_desc' => $description,
 													'gear_price' => $price,
+													'gear_image' => $image,
 													'gear_distance' => $distance,
 													'gear_dateTo' => "$year-$month-$day") , 
 											array('gear_id' => $id) );
@@ -103,6 +105,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 													'gear_name' => $name,
 													'gear_desc' => $description,
 													'gear_price' => $price,
+													'gear_image' => $image,
 													'gear_distance' => $distance,
 													'gear_dateTo' => "$year-$month-$day") );
 					$msg .= '<span style="color:green; background-color:#9ECA98">Gear correctly added.</span>';
@@ -114,7 +117,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 		if( isset($action) && $action = 'edit'){
 			$id = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			$table = $wpdb->prefix."gear";
-			$query = "SELECT gear_id,gear_brand,gear_name,gear_desc,gear_price,gear_distance,DAY(gear_dateTo) as `day`,MONTH(gear_dateTo) as `month`, YEAR(gear_dateTo) as `year` FROM $table WHERE gear_id = $id LIMIT 1;";
+			$query = "SELECT gear_id,gear_brand,gear_name,gear_desc,gear_price,gear_distance,gear_image,DAY(gear_dateTo) as `day`,MONTH(gear_dateTo) as `month`, YEAR(gear_dateTo) as `year` FROM $table WHERE gear_id = $id LIMIT 1;";
 			$res = $wpdb->get_row($query);
 
 			$day 		 = filter_var( $res->day,FILTER_SANITIZE_NUMBER_INT );
@@ -123,6 +126,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			$name 		 = filter_var( $res->gear_name, FILTER_SANITIZE_STRING );
 			$brand 		 = filter_var( $res->gear_brand, FILTER_SANITIZE_STRING );
 			$price 		 = filter_var( $res->gear_price, FILTER_SANITIZE_NUMBER_INT );
+			$image 		 = filter_var( $res->gear_image );
 			$distance	 = filter_var( $res->gear_distance, FILTER_SANITIZE_NUMBER_INT );
 			$year 		 = filter_var( $res->year, FILTER_SANITIZE_NUMBER_INT );	
 			$id 		 = filter_var( $res->gear_id, FILTER_SANITIZE_NUMBER_INT );			
@@ -165,6 +169,32 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 							<a href="#" onclick="cal.showCalendar('anchor9'); return false;" title="cal.showCalendar('anchor9'); return false;" name="anchor9" id="anchor9"><img src="<?php echo IMG_DIRECTORY?>calendar.png"/></a>
 						</td>
 					</tr>
+					<script language="JavaScript">
+					jQuery(document).ready(function() {
+
+					jQuery('#upload_image_button').click(function() {
+					formfield = jQuery('#upload_image').attr('name');
+					tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+					return false;
+					});
+
+					window.send_to_editor = function(html) {
+					imgurl = jQuery('img',html).attr('src');
+					jQuery('#upload_image').val(imgurl);
+					tb_remove();
+					}
+
+					});
+					</script>
+					<tr valign="top">
+						<td>Upload Image</td>
+							<td><label for="upload_image">
+								<input id="upload_image" type="text" size="36" name="upload_image" value="<?php echo $image;?>" />
+								<input id="upload_image_button" type="button" value="Upload Image" />
+								<br />Enter an URL or upload an image for the banner.
+								</label>
+							</td>
+						</tr>
 				</table>
 				<br/>
 <?php 
@@ -270,7 +300,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			echo '<br/><br/>';
 				
 			//prepare query
-				$query = "SELECT T.gear_id,T.gear_brand,T.gear_name,T.gear_desc,T.gear_price,T.gear_distance,T.gear_dateTo,T.gear_isDone FROM $table T ";				
+				$query = "SELECT T.gear_id,T.gear_brand,T.gear_name,T.gear_desc,T.gear_price,T.gear_image,T.gear_distance,T.gear_dateTo,T.gear_isDone FROM $table T ";				
 				
 		switch($view){
 			default:
@@ -296,6 +326,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 					<tr>
 						<th><img src="<?php echo ADM_IMG_DIRECTORY;?>comment-grey-bubble.png"></img></th>
 						<th>Id</th>
+						<th>Image</th>
 						<th>Brand</th>
 						<th>Name(model)</th>
 						<th>Price</th>
@@ -320,6 +351,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 						<th></th>
 						<th></th>
 						<th></th>
+						<th></th>
 					</tr>
 				  </tfoot>
 <?php
@@ -331,6 +363,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				$brand = filter_var($gear['gear_brand'],FILTER_SANITIZE_STRING);
 				$name = filter_var($gear['gear_name'],FILTER_SANITIZE_STRING);
 				$price = filter_var($gear['gear_price'],FILTER_SANITIZE_NUMBER_INT);
+				$image = filter_var($gear['gear_image']);
 				$distance = filter_var($gear['gear_distance'],FILTER_SANITIZE_NUMBER_INT);
 				$dateTo = filter_var($gear['gear_dateTo'],FILTER_SANITIZE_STRING);
 				$age = 	ROUND(((time() - strtotime($dateTo))/(60*60*24)),0);
@@ -352,6 +385,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				">
 					<td><img id="img<?php echo $id; ?>" src="<?php echo IMG_DIRECTORY;?>plus16.png"/></td>
 					<td><?php echo $id; ?></td>
+					<td>. <!-- Image place holder --></td>
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $name; ?></td>
 					<td><?php if ($price == '') { echo "-"; } else { echo $price; }?></td>
@@ -393,7 +427,8 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 		</script>
 <?php
 	}	
-	
+
+/* Seems to be deleted
 	function wp_gear_manager_get_sel_date($date=null,$day=null,$month=null,$year=null)
 	{
 		if( empty( $date ) )
@@ -430,6 +465,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 		
 		return "Day:&nbsp;$dayList&nbsp;Month:&nbsp;$monthList&nbsp;Year:&nbsp;$yearList";
 	}
+*/
 	
 	function wp_gear_manager_display_action( $id, $isdone, $view){
 		global $gear_plugIn_base_url;

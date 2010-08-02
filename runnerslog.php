@@ -166,7 +166,8 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			`gear_distance_calc` VARCHAR( 100 ) NOT NULL ,
 			`gear_desc` TEXT NOT NULL ,
 			`gear_dateTo` DATE NOT NULL ,
-			`gear_isDone` TINYINT NOT NULL
+			`gear_isDone` TINYINT NOT NULL ,
+			`gear_image` VARCHAR( 255 ) NOT NULL 
 			) ENGINE = MYISAM";
 	    $wpdb->query( $structure );
 	    update_option( OPTION_DATE_FORMAT, 'd/m/Y' ); //Standart date format for the use of the gear-manager
@@ -1513,5 +1514,15 @@ add_action('admin_menu', 'wp_gear_manager_create_menu');
 
 	}
 
-
+//Functions related to being able to insert an image in the gear-list
+	function my_admin_scripts() {
+		wp_enqueue_script('media-upload');
+		wp_enqueue_script('thickbox');
+	}
+	
+	function my_admin_styles() {
+		wp_enqueue_style('thickbox');
+	}
+	add_action('admin_print_scripts', 'my_admin_scripts');
+	add_action('admin_print_styles', 'my_admin_styles');
 ?>

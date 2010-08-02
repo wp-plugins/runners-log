@@ -1,9 +1,22 @@
 <?php
+
+include_once('Includes/runnerslog_weather_functions.php');
+
 $distancetype = ucfirst(get_option('runnerslog_distancetype'));
 $pulsavg = get_option('runnerslog_pulsavg');
 $garminconnect = get_option('runnerslog_garminconnectlink');
 $calories = get_option('runnerslog_caloriescount');
-$weather = get_option('runnerslog_weather');
+$weather_temperature = get_option('runnerslog_weather_temperature');
+$weather_windchill = get_option('runnerslog_weather_windchill');
+$weather_humidity = get_option('runnerslog_weather_humidity');
+$weather_description = get_option('runnerslog_weather_description');
+$weather_yahoo = get_option('runnerslog_weather_yahoo');
+$woeid = get_option('runnerslog_woeid');
+if(get_option('runnerslog_unittype') == 'metric'){
+	$unit = 'c';
+} else {
+	$unit = 'f';
+}
 
 global $wpdb;
  
@@ -72,12 +85,33 @@ array(
 		"description" => "Format like: http://connect.garmin.com/activity/37503629",
 		"show" => "$garminconnect"
 	),
-	"_rl_temperature" => array(
-		"name" => "_rl_temperature",
-		"std" => "",
+	"_rl_weather_temperature" => array(
+		"name" => "_rl_weather_temperature",
+		"std" => runnerslog_retrieveWeather($woeid,$unit,'temperature'),
 		"title" => "Temperature:",
 		"description" => "Temperature in full digits",
-		"show" => "$weather"
+		"show" => "$weather_temperature"
+	),
+	"_rl_weather_windchill" => array(
+		"name" => "_rl_$weather_windchill",
+		"std" => runnerslog_retrieveWeather($woeid,$unit,'windchill'),
+		"title" => "Windchill:",
+		"description" => "Windchill in full digits",
+		"show" => "$weather_windchill"
+	),
+	"_rl_weather_humidity" => array(
+		"name" => "_rl_weather_humidity",
+		"std" => runnerslog_retrieveWeather($woeid,$unit,'humidity'),
+		"title" => "Humidity:",
+		"description" => "THumidity in full digits (percent)",
+		"show" => "$weather_humidity"
+	),
+	"_rl_weather_description" => array(
+		"name" => "_rl_weather_description",
+		"std" => runnerslog_retrieveWeather($woeid,$unit,'description'),
+		"title" => "Weather Description:",
+		"description" => "Textual description of the weather",
+		"show" => "$weather_description"
 	)
 );
 

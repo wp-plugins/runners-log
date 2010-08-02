@@ -1456,7 +1456,7 @@ function hms2sec ($hms)	{
 	}
 	
 	function runnerslog_weather() {  
-		include('Includes/runnerslog_weather.php');
+		include('Includes/runnerslog_weather_settings.php');
 	}
 
 	function runnerslog_admin_menu() {

@@ -3,7 +3,6 @@
 
 <?php 
 	//load currently selected unit
-	$unittype = get_option('runnerslog_unittype');
 	$woeid = get_option('runnerslog_woeid');
 	if($_POST['runnerslog_op_hidden'] == 'Y') {
 		//Form data sent and new WOEID saved
@@ -70,7 +69,7 @@ For every class you activate here a field in the meta box is added so you can st
 	</tr>
 	<tr>
 		<th scope="row" colspan="2" class="th-full">
-		<label for="runnerslog_weather_description">
+		<label for="runnerslog_weather_yahoo">
 		<input name="runnerslog_weather_yahoo" id="runnerslog_weather_yahoo" value="1"<?php checked('1', get_option('runnerslog_weather_yahoo')); ?> type="checkbox">
 		<?php _e('Enable Weather Data from Yahoo') ?></label>
 		</th>
@@ -115,11 +114,6 @@ If you want to use the Yahoo Weather don't forget to activate it above.
 </div>
 
 <?php 
-if ($unittype == 'metric'){
-	$selectedType='c';
-} else {
-	$selectedType='f';
-}
 add_option('runnerslog_woeid', $woeid, '','yes');
 add_option('runnerslog_weather_temperature', $weather_temperature, '','yes');
 add_option('runnerslog_weather_windchill', $weather_windchill, '','yes');
@@ -127,70 +121,7 @@ add_option('runnerslog_weather_humidity', $weather_humidity, '','yes');
 add_option('runnerslog_weather_description', $weather_description, '','yes');
 add_option('runnerslog_weather_yahoo', $weather_yahoo, '','yes');
 
-echo runnerslog_retrieveWeather($woeid,$selectedType,$thingToMeasure);
 ?>
 
 
-<?php
-//retrieve information from Yahoo Weather channel depending on selected WOEID
-function runnerslog_retrieveWeather($woid,$unit,$thingToMeasure) {
 
-$weather_feed = file_get_contents('http://weather.yahooapis.com/forecastrss?w='.$woid.'&u='.$unit.'');
-if(!$weather_feed) die('weather failed, check feed URL');
-$weather = simplexml_load_string($weather_feed);
-
-$channel_yweather = $weather->channel->children('http://xml.weather.yahoo.com/ns/rss/1.0');
-	foreach($channel_yweather as $x => $channel_item)
-		foreach($channel_item->attributes() as $k => $attr)
-			$yw_channel[$x][$k] = $attr;
-	
-$item_yweather = $weather->channel->item->children('http://xml.weather.yahoo.com/ns/rss/1.0');
-	foreach($item_yweather as $x => $yw_item) {
-		foreach($yw_item->attributes() as $k => $attr) {
-			if($k == 'day') $day = $attr;
-			if($x == 'forecast') { $yw_forecast[$x][$day . ''][$k] = $attr;	} 
-			else { $yw_forecast[$x][$k] = $attr; }
-		}
-	}
-
-//depending on what data is requested the selected value is returned		
-switch($thingToMeasure){
-	
-	case 'humidity':
-	$result = $yw_channel[atmosphere][humidity];
-	break;
-	
-	case 'windchill':
-	$result = $yw_channel[wind][chill];
-	break;
-	
-	case 'temperature':
-	$result = $yw_forecast[condition][temp];
-	break;
-	
-	case 'description':
-	$result = $yw_forecast[condition][text];
-	break;
-	
-	/*
-	echo '<div id="weather">';
-	echo 'city: '.$yw_channel[location][city].'<br />';
-	echo 'humidity: '.$yw_channel[atmosphere][humidity].'%<br />';
-	echo 'wind chill: '.$yw_channel[wind][chill].'<br />';
-	echo 'wind direction: '.$yw_channel[wind][direction].'<br />';
-	echo 'wind speed:  '.$yw_channel[wind][speed].'<br />';
-	echo '</div>';
-	*/
-	
-	
-	/*
-	echo '<div id="weather">';
-	echo 'temperature: '.$yw_forecast[condition][temp].'<br />';
-	echo 'weather: '.$yw_forecast[condition][text].'<br />';
-	echo '</div>';
-	return $yw_forecast[condition][temp];
-	* */
-}
-return $result;
-}
-?>

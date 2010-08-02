@@ -84,7 +84,12 @@ array(
 		"title" => "Garmin Link:",
 		"description" => "Format like: http://connect.garmin.com/activity/37503629",
 		"show" => "$garminconnect"
-	),
+	)
+);
+
+//creates fields for weather options
+$runners_log_weather = 
+array (
 	"_rl_weather_temperature" => array(
 		"name" => "_rl_weather_temperature",
 		"std" => runnerslog_retrieveWeather($woeid,$unit,'temperature'),
@@ -115,6 +120,7 @@ array(
 	)
 );
 
+
 //runs trough the gear table and adds an option for each one
 $runner_log_gears = array();
 foreach ($res as $result) {
@@ -128,9 +134,28 @@ foreach ($res as $result) {
 }
 
 function post_custom_fields() {
-	global $post, $post_custom_fields, $runner_log_gears;
+	global $post, $post_custom_fields, $runner_log_gears, $runners_log_weather;
 	echo '<ul>';
+	echo '<h2 align="center">Running Stats</h2>';
 	foreach($post_custom_fields as $meta_box) {
+		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
+
+		if($meta_box_value == "")
+			$meta_box_value = $meta_box['std'];
+			
+			if($meta_box['show'] == '1') {
+				echo '<li style="float: left; width: 49%; height: 40px;">';
+				echo'<input type="hidden" name="'.$meta_box['name'].'_noncename" id="'.$meta_box['name'].'_noncename" value="'.wp_create_nonce( plugin_basename(__FILE__) ).'" />';
+				echo'<div class="label" style="width: 35%; text-align: right; font-weight: bold; float: left; padding:4px 10px 0 0;">'.$meta_box['title'].'</div>';
+				echo'<input type="text" name="'.$meta_box['name'].'_value" value="'.attribute_escape($meta_box_value).'" style="width:60%;" /><br />';
+				if($meta_box['description'] != "") {
+					echo '<div class="description" style="padding-left: 38%; font-style: italic;"><small>' . $meta_box['description'] . '</small></div>';
+				}
+				echo '</li>';
+			}
+	}
+	echo '<h2 align="center">Weather Stats</h2>';
+	foreach($runners_log_weather as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
 
 		if($meta_box_value == "")

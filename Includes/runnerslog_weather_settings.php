@@ -2,7 +2,7 @@
 <p><?php echo "<h2>" . __( 'Runners Log Weather Settings' ) . "</h2>"; ?></p>
 
 <?php 
-	include_once('Includes/runnerslog_weather_functions.php');
+	//include_once('Includes/runnerslog_weather_functions.php');
 	//load currently selected unit
 	$woeid = get_option('runnerslog_woeid');
 	if($_POST['runnerslog_op_hidden'] == 'Y') {

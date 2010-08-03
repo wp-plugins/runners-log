@@ -2,6 +2,7 @@
 <p><?php echo "<h2>" . __( 'Runners Log Weather Settings' ) . "</h2>"; ?></p>
 
 <?php 
+	include_once('Includes/runnerslog_weather_functions.php');
 	//load currently selected unit
 	$woeid = get_option('runnerslog_woeid');
 	if($_POST['runnerslog_op_hidden'] == 'Y') {
@@ -91,7 +92,7 @@ If you want to use the Yahoo Weather don't forget to activate it above.
 			<tr>
 				<th scope="row"><label for="runnerslog_woeid"><?php _e('Current WOEID:') ?></label></th>
 				<td><?php
-					echo $woeid;
+					echo $woeid.' ('.runnerslog_retrieveWeather($woeid,'c','city').')';
 					?>
 				</td>
 			</tr>

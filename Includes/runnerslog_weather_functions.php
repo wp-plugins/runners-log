@@ -43,6 +43,10 @@ function runnerslog_retrieveWeather($woid,$unit,$thingToMeasure) {
 		$result = $yw_forecast[condition][text];
 		break;
 		
+		case 'city':
+		$result = $yw_channel[location][city];
+		break;
+		
 		/*
 		echo '<div id="weather">';
 		echo 'city: '.$yw_channel[location][city].'<br />';

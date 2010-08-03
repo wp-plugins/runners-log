@@ -98,7 +98,7 @@ If you want to use the Yahoo Weather don't forget to activate it above.
 			<tr valign="top">
 				<th scope="row"><label for="runnerslog_woeid"><?php _e('New WOEID:') ?></label></th>
 				<td><?php
-					echo '<input name="runnerslog_woeid" type="text" id="runnerslog_woeid"  value="'.$woeid.'" class="small-text" />';
+					echo '<input name="runnerslog_woeid" type="text" id="runnerslog_woeid"  value="'.$woeid.'" size="7" maxlength ="8"/>';
 					echo '<span class="description"> WOEID for your city (eg 687337 for Ratisbona)</span>';
 					?>
 				</td>

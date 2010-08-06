@@ -50,7 +50,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			$price 		 = filter_input( INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT );
 			$distance 	 = filter_input( INPUT_POST, 'distance', FILTER_SANITIZE_NUMBER_INT );
 			$year 		 = filter_input( INPUT_POST, 'year', FILTER_SANITIZE_NUMBER_INT );
-			$image 		 = filter_input( INPUT_POST, 'image' );
+			$gearimage 	 = filter_input( INPUT_POST, 'upload_image' );
 			
 			if( empty( $brand ) ){
 				$error['brand'] = true;
@@ -94,7 +94,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 													'gear_name' => $name,
 													'gear_desc' => $description,
 													'gear_price' => $price,
-													'gear_image' => $image,
+													'gear_image' => $gearimage,
 													'gear_distance' => $distance,
 													'gear_dateTo' => "$year-$month-$day") , 
 											array('gear_id' => $id) );
@@ -105,7 +105,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 													'gear_name' => $name,
 													'gear_desc' => $description,
 													'gear_price' => $price,
-													'gear_image' => $image,
+													'gear_image' => $gearimage,
 													'gear_distance' => $distance,
 													'gear_dateTo' => "$year-$month-$day") );
 					$msg .= '<span style="color:green; background-color:#9ECA98">Gear correctly added.</span>';
@@ -126,7 +126,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			$name 		 = filter_var( $res->gear_name, FILTER_SANITIZE_STRING );
 			$brand 		 = filter_var( $res->gear_brand, FILTER_SANITIZE_STRING );
 			$price 		 = filter_var( $res->gear_price, FILTER_SANITIZE_NUMBER_INT );
-			$image 		 = filter_var( $res->gear_image );
+			$gearimage 	 = $res->gear_image;
 			$distance	 = filter_var( $res->gear_distance, FILTER_SANITIZE_NUMBER_INT );
 			$year 		 = filter_var( $res->year, FILTER_SANITIZE_NUMBER_INT );	
 			$id 		 = filter_var( $res->gear_id, FILTER_SANITIZE_NUMBER_INT );			
@@ -189,7 +189,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 					<tr valign="top">
 						<td>Upload Image</td>
 							<td><label for="upload_image">
-								<input id="upload_image" type="text" size="36" name="upload_image" value="<?php echo $image;?>" />
+								<input id="upload_image" type="text" size="36" name="upload_image" value="<?php echo $gearimage; ?>" />
 								<input id="upload_image_button" type="button" value="Upload Image" />
 								<br />Enter an URL or upload an image for the banner.
 								</label>
@@ -363,7 +363,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				$brand = filter_var($gear['gear_brand'],FILTER_SANITIZE_STRING);
 				$name = filter_var($gear['gear_name'],FILTER_SANITIZE_STRING);
 				$price = filter_var($gear['gear_price'],FILTER_SANITIZE_NUMBER_INT);
-				$image = filter_var($gear['gear_image']);
+				$gearimage = $gear['gear_image'];
 				$distance = filter_var($gear['gear_distance'],FILTER_SANITIZE_NUMBER_INT);
 				$dateTo = filter_var($gear['gear_dateTo'],FILTER_SANITIZE_STRING);
 				$age = 	ROUND(((time() - strtotime($dateTo))/(60*60*24)),0);

@@ -1566,16 +1566,4 @@ add_action('admin_menu', 'wp_gear_manager_create_menu');
 		//add_submenu_page('runners-log', 'Graphs and Stats', 'Graphs and Stats', 'administrator', 'runners-log-stats-graphs', 'runnerslog_stats_graphs');
 
 	}
-
-//Functions related to being able to insert an image in the gear-list
-	function my_admin_scripts() {
-		wp_enqueue_script('media-upload');
-		wp_enqueue_script('thickbox');
-	}
-	
-	function my_admin_styles() {
-		wp_enqueue_style('thickbox');
-	}
-	add_action('admin_print_scripts', 'my_admin_scripts');
-	add_action('admin_print_styles', 'my_admin_styles');
 ?>

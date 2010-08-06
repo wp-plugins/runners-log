@@ -14,6 +14,19 @@ define('ADM_IMG_DIRECTORY'				,'../wp-admin/images/');
 define('JS_DIRECTORY'				,'../wp-content/plugins/'.DIRECTORY_NAME.'/Js/');
 define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 
+//Functions related to being able to insert an image in the gear-list
+	function wp_gear_manager_admin_scripts() {
+		wp_enqueue_script('media-upload');
+		wp_enqueue_script('thickbox');
+		wp_enqueue_script('jquery');
+	}
+	
+	function wp_gear_manager_admin_styles() {
+		wp_enqueue_style('thickbox');
+	}
+	add_action('admin_print_scripts', 'wp_gear_manager_admin_scripts');
+	add_action('admin_print_styles', 'wp_gear_manager_admin_styles');
+
 	function wp_gear_manager_page_dispatcher(){
 		if (isset($_POST['gear'])) 
 			$_GET['gear']=$_POST['gear'];
@@ -136,7 +149,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			echo '<h1>Edit Gear Item</h1>';
 		else	
 			echo '<h1>Add Gear Item</h1>';
-		?>		
+		?>
 		<br/>
 		<div><?php echo $msg; ?></div>
 		<script type="text/javascript" src="<?php echo JS_DIRECTORY;?>calendar.js"></script>
@@ -385,7 +398,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				">
 					<td><img id="img<?php echo $id; ?>" src="<?php echo IMG_DIRECTORY;?>plus16.png"/></td>
 					<td><?php echo $id; ?></td>
-					<td>. <!-- Image place holder --></td>
+					<td><a href="<?php echo $gearimage; ?>" class="thickbox" title="Name: <?php echo $name; ?> Brand: <?php echo $brand; ?>" rel="gearimages"><img src="<?php echo $gearimage; ?>" alt="" width="24" height="24"></a></td>
 					<td><?php echo $brand; ?></td>
 					<td><?php echo $name; ?></td>
 					<td><?php if ($price == '') { echo "-"; } else { echo $price; }?></td>

@@ -497,6 +497,59 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 }
 add_shortcode('runners_log_basic', 'runners_log_basic');
 
+/* Show weather information */
+	function runners_log_weather() 
+	{
+		
+		global $wpdb, $post;
+		
+		// Retrieve the weather settings
+		$show_weather_temperature = get_option('runnerslog_weather_temperature'); // get temperature
+		$show_weather_windchill = get_option('runnerslog_weather_windchill'); // get windchill
+		$show_weather_humidity = get_option('runnerslog_weather_humidity'); // get humidity
+		$show_weather_description = get_option('runnerslog_weather_description'); //get textual weather description
+	
+	
+	echo "<ul class='post-meta'>"; //use post-meta for css formation
+
+	//check every option whether its selected and show it if it's selected and a value is available
+	if (get_option('runnerslog_weather_temperature') == '1')
+	{
+		$temperature = get_post_meta($post->ID, "_rl_weather_temperature_value", $single = true);
+		if ( $temperature > '0' ) //should avoid displaying if not set for this post 
+		{
+				echo "<li><span class='post-meta-key'>Temperature :</span> $temperature</li>";
+			}
+	}
+	if (get_option('runnerslog_weather_humidity') == '1')
+	{
+		$humidity = get_post_meta($post->ID, "_rl_weather_humidity_value", $single = true);
+		if ( $humidity > '0' ) //should avoid displaying if not set for this post 
+		{
+				echo "<li><span class='post-meta-key'>Humidity :</span> $humidity</li>";
+			}
+	}
+	if (get_option('runnerslog_weather_windchill') == '1')
+	{
+		$windchill = get_post_meta($post->ID, "_rl_weather_windchill_value", $single = true);
+		if ( $windchill > '0' ) //should avoid displaying if not set for this post 
+		{
+				echo "<li><span class='post-meta-key'>Windchill :</span> $windchill</li>";
+			}
+	}
+	if (get_option('runnerslog_weather_description') == '1')
+	{
+		$description = get_post_meta($post->ID, "_rl_weather_description_value", $single = true);
+		if ( strlen($description) > 0 ) //should avoid displaying if not set for this post 
+		{
+				echo "<li><span class='post-meta-key'>Description :</span> $description</li>";
+			}
+	}
+	echo "</ul>";
+} // End function runners_log_weather()
+add_shortcode('runners_log_weather', 'runners_log_weather');
+
+
 function runners_log_graph() {
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class'); 	// Let us include the classes for the graph tool
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');	// Graph script by:  http://pchart.sourceforge.net/

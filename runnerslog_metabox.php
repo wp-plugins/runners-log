@@ -98,7 +98,7 @@ array (
 		"show" => "$weather_temperature"
 	),
 	"_rl_weather_windchill" => array(
-		"name" => "_rl_$weather_windchill",
+		"name" => "_rl_weather_windchill",
 		"std" => runnerslog_retrieveWeather($woeid,$unit,'windchill'),
 		"title" => "Windchill:",
 		"description" => "Windchill in full digits",
@@ -202,7 +202,10 @@ function create_meta_box() {
 }
 
 function save_postdata( $post_id ) {
-	global $post, $post_custom_fields, $runner_log_gears;
+	global $post, $post_custom_fields, $runner_log_gears, $runners_log_weather;
+
+	// Add the weather values to the post_custom_fields array
+	$post_custom_fields = array_merge($post_custom_fields,$runners_log_weather); 
 
 	foreach($post_custom_fields as $meta_box) {
 		// Verify

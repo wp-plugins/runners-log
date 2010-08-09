@@ -134,7 +134,7 @@ foreach ($res as $result) {
 }
 
 function post_custom_fields() {
-	global $post, $post_custom_fields, $runner_log_gears, $runners_log_weather;
+	global $post, $post_custom_fields, $runner_log_gears, $runners_log_weather, $weather_temperature, $weather_windchill, $weather_humidity, $weather_description;
 	echo '<ul>';
 	foreach($post_custom_fields as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
@@ -153,7 +153,9 @@ function post_custom_fields() {
 				echo '</li>';
 			}
 	}
+	if($weather_temperature == '1' OR $weather_windchill == '1' OR $weather_humidity == '1' OR $weather_description == '1' ) {
 	echo '<h2 align="center">Weather Stats</h2>';
+	}
 	foreach($runners_log_weather as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
 

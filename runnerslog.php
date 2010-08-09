@@ -1561,9 +1561,5 @@ add_action('admin_menu', 'wp_gear_manager_create_menu');
 	{
 		add_menu_page( 'Gear Manager', 'Gear Manager', 1, 'runners-log-gear', 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
     	add_submenu_page( 'runners-log-gear', 'New Gear', 'Add new gear', 1, 'runners-log-gear&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
-		
-		//add_menu_page('Runners Log', 'Runners Log', 'administrator', 'runners-log', 'runnerslog_admin');
-		//add_submenu_page('runners-log', 'Graphs and Stats', 'Graphs and Stats', 'administrator', 'runners-log-stats-graphs', 'runnerslog_stats_graphs');
-
 	}
 ?>

@@ -412,6 +412,12 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 				<tr id="desc<?php echo $id; ?>" style="display:none">
 					<td></td>
 					<td colspan="5"><i><?php echo $description; ?></i></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 <?php
 			}
@@ -439,46 +445,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 			}
 		</script>
 <?php
-	}	
-
-/* Seems to be deleted
-	function wp_gear_manager_get_sel_date($date=null,$day=null,$month=null,$year=null)
-	{
-		if( empty( $date ) )
-			$date = date( 'Y-m-d' );
-		
-		if( $date != 1 && is_string( $date ) ){
-			$timestamp 	= strtotime( $date );
-			$day 		= date( 'j', $timestamp );
-			$month 		= date( 'n', $timestamp );
-			$year 		= date( 'Y', $timestamp );
-		}
-
-		$dayList 	= '<select name="day"><option value="###">Choose ...</option>';
-		$monthList 	= '<select name="month"><option value="###">Choose ...</option>';
-		$yearList 	= '<input type="text" name="year" value="'.$year.'"/>';
-		
-		for( $i=1; $i<32; $i++ ){
-			if( $i == $day ){
-				$dayList .= "<option value='$i' selected>$i</option>";
-			}else{
-				$dayList .= "<option value='$i'>$i</option>";
-			}
-		}
-		$dayList .='</select>';
-		
-		for( $i=1; $i<13; $i++ ){
-			if( $i == $month ){
-				$monthList .= "<option value='$i' selected>$i</option>";
-			}else{
-				$monthList .= "<option value='$i'>$i</option>";
-			}
-		}
-		$monthList .= '</select>';
-		
-		return "Day:&nbsp;$dayList&nbsp;Month:&nbsp;$monthList&nbsp;Year:&nbsp;$yearList";
 	}
-*/
 	
 	function wp_gear_manager_display_action( $id, $isdone, $view){
 		global $gear_plugIn_base_url;

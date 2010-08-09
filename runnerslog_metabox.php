@@ -82,7 +82,7 @@ array(
 		"name" => "_rl_garminconnectlink",
 		"std" => "",
 		"title" => "Garmin Link:",
-		"description" => "Format like: http://connect.garmin.com/activity/37503629",
+		"description" => "http://connect.garmin.com/activity/3789",
 		"show" => "$garminconnect"
 	)
 );
@@ -108,13 +108,13 @@ array (
 		"name" => "_rl_weather_humidity",
 		"std" => runnerslog_retrieveWeather($woeid,$unit,'humidity'),
 		"title" => "Humidity:",
-		"description" => "THumidity in full digits (percent)",
+		"description" => "Humidity in full digits (percent)",
 		"show" => "$weather_humidity"
 	),
 	"_rl_weather_description" => array(
 		"name" => "_rl_weather_description",
 		"std" => runnerslog_retrieveWeather($woeid,$unit,'description'),
-		"title" => "Weather Description:",
+		"title" => "Description:",
 		"description" => "Textual description of the weather",
 		"show" => "$weather_description"
 	)
@@ -136,7 +136,6 @@ foreach ($res as $result) {
 function post_custom_fields() {
 	global $post, $post_custom_fields, $runner_log_gears, $runners_log_weather;
 	echo '<ul>';
-	echo '<h2 align="center">Running Stats</h2>';
 	foreach($post_custom_fields as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
 

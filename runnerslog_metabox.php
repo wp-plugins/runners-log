@@ -12,6 +12,8 @@ $weather_humidity = get_option('runnerslog_weather_humidity');
 $weather_description = get_option('runnerslog_weather_description');
 $weather_yahoo = get_option('runnerslog_weather_yahoo');
 $woeid = get_option('runnerslog_woeid');
+$show_gearmanager = get_option('runnerslog_show_gearmanager');
+
 if(get_option('runnerslog_unittype') == 'metric'){
 	$unit = 'c';
 } else {
@@ -134,7 +136,7 @@ foreach ($res as $result) {
 }
 
 function post_custom_fields() {
-	global $post, $post_custom_fields, $runner_log_gears, $runners_log_weather, $weather_temperature, $weather_windchill, $weather_humidity, $weather_description;
+	global $post, $post_custom_fields, $runner_log_gears, $runners_log_weather, $weather_temperature, $weather_windchill, $weather_humidity, $weather_description, $show_gearmanager;
 	echo '<ul>';
 	foreach($post_custom_fields as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
@@ -153,8 +155,8 @@ function post_custom_fields() {
 				echo '</li>';
 			}
 	}
-	if($weather_temperature == '1' OR $weather_windchill == '1' OR $weather_humidity == '1' OR $weather_description == '1' ) {
-	echo '<h2 align="center">Weather Stats</h2>';
+	if($weather_temperature == '1' OR $weather_windchill == '1' OR $weather_humidity == '1' OR $weather_description == '1') {
+		echo '<h2 align="center">Weather Stats</h2>';
 	}
 	foreach($runners_log_weather as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
@@ -173,7 +175,9 @@ function post_custom_fields() {
 				echo '</li>';
 			}
 	}
-	echo "<h2 align=\"center\">Gear List Items</h2>";
+	if($show_gearmanager == '1') {
+		echo "<h2 align=\"center\">Gear List Items</h2>";
+	}
 	foreach($runner_log_gears as $meta_box) {
 		$meta_box_value = stripslashes(get_post_meta($post->ID, $meta_box['name'].'_value', true));
 

@@ -14,6 +14,7 @@
 		$age = $_POST['runnerslog_age'];
 		$hrrest = $_POST['runnerslog_hrrest'];
 		$hrmax = $_POST['runnerslog_hrmax'];
+		$show_gearmanager = $_POST['runnerslog_show_gearmanager'];
 		$show_distance = $_POST['runnerslog_show_distance'];
 		$show_time = $_POST['runnerslog_show_time'];
 		$show_speed = $_POST['runnerslog_show_speed'];
@@ -36,6 +37,7 @@
 		update_option('runnerslog_inches', $heightinches);
 		update_option('runnerslog_weight', $weight);
 		update_option('runnerslog_age', $age);
+		update_option('runnerslog_show_gearmanager', $show_gearmanager);
 		update_option('runnerslog_hrrest', $hrrest);
 		update_option('runnerslog_hrmax', $hrmax);
 		update_option('runnerslog_show_distance', $show_distance);
@@ -65,6 +67,7 @@
 		$heightinches = get_option('runnerslog_inches');
 		$weight = get_option('runnerslog_weight');
 		$age = get_option('runnerslog_age');
+		$show_gearmanager = get_option('runnerslog_show_gearmanager');
 		$hrrest = get_option('runnerslog_hrrest');
 		$hrmax = get_option('runnerslog_hrmax');
 		$show_distance = get_option('runnerslog_show_distance');
@@ -227,6 +230,22 @@
 				</th>
 			</tr>
 			
+		</tbody>
+	</table>
+</div>
+<div class="tool-box">
+    <h3 class="title">Options for Gear Manager</h3>
+	<table class="form-table">
+		<tbody>
+			<!-- Show Gear Manager -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_gearmanager">
+				<input name="runnerslog_show_gearmanager" id="runnerslog_show_gearmanager" value="1"<?php checked('1', get_option('runnerslog_show_gearmanager')); ?> type="checkbox">
+				<?php _e('Enable Gear Manager') ?></label>
+				<span class="description"><?php _e('Your must reload the page eg. press F5 after changing this setting') ?></span>
+				</th>
+			</tr>
 		</tbody>
 	</table>
 </div>

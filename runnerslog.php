@@ -118,6 +118,7 @@ if (version_compare($wp_version,"2.7","<")) {
 
 include('runnerslog_tag.php');
 include('runnerslog_gear.php');
+
 /* Get the plugin-base-url for use of the gear-list */
 $gear_plugIn_base_url='http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page=runners-log-gear';
 
@@ -1557,9 +1558,12 @@ register_activation_hook( __FILE__, 'runnerslog_activate' );
 //Create the gear-list menu-box
 add_action('admin_menu', 'wp_gear_manager_create_menu');
 
-	function wp_gear_manager_create_menu()
-	{
-		add_menu_page( 'Gear Manager', 'Gear Manager', 1, 'runners-log-gear', 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
-    	add_submenu_page( 'runners-log-gear', 'New Gear', 'Add new gear', 1, 'runners-log-gear&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
+	function wp_gear_manager_create_menu() {
+		$show_gearmanager = get_option('runnerslog_show_gearmanager');
+
+		if($show_gearmanager == '1'){
+			add_menu_page( 'Gear Manager', 'Gear Manager', 1, 'runners-log-gear', 'wp_gear_manager_page_dispatcher', IMG_DIRECTORY.'ico16.png');
+			add_submenu_page( 'runners-log-gear', 'New Gear', 'Add new gear', 1, 'runners-log-gear&amp;gear=new', 'wp_gear_manager_page_dispatcher' );
+		}
 	}
 ?>

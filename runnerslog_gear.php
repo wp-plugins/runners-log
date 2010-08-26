@@ -207,7 +207,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 								<br />Enter an URL or upload an image for the banner.
 								</label>
 							</td>
-						</tr>
+					</tr>
 				</table>
 				<br/>
 <?php 

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Runners Log
 Plugin URI: http://wordpress.org/extend/plugins/runners-log/
-Description: This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics and a variety of running related calculators. See screenshots.
+Description: This plugin let you convert your blog into a training log and let you track your distance, time, calories and let you have advance statistics and a variety of running related calculators. See screenshots.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
@@ -153,6 +153,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
 }
+
 //Add a new table in the DB for the gear manager
 	function wp_gear_manager_install()
 	{
@@ -171,10 +172,10 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			`gear_image` VARCHAR( 255 ) NOT NULL 
 			) ENGINE = MYISAM";
 	    $wpdb->query( $structure );
-	    update_option( OPTION_DATE_FORMAT, 'd/m/Y' ); //Standart date format for the use of the gear-manager
+	    update_option( OPTION_DATE_FORMAT, 'd/m/Y' ); //Standart date format for the use of the gear manager
 	}
 
-// Add settings option
+// Add a settings option in wp-admin/plugins.php
 	function rl_filter_plugin_actions($links) 
 	{
 		$new_links = array();
@@ -183,7 +184,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 	}
 	add_action('plugin_action_links_' . plugin_basename(__FILE__), 'rl_filter_plugin_actions');
 
-// Add FAQ and support information and a little more
+// Add FAQ and support information and a little more in wp-admin/plugins.php
 	function rl_filter_plugin_links($links, $file)
 	{
 		if ( $file == plugin_basename(__FILE__) )
@@ -197,9 +198,9 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 	add_filter('plugin_row_meta', 'rl_filter_plugin_links', 10, 2);
 
 /* Let us create the functions */
+    //[runners_log_basic]
 	function runners_log_basic() 
 	{
-		
 		global $wpdb, $post; 
 		$hms = get_post_meta($post->ID, "_rl_time_value", $single = true); // Get the running time
 		$distance = get_post_meta($post->ID, "_rl_distance_value", $single = true); // Get the distance
@@ -403,7 +404,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			echo "</li>";
 		}
 	}
-	if ($show_calories == '1') // Caloríes
+	if ($show_calories == '1') // Calorï¿½es
 	{	
 		if ($calories) 
 		{
@@ -499,9 +500,9 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 add_shortcode('runners_log_basic', 'runners_log_basic');
 
 /* Show weather information */
+    //[runners_log_weather]
 	function runners_log_weather() 
 	{
-		
 		global $wpdb, $post;
 		
 		// Retrieve the weather settings
@@ -550,8 +551,62 @@ add_shortcode('runners_log_basic', 'runners_log_basic');
 } // End function runners_log_weather()
 add_shortcode('runners_log_weather', 'runners_log_weather');
 
+    //[runners_log_weather_footer]
+	function runners_log_weather_footer() 
+	{
+		global $wpdb, $post;
+		
+		// Retrieve the weather settings
+		$show_weather_temperature = get_option('runnerslog_weather_temperature'); // get temperature
+		$show_weather_windchill = get_option('runnerslog_weather_windchill'); // get windchill
+		$show_weather_humidity = get_option('runnerslog_weather_humidity'); // get humidity
+		$show_weather_description = get_option('runnerslog_weather_description'); //get textual weather description
+	
+	
+	echo "<div style='color:#999999;margin-bottom:5px;font-size:10px;'>"; //use div-style for css formation
+    echo "<p style='margin-bottom: 2px;'>-- Weather on Post Time --";
+    echo "<ul style='display:inline;'>";
 
-function runners_log_graph() {
+	//check every option whether its selected and show it if it's selected and a value is available
+	if (get_option('runnerslog_weather_temperature') == '1')
+	{
+		$temperature = get_post_meta($post->ID, "_rl_weather_temperature_value", $single = true);
+		if ( $temperature > '0' ) //should avoid displaying if not set for this post 
+		{
+				echo "<li style='padding:0px 3px;display:inline;'>Temperature : $temperature</li>";
+			}
+	}
+	if (get_option('runnerslog_weather_humidity') == '1')
+	{
+		$humidity = get_post_meta($post->ID, "_rl_weather_humidity_value", $single = true);
+		if ( $humidity > '0' ) //should avoid displaying if not set for this post 
+		{
+				echo "<li style='padding:0px 3px;display:inline;'>Humidity : $humidity</li>";
+			}
+	}
+	if (get_option('runnerslog_weather_windchill') == '1')
+	{
+		$windchill = get_post_meta($post->ID, "_rl_weather_windchill_value", $single = true);
+		if ( $windchill > '0' ) //should avoid displaying if not set for this post 
+		{
+				echo "<li style='padding:0px 3px;display:inline;'>Windchill : $windchill</li>";
+			}
+	}
+	if (get_option('runnerslog_weather_description') == '1')
+	{
+		$description = get_post_meta($post->ID, "_rl_weather_description_value", $single = true);
+		if ( strlen($description) > 0 ) //should avoid displaying if not set for this post 
+		{
+				echo "<li style='padding:0px 3px;display:inline;'>Description : $description</li>";
+			}
+	}
+	echo "</ul>";
+    echo "</p></div>";
+} // End function runners_log_weather()
+add_shortcode('runners_log_weather_footer', 'runners_log_weather_footer');
+
+  //[runners_log_graph]
+  function runners_log_graph() {
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class'); 	// Let us include the classes for the graph tool
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pChart.class');	// Graph script by:  http://pchart.sourceforge.net/
  
@@ -707,7 +762,8 @@ function runners_log_graph() {
 }
 add_shortcode('runners_log_graph', 'runners_log_graph');
 
-function runners_log_graphmini_distance() {
+  //[runners_log_graphmini_distance]
+  function runners_log_graphmini_distance() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -773,7 +829,8 @@ function runners_log_graphmini_distance() {
 }
 add_shortcode('runners_log_graphmini_distance', 'runners_log_graphmini_distance');
 
-function runners_log_graphmini_hours() {
+  //[runners_log_graphmini_hours]
+  function runners_log_graphmini_hours() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -832,7 +889,8 @@ function runners_log_graphmini_hours() {
 }
 add_shortcode('runners_log_graphmini_hours', 'runners_log_graphmini_hours');
 
-function runners_log_graphmini_calories() {
+  //runners_log_graphmini_calories
+  function runners_log_graphmini_calories() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -890,7 +948,8 @@ function runners_log_graphmini_calories() {
 }
 add_shortcode('runners_log_graphmini_calories', 'runners_log_graphmini_calories');
 
-function runners_log_pie_distance() {
+  //[runners_log_pie_distance]
+  function runners_log_pie_distance() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -989,7 +1048,8 @@ function runners_log_pie_distance() {
 }
 add_shortcode('runners_log_pie_distance', 'runners_log_pie_distance');
 
-function runners_log_pie_hours() {
+  //[runners_log_pie_hours]
+  function runners_log_pie_hours() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -1073,7 +1133,8 @@ function runners_log_pie_hours() {
 }
 add_shortcode('runners_log_pie_hours', 'runners_log_pie_hours');
 
-function runners_log_pie_calories() {
+  //[runners_log_pie_calories]
+  function runners_log_pie_calories() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -1152,12 +1213,12 @@ function runners_log_pie_calories() {
 	//Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-calories.png', __FILE__ ) . '" alt="Training Graph Pie Calories" />';
 
- 
  //End function runners_log_pie_calories()
 }
 add_shortcode('runners_log_pie_calories', 'runners_log_pie_calories');
 
-function runners_log_bar_distance() {
+  //[runners_log_bar_distance]
+  function runners_log_bar_distance() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -1261,7 +1322,8 @@ function runners_log_bar_distance() {
 }
 add_shortcode('runners_log_bar_distance', 'runners_log_bar_distance');
 
-function runners_log_bar_hours() {
+  //[runners_log_bar_hours]
+  function runners_log_bar_hours() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -1352,7 +1414,8 @@ function runners_log_bar_hours() {
 }
 add_shortcode('runners_log_bar_hours', 'runners_log_bar_hours');
 
-function runners_log_bar_calories() {
+  //[runners_log_bar_calories]
+  function runners_log_bar_calories() {
 	// Let us include the classes for the graph tool
 	// Graph script by:  http://pchart.sourceforge.net/
 	include_once(ABSPATH.PLUGINDIR.'/runners-log/pChart/pData.class');
@@ -1442,7 +1505,8 @@ function runners_log_bar_calories() {
 }
 add_shortcode('runners_log_bar_calories', 'runners_log_bar_calories');
 
-function runners_log_garminmap() {
+  //[runners_log_garminmap]
+  function runners_log_garminmap() {
 	// Make $wpdb and $post global
 	global $wpdb, $post;
 	
@@ -1469,6 +1533,7 @@ function hms2sec ($hms)	{
 		return $seconds;
 	}
 
+/*  Some admin stuff  */
 	// Post Write Panel (Meta box)
 	include('runnerslog_metabox.php');
 
@@ -1553,7 +1618,6 @@ register_activation_hook( __FILE__, 'runnerslog_activate' );
 		update_option('runnerslog_show_distance_sum', '1');
 		update_option('runnerslog_show_garminmap', '1');
 	}
-
 	
 //Create the gear-list menu-box
 add_action('admin_menu', 'wp_gear_manager_create_menu');

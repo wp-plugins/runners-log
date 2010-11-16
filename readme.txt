@@ -3,21 +3,19 @@ Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.0.0
-Stable tag: 1.8.5
+Tested up to: 3.0.1
+Stable tag: 2.0.0
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and a variety of running related calculators. See screenshots.
 
 == Description ==
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
-You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02maxulator Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
+You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
-In "Settings" >> "Runners Log" you can specify the fields you like to use.
+We support a embed Garmin Connnect Map TheRealEyeless we now have weather support. And with this release we have started adding a Gear Manager this way you can track the use of your equipment.
 
-Now we support a embed Garmin Connnect Map and we have a Gear Manager
-
-Now you can add graphs per month using eg: [runners_log year="2010" month="May" type="pie"] see FAQ for howto use it.
+You can add graphs per month using eg: [runners_log year="2010" month="May" type="pie"] see FAQ for howto use it.
 
 == Installation ==
 This section describes how to install the plugin and get it working.
@@ -50,6 +48,8 @@ This section describes how to install the plugin and get it working.
 	* `[runners_log_bar_hours]`
 	* `[runners_log_bar_calories]`
 	* `[runners_log_garminmap]`
+	* `[runners_log_weather]`
+	* `[runners_log_weather_footer]`
 6. Runners Log let you use the following tags in your template:
 	* `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>`
 	* `<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>`
@@ -63,6 +63,8 @@ This section describes how to install the plugin and get it working.
 	* `<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>`
 	* `<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
 	* `<?php if (function_exists(runners_log_garminmap)) echo runners_log_bar_garminmap(); ?>`
+	* `<?php if (function_exists(runners_log_weather)) echo runners_log_bar_weather(); ?>`
+	* `<?php if (function_exists(runners_log_weather_footer)) echo runners_log_bar_weather_footer(); ?>`
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 
 == Frequently Asked Questions ==
@@ -81,22 +83,54 @@ This section describes how to install the plugin and get it working.
 	[runners_log_bar_hours]
 	[runners_log_bar_calories]
 	[runners_log_garminmap]
+    [runners_log_weather]
+    [runners_log_weather_footer]
 	
 = Howto use [runners_log] =
 This tag support: year, month, type.
-Year could be set to 2010 or 2009 or what you want
 
-Month could be "february", "FeBRUary" or just "feb". You need to specify at least the first 3 chars of the month name.
+Year: could be set to 2010 or 2009 or what you want
 
-Type could be: bar, graph, pie, mini
+Month: could be "february", "FeBRUary" or just "feb". You need to specify at least the first 3 chars of the month name.
+
+Type: could be bar, graph, pie or mini
 
 By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
+
 Other exambles of using this tag could be:
 `[runners_log type="pie" month="marts" year="2009"]`
 Gives you a Pie chart of your tracked distances in Marts in 2009
 or
 `[runners_log type="mini"]`
 Gives you a mini-graph with distances for the whole 2010
+
+= Howto use [runners_log_basic] =
+To have the basic information about your posted course like:
+    * Meters: 8500
+    * Time: 00:49:59
+    * Km/hour: 10.2
+    * Min/km: 05:52 minutes
+    * Puls average: 172 bpmis 86% of Max HR and 80% of HRR
+    * Calories: 654 C
+    * Garmin Connect Link: http://connect.garmin.com/activity/id
+    * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
+    * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
+	* ~embed garmin connect map~
+
+Use this short code `[runners_log_basic]` in a post or page. 
+
+Alternativly place `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your template.
+
+= Howto use [runners_log_weather] =
+If you have enabled weather support the weather is stored while you add your post. To paste in the weather use  `[runners_log_weather]` to have something like:
+    * Temperature : 3
+    * Humidity : 100
+    * Windchill : 3
+    * Description : Mostly Cloudy
+    
+Alternativly place `<?php if (function_exists(runners_log_weather)) echo runners_log_weather(); ?>` in your template.
+
+To have your weather data in the footer of the page or post use: `[runners_log_weather_footer]`.
 
 = I only want my graphs to show up in a special category =
 If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
@@ -143,7 +177,13 @@ If you have a very visited blog and using this plugin it could cause high server
 If that's a problem either uninstall this plugin, help making it work with cache :D or wait for a later release.
 
 = Gear Manager =
-I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the gear manager is based on.
+I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the Gear Manager is based on.
+
+Plugin URI: http://thomas.lepetitmonde.net/en/index.php/projects/wordpress-task-manager
+Description: Integrate in Wordpress, a small task manager system. The plugin is very young, so you should be kind with him.
+Author: Thomas Genin
+Author URI: http://thomas.lepetitmonde.net/
+Version: 1.2
 
 == Screenshots ==
 1. show the Runners Log box
@@ -166,6 +206,9 @@ I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the gea
 18. Predicted effect of change in weight
 19. Converter Toolbox
 20. Embed Garmin Connect Map in [runners_log_basic] and/or an example of using [runners_log_garminmap]
+21. Weather Settings
+22. Gear Manager
+23. Add new Gear to the Gear Manager
 
 == Changelog ==
 
@@ -283,6 +326,9 @@ I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the gea
 
 = 2.0.0 =
 * FL - Added a Gear List Manager Based on Thomas Genin WP-Task-Manager v.1.2.
+* TRE - Weather support
+* TRE - [runners_log_weather] Using the meta-style like [runners_log_basic]
+* FL - [runners_log_weather_footer] - to put the weather data in the footer of the post or page. Thanks to Weather Postin' Plugin By bigdawggi
 
 == Upgrade Notice ==
 
@@ -323,11 +369,12 @@ June 30th 2010
 July 20th 2010
 
 = 2.0.0 =
-
+November 16th 2010
 
 == To Do ==
 	* enable cache
 	* more graphs (pulse avg?)
-	* gear list
-	* weather support
+	* gear list (started)
+	* weather support (done)
 	* multi language support
+    * multi user support

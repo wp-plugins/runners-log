@@ -287,6 +287,7 @@ define('OPTION_DATE_FORMAT'			,'gear_manager_date_format');
 ?>
 		<div class="wrap">
 		<h2>Runners Log - Gear List</h2>
+        <h2><span style="color: rgb(255, 0, 0);"><span style="background-color: rgb(255, 255, 0);">ALART</span></span><span style="background-color: rgb(255, 255, 0);">: </span><span style="color: rgb(0, 128, 0);"><span style="background-color: rgb(255, 255, 0);">The Gear Manager is still a beta version. Data might be deleted in a comming release!</span></span></h2>
 		<div><?php $msg; ?></div>
 		<div>
 			View:&nbsp;

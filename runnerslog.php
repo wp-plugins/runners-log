@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
-Version: 1.8.5
+Version: 2.0.0
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 

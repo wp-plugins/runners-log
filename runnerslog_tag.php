@@ -1,11 +1,11 @@
 <?php
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-// Eg: [runners_log year="2010" month="May" type="pie"] 											//
-// Year: 2009, 2010																					//
-// Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec							//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Eg: [runners_log year="2010" month="May" type="pie"] 		                //
+// Year: 2009, 2010																					    //
+// Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec	//
 // Type: graph, bar, pie, mini																		//
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Let us start the function and set the default values, if not set in the [runners_log]-tag
 function runners_log_func($atts) {
@@ -26,8 +26,8 @@ function runners_log_func($atts) {
 	// Let us get the distancetype for further calculations
 	$distancetype = get_option('runnerslog_distancetype');
 	
-//If [runners_log type="bar"] or just the default	
-if ($type == 'bar') {
+/* If [runners_log type="bar"] or just the default */
+ if ($type == 'bar') {
 
 	//Convert the month it even if it is mispelled. 
 	//First rip the month value to 3 chars and then set all the chars to lower letters. This way ppl can write FeBruarY and it still works
@@ -153,10 +153,10 @@ if ($type == 'bar') {
  
 	//Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-distance'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph" />';
-}
+ }
 
-//If [runners_log type="graph"]
-if ($type == 'graph') {
+/* If [runners_log type="graph"] */
+ if ($type == 'graph') {
 
 	//Convert the month it even if it is mispelled. 
 	//First rip the month value to 3 chars and then set all the chars to lower letters. This way ppl can write FeBruarY and it still works
@@ -290,10 +290,10 @@ if ($type == 'graph') {
  
 	// Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph Distance" />';
-}
+ }
 
-//If [runners_log type="pie"]
-if ($type == 'pie') {
+/* If [runners_log type="pie"] */
+ if ($type == 'pie') {
 
 	//Convert the month it even if it is mispelled. 
 	//First rip the month value to 3 chars and then set all the chars to lower letters. This way ppl can write FeBruarY and it still works
@@ -414,10 +414,10 @@ if ($type == 'pie') {
  
 	// Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance_pie'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph Distance Pie" />';
-}
+ }
 
-//If [runners_log type="mini"]
-if ($type == 'mini') {
+/* If [runners_log type="mini"] */
+ if ($type == 'mini') {
 
 	//Convert the month it even if it is mispelled. 
 	//First rip the month value to 3 chars and then set all the chars to lower letters. This way ppl can write FeBruarY and it still works
@@ -504,10 +504,8 @@ if ($type == 'mini') {
  
 	// Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance_mini'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph Distance Mini" />';
-}
-
-//Here we end the function
-}
+ }
+} // Here we end the function "runners_log_func"
 add_shortcode('runners_log', 'runners_log_func');
 
 /* 
@@ -525,8 +523,8 @@ ORDER BY `wp_posts`.`post_date` DESC
 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-// Eg: [runners_log_gear id="2"] 																	//
-// Id: You find the id in the gear manager list														//																	//
+// Eg: [runners_log_gear id="2"] 													//
+// Id: You find the id in the gear manager list							    //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function runners_log_gear_func($atts) {
 	extract(shortcode_atts(array(
@@ -564,9 +562,7 @@ function runners_log_gear_func($atts) {
 	*/
 	
 	print_r($res);
-	
-//Here we end the function
-}
+} //Here we end the function "runners_log_gear_func"
 add_shortcode('runners_log_gear', 'runners_log_gear_func');
 
 /* 

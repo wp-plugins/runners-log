@@ -6,91 +6,10 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
-Version: 2.0.0
+Version: 2.0.2
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
-= Use the following short codes =
-	[runners_log]
-	[runners_log_basic]
-	[runners_log_graph]
-	[runners_log_graphmini_distance]
-	[runners_log_graphmini_hours]
-	[runners_log_graphmini_calories]
-	[runners_log_pie_distance]
-	[runners_log_pie_hours]
-	[runners_log_pie_calories]
-	[runners_log_bar_distance]
-	[runners_log_bar_hours]
-	[runners_log_bar_calories]
-
-= Alternative: Use the follow tags in your template =
-	<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
-	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
-	<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
-	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
-	<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
-	<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
-	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
-	<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
-	<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
-	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
-	<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
-	
-= Howto use [runners_log] =
-This tag support: year, month, type.
-Year could be set to 2010 or 2009 or what you want
-
-Month could be "february", "FeBRUary" or just "feb". You need to specify at least the first 3 chars of the month name.
-
-Type could be: bar, graph, pie, mini
-
-By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
-Other exambles of using this tag could be:
-`[runners_log type="pie" month="march" year="2009"]`
-Gives you a Pie chart of your tracked distances in March in 2009
-or
-`[runners_log type="mini"]`
-Gives you a mini-graph with distances for the whole 2010
-
-= Gear Manager =
-I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the gear manager is based on.
-
-= I only want my graphs to show up in a special category =
-If you only want your graphs to show up in the category "training" with the category ID = 6 then use it like this eg in single.php:
-
-	<?php if ( in_category('6') ): ?>
-	<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>
-	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
-	<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
-	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
-	<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
-	<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
-	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
-	<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
-	<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
-	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
-	<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
-	<?php endif; ?>
-	
-= I only want my graphs to show up in a special page =
-If you only want your graphs to show up in the page with the name "Training Stats" then use it like this eg. in page.php:
-BE WARE: <?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?> only works in categories
-
-	<?php if (is_page('Training Stats')) { ?>
-	<?php if (function_exists(runners_log_graph)) echo runners_log_graph(); ?>
-	<?php if (function_exists(runners_log_graphmini_distance)) echo runners_log_graphmini_distance(); ?>
-	<?php if (function_exists(runners_log_graphmini_hours)) echo runners_log_graphmini_hours(); ?>
-	<?php if (function_exists(runners_log_graphmini_calories)) echo runners_log_graphmini_calories(); ?>
-	<?php if (function_exists(runners_log_pie_distance)) echo runners_log_pie_distance(); ?>
-	<?php if (function_exists(runners_log_pie_hours)) echo runners_log_pie_hours(); ?>
-	<?php if (function_exists(runners_log_pie_calories)) echo runners_log_pie_calories(); ?>
-	<?php if (function_exists(runners_log_bar_distance)) echo runners_log_bar_distance(); ?>
-	<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>
-	<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>
-	<?php } ?>
-	
-*/
 /*  
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

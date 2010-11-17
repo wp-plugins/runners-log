@@ -13,9 +13,11 @@ This plugin let you convert your blog into a training log and let you track your
 
 You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
-We support a embed Garmin Connnect Map TheRealEyeless we now have weather support. And with this release we have started adding a Gear Manager this way you can track the use of your equipment.
+We support a embed Garmin Connnect Map.
 
-You can add graphs per month using eg: [runners_log year="2010" month="May" type="pie"] see FAQ for howto use it.
+Thanks to TheRealEyeless we now have weather support. And with this release we have started adding a Gear Manager this way you can track the use of your equipment.
+
+You can add graphs per month using eg: `[runners_log year='2010' month='May' type='pie']` see FAQ for howto use it.
 
 == Installation ==
 This section describes how to install the plugin and get it working.
@@ -63,8 +65,8 @@ This section describes how to install the plugin and get it working.
 	* `<?php if (function_exists(runners_log_bar_hours)) echo runners_log_bar_hours(); ?>`
 	* `<?php if (function_exists(runners_log_bar_calories)) echo runners_log_bar_calories(); ?>`
 	* `<?php if (function_exists(runners_log_garminmap)) echo runners_log_bar_garminmap(); ?>`
-	* `<?php if (function_exists(runners_log_weather)) echo runners_log_bar_weather(); ?>`
-	* `<?php if (function_exists(runners_log_weather_footer)) echo runners_log_bar_weather_footer(); ?>`
+	* `<?php if (function_exists(runners_log_weather)) echo runners_log_weather(); ?>`
+	* `<?php if (function_exists(runners_log_weather_footer)) echo runners_log_weather_footer(); ?>`
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 
 == Frequently Asked Questions ==
@@ -97,16 +99,12 @@ Type: could be bar, graph, pie or mini
 
 By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
 
-Other exambles of using this tag could be:
-`[runners_log type="pie" month="marts" year="2009"]`
-Gives you a Pie chart of your tracked distances in Marts in 2009
-or
-`[runners_log type="mini"]`
-Gives you a mini-graph with distances for the whole 2010
+Other exambles of using this tag could be: `[runners_log type='pie' month='marts' year='2009']` gives you a Pie chart of your tracked distances in Marts in 2009
+or `[runners_log type='mini']`gives you a mini-graph with distances for the whole 2010
 
 = Howto use [runners_log_basic] =
 To have the basic information about your posted course like:
-    * Meters: 8500
+    `* Meters: 8500
     * Time: 00:49:59
     * Km/hour: 10.2
     * Min/km: 05:52 minutes
@@ -115,7 +113,7 @@ To have the basic information about your posted course like:
     * Garmin Connect Link: http://connect.garmin.com/activity/id
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
     * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
-	* ~embed garmin connect map~
+	* ~embed garmin connect map~`
 
 Use this short code `[runners_log_basic]` in a post or page. 
 
@@ -123,10 +121,10 @@ Alternativly place `<?php if (function_exists(runners_log_basic)) echo runners_l
 
 = Howto use [runners_log_weather] =
 If you have enabled weather support the weather is stored while you add your post. To paste in the weather use  `[runners_log_weather]` to have something like:
-    * Temperature : 3
+    `* Temperature : 3
     * Humidity : 100
     * Windchill : 3
-    * Description : Mostly Cloudy
+    * Description : Mostly Cloudy`
     
 Alternativly place `<?php if (function_exists(runners_log_weather)) echo runners_log_weather(); ?>` in your template.
 
@@ -324,11 +322,13 @@ Version: 1.2
 * FL - Fixing minor bug in the bar-charts in runnerslog.php
 * FL - By request by TheRealEyeless http://wordpress.org/support/topic/347464/page/2?replies=47 added a whole new tag [runners_log year="2010" month="May" type="pie"]. See FAQ for howto use it.
 
-= 2.0.0 =
+= 2.0.2 =
 * FL - Added a Gear List Manager Based on Thomas Genin WP-Task-Manager v.1.2.
 * TRE - Weather support
 * TRE - [runners_log_weather] Using the meta-style like [runners_log_basic]
 * FL - [runners_log_weather_footer] - to put the weather data in the footer of the post or page. Thanks to Weather Postin' Plugin By bigdawggi
+
+= 2.1.0 =
 
 == Upgrade Notice ==
 
@@ -368,8 +368,10 @@ June 30th 2010
 = 1.8.5 =
 July 20th 2010
 
-= 2.0.0 =
+= 2.0.2 =
 November 16th 2010
+
+= 2.1.0 =
 
 == To Do ==
 	* enable cache

@@ -3,8 +3,8 @@ Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.0.1
-Stable tag: 2.0.2
+Tested up to: 3.0.4
+Stable tag: 2.0.5
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and a variety of running related calculators. See screenshots.
 
@@ -12,8 +12,6 @@ This plugin let you convert your blog into a training log and let you track your
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
 You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
-
-We support a embed Garmin Connnect Map.
 
 Thanks to TheRealEyeless we now have weather support. And with this release we have started adding a Gear Manager this way you can track the use of your equipment.
 
@@ -328,7 +326,8 @@ Version: 1.2
 * TRE - [runners_log_weather] Using the meta-style like [runners_log_basic]
 * FL - [runners_log_weather_footer] - to put the weather data in the footer of the post or page. Thanks to Weather Postin' Plugin By bigdawggi
 
-= 2.1.0 =
+= 2.0.5 =
+* FL - Added 2011 support
 
 == Upgrade Notice ==
 
@@ -371,7 +370,8 @@ July 20th 2010
 = 2.0.2 =
 November 16th 2010
 
-= 2.1.0 =
+= 2.0.5 =
+January 8th 2011
 
 == To Do ==
 	* enable cache

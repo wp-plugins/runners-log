@@ -24,6 +24,7 @@
 		$show_garminconnect = $_POST['runnerslog_show_garminconnect'];
 		$show_distance2009 = $_POST['runnerslog_show_distance2009'];
 		$show_distance2010 = $_POST['runnerslog_show_distance2010'];
+		$show_distance2011 = $_POST['runnerslog_show_distance2011'];
 		$show_distance_sum = $_POST['runnerslog_show_distance_sum'];
 		$show_garminmap = $_POST['runnerslog_show_garminmap'];
 		update_option('runnerslog_distancetype', $distancetype);
@@ -49,6 +50,7 @@
 		update_option('runnerslog_show_garminconnect', $show_garminconnect);
 		update_option('runnerslog_show_distance2009', $show_distance2009);
 		update_option('runnerslog_show_distance2010', $show_distance2010);
+		update_option('runnerslog_show_distance2011', $show_distance2011);
 		update_option('runnerslog_show_distance_sum', $show_distance_sum);
 		update_option('runnerslog_show_garminmap', $show_garminmap);
 		?>
@@ -79,6 +81,7 @@
 		$show_garminconnect = get_option('runnerslog_show_garminconnect');
 		$show_distance2009 = get_option('runnerslog_show_distance2009');
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
+		$show_distance2011 = get_option('runnerslog_show_distance2011');
 		$show_distance_sum = get_option('runnerslog_show_distance_sum');
 		$show_garminmap = get_option('runnerslog_show_garminmap');
 	}
@@ -331,6 +334,15 @@
 				<label for="runnerslog_show_distance2010">
 				<input name="runnerslog_show_distance2010" id="runnerslog_show_distance2010" value="1"<?php checked('1', get_option('runnerslog_show_distance2010')); ?> type="checkbox">
 				<?php _e('Show Distance in 2010') ?></label>
+				</th>
+			</tr>
+            
+			<!-- Show distance 2011: runnerslog_show_distance2011 -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_distance2011">
+				<input name="runnerslog_show_distance2011" id="runnerslog_show_distance2011" value="1"<?php checked('1', get_option('runnerslog_show_distance2011')); ?> type="checkbox">
+				<?php _e('Show Distance in 2011') ?></label>
 				</th>
 			</tr>
 

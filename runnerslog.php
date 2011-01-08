@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
-Version: 2.0.2
+Version: 2.0.5
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -137,6 +137,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		$show_garminconnect = get_option('runnerslog_show_garminconnect');
 		$show_distance2009 = get_option('runnerslog_show_distance2009');
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
+		$show_distance2011 = get_option('runnerslog_show_distance2011');
 		$show_distance_sum = get_option('runnerslog_show_distance_sum');
 		$show_garminmap = get_option('runnerslog_show_garminmap');
 	
@@ -231,6 +232,32 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			$avg_km_per_run_2010 = ROUND(($distance_sum_2010/1000) / $number_of_runs_2010, 2);
 			$avg_miles_per_run_2010 = ROUND(($distance_sum_2010) / $number_of_runs_2010, 2);
+		}
+        
+ /* 2 0 1 1 */	
+		// Connect to DB and calculate the sum of distance runned in 2011
+		$distance_sum_2011 = $wpdb->get_var($wpdb->prepare("
+			SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun2011
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2011'"));
+		$km_sum_2011 = round($distance_sum_2011/1000, 1); // Convert distance to km when the user use "meters"
+	
+		//Connect to DB and calculate the number of runs in 2011
+		$number_of_runs_2011 = $wpdb->get_var($wpdb->prepare("
+			SELECT COUNT($wpdb->postmeta.meta_value)
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'	
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2011'"));
+	
+		if ( $distance_sum_2011 ) // Calculate the avg per run in 2011
+		{
+			$avg_km_per_run_2011 = ROUND(($distance_sum_2011/1000) / $number_of_runs_2011, 2);
+			$avg_miles_per_run_2011 = ROUND(($distance_sum_2011) / $number_of_runs_2011, 2);
 		}
 	
  /* S U M  A T  A L L */	
@@ -383,6 +410,29 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			}
 		}
 	}
+	if ($show_distance2011 == '1') // Totals 2011
+	{	
+		if ($distancetype == 'meters') 
+		{
+			if ($number_of_runs_2011 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$km_sum_2011</strong> km based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_km_per_run_2011</strong> km</li>";
+			} 
+			if ($number_of_runs_2011 > '1') 
+			{
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$km_sum_2011</strong> km based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_km_per_run_2011</strong> km</li>";
+			}
+		} else {
+			if ($number_of_runs_2011 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$distance_sum_2011</strong> miles based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_miles_per_run_2011</strong> mi</li>";
+			} 
+			if ($number_of_runs_2011 > '1') 
+			{		
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$distance_sum_2011</strong> miles based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_miles_per_run_2011</strong> mi</li>";
+			}
+		}
+	}
 	if ($show_distance_sum == '1') // Total at all
 	{	
 		if ($distancetype == meters) 
@@ -400,7 +450,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			{
 				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
 			} 
-			if ($number_of_runs_2010 > '1') 
+			if ($number_of_runs_2011 > '1') 
 			{		
 				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
 			}
@@ -1534,6 +1584,7 @@ register_activation_hook( __FILE__, 'runnerslog_activate' );
 		update_option('runnerslog_show_garminconnect', '1');
 		update_option('runnerslog_show_distance2009', '1');
 		update_option('runnerslog_show_distance2010', '1');
+		update_option('runnerslog_show_distance2011', '1');
 		update_option('runnerslog_show_distance_sum', '1');
 		update_option('runnerslog_show_garminmap', '1');
 	}

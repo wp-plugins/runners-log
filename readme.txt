@@ -81,7 +81,7 @@ Height: The height of the chart: Default: 250 pixel
 == Frequently Asked Questions ==
 
 = The supported short codes for using pChart =
-	[runners_log]
+	`[runners_log]
 	[runners_log_basic]
 	[runners_log_graph]
 	[runners_log_graphmini_distance]
@@ -95,7 +95,7 @@ Height: The height of the chart: Default: 250 pixel
 	[runners_log_bar_calories]
 	[runners_log_garminmap]
     [runners_log_weather]
-    [runners_log_weather_footer]
+    [runners_log_weather_footer]`
 
 = Howto use Google Chart =
 Eg: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
@@ -122,6 +122,7 @@ or `[runners_log type='mini']`gives you a mini-graph with distances for the whol
 
 = Howto use [runners_log_basic] =
 To have the basic information about your posted course like:
+
     `* Meters: 8500
     * Time: 00:49:59
     * Km/hour: 10.2

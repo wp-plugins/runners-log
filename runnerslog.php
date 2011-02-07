@@ -36,6 +36,7 @@ if (version_compare($wp_version,"2.7","<")) {
 }
 
 include('runnerslog_tag.php');
+include('runnerslog_gchart.php');
 include('runnerslog_gear.php');
 
 /* Get the plugin-base-url for use of the gear-list */

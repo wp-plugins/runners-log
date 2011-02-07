@@ -6,16 +6,18 @@ Requires at least: 2.7
 Tested up to: 3.0.4
 Stable tag: 2.0.5
 
-This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and a variety of running related calculators. See screenshots.
+This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
 == Description ==
 This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
 
 You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
-Thanks to TheRealEyeless we now have weather support. And with this release we have started adding a Gear Manager this way you can track the use of your equipment.
+Thanks to TheRealEyeless we now have weather support. And we have started adding a Gear Manager (when it works) you can use this to track the use of your equipment.
 
-You can add graphs per month using eg: `[runners_log year='2010' month='May' type='pie']` see FAQ for howto use it.
+You can add graphs using Google Chart or pChart see FAQ for howto use it.
+
+Using Google chart you need using a short code syntax like: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
 
 == Installation ==
 This section describes how to install the plugin and get it working.
@@ -34,7 +36,7 @@ This section describes how to install the plugin and get it working.
     * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
 	* ~embed garmin connect map~
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
-5. Runners Log support the following short codes 
+5. Runners Log support the following short codes using pChart
 	* `[runners_log]`
 	* `[runners_log_basic]`
 	* `[runners_log_graph]`
@@ -66,10 +68,19 @@ This section describes how to install the plugin and get it working.
 	* `<?php if (function_exists(runners_log_weather)) echo runners_log_weather(); ?>`
 	* `<?php if (function_exists(runners_log_weather_footer)) echo runners_log_weather_footer(); ?>`
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
+8. Runners Log support the following short codes using Google Chart
+	* `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
+Type: bar, graph, pie, 3dpie
+Format: d="distance", ds="distance sum", ts="Time sum", h="heart rate" d="distance" c="calories" p="pulse average"
+Year: 2009, 2010, 2011
+Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
+Color: Is the color scheme used eg: "224499" for the html color #224499
+Width: The width of the chart: Default: 475 pixel
+Height: The height of the chart: Default: 250 pixel	
 
 == Frequently Asked Questions ==
 
-= The supported short codes =
+= The supported short codes for using pChart =
 	[runners_log]
 	[runners_log_basic]
 	[runners_log_graph]
@@ -85,14 +96,23 @@ This section describes how to install the plugin and get it working.
 	[runners_log_garminmap]
     [runners_log_weather]
     [runners_log_weather_footer]
+
+= Howto use Google Chart =
+Eg: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
+
+Type: bar, graph, pie, 3dpie
+Format: d="distance", ds="distance sum", ts="Time sum", h="heart rate" d="distance" c="calories" p="pulse average"
+Year: 2009, 2010, 2011
+Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
+Color: Is the color scheme used eg: "224499" for the html color #224499
+Width: The width of the chart: Default: 475 pixel
+Height: The height of the chart: Default: 250 pixel	
 	
 = Howto use [runners_log] =
-This tag support: year, month, type.
+This tag support: 
 
 Year: could be set to 2010 or 2009 or what you want
-
 Month: could be "february", "FeBRUary" or just "feb". You need to specify at least the first 3 chars of the month name.
-
 Type: could be bar, graph, pie or mini
 
 By using `[runners_log]` the default setting is year="2010" type="bar" month="0" (which is the same as all months in the choosen year)
@@ -205,6 +225,11 @@ Version: 1.2
 21. Weather Settings
 22. Gear Manager
 23. Add new Gear to the Gear Manager
+24. Pulsavg for a whole year using Google Chart. (Type: bar)
+25. Pulsavg for a whole year using Google Chart. (Type: graph)
+26. Pulsavg a given month using Google Chart. (Type: 3dpie)
+27. Pulsavg a given month using Google Chart. (Type: pie)
+28. Google Chart
 
 == Changelog ==
 
@@ -322,12 +347,15 @@ Version: 1.2
 
 = 2.0.2 =
 * FL - Added a Gear List Manager Based on Thomas Genin WP-Task-Manager v.1.2.
-* TRE - Weather support
-* TRE - [runners_log_weather] Using the meta-style like [runners_log_basic]
+* TR - Weather support
+* TR - [runners_log_weather] Using the meta-style like [runners_log_basic]
 * FL - [runners_log_weather_footer] - to put the weather data in the footer of the post or page. Thanks to Weather Postin' Plugin By bigdawggi
 
 = 2.0.5 =
 * FL - Added 2011 support
+
+= 2.1.0 =
+* FL - Added Google Chart suppport. See Faq and Screenshots
 
 == Upgrade Notice ==
 
@@ -373,9 +401,12 @@ November 16th 2010
 = 2.0.5 =
 January 8th 2011
 
+= 2.1.0 =
+February 7th 2011
+
 == To Do ==
-	* enable cache
-	* more graphs (pulse avg?)
+	* enable cache (done - not an issue when using google chart)
+	* more graphs (pulse avg?) (done with google chart)
 	* gear list (started)
 	* weather support (done)
 	* multi language support

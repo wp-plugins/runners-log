@@ -1,9 +1,9 @@
-<<<<<<< .mine<?php
+<?php
 /*
 [runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]
 
 Type: bar, graph, pie, 3dpie
-Format: d="distance", ds="distance sum", ts="Time sum", h="heart rate" d="distance" c="calories" p="pulse average"
+Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
 Year: 2009, 2010, 2011
 Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
 Color: Is the color scheme used eg: "224499" for the html color #224499
@@ -39,26 +39,26 @@ $xaxislable	//The x-labels printed from the database
 		**********************************************************************************
 		**				RELATED TO THE GOOGLE API			**
 		**********************************************************************************
-$chf	Gradient Fills http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_gradient_fills
-$chxl	Custom Axis Labels http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_labels
-$chxr	Axis Range http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_range
+$data['chf']	Gradient Fills http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_gradient_fills
+$data['chxl']	Custom Axis Labels http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_labels
+$data['chxr']	Axis Range http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_range
 $chxp	Axis Label Positions http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_label_positions
 $chxs	Axis Label Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_label_styles
 $chxtc 	Axis Tick Mark Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_tick_marks
-$chxt	Visible Axes http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_type
+$data['chxt']	Visible Axes http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_type
 $chbh	Bar Width and Spacing http://code.google.com/intl/da/apis/chart/docs/gallery/bar_charts.html#chbh
-$chs	Chart Size http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chs
-$cht	Chart Type http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_cht
-$chco	Series Colors http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_series_color
-$chds	Text Format with Custom Scaling http://code.google.com/intl/da/apis/chart/docs/data_formats.html#data_scaling
-$chd	Chart Data String http://code.google.com/intl/da/apis/chart/docs/data_formats.html
-$chdl	Chart Legend Text and Style http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_legend
-$chl	Chart Legend Text, when it is a pie
-$chdlp 	Where the legand is placed. Top, right, left etc
-$chg	Grid Lines http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_grid_lines
-$chls	Line Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_line_styles
-$chm	Shape Markers http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_shape_markers
-$chtt	Chart Title http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chart_title
+$data['chs']	Chart Size http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chs
+$data['cht']	Chart Type http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_cht
+$data['chco']	Series Colors http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_series_color
+$data['chds']	Text Format with Custom Scaling http://code.google.com/intl/da/apis/chart/docs/data_formats.html#data_scaling
+$data['chd']	Chart Data String http://code.google.com/intl/da/apis/chart/docs/data_formats.html
+$data['chdl']	Chart Legend Text and Style http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_legend
+$data['chl']	Chart Legend Text, when it is a pie
+$data['chdlp'] 	Where the legand is placed. Top, right, left etc
+$data['chg']	Grid Lines http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_grid_lines
+$data['chls']	Line Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_line_styles
+$data['chm']	Shape Markers http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_shape_markers
+$data['chtt']	Chart Title http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chart_title
 
 		**********************************************************************************
 		**				SETTINGS VARIABLE				**
@@ -182,14 +182,14 @@ http://imagecharteditor.appspot.com/
 			}
 			//Google Chart API Varibles
 			if ($distancetype == 'Meters') {
-				$chdl = 'Km';
+				$data['chdl'] = 'Km';
 			} else {
-				$chdl = 'Miles';
+				$data['chdl'] = 'Miles';
 			}
 			if ($month == '0') {
-				$chtt = 'Distances  in ' .$year. '';
+				$data['chtt'] = 'Distances  in ' .$year. '';
 			} else { 
-				$chtt = 'Distances per day in '. $month2str[$row->Month] .' ' .$year. '';
+				$data['chtt'] = 'Distances per day in '. $month2str[$row->Month] .' ' .$year. '';
 			}
 		break;
 		
@@ -197,6 +197,7 @@ http://imagecharteditor.appspot.com/
 			$dbdata = $wpdb->get_results("
 				SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS Runyearmonth,
 					MONTH( $wpdb->posts.post_date ) AS Runmonth,
+					DATE_FORMAT( $wpdb->posts.post_date, '%y' ) AS Runyear,
 					(SUM( $wpdb->postmeta.meta_value )/1000) AS Runkm,
 					SUM( $wpdb->postmeta.meta_value ) AS Runmiles
 				FROM $wpdb->postmeta
@@ -227,18 +228,18 @@ http://imagecharteditor.appspot.com/
 			}
 			//Google Chart API Varibles
 			if ($distancetype == 'Meters') {
-				$chdl = 'Km';
+				$data['chdl'] = 'Km';
 			} else {
-				$chdl = 'Miles';
+				$data['chdl'] = 'Miles';
 			}
-			$chtt = 'Distances per Month the Previous Year';
+			$data['chtt'] = 'Distances per Month the Previous Year';
 		break;
 
 		case "ts" :	//Time Sum per Month
 			$dbdata = $wpdb->get_results("
 				SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS Runyearmonth, 
 					MONTH( $wpdb->posts.post_date ) AS Runmonth,
-					DATE_FORMAT( wp_posts.post_date, '%y' ) AS Runyear,
+					DATE_FORMAT( $wpdb->posts.post_date, '%y' ) AS Runyear,
 					ROUND((SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) )/3600), 2) AS Runhours,
 					sec_to_time( SUM( time_to_sec( STR_TO_DATE( $wpdb->postmeta.meta_value, '%T' ) ) ) ) AS Runtime
 				FROM $wpdb->postmeta
@@ -261,15 +262,15 @@ http://imagecharteditor.appspot.com/
 				$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
 			}
 			//Google Chart API Varibles
-			$chdl = 'Hours';
-			$chtt = 'Time per Month the Previous Year';
+			$data['chdl'] = 'Hours';
+			$data['chtt'] = 'Time per Month the Previous Year';
 		break;
 		
 		case "cs" : //Calories Sum per Month
 			$dbdata = $wpdb->get_results("
 				SELECT DATE_FORMAT( $wpdb->posts.post_date, '%Y-%m' ) AS Runyearmonth, 
 					MONTH( $wpdb->posts.post_date ) AS Runmonth,
-					DATE_FORMAT( wp_posts.post_date, '%y' ) AS Runyear,
+					DATE_FORMAT( $wpdb->posts.post_date, '%y' ) AS Runyear,
 					SUM( $wpdb->postmeta.meta_value ) AS Runcalories
 				FROM $wpdb->postmeta
 				INNER JOIN $wpdb->posts ON ( $wpdb->postmeta.post_id = $wpdb->posts.id )
@@ -291,8 +292,8 @@ http://imagecharteditor.appspot.com/
 				$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
 			}
 			//Google Chart API Varibles
-			$chdl = 'Cal.';
-			$chtt = 'Calories per Month the Previous Year';
+			$data['chdl'] = 'Cal.';
+			$data['chtt'] = 'Calories per Month the Previous Year';
 		break;
 		
 		case "p" :  //Pulse avg
@@ -347,11 +348,11 @@ http://imagecharteditor.appspot.com/
 				}
 			}
 			//Google Chart API Varibles
-			$chdl = 'Bpm';
+			$data['chdl'] = 'Bpm';
 			if ($month == '0') {
-				$chtt = 'Pulse Average  in ' .$year. '';
+				$data['chtt'] = 'Pulse Average  in ' .$year. '';
 			} else { 
-				$chtt = 'Pulse Average per day in '. $month2str[$row->Month] .' ' .$year. '';
+				$data['chtt'] = 'Pulse Average per day in '. $month2str[$row->Month] .' ' .$year. '';
 			}
 		break;
 		
@@ -366,103 +367,70 @@ http://imagecharteditor.appspot.com/
 		//Chart Parameters: http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_cht
 		//Image Chart Editor: http://imagecharteditor.appspot.com/
 		case "bar" :
-			$chf = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1|c,lg,0,EFEFEF,0,BBBBBB,1';
-			$chxl = '1:|'. join( '|', $xaxislable ) .'';
-			$chxr =	'0,0,'. ($maxvalue + 1) .'';
-			$chxp = '';
-			$chxs = '';
-			$chxtc = '';
-			$chxt = 'y,x';
+			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1|c,lg,0,EFEFEF,0,BBBBBB,1';
+			$data['chxl'] = '1:|'. join( '|', $xaxislable ) .'';
+			$data['chxr'] =	'0,0,'. ($maxvalue + 1) .'';
+			$data['chxt'] = 'y,x';
 			$chbh = 'a,2,0';
-			$chs = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
-			$cht = 'bvs';	//http://code.google.com/intl/da/apis/chart/docs/gallery/bar_charts.html#bar_types eg. "bvg"
-			$chco = $color;
-			$chds = '0,'. ($maxvalue + 1) .'';
-			$chd = implode(',',  $monthsList);
-			//$chdl = ''; Chart Legend Tekst moved to format switch do it is Bpm when pulse and eg. km when distances
-			$chdlp = 't';
-			$chg = '14.3,-1,1,1';
-			$chls = '2,4,0';
-			$chm = '';
-			//$chtt = ''; //Title is based on the format therefor the value is in the format switch
+			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
+			$data['cht'] = 'bvs';	//http://code.google.com/intl/da/apis/chart/docs/gallery/bar_charts.html#bar_types eg. "bvg"
+			$data['chco'] = $color;
+			$data['chds'] = '0,'. ($maxvalue + 1) .'';
+			$data['chd'] = 't:'.implode(',',  $monthsList);
+			$data['chdlp'] = 't';
+			$data['chg'] = '14.3,-1,1,1';
+			$data['chls'] = '2,4,0';
 		break;
 
 		case "graph" :
-			$chf = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1|c,lg,0,EFEFEF,0,BBBBBB,1';
-			$chxl = '1:|'. join( '|', $xaxislable ) .'';
-			$chxp = '';
-			$chxr =	'0,'. ($minvalue -1) .','. ($maxvalue + 1) .'';
-			$chxs = '';
-			$chxtc = '';
-			$chxt = 'y,x';
-			$chbh = '';
-			$chs = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
-			$cht = 'lc';	//http://code.google.com/intl/da/apis/chart/docs/gallery/line_charts.html
-			$chco = $color;
-			$chds = ($minvalue -5) .','. ($maxvalue + 1) .'';
-			$chd = implode(',',  $monthsList);
-			//$chdl = ''; Chart Legend Tekst moved to format switch do it is Bpm when pulse and eg. km when distances
-			$chdlp = 't';
-			$chg = '14.3,-1,1,1';
-			$chls = '2,4,0';
-			$chm = 'B,C5D4B5BB,0,0,0';
-			//$chtt = 'Overskrift';
+			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1|c,lg,0,EFEFEF,0,BBBBBB,1';
+			$data['chxl'] = '1:|'. join( '|', $xaxislable ) .'';
+			$data['chxr'] =	'0,'. ($minvalue -1) .','. ($maxvalue + 1) .'';
+			$data['chxt'] = 'y,x';
+			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
+			$data['cht'] = 'lc';	//http://code.google.com/intl/da/apis/chart/docs/gallery/line_charts.html
+			$data['chco'] = $color;
+			$data['chds'] = ($minvalue -5) .','. ($maxvalue + 1) .'';
+			$data['chd'] = 't:'.implode(',',  $monthsList);
+			$data['chdlp'] = 't';
+			$data['chg'] = '14.3,-1,1,1';
+			$data['chls'] = '2,4,0';
+			$data['chm'] = 'B,C5D4B5BB,0,0,0';
 		break;
 		
 		case "pie" :
-			$chf = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1';
-			$chxl = '';
-			$chxp = '';
-			$chxr =	'';
-			$chxs = '';
-			$chxtc = '';
-			$chxt = '';
-			$chbh = '';
-			$chs = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
-			$cht = 'p';	//http://code.google.com/intl/da/apis/chart/docs/gallery/pie_charts.html#chart_types
-			$chco = $color;
-			$chds = '0,'. ($maxvalue + 1) .'';
-			$chd = implode(',',  $monthsList);
-			foreach ($valuepercents as $key=>$val) $valuepercents[$key] = sprintf("%d%%25", $val); //We need to have a percent (%=%25) char after each value
-			$chl = implode("|", $valuepercents); //We need to list the values like 
-			$chdl = join( '|', $xaxislable ); //Date like: 31 dec
-			$chg = '';
-			$chls = '';
-			$chm = '';
-			//$chtt = 'Overskrift';
+			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1';
+			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
+			$data['cht'] = 'p';	//http://code.google.com/intl/da/apis/chart/docs/gallery/pie_charts.html#chart_types
+			$data['chco'] = $color;
+			$data['chds'] = '0,'. ($maxvalue + 1) .'';
+			$data['chd'] = 't:'.implode(',',  $monthsList);
+			foreach ($valuepercents as $key=>$val) $valuepercents[$key] = sprintf("%d%%", $val); //We need to have a percent (%=%25) char after each value
+			$data['chl'] = implode("|", $valuepercents); //We need to list the values like 
+			$data['chdl'] = join( '|', $xaxislable ); //Date like: 31 dec
 		break;
 		
 		case "3dpie" :
-			$chf = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1';
-			$chxl = '';
-			$chxp = '';
-			$chxr =	'';
-			$chxs = '';
-			$chxtc = '';
-			$chxt = '';
-			$chbh = '';
-			$chs = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
-			$cht = 'p3';	//http://code.google.com/intl/da/apis/chart/docs/gallery/pie_charts.html#chart_types
-			$chco = $color;
-			$chds = '0,'. ($maxvalue + 1) .'';
-			$chd = implode(',',  $monthsList);
-			foreach ($valuepercents as $key=>$val) $valuepercents[$key] = sprintf("%d%%25", $val); //We need to have a percent (%=%25) char after each value
-			$chl = implode("|", $valuepercents); //We need to list the values like 
-			$chdl = join( '|', $xaxislable ); //Date like: 31 dec
-			$chg = '';
-			$chls = '';
-			$chm = '';
-			//$chtt = 'Overskrift';
+			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1';
+			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
+			$data['cht'] = 'p3';	//http://code.google.com/intl/da/apis/chart/docs/gallery/pie_charts.html#chart_types
+			$data['chco'] = $color;
+			$data['chds'] = '0,'. ($maxvalue + 1) .'';
+			$data['chd'] = 't:'.implode(',',  $monthsList);
+			foreach ($valuepercents as $key=>$val) $valuepercents[$key] = sprintf("%d%%", $val); //We need to have a percent (%=%25) char after each value
+			$data['chl'] = implode("|", $valuepercents); //We need to list the values like 
+			$data['chdl'] = join( '|', $xaxislable ); //Date like: 31 dec
 		break;
 
 		default : //same as "bar"
 		break;
    }	
 	
-	$charturl = ($chf ? "&chf=$chf" : "").($chxl ? "&chxl=$chxl" : "").($chxr ? "&chxr=$chxr" : "").($chxp ? "&chxp=$chxp" : "").($chxs ? "&chxs=$chxs" : "").($chxtc ? "&chxtc=$chxtc" : "").($chxt ? "&chxt=$chxt" : "").($chbh ? "&chbh=$chbh" : "").($chs ? "&chs=$chs" : "").($cht ? "&cht=$cht" : "").($chco ? "&chco=$chco" : "").($chds ? "&chds=$chds" : "").($chd ? "&chd=$chd" : "").($chdl ? "&chdl=$chdl" : "").($chl ? "&chl=$chl" : "").($chdlp ? "&chdlp=$chlp" : "").($chg ? "&chg=$chg" : "").($chls ? "&chls=$chls" : "").($chm ? "&chm=$chm" : "").($chtt ? "&chtt=$chtt" : "");
-			
-	return "<img src='http://chart.apis.google.com/chart?".$charturl."' />"
-// Debugging start	
+    $charturl = "http://chart.apis.google.com/chart?" . http_build_query($data);
+    $charturl = htmlspecialchars($charturl);
+                
+	return "<img src='".$charturl."' />"
+/* // Debugging start	
 			.$month."<<-month<br />"
 			.$maxvalue."<<-maxvalue<br />"
 			.$minvalue."<<-minvalue<br />"

@@ -39,26 +39,26 @@ $xaxislable	//The x-labels printed from the database
 		**********************************************************************************
 		**				RELATED TO THE GOOGLE API			**
 		**********************************************************************************
-$data['chf']	Gradient Fills http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_gradient_fills
+$data['chf']	    Gradient Fills http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_gradient_fills
 $data['chxl']	Custom Axis Labels http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_labels
 $data['chxr']	Axis Range http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_range
-$chxp	Axis Label Positions http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_label_positions
-$chxs	Axis Label Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_label_styles
-$chxtc 	Axis Tick Mark Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_tick_marks
+$data['chxp']	Axis Label Positions http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_label_positions
+$data['chxs']	Axis Label Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_label_styles
+$data['chxtc'] 	Axis Tick Mark Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_tick_marks
 $data['chxt']	Visible Axes http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_type
-$chbh	Bar Width and Spacing http://code.google.com/intl/da/apis/chart/docs/gallery/bar_charts.html#chbh
-$data['chs']	Chart Size http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chs
-$data['cht']	Chart Type http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_cht
+$data['chbh']	Bar Width and Spacing http://code.google.com/intl/da/apis/chart/docs/gallery/bar_charts.html#chbh
+$data['chs']	    Chart Size http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chs
+$data['cht']	    Chart Type http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_cht
 $data['chco']	Series Colors http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_series_color
 $data['chds']	Text Format with Custom Scaling http://code.google.com/intl/da/apis/chart/docs/data_formats.html#data_scaling
-$data['chd']	Chart Data String http://code.google.com/intl/da/apis/chart/docs/data_formats.html
+$data['chd']	    Chart Data String http://code.google.com/intl/da/apis/chart/docs/data_formats.html
 $data['chdl']	Chart Legend Text and Style http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_legend
-$data['chl']	Chart Legend Text, when it is a pie
+$data['chl']	    Chart Legend Text, when it is a pie
 $data['chdlp'] 	Where the legand is placed. Top, right, left etc
-$data['chg']	Grid Lines http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_grid_lines
-$data['chls']	Line Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_line_styles
+$data['chg']	    Grid Lines http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_grid_lines
+$data['chls']	    Line Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_line_styles
 $data['chm']	Shape Markers http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_shape_markers
-$data['chtt']	Chart Title http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chart_title
+$data['chtt']	    Chart Title http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chart_title
 
 		**********************************************************************************
 		**				SETTINGS VARIABLE				**
@@ -369,9 +369,12 @@ http://imagecharteditor.appspot.com/
 		case "bar" :
 			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1|c,lg,0,EFEFEF,0,BBBBBB,1';
 			$data['chxl'] = '1:|'. join( '|', $xaxislable ) .'';
-			$data['chxr'] =	'0,0,'. ($maxvalue + 1) .'';
+			$data['chxr'] = '0,0,'. ($maxvalue + 1) .'';
+			$data['chxp'] = '';
+			$data['chxs'] = '';
+			$data['chxtc'] = '';
 			$data['chxt'] = 'y,x';
-			$chbh = 'a,2,0';
+			$data['chbh'] = 'a,2,0';
 			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
 			$data['cht'] = 'bvs';	//http://code.google.com/intl/da/apis/chart/docs/gallery/bar_charts.html#bar_types eg. "bvg"
 			$data['chco'] = $color;
@@ -380,13 +383,18 @@ http://imagecharteditor.appspot.com/
 			$data['chdlp'] = 't';
 			$data['chg'] = '14.3,-1,1,1';
 			$data['chls'] = '2,4,0';
+            $data['chm'] = '';
 		break;
 
 		case "graph" :
 			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1|c,lg,0,EFEFEF,0,BBBBBB,1';
 			$data['chxl'] = '1:|'. join( '|', $xaxislable ) .'';
+			$data['chxp'] = '';
 			$data['chxr'] =	'0,'. ($minvalue -1) .','. ($maxvalue + 1) .'';
+			$data['chxs'] = '';
+			$data['chxtc'] = '';
 			$data['chxt'] = 'y,x';
+			$data['chbh'] = '';
 			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
 			$data['cht'] = 'lc';	//http://code.google.com/intl/da/apis/chart/docs/gallery/line_charts.html
 			$data['chco'] = $color;
@@ -400,6 +408,13 @@ http://imagecharteditor.appspot.com/
 		
 		case "pie" :
 			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1';
+			$data['chxl'] = '';
+			$data['chxp'] = '';
+			$data['chxr'] =	'';
+			$data['chxs'] = '';
+			$data['chxtc'] = '';
+			$data['chxt'] = '';
+			$data['chbh'] = '';
 			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
 			$data['cht'] = 'p';	//http://code.google.com/intl/da/apis/chart/docs/gallery/pie_charts.html#chart_types
 			$data['chco'] = $color;
@@ -408,10 +423,20 @@ http://imagecharteditor.appspot.com/
 			foreach ($valuepercents as $key=>$val) $valuepercents[$key] = sprintf("%d%%", $val); //We need to have a percent (%=%25) char after each value
 			$data['chl'] = implode("|", $valuepercents); //We need to list the values like 
 			$data['chdl'] = join( '|', $xaxislable ); //Date like: 31 dec
+			$data['chg'] = '';
+			$data['chls'] = '';
+			$data['chm'] = '';
 		break;
 		
 		case "3dpie" :
 			$data['chf'] = 'a,s,000000CD|bg,lg,0,EFEFEF,0,BBBBBB,1';
+			$data['chxl'] = '';
+			$data['chxp'] = '';
+			$data['chxr'] =	'';
+			$data['chxs'] = '';
+			$data['chxtc'] = '';
+			$data['chxt'] = '';
+			$data['chbh'] = '';
 			$data['chs'] = '' . esc_attr( $width ) . 'x' . esc_attr( $height ) .'';
 			$data['cht'] = 'p3';	//http://code.google.com/intl/da/apis/chart/docs/gallery/pie_charts.html#chart_types
 			$data['chco'] = $color;
@@ -420,6 +445,9 @@ http://imagecharteditor.appspot.com/
 			foreach ($valuepercents as $key=>$val) $valuepercents[$key] = sprintf("%d%%", $val); //We need to have a percent (%=%25) char after each value
 			$data['chl'] = implode("|", $valuepercents); //We need to list the values like 
 			$data['chdl'] = join( '|', $xaxislable ); //Date like: 31 dec
+			$data['chg'] = '';
+			$data['chls'] = '';
+			$data['chm'] = '';
 		break;
 
 		default : //same as "bar"

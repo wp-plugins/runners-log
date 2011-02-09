@@ -70,13 +70,14 @@ This section describes how to install the plugin and get it working.
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 8. Runners Log support the following short codes when you want to use Google Chart
 	* `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
-Type: bar, graph, pie, 3dpie
-Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
-Year: 2009, 2010, 2011
-Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
-Color: Is the color scheme used eg: "224499" for the html color #224499
-Width: The width of the chart: Default: 475 pixel
-Height: The height of the chart: Default: 250 pixel	
+
+    *Type: bar, graph, pie, 3dpie
+    *Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
+    *Year: 2009, 2010, 2011
+    *Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
+    *Color: Is the color scheme used eg: "224499" for the html color #224499
+    *Width: The width of the chart: Default: 475 pixel
+    *Height: The height of the chart: Default: 250 pixel
 
 == Frequently Asked Questions ==
 
@@ -100,13 +101,13 @@ Height: The height of the chart: Default: 250 pixel
 = Howto use Google Chart =
 Eg: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
 
-Type: bar, graph, pie, 3dpie
-Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
-Year: 2009, 2010, 2011
-Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
-Color: Is the color scheme used eg: "224499" for the html color #224499
-Width: The width of the chart: Default: 475 pixel
-Height: The height of the chart: Default: 250 pixel	
+    *Type: bar, graph, pie, 3dpie
+    *Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
+    *Year: 2009, 2010, 2011
+    *Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
+    *Color: Is the color scheme used eg: "224499" for the html color #224499
+    *Width: The width of the chart: Default: 475 pixel
+    *Height: The height of the chart: Default: 250 pixel
 	
 = Howto use [runners_log] =
 This tag support: 
@@ -140,6 +141,7 @@ Alternativly place `<?php if (function_exists(runners_log_basic)) echo runners_l
 
 = Howto use [runners_log_weather] =
 If you have enabled weather support the weather is stored while you add your post. To paste in the weather use  `[runners_log_weather]` to have something like:
+ 
     `* Temperature : 3
     * Humidity : 100
     * Windchill : 3
@@ -358,6 +360,11 @@ Version: 1.2
 = 2.2 =
 * FL - Added Google Chart suppport. See Faq and Screenshots
 
+= 2.3 =
+*FL - Google Chart: Better color palettes
+*FL - Google Chart: Markers for the type bar
+*to do add cadance field
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -404,6 +411,8 @@ January 8th 2011
 
 = 2.2 =
 February 9th 2011
+
+= 2.3 =
 
 == To Do ==
 	* enable cache (done - not an issue when using google chart)

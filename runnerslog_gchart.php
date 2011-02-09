@@ -86,7 +86,7 @@ http://imagecharteditor.appspot.com/
 		'month' => '',
 		'width' => '470',
 		'height' => '240',
-		'color' => '224499',
+		'color' => '623000|C92200|F78F01|5AB56E|B64245|D98962|F6CB6B|6F8069|E3E3D8|72B0B4|007C8F|14435D|270A2B',
 	), $atts));
 
 	global $wpdb, $distancetype;	
@@ -383,7 +383,7 @@ http://imagecharteditor.appspot.com/
 			$data['chdlp'] = 't';
 			$data['chg'] = '14.3,-1,1,1';
 			$data['chls'] = '2,4,0';
-            $data['chm'] = '';
+            $data['chm'] = 'N,000000,0,-1,11';
 		break;
 
 		case "graph" :

@@ -3,8 +3,8 @@ Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.0.4
-Stable tag: 2.0.5
+Tested up to: 3.0.5
+Stable tag: 2.2
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
@@ -35,7 +35,7 @@ This section describes how to install the plugin and get it working.
     * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
     * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
 	* ~embed garmin connect map~
-4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have graph based statistics. It gives you a chart of your total distance and hours per month.
+4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have a chart of your total distance and hours per month.
 5. Runners Log support the following short codes using pChart
 	* `[runners_log]`
 	* `[runners_log_basic]`
@@ -68,10 +68,10 @@ This section describes how to install the plugin and get it working.
 	* `<?php if (function_exists(runners_log_weather)) echo runners_log_weather(); ?>`
 	* `<?php if (function_exists(runners_log_weather_footer)) echo runners_log_weather_footer(); ?>`
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
-8. Runners Log support the following short codes using Google Chart
+8. Runners Log support the following short codes when you want to use Google Chart
 	* `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
 Type: bar, graph, pie, 3dpie
-Format: d="distance", ds="distance sum", ts="Time sum", h="heart rate" d="distance" c="calories" p="pulse average"
+Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
 Year: 2009, 2010, 2011
 Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
 Color: Is the color scheme used eg: "224499" for the html color #224499
@@ -101,7 +101,7 @@ Height: The height of the chart: Default: 250 pixel
 Eg: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
 
 Type: bar, graph, pie, 3dpie
-Format: d="distance", ds="distance sum", ts="Time sum", h="heart rate" d="distance" c="calories" p="pulse average"
+Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
 Year: 2009, 2010, 2011
 Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
 Color: Is the color scheme used eg: "224499" for the html color #224499
@@ -355,7 +355,7 @@ Version: 1.2
 = 2.0.5 =
 * FL - Added 2011 support
 
-= 2.1.0 =
+= 2.2 =
 * FL - Added Google Chart suppport. See Faq and Screenshots
 
 == Upgrade Notice ==
@@ -402,8 +402,8 @@ November 16th 2010
 = 2.0.5 =
 January 8th 2011
 
-= 2.1.0 =
-February 7th 2011
+= 2.2 =
+February 9th 2011
 
 == To Do ==
 	* enable cache (done - not an issue when using google chart)

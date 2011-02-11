@@ -11,6 +11,13 @@ Width: The width of the chart: Default: 475 pixel
 Height: The height of the chart: Default: 250 pixel	
 */
 
+function runners_log_gchart_get_percents($values) {
+    $sum = array_sum($values);
+    foreach ($values as $key => $value) {
+        $values[$key] = round(($value / $sum) * 100, 0);
+    }
+    return $values;
+}
 
 function runners_log_gchart_func($atts) {
 /* W I K I  --  T H E  G U I D E  T O  A L L  T H E  V A R I A B L E S
@@ -129,7 +136,6 @@ http://imagecharteditor.appspot.com/
 		12 => 'December'
 	);
 	
-	
   /* T H E   F O R M A T  S W I T C H */
 	switch ($format){
 	
@@ -171,14 +177,16 @@ http://imagecharteditor.appspot.com/
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                    $valuepercents = runners_log_gchart_get_percents($monthsList);
 				} else { //else it is miles
 					$monthsList[] = $row->Distance;
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
-				}
+					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                    $valuepercents = runners_log_gchart_get_percents($monthsList);
+                    }
 			}
 			//Google Chart API Varibles
 			if ($distancetype == 'Meters') {
@@ -217,14 +225,16 @@ http://imagecharteditor.appspot.com/
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
-				} else { //else it is miles
+					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                    $valuepercents = runners_log_gchart_get_percents($monthsList);
+                } else { //else it is miles
 					$monthsList[] = $row->Runmiles;
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
-				}
+					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                    $valuepercents = runners_log_gchart_get_percents($monthsList);
+                }
 			}
 			//Google Chart API Varibles
 			if ($distancetype == 'Meters') {
@@ -259,8 +269,9 @@ http://imagecharteditor.appspot.com/
 				$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 				$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 				$sumvalue = array_sum($monthsList);
-				$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
-			}
+				//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                $valuepercents = runners_log_gchart_get_percents($monthsList);
+            }
 			//Google Chart API Varibles
 			$data['chdl'] = 'Hours';
 			$data['chtt'] = 'Time per Month the Previous Year';
@@ -289,8 +300,9 @@ http://imagecharteditor.appspot.com/
 				$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 				$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 				$sumvalue = array_sum($monthsList);
-				$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
-			}
+				//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                $valuepercents = runners_log_gchart_get_percents($monthsList);
+            }
 			//Google Chart API Varibles
 			$data['chdl'] = 'Cal.';
 			$data['chtt'] = 'Calories per Month the Previous Year';
@@ -336,14 +348,16 @@ http://imagecharteditor.appspot.com/
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$minvalue = min($monthsList); //We need the min-value to have the righ x-axis
 					$sumvalue = array_sum($monthsList);
-					$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
-					$xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
+                    //$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                    $valuepercents = runners_log_gchart_get_percents($monthsList);
+                    $xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 				} else { //else it is miles
 					$monthsList[] = $row->Pulse;
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$minvalue = min($monthsList); //We need the min-value to have the righ x-axis
 					$sumvalue = array_sum($monthsList);
-					$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                    //$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
+                    $valuepercents = runners_log_gchart_get_percents($monthsList);
 					$xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 				}
 			}

@@ -46,7 +46,7 @@ $xaxislable	//The x-labels printed from the database
 		**********************************************************************************
 		**				RELATED TO THE GOOGLE API			**
 		**********************************************************************************
-$data['chf']	    Gradient Fills http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_gradient_fills
+$data['chf']	Gradient Fills http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_gradient_fills
 $data['chxl']	Custom Axis Labels http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_labels
 $data['chxr']	Axis Range http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_range
 $data['chxp']	Axis Label Positions http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_label_positions
@@ -54,18 +54,18 @@ $data['chxs']	Axis Label Styles http://code.google.com/intl/da/apis/chart/docs/c
 $data['chxtc'] 	Axis Tick Mark Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_tick_marks
 $data['chxt']	Visible Axes http://code.google.com/intl/da/apis/chart/docs/chart_params.html#axis_type
 $data['chbh']	Bar Width and Spacing http://code.google.com/intl/da/apis/chart/docs/gallery/bar_charts.html#chbh
-$data['chs']	    Chart Size http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chs
-$data['cht']	    Chart Type http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_cht
+$data['chs']	Chart Size http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chs
+$data['cht']	Chart Type http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_cht
 $data['chco']	Series Colors http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_series_color
 $data['chds']	Text Format with Custom Scaling http://code.google.com/intl/da/apis/chart/docs/data_formats.html#data_scaling
-$data['chd']	    Chart Data String http://code.google.com/intl/da/apis/chart/docs/data_formats.html
+$data['chd']	Chart Data String http://code.google.com/intl/da/apis/chart/docs/data_formats.html
 $data['chdl']	Chart Legend Text and Style http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_legend
-$data['chl']	    Chart Legend Text, when it is a pie
+$data['chl']	Chart Legend Text, when it is a pie
 $data['chdlp'] 	Where the legand is placed. Top, right, left etc
-$data['chg']	    Grid Lines http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_grid_lines
-$data['chls']	    Line Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_line_styles
+$data['chg']	Grid Lines http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_grid_lines
+$data['chls']	Line Styles http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_line_styles
 $data['chm']	Shape Markers http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_shape_markers
-$data['chtt']	    Chart Title http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chart_title
+$data['chtt']	Chart Title http://code.google.com/intl/da/apis/chart/docs/chart_params.html#gcharts_chart_title
 
 		**********************************************************************************
 		**				SETTINGS VARIABLE				**
@@ -177,14 +177,12 @@ http://imagecharteditor.appspot.com/
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                     $valuepercents = runners_log_gchart_get_percents($monthsList);
 				} else { //else it is miles
 					$monthsList[] = $row->Distance;
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                     $valuepercents = runners_log_gchart_get_percents($monthsList);
                     }
 			}
@@ -225,14 +223,12 @@ http://imagecharteditor.appspot.com/
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                     $valuepercents = runners_log_gchart_get_percents($monthsList);
                 } else { //else it is miles
 					$monthsList[] = $row->Runmiles;
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 					$sumvalue = array_sum($monthsList);
-					//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                     $valuepercents = runners_log_gchart_get_percents($monthsList);
                 }
 			}
@@ -269,7 +265,6 @@ http://imagecharteditor.appspot.com/
 				$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 				$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 				$sumvalue = array_sum($monthsList);
-				//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                 $valuepercents = runners_log_gchart_get_percents($monthsList);
             }
 			//Google Chart API Varibles
@@ -300,7 +295,6 @@ http://imagecharteditor.appspot.com/
 				$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 				$xaxislable[] = sprintf(__('%1$s'), substr( $month2str[$row->Runmonth], 0, 3 ) );
 				$sumvalue = array_sum($monthsList);
-				//$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                 $valuepercents = runners_log_gchart_get_percents($monthsList);
             }
 			//Google Chart API Varibles
@@ -348,7 +342,6 @@ http://imagecharteditor.appspot.com/
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$minvalue = min($monthsList); //We need the min-value to have the righ x-axis
 					$sumvalue = array_sum($monthsList);
-                    //$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                     $valuepercents = runners_log_gchart_get_percents($monthsList);
                     $xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 				} else { //else it is miles
@@ -356,7 +349,6 @@ http://imagecharteditor.appspot.com/
 					$maxvalue = max($monthsList); //We need the max-value to have the righ Y-axis
 					$minvalue = min($monthsList); //We need the min-value to have the righ x-axis
 					$sumvalue = array_sum($monthsList);
-                    //$valuepercents = array_map(function ($a) use($sumvalue) { return ROUND((($a/$sumvalue)*100),0); }, $monthsList);   // will only work in php5.3??
                     $valuepercents = runners_log_gchart_get_percents($monthsList);
 					$xaxislable[] = sprintf(__('%1$d %2$s'), $row->Day, substr( $month2str[$row->Month], 0, 3 ) );
 				}

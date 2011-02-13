@@ -2,7 +2,7 @@
 /*
 Plugin Name: Runners Log
 Plugin URI: http://wordpress.org/extend/plugins/runners-log/
-Description: This plugin let you convert your blog into a training log and let you track your distance, time, calories and let you have advance statistics and a variety of running related calculators. See screenshots.
+Description: This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
@@ -127,6 +127,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		$url = get_post_meta($post->ID, "_rl_garminconnectlink_value", $single = true); // Get the Garmin Connect Link
 		$pulsavg = get_post_meta($post->ID, "_rl_pulsavg_value", $single = true); // Get pulsavg.
 		$calories = get_post_meta($post->ID, "_rl_calories_value", $single = true); // Get calories.
+		$cadence = get_post_meta($post->ID, "_rl_cadence_value", $single = true); // Get cadence.
 
 		// Get [runners_log_basic] settings
 		$show_distance = get_option('runnerslog_show_distance');
@@ -135,6 +136,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		$show_speedperdistance = get_option('runnerslog_show_speedperdistance');
 		$show_pulse = get_option('runnerslog_show_pulse');
 		$show_calories = get_option('runnerslog_show_calories');
+		$show_cadence = get_option('runnerslog_show_cadence');
 		$show_garminconnect = get_option('runnerslog_show_garminconnect');
 		$show_distance2009 = get_option('runnerslog_show_distance2009');
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
@@ -351,11 +353,18 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			echo "</li>";
 		}
 	}
-	if ($show_calories == '1') // Calor�es
+	if ($show_calories == '1') // Calories
 	{	
 		if ($calories) 
 		{
 			echo "<li><span class='post-meta-key'>Calories:</span> $calories C</li>";
+		}
+	}
+	if ($show_cadence == '1') // Cadence
+	{	
+		if ($cadence) 
+		{
+			echo "<li><span class='post-meta-key'>Cadence:</span> $cadence</li>";
 		}
 	}
 	if ($show_garminconnect == '1') //Garmin Connect Link
@@ -1574,6 +1583,7 @@ register_activation_hook( __FILE__, 'runnerslog_activate' );
 		update_option('runnerslog_gender', 'male');
 		update_option('runnerslog_pulsavg', '1');
 		update_option('runnerslog_caloriescount', '1');
+		update_option('runnerslog_cadence', '1');
 		update_option('runnerslog_garminconnectlink', '1');
 		update_option('runnerslog_show_distance', '1');
 		//Settings for [runners_log_basic]
@@ -1582,6 +1592,7 @@ register_activation_hook( __FILE__, 'runnerslog_activate' );
 		update_option('runnerslog_show_speedperdistance', '1');
 		update_option('runnerslog_show_pulse', '1');
 		update_option('runnerslog_show_calories', '1');
+		update_option('runnerslog_show_cadence', '1');
 		update_option('runnerslog_show_garminconnect', '1');
 		update_option('runnerslog_show_distance2009', '1');
 		update_option('runnerslog_show_distance2010', '1');

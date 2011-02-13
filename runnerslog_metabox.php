@@ -6,6 +6,7 @@ $distancetype = ucfirst(get_option('runnerslog_distancetype'));
 $pulsavg = get_option('runnerslog_pulsavg');
 $garminconnect = get_option('runnerslog_garminconnectlink');
 $calories = get_option('runnerslog_caloriescount');
+$cadence = get_option('runnerslog_cadence');
 $weather_temperature = get_option('runnerslog_weather_temperature');
 $weather_windchill = get_option('runnerslog_weather_windchill');
 $weather_humidity = get_option('runnerslog_weather_humidity');
@@ -79,6 +80,13 @@ array(
 		"title" => "Calories:",
 		"description" => "Type in your calories",
 		"show" => "$calories"
+	),
+	"_rl_cadence" => array(
+		"name" => "_rl_cadence",
+		"std" => "",
+		"title" => "Cadence:",
+		"description" => "Type in your cadence",
+		"show" => "$cadence"
 	),
 	"_rl_garminconnectlink" => array(
 		"name" => "_rl_garminconnectlink",

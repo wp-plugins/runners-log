@@ -7,6 +7,7 @@
 		$pulsavg = $_POST['runnerslog_pulsavg'];
 		$garminconnect = $_POST['runnerslog_garminconnectlink'];
 		$calories = $_POST['runnerslog_caloriescount'];
+		$cadence = $_POST['runnerslog_cadence'];
 		$heightcm = $_POST['runnerslog_cm'];
 		$heightfeets = $_POST['runnerslog_feets'];
 		$heightinches = $_POST['runnerslog_inches'];
@@ -21,6 +22,7 @@
 		$show_speedperdistance = $_POST['runnerslog_show_speedperdistance'];
 		$show_pulse = $_POST['runnerslog_show_pulse'];
 		$show_calories = $_POST['runnerslog_show_calories'];
+		$show_cadence = $_POST['runnerslog_show_cadence'];
 		$show_garminconnect = $_POST['runnerslog_show_garminconnect'];
 		$show_distance2009 = $_POST['runnerslog_show_distance2009'];
 		$show_distance2010 = $_POST['runnerslog_show_distance2010'];
@@ -33,6 +35,7 @@
 		update_option('runnerslog_pulsavg', $pulsavg);		
 		update_option('runnerslog_garminconnectlink', $garminconnect);		
 		update_option('runnerslog_caloriescount', $calories);
+		update_option('runnerslog_cadence', $cadence);
 		update_option('runnerslog_cm', $heightcm);
 		update_option('runnerslog_feets', $heightfeets);
 		update_option('runnerslog_inches', $heightinches);
@@ -47,6 +50,7 @@
 		update_option('runnerslog_show_speedperdistance', $show_speedperdistance);
 		update_option('runnerslog_show_pulse', $show_pulse);
 		update_option('runnerslog_show_calories', $show_calories);
+		update_option('runnerslog_show_cadence', $show_cadence);
 		update_option('runnerslog_show_garminconnect', $show_garminconnect);
 		update_option('runnerslog_show_distance2009', $show_distance2009);
 		update_option('runnerslog_show_distance2010', $show_distance2010);
@@ -64,6 +68,7 @@
 		$pulsavg = get_option('runnerslog_pulsavg');
 		$garminconnect = get_option('runnerslog_garminconnectlink');
 		$calories = get_option('runnerslog_caloriescount');
+		$cadence = get_option('runnerslog_cadence');
 		$heightcm = get_option('runnerslog_cm');
 		$heightfeets = get_option('runnerslog_feets');
 		$heightinches = get_option('runnerslog_inches');
@@ -78,6 +83,7 @@
 		$show_speedperdistance = get_option('runnerslog_show_speedperdistance');
 		$show_pulse = get_option('runnerslog_show_pulse');
 		$show_calories = get_option('runnerslog_show_calories');
+		$show_cadence = get_option('runnerslog_show_cadence');
 		$show_garminconnect = get_option('runnerslog_show_garminconnect');
 		$show_distance2009 = get_option('runnerslog_show_distance2009');
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
@@ -233,6 +239,15 @@
 				</th>
 			</tr>
 			
+			<!-- Enable Cadence: runnerslog_cadence -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_cadence">
+				<input name="runnerslog_cadence" id="runnerslog_cadence" value="1"<?php checked('1', get_option('runnerslog_cadence')); ?> type="checkbox">
+				<?php _e('Enable Cadence') ?></label>
+				</th>
+			</tr>
+			
 		</tbody>
 	</table>
 </div>
@@ -307,6 +322,15 @@
 				<label for="runnerslog_show_calories">
 				<input name="runnerslog_show_calories" id="runnerslog_show_calories" value="1"<?php checked('1', get_option('runnerslog_show_calories')); ?> type="checkbox">
 				<?php _e('Show Calories') ?></label>
+				</th>
+			</tr>
+			
+			<!-- Show cadence: runnerslog_show_cadence -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_cadence">
+				<input name="runnerslog_show_cadence" id="runnerslog_show_cadence" value="1"<?php checked('1', get_option('runnerslog_show_cadence')); ?> type="checkbox">
+				<?php _e('Show Cadence') ?></label>
 				</th>
 			</tr>
 

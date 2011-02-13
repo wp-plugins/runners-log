@@ -9,9 +9,7 @@ Stable tag: 2.2.1
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
 == Description ==
-This version fix a bug in version 2.2 not working in a php 5.2.x setup!! Please update!
-
-This plugin let you convert your blog into a training log and let you track your distance, time, calories and calculate your speed, time per km(or miles), and let you have advance statistics. See screenshots.
+This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
 You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
@@ -367,6 +365,9 @@ Version: 1.2
 *FL - Google Chart: Markers for the type bar
 *FL - Serious bug fix thanks to salathe @ #php @ freenode: http://wordpress.org/support/topic/plugin-runners-log-shots-screen-of-death-after-plugin-upgrade
 
+= 2.2.2 =
+*FL - Added a new option "Cadence"
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -416,6 +417,8 @@ February 9th 2011
 
 = 2.2.1 =
 February 11th 2011
+
+= 2.2.2 =
 
 == To Do ==
 	* enable cache (done - not an issue when using google chart)

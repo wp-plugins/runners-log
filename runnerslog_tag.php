@@ -152,7 +152,7 @@ function runners_log_func($atts) {
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-bar-distance'.$month.$year.'.png');
  
 	//Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-distance'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph" />';
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-distance'.$month.$year.'.png', __FILE__ ) . '" alt="'._e('Training Graph', RUNNERSLOG).'" />';
  }
 
 /* If [runners_log type="graph"] */
@@ -289,7 +289,7 @@ function runners_log_func($atts) {
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-distance'.$month.$year.'.png');
  
 	// Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph Distance" />';
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance'.$month.$year.'.png', __FILE__ ) . '" alt="'._e('Training Graph Distance', RUNNERSLOG).'" />';
  }
 
 /* If [runners_log type="pie"] */
@@ -400,9 +400,9 @@ function runners_log_func($atts) {
 	
 	// Draw the Distance per month graph
 	if ($distancetype == meters) {
-		$Test->drawTitle(15,20,"The Percentage of Km $month2str[$month] $year",0,0,0);
+		$Test->drawTitle(15,20, __('The Percentage of Km', RUNNERSLOG)."$month2str[$month] $year",0,0,0);
 	} else {
-		$Test->drawTitle(15,20,"The Percentage of Miles $month2str[$month] $year",0,0,0);
+		$Test->drawTitle(15,20,__('The Percentage of Miles', RUNNERSLOG)."$month2str[$month] $year",0,0,0);
 	}
  
 	//Draw the title Copyright. Please dont edit this.  
@@ -413,7 +413,7 @@ function runners_log_func($atts) {
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-distance_pie'.$month.$year.'.png');
  
 	// Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance_pie'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph Distance Pie" />';
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance_pie'.$month.$year.'.png', __FILE__ ) . '" alt='.__('Training Graph Distance Pie', RUNNERSLOG). '/>';
  }
 
 /* If [runners_log type="mini"] */
@@ -503,7 +503,7 @@ function runners_log_func($atts) {
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-distance_mini'.$month.$year.'.png');
  
 	// Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance_mini'.$month.$year.'.png', __FILE__ ) . '" alt="Training Graph Distance Mini" />';
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-distance_mini'.$month.$year.'.png', __FILE__ ) . '" alt="'.__('Training Graph Distance Mini', RUNNERSLOG).'" />';
  }
 } // Here we end the function "runners_log_func"
 add_shortcode('runners_log', 'runners_log_func');
@@ -552,7 +552,7 @@ function runners_log_gear_func($atts) {
 	// is there something to do?
 	if (sizeof($res) == '0')
 	{
-		echo "No data available. Did you specify an id like [runners_log_gear id=\"2\"]<br/>\n";
+		echo __('No data available. Did you specify an id like ', RUNNERSLOG)."[runners_log_gear id=\"2\"]<br/>\n";
 		return;
 	}
 		

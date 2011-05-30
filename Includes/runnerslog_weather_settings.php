@@ -1,5 +1,11 @@
 <div class="wrap">
-<p><?php echo "<h2>" . __( 'Runners Log Weather Settings' ) . "</h2>"; ?></p>
+
+
+<p><?php 
+
+load_plugin_textdomain(RUNNERSLOG,PLUGINDIR.'runners-log/languages','rlanguages');
+
+echo "<h2>" . __( 'Runners Log Weather Settings' ) . "</h2>"; ?></p>
 
 <?php 
 	//include_once('Includes/runnerslog_weather_functions.php');
@@ -107,7 +113,7 @@ If you want to use the Yahoo Weather don't forget to activate it above.
 		</tbody>
 	</table>
 	<p class="submit">
-		<input type="submit" name="Submit" value="<?php _e('Update and save', 'runnerslog_ops' ) ?>" />
+		<input type="submit" name="Submit" value="<?php _e('Update and save', RUNNERSLOG) ?>" />
 	</p>
 </form>
 

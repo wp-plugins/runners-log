@@ -1,5 +1,9 @@
 <div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log HR Training Zones Calculator' ) . "</h2>"; ?>
+<?php 
+
+load_plugin_textdomain(RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
+
+echo "<h2>" . __( 'Runners Log HR Training Zones Calculator', RUNNERSLOG). "</h2>"; ?>
 <?php 
 //Get the hrrest and hrmax
 $hrrest = get_option('runnerslog_hrrest');
@@ -20,24 +24,24 @@ $hrr95 = ROUND((($hrmax-$hrrest)*0.95)+$hrrest,0);  // 95% of HRR
 $hrr100 = ROUND((($hrmax-$hrrest)*1)+$hrrest,0);	// 100% of HRR
 
 if ( $hrrest AND $hrmax ) {
-echo '<p>Based on a Resting Heart Rate at <b>'.$hrrest.'</b> and a Maximum Heart Rate at <b>' .$hrmax.'</b> the commanded training zones are:</p>';
+echo '<p>'.__('Based on a Resting Heart Rate at <b>', RUNNERSLOG).$hrrest.'</b>'. __('and a Maximum Heart Rate at <b>', RUNNERSLOG) .$hrmax.'</b>'. __('the commanded training zones are:', RUNNERSLOG).'</p>';
 echo '
 <h2>
-	Heart Rate Training Zones (Beginner)</h2>
+	'. __('Heart Rate Training Zones (Beginner)', RUNNERSLOG).'</h2>
 <table cellpadding="0" cellspacing="0" class="cooper" style="width: 700px;">
 	<tbody>
 		<tr>
 			<td style="background-color: rgb(128, 128, 128); width: 70px; text-align: center;">
-				<strong>Pulse Zone</strong></td>
+				<strong>'. __('Pulse Zone', RUNNERSLOG).'</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 60px; text-align: center;">
-				<strong>Pulse</strong></td>
+				<strong>'. __('Pulse', RUNNERSLOG).'</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 70px; text-align: center;">
-				<strong>% of HRR<br />
+				<strong>'. __('% of HRR', RUNNERSLOG).'<br />
 				</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 120px; text-align: center;">
-				<strong>Type</strong></td>
+				<strong>'. __('Type', RUNNERSLOG).'</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 380px; text-align: center;">
-				<strong>What it does<br />
+				<strong>'. __('What it does', RUNNERSLOG).'<br />
 				</strong></td>
 		</tr>
 		<tr>
@@ -48,9 +52,9 @@ echo '
 			<td style="background-color: rgb(255, 255, 0); width: 70px; text-align: center;">
 				50-60%</td>
 			<td style="background-color: rgb(255, 255, 0); width: 120px; text-align: center;">
-				Moderate activity</td>
+				'. __('Moderate activity', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 255, 0); width: 380px; text-align: center;">
-				Maintenance or warm up</td>
+				'. __('Maintenance or warm up', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 204, 0); width: 70px; text-align: center;">
@@ -60,9 +64,9 @@ echo '
 			<td style="background-color: rgb(255, 204, 0); width: 70px; text-align: center;">
 				60-70%</td>
 			<td style="background-color: rgb(255, 204, 0); width: 120px; text-align: center;">
-				The Energy Efficient or Recovery Zone</td>
+				'. __('The Energy Efficient or Recovery Zone', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 204, 0); width: 380px; text-align: center;">
-				Training within this zone develops basic endurance and aerobic capacity.</td>
+				'. __('Training within this zone develops basic endurance and aerobic capacity.', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 153, 0); width: 70px; text-align: center;">
@@ -72,9 +76,9 @@ echo '
 			<td style="background-color: rgb(255, 153, 0); width: 70px; text-align: center;">
 				70-80%</td>
 			<td style="background-color: rgb(255, 153, 0); width: 120px; text-align: center;">
-				The Aerobic Zone</td>
+				'. __('The Aerobic Zone', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 153, 0); width: 380px; text-align: center;">
-				Training in this zone will develop your cardiovascular system (Also Known As: cardio zone). Train the ability to transport oxygen to, and carbon dioxide away from, the working muscles.</td>
+				'. __('Training in this zone will develop your cardiovascular system (Also Known As: cardio zone). Train the ability to transport oxygen to, and carbon dioxide away from, the working muscles.', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 51, 0); width: 70px; text-align: center;">
@@ -84,9 +88,9 @@ echo '
 			<td style="background-color: rgb(255, 51, 0); width: 70px; text-align: center;">
 				80-90%</td>
 			<td style="background-color: rgb(255, 51, 0); width: 120px; text-align: center;">
-				The Anaerobic Zone</td>
+				'.__('The Anaerobic Zone', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 51, 0); width: 380px; text-align: center;">
-				Training in this zone will develop your lactic acid system. The point at which the body cannot remove lactic acid as quickly as it is produced is called the lactate threshold (LT) or anaerobic threshold (AT).</td>
+				'.__('Training in this zone will develop your lactic acid system. The point at which the body cannot remove lactic acid as quickly as it is produced is called the lactate threshold (LT) or anaerobic threshold (AT).', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 0, 0); width: 70px; text-align: center;">
@@ -98,7 +102,7 @@ echo '
 			<td style="background-color: rgb(255, 0, 0); width: 60px; text-align: center;">
 				VO<sub>2</sub>max or &quot;Red line zone&quot;</td>
 			<td style="background-color: rgb(255, 0, 0); width: 380px; text-align: center;">
-				It effectively trains your fast twitch muscle fibres and helps to develop speed. This zone is reserved for interval running.</td>
+				'.__('It effectively trains your fast twitch muscle fibres and helps to develop speed. This zone is reserved for interval running.', RUNNERSLOG).'</td>
 		</tr>
 	</tbody>
 </table>
@@ -109,16 +113,16 @@ echo '
 	<tbody>
 		<tr>
 			<td style="background-color: rgb(128, 128, 128); width: 70px; text-align: center;">
-				<strong>Pulse Zone</strong></td>
+				<strong>'.__('Pulse Zone', RUNNERSLOG).'</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 60px; text-align: center;">
-				<strong>Pulse</strong></td>
+				<strong>'.__('Pulse', RUNNERSLOG).'</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 70px; text-align: center;">
-				<strong>% of HRR<br />
+				<strong>'.__('% of HRR', RUNNERSLOG).'<br />
 				</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 120px; text-align: center;">
-				<strong>Type</strong></td>
+				<strong>'.__('Type', RUNNERSLOG).'</strong></td>
 			<td style="background-color: rgb(128, 128, 128); width: 380px; text-align: center;">
-				<strong>What it does<br />
+				<strong>'.__('What it does', RUNNERSLOG).'<br />
 				</strong></td>
 		</tr>
 		<tr>
@@ -129,9 +133,9 @@ echo '
 			<td style="background-color: rgb(255, 255, 0); width: 70px; text-align: center;">
 				55-65%</td>
 			<td style="background-color: rgb(255, 255, 0); width: 120px; text-align: center;">
-				Moderate activity</td>
+				'.__('Moderate activity', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 255, 0); width: 380px; text-align: center;">
-				Maintenance or warm up</td>
+				'.__('Maintenance or warm up', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 204, 0); width: 70px; text-align: center;">
@@ -141,9 +145,9 @@ echo '
 			<td style="background-color: rgb(255, 204, 0); width: 70px; text-align: center;">
 				65-75%</td>
 			<td style="background-color: rgb(255, 204, 0); width: 120px; text-align: center;">
-				The Energy Efficient or Recovery Zone</td>
+				'.__('The Energy Efficient or Recovery Zone', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 204, 0); width: 380px; text-align: center;">
-				Training within this zone develops basic endurance and aerobic capacity.</td>
+				'.__('Training within this zone develops basic endurance and aerobic capacity.', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 153, 0); width: 70px; text-align: center;">
@@ -153,9 +157,9 @@ echo '
 			<td style="background-color: rgb(255, 153, 0); width: 70px; text-align: center;">
 				75-85%</td>
 			<td style="background-color: rgb(255, 153, 0); width: 120px; text-align: center;">
-				The Aerobic Zone</td>
+				'.__('The Aerobic Zone', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 153, 0); width: 380px; text-align: center;">
-				Training in this zone will develop your cardiovascular system (Also Known As: cardio zone). Train the ability to transport oxygen to, and carbon dioxide away from, the working muscles.</td>
+				'.__('Training in this zone will develop your cardiovascular system (Also Known As: cardio zone). Train the ability to transport oxygen to, and carbon dioxide away from, the working muscles.', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 51, 0); width: 70px; text-align: center;">
@@ -165,9 +169,9 @@ echo '
 			<td style="background-color: rgb(255, 51, 0); width: 70px; text-align: center;">
 				85-95%</td>
 			<td style="background-color: rgb(255, 51, 0); width: 120px; text-align: center;">
-				The Anaerobic Zone</td>
+				'.__('The Anaerobic Zone', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 51, 0); width: 380px; text-align: center;">
-				Training in this zone will develop your lactic acid system. The point at which the body cannot remove lactic acid as quickly as it is produced is called the lactate threshold (LT) or anaerobic threshold (AT).</td>
+				'.__('Training in this zone will develop your lactic acid system. The point at which the body cannot remove lactic acid as quickly as it is produced is called the lactate threshold (LT) or anaerobic threshold (AT).', RUNNERSLOG).'</td>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(255, 0, 0); width: 70px; text-align: center;">
@@ -177,14 +181,14 @@ echo '
 			<td style="background-color: rgb(255, 0, 0); width: 60px; text-align: center;">
 				95-100%</td>
 			<td style="background-color: rgb(255, 0, 0); width: 60px; text-align: center;">
-				VO<sub>2</sub>max or &quot;Red line zone&quot;</td>
+				'.__('VO<sub>2</sub>max or &quot;Red line zone&quot;', RUNNERSLOG).'</td>
 			<td style="background-color: rgb(255, 0, 0); width: 380px; text-align: center;">
-				It effectively trains your fast twitch muscle fibres and helps to develop speed. This zone is reserved for interval running.</td>
+				'.__('It effectively trains your fast twitch muscle fibres and helps to develop speed. This zone is reserved for interval running.', RUNNERSLOG).'</td>
 		</tr>
 	</tbody>
 </table>';
 		} else {
-	echo '<p>To calculate <b>YOUR</b> traing zones you have to type in your resting pulse and max pulse in Runners Log Settings.</p>';	
+	_e('<p>To calculate <b>YOUR</b> traing zones you have to type in your resting pulse and max pulse in Runners Log Settings.</p>', RUNNERSLOG);	
 }
 ?>
 </div>

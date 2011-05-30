@@ -1,5 +1,8 @@
 <?php
 //retrieve information from Yahoo Weather channel depending on selected WOEID
+
+load_plugin_textdomain(RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
+
 function runnerslog_retrieveWeather($woid,$unit,$thingToMeasure) {
 	
 	if (get_option('runnerslog_weather_yahoo') == 0) {

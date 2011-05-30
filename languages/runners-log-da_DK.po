@@ -1,0 +1,635 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Runners Log v2.2.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2011-05-26 15:30+0000\n"
+"Last-Translator: admin <christoph@haehnelonline.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: Includes/runnerslog_body_mass_index.php:6
+#@ default
+msgid "Runners Log Body Mass Calculator"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:5
+#@ runnerslog
+msgid "Runners Log Coverter Toolbox"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:43
+#: Includes/runnerslog_v02max.php:21
+#: Includes/runnerslog_vdot_race_time.php:89
+#: Includes/runnerslog_vdot_training_pace.php:82
+#: Includes/runnerslog_weather_settings.php:29
+#: Includes/runnerslog_weight_change_effect.php:29
+#: runnerslog_admin.php:61
+#@ default
+msgid "Options saved."
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:109
+#: Includes/runnerslog_converter_toolbox.php:162
+#: Includes/runnerslog_converter_toolbox.php:233
+#: Includes/runnerslog_vdot_race_time.php:108
+#: Includes/runnerslog_vdot_training_pace.php:96
+#: Includes/runnerslog_weight_change_effect.php:43
+#@ default
+msgid "Distance:"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:122
+#: Includes/runnerslog_converter_toolbox.php:212
+#: Includes/runnerslog_vdot_race_time.php:121
+#: Includes/runnerslog_vdot_training_pace.php:109
+#: Includes/runnerslog_weight_change_effect.php:56
+#: runnerslog.php:316
+#@ default
+#@ runnerslog
+msgid "Time:"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:130
+#: Includes/runnerslog_converter_toolbox.php:175
+#: Includes/runnerslog_converter_toolbox.php:220
+#@ default
+msgid "Speed:"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:155
+#@ runnerslog
+msgid "Calculate Speed"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:188
+#@ default
+msgid "Race Time:"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:205
+#@ runnerslog
+msgid "Calculate Race Time"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:250
+#@ runnerslog
+msgid "Calculate Distance"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:257
+#@ default
+msgid "Speed per Hour:"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:269
+#@ default
+msgid "Time per Distance:"
+msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:286
+#@ runnerslog
+msgid "Calculate Time per Distance"
+msgstr ""
+
+#: Includes/runnerslog_stats_graphs.php:6
+#@ default
+msgid "Runners Log Stats and Graph"
+msgstr ""
+
+#: Includes/runnerslog_training_zones.php:6
+#@ default
+msgid "Runners Log HR Training Zones Calculator"
+msgstr ""
+
+#: Includes/runnerslog_v02max.php:2
+#@ runnerslog
+msgid "Runners Log V0<sub>2</sub>maxulator Calculator"
+msgstr ""
+
+#: Includes/runnerslog_v02max.php:36
+#@ default
+msgid "Distance in 12 min:"
+msgstr ""
+
+#: Includes/runnerslog_v02max.php:51
+#@ runnerslog
+msgid "Calculate Vo2-max"
+msgstr ""
+
+#: Includes/runnerslog_vdot_race_time.php:2
+#@ runnerslog
+msgid "Runners Log VDOT Race Time Calculator"
+msgstr ""
+
+#: Includes/runnerslog_vdot_race_time.php:131
+#: Includes/runnerslog_vdot_training_pace.php:119
+#: Includes/runnerslog_weight_change_effect.php:66
+#@ runnerslog
+msgid "Calculate VDOT-value"
+msgstr ""
+
+#: Includes/runnerslog_vdot_training_pace.php:2
+#@ runnerslog
+msgid "Runners Log VDOT Training Pace Calculator"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:8
+#@ default
+msgid "Runners Log Weather Settings"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:53
+#@ default
+msgid "Enable Temperature Measurement"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:60
+#@ default
+msgid "Enable Windchill Measurement"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:67
+#@ default
+msgid "Enable Humidity Measurement"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:74
+#@ default
+msgid "Enable Textbased Weather Description"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:81
+#@ default
+msgid "Enable Weather Data from Yahoo"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:99
+#@ default
+msgid "Current WOEID:"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:106
+#@ default
+msgid "New WOEID:"
+msgstr ""
+
+#: Includes/runnerslog_weather_settings.php:116
+#@ runnerslog
+msgid "Update and save"
+msgstr ""
+
+#: Includes/runnerslog_weight_change_effect.php:2
+#@ runnerslog
+msgid "Runners Log Predicted effect of change in weight"
+msgstr ""
+
+#: runnerslog.php:107
+#@ runners-log
+msgid "Settings"
+msgstr ""
+
+#: runnerslog.php:117
+#@ runners-log
+msgid "FAQ"
+msgstr ""
+
+#: runnerslog.php:118
+#@ runners-log
+msgid "Support"
+msgstr ""
+
+#: runnerslog.php:119
+#@ runners-log
+msgid "Share where you use it"
+msgstr ""
+
+#: runnerslog.php:303
+#@ runnerslog
+msgid "Meters:"
+msgstr ""
+
+#: runnerslog.php:308
+#@ runnerslog
+msgid "Miles:"
+msgstr ""
+
+#: runnerslog.php:325
+#@ runnerslog
+msgid "Km/hour:"
+msgstr ""
+
+#: runnerslog.php:330
+#@ runnerslog
+msgid "Miles/hour:"
+msgstr ""
+
+#: runnerslog.php:340
+#@ runnerslog
+msgid "Min/km:"
+msgstr ""
+
+#: runnerslog.php:345
+#@ runnerslog
+msgid "Min/miles:"
+msgstr ""
+
+#: runnerslog.php:353
+#@ runnerslog
+msgid "Pulse average:"
+msgstr ""
+
+#: runnerslog.php:365
+#@ runnerslog
+msgid "Calories:"
+msgstr ""
+
+#: runnerslog.php:372
+#@ runnerslog
+msgid "Cadence:"
+msgstr ""
+
+#: runnerslog.php:388
+#@ runnerslog
+msgid "km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km"
+msgstr ""
+
+#: runnerslog.php:392
+#@ runnerslog
+msgid "km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km"
+msgstr ""
+
+#: runnerslog.php:397
+#@ runnerslog
+msgid "miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi"
+msgstr ""
+
+#: runnerslog.php:401
+#@ runnerslog
+msgid "miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi"
+msgstr ""
+
+#: runnerslog_admin.php:99
+#@ runnerslog
+msgid "Runners Log Options"
+msgstr ""
+
+#: runnerslog_admin.php:100
+#@ runnerslog
+msgid "Set the options below"
+msgstr ""
+
+#: runnerslog_admin.php:110
+#@ default
+msgid "Distance type"
+msgstr ""
+
+#: runnerslog_admin.php:115
+#@ default
+msgid "Meters"
+msgstr ""
+
+#: runnerslog_admin.php:117
+#@ default
+msgid "Miles"
+msgstr ""
+
+#: runnerslog_admin.php:126
+#@ default
+msgid "Unit type"
+msgstr ""
+
+#: runnerslog_admin.php:131
+#@ default
+msgid "Metric"
+msgstr ""
+
+#: runnerslog_admin.php:133
+#@ default
+msgid "English"
+msgstr ""
+
+#: runnerslog_admin.php:142
+#@ default
+msgid "Gender"
+msgstr ""
+
+#: runnerslog_admin.php:147
+#@ default
+msgid "Male"
+msgstr ""
+
+#: runnerslog_admin.php:149
+#@ default
+msgid "Female"
+msgstr ""
+
+#: runnerslog_admin.php:159
+#@ runnerslog
+msgid "Your Height"
+msgstr ""
+
+#: runnerslog_admin.php:163
+#@ runnerslog
+msgid "Centimeters"
+msgstr ""
+
+#: runnerslog_admin.php:166
+#@ runnerslog
+msgid " Feet"
+msgstr ""
+
+#: runnerslog_admin.php:168
+#@ runnerslog
+msgid "Inch(es)"
+msgstr ""
+
+#: runnerslog_admin.php:176
+#@ default
+msgid "Your Weight"
+msgstr ""
+
+#: runnerslog_admin.php:182
+#@ default
+msgid "Kilograms"
+msgstr ""
+
+#: runnerslog_admin.php:184
+#@ runnerslog
+msgid "Pounds. Note: 8 ounces = 0.5 pounds"
+msgstr ""
+
+#: runnerslog_admin.php:192
+#@ runnerslog
+msgid "Your age"
+msgstr ""
+
+#: runnerslog_admin.php:195
+#@ runnerslog
+msgid "Years"
+msgstr ""
+
+#: runnerslog_admin.php:201
+#@ runnerslog
+msgid "Resting Heart Rate"
+msgstr ""
+
+#: runnerslog_admin.php:204
+#@ runnerslog
+msgid "\"Resting Heart Rate\" is the number of times our heart beats when we are at completely at rest."
+msgstr ""
+
+#: runnerslog_admin.php:210
+#@ runnerslog
+msgid "Maximum Heart Rate"
+msgstr ""
+
+#: runnerslog_admin.php:213
+#@ runnerslog
+msgid "\"Maximum Heart Rate\" is the highest number of times your heart can contract in one minute."
+msgstr ""
+
+#: runnerslog_admin.php:222
+#@ runnerslog
+msgid "Enable Pulse Average"
+msgstr ""
+
+#: runnerslog_admin.php:231
+#@ runnerslog
+msgid "Enable Link to Garmin Connect"
+msgstr ""
+
+#: runnerslog_admin.php:240
+#@ default
+msgid "Enable Calories Count"
+msgstr ""
+
+#: runnerslog_admin.php:249
+#@ default
+msgid "Enable Cadence"
+msgstr ""
+
+#: runnerslog_admin.php:265
+#@ default
+msgid "Enable Gear Manager"
+msgstr ""
+
+#: runnerslog_admin.php:266
+#@ runnerslog
+msgid "Your must reload the page eg. press F5 after changing this setting"
+msgstr ""
+
+#: runnerslog_admin.php:281
+#@ runnerslog
+msgid "Show Distance"
+msgstr ""
+
+#: runnerslog_admin.php:290
+#@ runnerslog
+msgid "Show Time"
+msgstr ""
+
+#: runnerslog_admin.php:299
+#@ runnerslog
+msgid "Show Speed"
+msgstr ""
+
+#: runnerslog_admin.php:308
+#@ runnerslog
+msgid "Show Speed per Distance"
+msgstr ""
+
+#: runnerslog_admin.php:317
+#@ runnerslog
+msgid "Show Pulse Average"
+msgstr ""
+
+#: runnerslog_admin.php:326
+#@ runnerslog
+msgid "Show Calories"
+msgstr ""
+
+#: runnerslog_admin.php:335
+#@ runnerslog
+msgid "Show Cadence"
+msgstr ""
+
+#: runnerslog_admin.php:344
+#@ runnerslog
+msgid "Show link to Garmin Connect"
+msgstr ""
+
+#: runnerslog_admin.php:353
+#@ runnerslog
+msgid "Show Distance in 2009"
+msgstr ""
+
+#: runnerslog_admin.php:362
+#@ runnerslog
+msgid "Show Distance in 2010"
+msgstr ""
+
+#: runnerslog_admin.php:371
+#@ runnerslog
+msgid "Show Distance in 2011"
+msgstr ""
+
+#: runnerslog_admin.php:380
+#@ runnerslog
+msgid "Show Distance at All"
+msgstr ""
+
+#: runnerslog_admin.php:389
+#@ runnerslog
+msgid "Show embed Garmin Map"
+msgstr ""
+
+#: runnerslog_admin.php:396
+#@ runnerslog
+msgid "Save and update options"
+msgstr ""
+
+#: runnerslog_gchart.php:178
+#: runnerslog_gchart.php:184
+#: runnerslog_gchart.php:346
+#: runnerslog_gchart.php:353
+#, php-format
+#@ default
+msgid "%1$d %2$s"
+msgstr ""
+
+#: runnerslog_gchart.php:224
+#: runnerslog_gchart.php:230
+#: runnerslog_gchart.php:266
+#: runnerslog_gchart.php:296
+#, php-format
+#@ default
+msgid "%1$s"
+msgstr ""
+
+#: runnerslog_gear.php:78
+#@ runnerslog
+msgid "The&nbsp;<b>Name</b>&nbsp;of the gear must be set."
+msgstr ""
+
+#: runnerslog_gear.php:83
+#@ runnerslog
+msgid "The&nbsp;<b>Description</b>&nbsp;of the gear must be set."
+msgstr ""
+
+#: runnerslog_gear.php:88
+#@ runnerslog
+msgid "The&nbsp;<b>Day</b>&nbsp;of the gear must be set."
+msgstr ""
+
+#: runnerslog_gear.php:93
+#@ runnerslog
+msgid "The&nbsp;<b>Month</b>&nbsp;of the gear must be set."
+msgstr ""
+
+#: runnerslog_gear.php:98
+#@ runnerslog
+msgid "The&nbsp;<b>Year</b>&nbsp;of the gear must be set correctly."
+msgstr ""
+
+#: runnerslog_gear.php:116
+#@ runnerslog
+msgid "Gear correctly updated."
+msgstr ""
+
+#: runnerslog_gear.php:126
+#@ runnerslog
+msgid "Gear correctly added"
+msgstr ""
+
+#: runnerslog_gear.php:274
+#@ runnerslog
+msgid "Gear accomplish !"
+msgstr ""
+
+#: runnerslog_gear.php:278
+#@ runnerslog
+msgid "Gear back to work !"
+msgstr ""
+
+#: runnerslog_gear.php:300
+#@ runnerslog
+msgid "All"
+msgstr ""
+
+#: runnerslog_gear.php:307
+#@ runnerslog
+msgid "In use"
+msgstr ""
+
+#: runnerslog_gear.php:314
+#@ runnerslog
+msgid "Not in use"
+msgstr ""
+
+#: runnerslog_gear.php:457
+#@ runnerslog
+msgid "Click to say that the gear as not in use"
+msgstr ""
+
+#: runnerslog_gear.php:459
+#@ runnerslog
+msgid "To put back the gear in use"
+msgstr ""
+
+#: runnerslog_gear.php:461
+#@ runnerslog
+msgid "Error, can't get the status"
+msgstr ""
+
+#: runnerslog_gear.php:467
+#@ runnerslog
+msgid "Edit the gear"
+msgstr ""
+
+#: runnerslog_gear.php:473
+#@ runnerslog
+msgid "Delete the gear, can' be undone"
+msgstr ""
+
+#: runnerslog_gear.php:497
+#@ runnerslog
+msgid "Add Gear Item"
+msgstr ""
+
+#: runnerslog_gear.php:502
+#@ runnerslog
+msgid "Manage Gear List"
+msgstr ""
+
+#: runnerslog_tag.php:403
+#@ runnerslog
+msgid "The Percentage of Km"
+msgstr ""
+
+#: runnerslog_tag.php:405
+#@ runnerslog
+msgid "The Percentage of Miles"
+msgstr ""
+
+#: runnerslog_tag.php:416
+#@ runnerslog
+msgid "Training Graph Distance Pie"
+msgstr ""
+
+#: runnerslog_tag.php:506
+#@ runnerslog
+msgid "Training Graph Distance Mini"
+msgstr ""
+

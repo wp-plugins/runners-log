@@ -96,7 +96,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 ?>
 
 <div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log Options', RUNNERSLOG) . "</h2>"; ?>
+<?php echo "<h2>" . __( 'Runners Log - Options', RUNNERSLOG) . "</h2>"; ?>
 <?php echo "<p>". __('Set the options below', RUNNERSLOG).".</p>"?>
 
 <div class="tool-box">
@@ -263,7 +263,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<label for="runnerslog_show_gearmanager">
 				<input name="runnerslog_show_gearmanager" id="runnerslog_show_gearmanager" value="1"<?php checked('1', get_option('runnerslog_show_gearmanager')); ?> type="checkbox">
 				<?php _e('Enable Gear Manager') ?></label>
-				<span class="description"><?php _e('Your must reload the page eg. press F5 after changing this setting', RUNNERSLOG) ?></span>
+				<span class="description"><?php _e('Your must reload the page eg. by pressing F5 after changing this setting', RUNNERSLOG) ?></span>
 				</th>
 			</tr>
 		</tbody>

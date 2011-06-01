@@ -5,7 +5,7 @@
 
 load_plugin_textdomain(RUNNERSLOG,PLUGINDIR.'runners-log/languages','rlanguages');
 
-echo "<h2>" . __( 'Runners Log Weather Settings' ) . "</h2>"; ?></p>
+echo "<h2>" . __( 'Runners Log - Weather Settings' ) . "</h2>"; ?></p>
 
 <?php 
 	//include_once('Includes/runnerslog_weather_functions.php');

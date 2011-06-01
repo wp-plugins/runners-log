@@ -2,7 +2,7 @@
 <?php 
 load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
 
-echo "<h2>" . __( 'Runners Log Coverter Toolbox', RUNNERSLOG) . "</h2>"; ?>
+echo "<h2>" . __( 'Runners Log - Coverter Toolbox', RUNNERSLOG) . "</h2>"; ?>
 
 <?php
 //We have to be sure that we have the variables needed for the calculations

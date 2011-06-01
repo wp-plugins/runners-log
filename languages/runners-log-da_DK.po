@@ -19,16 +19,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: Includes/runnerslog_body_mass_index.php:6
-#@ default
-msgid "Runners Log Body Mass Calculator"
-msgstr ""
-
-#: Includes/runnerslog_converter_toolbox.php:5
-#@ runnerslog
-msgid "Runners Log Coverter Toolbox"
-msgstr ""
-
 #: Includes/runnerslog_converter_toolbox.php:43
 #: Includes/runnerslog_v02max.php:21
 #: Includes/runnerslog_vdot_race_time.php:89
@@ -47,8 +37,9 @@ msgstr ""
 #: Includes/runnerslog_vdot_training_pace.php:96
 #: Includes/runnerslog_weight_change_effect.php:43
 #@ default
+#@ runners-log
 msgid "Distance:"
-msgstr ""
+msgstr "Distance:"
 
 #: Includes/runnerslog_converter_toolbox.php:122
 #: Includes/runnerslog_converter_toolbox.php:212
@@ -56,37 +47,40 @@ msgstr ""
 #: Includes/runnerslog_vdot_training_pace.php:109
 #: Includes/runnerslog_weight_change_effect.php:56
 #: runnerslog.php:316
+#@ runners-log
 #@ default
-#@ runnerslog
 msgid "Time:"
-msgstr ""
+msgstr "Tid:"
 
 #: Includes/runnerslog_converter_toolbox.php:130
 #: Includes/runnerslog_converter_toolbox.php:175
 #: Includes/runnerslog_converter_toolbox.php:220
-#@ default
+#@ runners-log
 msgid "Speed:"
-msgstr ""
+msgstr "Hastighed:"
 
+#: Includes/runnerslog_converter_toolbox.php:103
 #: Includes/runnerslog_converter_toolbox.php:155
-#@ runnerslog
+#@ runners-log
 msgid "Calculate Speed"
-msgstr ""
+msgstr "Beregn hastighed"
 
 #: Includes/runnerslog_converter_toolbox.php:188
-#@ default
+#@ runners-log
 msgid "Race Time:"
-msgstr ""
+msgstr "Løbstid:"
 
+#: Includes/runnerslog_converter_toolbox.php:158
 #: Includes/runnerslog_converter_toolbox.php:205
-#@ runnerslog
+#@ runners-log
 msgid "Calculate Race Time"
-msgstr ""
+msgstr "Beregn løbstid"
 
+#: Includes/runnerslog_converter_toolbox.php:208
 #: Includes/runnerslog_converter_toolbox.php:250
-#@ runnerslog
+#@ runners-log
 msgid "Calculate Distance"
-msgstr ""
+msgstr "Beregn distance"
 
 #: Includes/runnerslog_converter_toolbox.php:257
 #@ default
@@ -94,29 +88,14 @@ msgid "Speed per Hour:"
 msgstr ""
 
 #: Includes/runnerslog_converter_toolbox.php:269
-#@ default
+#@ runners-log
 msgid "Time per Distance:"
-msgstr ""
+msgstr "Tid per distance:"
 
 #: Includes/runnerslog_converter_toolbox.php:286
-#@ runnerslog
+#@ runners-log
 msgid "Calculate Time per Distance"
-msgstr ""
-
-#: Includes/runnerslog_stats_graphs.php:6
-#@ default
-msgid "Runners Log Stats and Graph"
-msgstr ""
-
-#: Includes/runnerslog_training_zones.php:6
-#@ default
-msgid "Runners Log HR Training Zones Calculator"
-msgstr ""
-
-#: Includes/runnerslog_v02max.php:2
-#@ runnerslog
-msgid "Runners Log V0<sub>2</sub>maxulator Calculator"
-msgstr ""
+msgstr "Beregn tid per distance"
 
 #: Includes/runnerslog_v02max.php:36
 #@ default
@@ -124,31 +103,16 @@ msgid "Distance in 12 min:"
 msgstr ""
 
 #: Includes/runnerslog_v02max.php:51
-#@ runnerslog
+#@ runners-log
 msgid "Calculate Vo2-max"
-msgstr ""
-
-#: Includes/runnerslog_vdot_race_time.php:2
-#@ runnerslog
-msgid "Runners Log VDOT Race Time Calculator"
-msgstr ""
+msgstr "Beregn Vo2-max"
 
 #: Includes/runnerslog_vdot_race_time.php:131
 #: Includes/runnerslog_vdot_training_pace.php:119
 #: Includes/runnerslog_weight_change_effect.php:66
-#@ runnerslog
+#@ runners-log
 msgid "Calculate VDOT-value"
-msgstr ""
-
-#: Includes/runnerslog_vdot_training_pace.php:2
-#@ runnerslog
-msgid "Runners Log VDOT Training Pace Calculator"
-msgstr ""
-
-#: Includes/runnerslog_weather_settings.php:8
-#@ default
-msgid "Runners Log Weather Settings"
-msgstr ""
+msgstr "Udregn VDOT-værdi"
 
 #: Includes/runnerslog_weather_settings.php:53
 #@ default
@@ -186,109 +150,99 @@ msgid "New WOEID:"
 msgstr ""
 
 #: Includes/runnerslog_weather_settings.php:116
-#@ runnerslog
+#@ runners-log
 msgid "Update and save"
-msgstr ""
-
-#: Includes/runnerslog_weight_change_effect.php:2
-#@ runnerslog
-msgid "Runners Log Predicted effect of change in weight"
-msgstr ""
+msgstr "Opdater og gem"
 
 #: runnerslog.php:107
 #@ runners-log
 msgid "Settings"
-msgstr ""
+msgstr "Indstillinger"
 
 #: runnerslog.php:117
 #@ runners-log
 msgid "FAQ"
-msgstr ""
+msgstr "OSS"
 
 #: runnerslog.php:118
 #@ runners-log
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: runnerslog.php:119
 #@ runners-log
 msgid "Share where you use it"
-msgstr ""
+msgstr "Del hvor du bruger det"
 
 #: runnerslog.php:303
-#@ runnerslog
+#@ runners-log
 msgid "Meters:"
-msgstr ""
+msgstr "Meter:"
 
 #: runnerslog.php:308
-#@ runnerslog
+#@ runners-log
 msgid "Miles:"
-msgstr ""
+msgstr "Miles:"
 
 #: runnerslog.php:325
-#@ runnerslog
+#@ runners-log
 msgid "Km/hour:"
-msgstr ""
+msgstr "Km/t:"
 
 #: runnerslog.php:330
-#@ runnerslog
+#@ runners-log
 msgid "Miles/hour:"
-msgstr ""
+msgstr "Mi/t:"
 
 #: runnerslog.php:340
-#@ runnerslog
+#@ runners-log
 msgid "Min/km:"
-msgstr ""
+msgstr "Min/km:"
 
 #: runnerslog.php:345
-#@ runnerslog
+#@ runners-log
 msgid "Min/miles:"
-msgstr ""
+msgstr "Min/mile:"
 
 #: runnerslog.php:353
-#@ runnerslog
+#@ runners-log
 msgid "Pulse average:"
-msgstr ""
+msgstr "Gennemsnits-puls:"
 
 #: runnerslog.php:365
-#@ runnerslog
+#@ runners-log
 msgid "Calories:"
-msgstr ""
+msgstr "Kalorier:"
 
 #: runnerslog.php:372
-#@ runnerslog
+#@ runners-log
 msgid "Cadence:"
-msgstr ""
+msgstr "Cadence:"
 
 #: runnerslog.php:388
-#@ runnerslog
+#@ runners-log
 msgid "km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km"
-msgstr ""
+msgstr "km baseret på <strong>$number_of_runs_2009</strong> løb med et snit på <strong>$avg_km_per_run_2009</strong> km"
 
 #: runnerslog.php:392
-#@ runnerslog
+#@ runners-log
 msgid "km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km"
-msgstr ""
+msgstr "km baseret på <strong>$number_of_runs_2009</strong> løb med et snit på <strong>$avg_km_per_run_2009</strong> km"
 
 #: runnerslog.php:397
-#@ runnerslog
+#@ runners-log
 msgid "miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi"
-msgstr ""
+msgstr "miles baseret på <strong>$number_of_runs_2009</strong> løb med et snit på <strong>$avg_miles_per_run_2009</strong> mi"
 
 #: runnerslog.php:401
-#@ runnerslog
+#@ runners-log
 msgid "miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi"
-msgstr ""
-
-#: runnerslog_admin.php:99
-#@ runnerslog
-msgid "Runners Log Options"
-msgstr ""
+msgstr "miles baseret på <strong>$number_of_runs_2009</strong> løb med et snit på <strong>$avg_miles_per_run_2009</strong> mi"
 
 #: runnerslog_admin.php:100
-#@ runnerslog
+#@ runners-log
 msgid "Set the options below"
-msgstr ""
+msgstr "Sæt indstillingerne nedenfor"
 
 #: runnerslog_admin.php:110
 #@ default
@@ -336,24 +290,24 @@ msgid "Female"
 msgstr ""
 
 #: runnerslog_admin.php:159
-#@ runnerslog
+#@ runners-log
 msgid "Your Height"
-msgstr ""
+msgstr "Højde"
 
 #: runnerslog_admin.php:163
-#@ runnerslog
+#@ runners-log
 msgid "Centimeters"
-msgstr ""
+msgstr "Cm"
 
 #: runnerslog_admin.php:166
-#@ runnerslog
+#@ runners-log
 msgid " Feet"
-msgstr ""
+msgstr "Feet"
 
 #: runnerslog_admin.php:168
-#@ runnerslog
+#@ runners-log
 msgid "Inch(es)"
-msgstr ""
+msgstr "Inch(es)"
 
 #: runnerslog_admin.php:176
 #@ default
@@ -366,49 +320,49 @@ msgid "Kilograms"
 msgstr ""
 
 #: runnerslog_admin.php:184
-#@ runnerslog
+#@ runners-log
 msgid "Pounds. Note: 8 ounces = 0.5 pounds"
-msgstr ""
+msgstr "Pounds. OBS: 8 ounces = 0.5 pounds"
 
 #: runnerslog_admin.php:192
-#@ runnerslog
+#@ runners-log
 msgid "Your age"
-msgstr ""
+msgstr "Alder"
 
 #: runnerslog_admin.php:195
-#@ runnerslog
+#@ runners-log
 msgid "Years"
-msgstr ""
+msgstr "Årstal"
 
 #: runnerslog_admin.php:201
-#@ runnerslog
+#@ runners-log
 msgid "Resting Heart Rate"
-msgstr ""
+msgstr "Hvilepuls"
 
 #: runnerslog_admin.php:204
-#@ runnerslog
+#@ runners-log
 msgid "\"Resting Heart Rate\" is the number of times our heart beats when we are at completely at rest."
-msgstr ""
+msgstr "\"Hvilepuls\" er antal hjerteslag per minut i total hvile. F.eks. morgenpuls i sengen."
 
 #: runnerslog_admin.php:210
-#@ runnerslog
+#@ runners-log
 msgid "Maximum Heart Rate"
-msgstr ""
+msgstr "Maks puls"
 
 #: runnerslog_admin.php:213
-#@ runnerslog
+#@ runners-log
 msgid "\"Maximum Heart Rate\" is the highest number of times your heart can contract in one minute."
-msgstr ""
+msgstr "\"Max puls\" Er det højeste antal pulsslag under løb baseret på en all-out test."
 
 #: runnerslog_admin.php:222
-#@ runnerslog
+#@ runners-log
 msgid "Enable Pulse Average"
-msgstr ""
+msgstr "Aktiver plusgennemsnit"
 
 #: runnerslog_admin.php:231
-#@ runnerslog
+#@ runners-log
 msgid "Enable Link to Garmin Connect"
-msgstr ""
+msgstr "Aktiver link til Garmin Connect"
 
 #: runnerslog_admin.php:240
 #@ default
@@ -425,80 +379,75 @@ msgstr ""
 msgid "Enable Gear Manager"
 msgstr ""
 
-#: runnerslog_admin.php:266
-#@ runnerslog
-msgid "Your must reload the page eg. press F5 after changing this setting"
-msgstr ""
-
 #: runnerslog_admin.php:281
-#@ runnerslog
+#@ runners-log
 msgid "Show Distance"
-msgstr ""
+msgstr "Vis distance"
 
 #: runnerslog_admin.php:290
-#@ runnerslog
+#@ runners-log
 msgid "Show Time"
-msgstr ""
+msgstr "Vis tid"
 
 #: runnerslog_admin.php:299
-#@ runnerslog
+#@ runners-log
 msgid "Show Speed"
-msgstr ""
+msgstr "Vis hastighed"
 
 #: runnerslog_admin.php:308
-#@ runnerslog
+#@ runners-log
 msgid "Show Speed per Distance"
-msgstr ""
+msgstr "Vis hastighed pr distance"
 
 #: runnerslog_admin.php:317
-#@ runnerslog
+#@ runners-log
 msgid "Show Pulse Average"
-msgstr ""
+msgstr "Vis pulsgennemsnit"
 
 #: runnerslog_admin.php:326
-#@ runnerslog
+#@ runners-log
 msgid "Show Calories"
-msgstr ""
+msgstr "Vis kalorier"
 
 #: runnerslog_admin.php:335
-#@ runnerslog
+#@ runners-log
 msgid "Show Cadence"
-msgstr ""
+msgstr "Vis cadence"
 
 #: runnerslog_admin.php:344
-#@ runnerslog
+#@ runners-log
 msgid "Show link to Garmin Connect"
-msgstr ""
+msgstr "Vis link til Garmin Connect"
 
 #: runnerslog_admin.php:353
-#@ runnerslog
+#@ runners-log
 msgid "Show Distance in 2009"
-msgstr ""
+msgstr "Vis distance i 2009"
 
 #: runnerslog_admin.php:362
-#@ runnerslog
+#@ runners-log
 msgid "Show Distance in 2010"
-msgstr ""
+msgstr "Vis distance i 2010"
 
 #: runnerslog_admin.php:371
-#@ runnerslog
+#@ runners-log
 msgid "Show Distance in 2011"
-msgstr ""
+msgstr "Vis distance i 2011"
 
 #: runnerslog_admin.php:380
-#@ runnerslog
+#@ runners-log
 msgid "Show Distance at All"
-msgstr ""
+msgstr "Vis distance-sum"
 
 #: runnerslog_admin.php:389
-#@ runnerslog
+#@ runners-log
 msgid "Show embed Garmin Map"
-msgstr ""
+msgstr "Vis embed Garmin Map"
 
 #: runnerslog_admin.php:396
-#@ runnerslog
+#@ runners-log
 msgid "Save and update options"
-msgstr ""
+msgstr "Gem og opdater indstillinger"
 
 #: runnerslog_gchart.php:178
 #: runnerslog_gchart.php:184
@@ -519,117 +468,679 @@ msgid "%1$s"
 msgstr ""
 
 #: runnerslog_gear.php:78
-#@ runnerslog
+#@ runners-log
 msgid "The&nbsp;<b>Name</b>&nbsp;of the gear must be set."
-msgstr ""
+msgstr "Der skal angives et &nbsp;<b>navn</b>&nbsp; på dit udstyr."
 
 #: runnerslog_gear.php:83
-#@ runnerslog
+#@ runners-log
 msgid "The&nbsp;<b>Description</b>&nbsp;of the gear must be set."
-msgstr ""
+msgstr "Der skal angives en &nbsp;<b>beskrivelse</b>&nbsp; af dit udstyr."
 
 #: runnerslog_gear.php:88
-#@ runnerslog
+#@ runners-log
 msgid "The&nbsp;<b>Day</b>&nbsp;of the gear must be set."
-msgstr ""
+msgstr "Der skal angives en &nbsp;<b>indkøbsdato</b>&nbsp; for dit udstyr."
 
 #: runnerslog_gear.php:93
-#@ runnerslog
+#@ runners-log
 msgid "The&nbsp;<b>Month</b>&nbsp;of the gear must be set."
-msgstr ""
+msgstr "Der skal angives en &nbsp;<b>måned</b>&nbsp; for køb af dit udstyr."
 
 #: runnerslog_gear.php:98
-#@ runnerslog
+#@ runners-log
 msgid "The&nbsp;<b>Year</b>&nbsp;of the gear must be set correctly."
-msgstr ""
+msgstr "Der skal angives et &nbsp;<b>årstal</b>&nbsp; for dit udstyr."
 
 #: runnerslog_gear.php:116
-#@ runnerslog
+#@ runners-log
 msgid "Gear correctly updated."
-msgstr ""
+msgstr "Udstyr opdateret"
 
 #: runnerslog_gear.php:126
-#@ runnerslog
+#@ runners-log
 msgid "Gear correctly added"
-msgstr ""
+msgstr "Udstyr tilføjet"
 
 #: runnerslog_gear.php:274
-#@ runnerslog
+#@ runners-log
 msgid "Gear accomplish !"
-msgstr ""
+msgstr "Udstyr udrettet!"
 
 #: runnerslog_gear.php:278
-#@ runnerslog
+#@ runners-log
 msgid "Gear back to work !"
-msgstr ""
+msgstr "Gear - tilbage til arbejdet!"
 
 #: runnerslog_gear.php:300
-#@ runnerslog
+#@ runners-log
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: runnerslog_gear.php:307
-#@ runnerslog
+#@ runners-log
 msgid "In use"
-msgstr ""
+msgstr "I brug"
 
 #: runnerslog_gear.php:314
-#@ runnerslog
+#@ runners-log
 msgid "Not in use"
-msgstr ""
+msgstr "Ikke i brug"
 
 #: runnerslog_gear.php:457
-#@ runnerslog
+#@ runners-log
 msgid "Click to say that the gear as not in use"
-msgstr ""
+msgstr "Klik for at angive at udstyret ikke er i brug"
 
 #: runnerslog_gear.php:459
-#@ runnerslog
+#@ runners-log
 msgid "To put back the gear in use"
-msgstr ""
+msgstr "Klik for at angive at udstyret er i brug"
 
 #: runnerslog_gear.php:461
-#@ runnerslog
+#@ runners-log
 msgid "Error, can't get the status"
-msgstr ""
+msgstr "Fejl, kan ikke hente aktuelle status"
 
 #: runnerslog_gear.php:467
-#@ runnerslog
+#@ runners-log
 msgid "Edit the gear"
-msgstr ""
+msgstr "Rediger udstyr"
 
 #: runnerslog_gear.php:473
-#@ runnerslog
+#@ runners-log
 msgid "Delete the gear, can' be undone"
-msgstr ""
+msgstr "Slet udstyr, kan ikke fortrydes"
 
 #: runnerslog_gear.php:497
-#@ runnerslog
+#@ runners-log
 msgid "Add Gear Item"
-msgstr ""
+msgstr "Tilføj nyt udstyr"
 
 #: runnerslog_gear.php:502
-#@ runnerslog
+#@ runners-log
 msgid "Manage Gear List"
-msgstr ""
+msgstr "Administrer udstyr"
 
 #: runnerslog_tag.php:403
-#@ runnerslog
+#@ runners-log
 msgid "The Percentage of Km"
-msgstr ""
+msgstr "Procent af km-summen"
 
 #: runnerslog_tag.php:405
-#@ runnerslog
+#@ runners-log
 msgid "The Percentage of Miles"
-msgstr ""
+msgstr "Procent af miles-summen"
 
 #: runnerslog_tag.php:416
-#@ runnerslog
+#@ runners-log
 msgid "Training Graph Distance Pie"
-msgstr ""
+msgstr "Træningsgraf - distance (lagkage)"
 
 #: runnerslog_tag.php:506
-#@ runnerslog
+#@ runners-log
 msgid "Training Graph Distance Mini"
+msgstr "Træningsgraf - distance (mini)"
+
+#: Includes/runnerslog_converter_toolbox.php:74
+#@ runners-log
+msgid "hours"
+msgstr "timer"
+
+#: Includes/runnerslog_converter_toolbox.php:113
+#@ runners-log
+msgid "Meters (eg 2500)"
+msgstr "Meter (f.eks. 2500)"
+
+#: Includes/runnerslog_converter_toolbox.php:116
+#: Includes/runnerslog_converter_toolbox.php:169
+#@ runners-log
+msgid "Miles (eg. 1.58)"
+msgstr "Miles (f.eks 1.58)"
+
+#: Includes/runnerslog_converter_toolbox.php:125
+#@ runners-log
+msgid "Must be formated as hh:mm:ss like 01:37:45 for 1 hour 37min and 45sec"
+msgstr "Skal være formateret som hh:mm:ss eks. 01:37:45 1 time 37min og 45sec"
+
+#: Includes/runnerslog_converter_toolbox.php:137
+#: Includes/runnerslog_converter_toolbox.php:180
+#: Includes/runnerslog_converter_toolbox.php:225
+#: Includes/runnerslog_converter_toolbox.php:274
+#@ runners-log
+msgid "per km"
+msgstr "per km"
+
+#: Includes/runnerslog_converter_toolbox.php:138
+#@ runners-log
+msgid "m/sec"
+msgstr "m/sek"
+
+#: Includes/runnerslog_converter_toolbox.php:139
+#@ runners-log
+msgid "km/hours"
+msgstr "km/t"
+
+#: Includes/runnerslog_converter_toolbox.php:144
+#: Includes/runnerslog_converter_toolbox.php:182
+#: Includes/runnerslog_converter_toolbox.php:227
+#: Includes/runnerslog_converter_toolbox.php:277
+#@ runners-log
+msgid "per mile"
+msgstr "per mile"
+
+#: Includes/runnerslog_converter_toolbox.php:145
+#@ runners-log
+msgid "feet/sec"
+msgstr "fod/sek"
+
+#: Includes/runnerslog_converter_toolbox.php:146
+#@ runners-log
+msgid "miles/hours"
+msgstr "miles/time"
+
+#: Includes/runnerslog_converter_toolbox.php:166
+#@ runners-log
+msgid "Meters (eg. 2500)"
+msgstr "Meter (f.eks 2500)"
+
+#: Includes/runnerslog_converter_toolbox.php:215
+#@ runners-log
+msgid "Must be formated as hh:mm:ss like 01:37:45 for 1 hours 37min and 45sec"
+msgstr "Skal være formateret som hh:mm:ss eks. 01:37:45 for 1 time 37min og 45sec"
+
+#: Includes/runnerslog_converter_toolbox.php:238
+#@ runners-log
+msgid "meters"
+msgstr "meter"
+
+#: Includes/runnerslog_converter_toolbox.php:241
+#@ runners-log
+msgid "miles"
+msgstr "miles"
+
+#: Includes/runnerslog_converter_toolbox.php:253
+#@ runners-log
+msgid "Convert speed to min per distance"
+msgstr "Konverter hastigheden til min pr afstand"
+
+#: Includes/runnerslog_converter_toolbox.php:261
+#@ runners-log
+msgid "km/hour eg. 12.5"
+msgstr "km/t f.eks. 12.5"
+
+#: Includes/runnerslog_converter_toolbox.php:263
+#@ runners-log
+msgid "miles/hour"
+msgstr "miles/time"
+
+#: Includes/runnerslog_stats_graphs.php:10
+#: Includes/runnerslog_stats_graphs.php:13
+#: Includes/runnerslog_stats_graphs.php:16
+#: Includes/runnerslog_stats_graphs.php:19
+#: Includes/runnerslog_stats_graphs.php:22
+#: Includes/runnerslog_stats_graphs.php:25
+#: Includes/runnerslog_stats_graphs.php:28
+#: Includes/runnerslog_stats_graphs.php:31
+#: Includes/runnerslog_stats_graphs.php:34
+#: Includes/runnerslog_stats_graphs.php:37
+#@ runners-log
+msgid "In pages or posts use:"
+msgstr "I sider eller indlæg brug:"
+
+#: Includes/runnerslog_training_zones.php:27
+#@ runners-log
+msgid "Based on a Resting Heart Rate at <b>"
+msgstr "Baseret på en hvilepuls på"
+
+#: Includes/runnerslog_training_zones.php:27
+#@ runners-log
+msgid "and a Maximum Heart Rate at <b>"
+msgstr "og en maksimal puls på"
+
+#: Includes/runnerslog_training_zones.php:27
+#@ runners-log
+msgid "the commanded training zones are:"
+msgstr "de anbefalede træningszoner er:"
+
+#: Includes/runnerslog_training_zones.php:30
+#@ runners-log
+msgid "Heart Rate Training Zones (Beginner)"
+msgstr "Pulstrænings-Zoner (Begynder)"
+
+#: Includes/runnerslog_training_zones.php:35
+#: Includes/runnerslog_training_zones.php:116
+#@ runners-log
+msgid "Pulse Zone"
+msgstr "Puls-Zoner"
+
+#: Includes/runnerslog_training_zones.php:37
+#: Includes/runnerslog_training_zones.php:118
+#@ runners-log
+msgid "Pulse"
+msgstr "Puls"
+
+#: Includes/runnerslog_training_zones.php:39
+#: Includes/runnerslog_training_zones.php:120
+#@ runners-log
+msgid "% of HRR"
+msgstr "% af HRR"
+
+#: Includes/runnerslog_training_zones.php:42
+#: Includes/runnerslog_training_zones.php:123
+#@ runners-log
+msgid "Type"
+msgstr "Type"
+
+#: Includes/runnerslog_training_zones.php:44
+#: Includes/runnerslog_training_zones.php:125
+#@ runners-log
+msgid "What it does"
+msgstr "Hvad den gør"
+
+#: Includes/runnerslog_training_zones.php:55
+#: Includes/runnerslog_training_zones.php:136
+#@ runners-log
+msgid "Moderate activity"
+msgstr "Moderat aktivitet"
+
+#: Includes/runnerslog_training_zones.php:57
+#: Includes/runnerslog_training_zones.php:138
+#@ runners-log
+msgid "Maintenance or warm up"
+msgstr "Vedligeholdelse eller opvarmning"
+
+#: Includes/runnerslog_training_zones.php:67
+#: Includes/runnerslog_training_zones.php:148
+#@ runners-log
+msgid "The Energy Efficient or Recovery Zone"
+msgstr "Energy-effektive eller Recovery-zone"
+
+#: Includes/runnerslog_training_zones.php:69
+#: Includes/runnerslog_training_zones.php:150
+#@ runners-log
+msgid "Training within this zone develops basic endurance and aerobic capacity."
+msgstr "Træning inden for denne zone udvikler grundlæggende udholdenhed og aerob kapacitet."
+
+#: Includes/runnerslog_training_zones.php:79
+#: Includes/runnerslog_training_zones.php:160
+#@ runners-log
+msgid "The Aerobic Zone"
+msgstr "Den aerobe zone"
+
+#: Includes/runnerslog_training_zones.php:81
+#: Includes/runnerslog_training_zones.php:162
+#@ runners-log
+msgid "Training in this zone will develop your cardiovascular system (Also Known As: cardio zone). Train the ability to transport oxygen to, and carbon dioxide away from, the working muscles."
+msgstr "Træning i denne zone vil udvikle dit kardiovaskulære system (også kendt som: cardio zone). Og træne evnen til at transportere ilt til, og kuldioxid væk fra, de arbejdende muskler."
+
+#: Includes/runnerslog_training_zones.php:91
+#: Includes/runnerslog_training_zones.php:172
+#@ runners-log
+msgid "The Anaerobic Zone"
+msgstr "Den anaerobe zone"
+
+#: Includes/runnerslog_training_zones.php:93
+#: Includes/runnerslog_training_zones.php:174
+#@ runners-log
+msgid "Training in this zone will develop your lactic acid system. The point at which the body cannot remove lactic acid as quickly as it is produced is called the lactate threshold (LT) or anaerobic threshold (AT)."
+msgstr "Træning i denne zone vil udvikle din mælkesyre-tærske. Det punkt, hvor kroppen ikke kan fjerne mælkesyren med samme hastighed som det fremstilles kaldes mælkesyretærsklen (LT) eller den anaerob tærskel (AT)."
+
+#: Includes/runnerslog_training_zones.php:105
+#: Includes/runnerslog_training_zones.php:186
+#@ runners-log
+msgid "It effectively trains your fast twitch muscle fibres and helps to develop speed. This zone is reserved for interval running."
+msgstr "Denne zone er forbeholdt interval løb og udvikler den type muskelfibre som hjælper med at bidrage hastighed."
+
+#: Includes/runnerslog_training_zones.php:184
+#@ runners-log
+msgid "VO<sub>2</sub>max or &quot;Red line zone&quot;"
+msgstr "VO<sub>2</sub>max eller &quot;Rød zone&quot;"
+
+#: Includes/runnerslog_training_zones.php:191
+#@ runners-log
+msgid "<p>To calculate <b>YOUR</b> traing zones you have to type in your resting pulse and max pulse in Runners Log Settings.</p>"
+msgstr "<p>For at beregne <b>din</b> træningszone er du nød til at angive din hvilepuls og maxpuls i indstillingerne. </p>"
+
+#: Includes/runnerslog_v02max.php:29
+#@ runners-log
+msgid "The Cooper test is a test of physical fitness. It was designed by Kenneth H. Cooper in 1968 for US military use. In the original form, the point of the test is to run as far as possible within 12 minutes."
+msgstr "Cooper-testen er en test af din fysiske kondition. Den blev designet af Kenneth H. Cooper i 1968 til brug i det amerikanske militær. Formålet er at løbe så langt som muligt inden for 12 minutter - på en flad og opmålt rute. Gerne en træningsbane."
+
+#: Includes/runnerslog_v02max.php:88
+#@ runners-log
+msgid "Based on your gender <b>"
+msgstr "Baseret på dit køn <b>"
+
+#: Includes/runnerslog_v02max.php:88
+#@ runners-log
+msgid "</b> and your weight <b>"
+msgstr "</b> og din vægt  <b>"
+
+#: Includes/runnerslog_v02max.php:88
+#@ runners-log
+msgid "</b> and the distance <b>"
+msgstr "</b> og den løbet distance <b>"
+
+#: Includes/runnerslog_v02max.php:88
+#@ runners-log
+msgid "</b> in 12min gives you the following \"V0<sub>2</sub>max\" and \"absorption of oxygen value\"."
+msgstr "</b> på 12min giver dig følgende \"V0<sub>2</sub>max\" og \"iltoptagelse\"."
+
+#: Includes/runnerslog_v02max.php:90
+#@ runners-log
+msgid "Absorption of oxygen"
+msgstr "Iltoptagelse"
+
+#: Includes/runnerslog_v02max.php:91
+#@ runners-log
+msgid "Below you can compare the V0<sub>2</sub>max with your age. You find a chart for men, women and elite."
+msgstr "Nedenfor kan du sammenligne din V0<sub>2</sub>max-værdi med din alder. Du finder et diagram for mænd, kvinder og elite."
+
+#: Includes/runnerslog_v02max.php:93
+#@ runners-log
+msgid "To calculate your \"V0<sub>2</sub>max\" and \"Absorption of oxygen value\" you need to specify your weight and gender in the settings. And a distance above."
+msgstr "For at beregne din \"V0<sub>2</sub>max\" og \"iltoptagelse\" skal du angive din vægt og dit køn under instillingerne, samt en distance nedenfor."
+
+#: runnerslog.php:379
+#@ runners-log
+msgid "Garmin Link:"
+msgstr "Garmin Link:"
+
+#: runnerslog.php:411
+#@ runners-log
+msgid "km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km"
+msgstr "km baseret på <strong>$number_of_runs_2010</strong> løb med et gennemsnit på <strong>$avg_km_per_run_2010</strong> km"
+
+#: runnerslog.php:415
+#@ runners-log
+msgid "km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km"
+msgstr "km baseret på <strong>$number_of_runs_2010</strong> løb med et gennemsnit på <strong>$avg_km_per_run_2010</strong> km"
+
+#: runnerslog.php:420
+#@ runners-log
+msgid "miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi"
+msgstr "miles baseret på <strong>$number_of_runs_2010</strong> løb med et gennemsnit på <strong>$avg_miles_per_run_2010</strong> mi"
+
+#: runnerslog.php:424
+#@ runners-log
+msgid "miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi"
+msgstr "miles baseret på <strong>$number_of_runs_2010</strong> løb med et gennemsnit på <strong>$avg_miles_per_run_2010</strong> mi"
+
+#: runnerslog.php:434
+#@ runners-log
+msgid "km based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_km_per_run_2011</strong> km"
+msgstr "km baseret på <strong>$number_of_runs_2011</strong> løb med et gennemsnit på <strong>$avg_km_per_run_2011</strong> km"
+
+#: runnerslog.php:438
+#@ runners-log
+msgid "km based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_km_per_run_2011</strong> km"
+msgstr "km baseret på <strong>$number_of_runs_2011</strong> løb med et gennemsnit på <strong>$avg_km_per_run_2011</strong> km"
+
+#: runnerslog.php:443
+#@ runners-log
+msgid "miles based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_miles_per_run_2011</strong> mi"
+msgstr "miles baseret på <strong>$number_of_runs_2011</strong> løb med et gennemsnit på <strong>$avg_miles_per_run_2011</strong> mi"
+
+#: runnerslog.php:447
+#@ runners-log
+msgid "miles based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_miles_per_run_2011</strong> mi"
+msgstr "miles baseret på <strong>$number_of_runs_2011</strong> løb med et gennemsnit på <strong>$avg_miles_per_run_2011</strong> mi"
+
+#: runnerslog.php:457
+#@ runners-log
+msgid "km based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_km_per_run</strong> km"
+msgstr "km baseret på <strong>$number_of_runs</strong> løb med et gennemsnit på <strong>$avg_km_per_run</strong> km"
+
+#: runnerslog.php:461
+#@ runners-log
+msgid "km based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_km_per_run</strong> km"
+msgstr "km baseret på <strong>$number_of_runs</strong> løb med et gennemsnit på <strong>$avg_km_per_run</strong> km"
+
+#: runnerslog.php:466
+#@ runners-log
+msgid "miles based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_miles_per_run</strong> mi"
+msgstr "miles baseret på <strong>$number_of_runs</strong> løb med et gennemsnit på <strong>$avg_miles_per_run</strong> mi"
+
+#: runnerslog.php:470
+#@ runners-log
+msgid "miles based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_miles_per_run</strong> mi"
+msgstr "miles baseret på <strong>$number_of_runs</strong> løb med et gennemsnit på <strong>$avg_miles_per_run</strong> mi"
+
+#: runnerslog.php:507
+#: runnerslog.php:560
+#@ runners-log
+msgid "Temperature :"
+msgstr "Temperatur:"
+
+#: runnerslog.php:515
+#: runnerslog.php:568
+#@ runners-log
+msgid "Humidity :"
+msgstr "Luftfugtighed:"
+
+#: runnerslog.php:523
+#: runnerslog.php:576
+#@ runners-log
+msgid "Windchill :"
+msgstr "Vindeffekt:"
+
+#: runnerslog.php:531
+#: runnerslog.php:584
+#@ runners-log
+msgid "Description :"
+msgstr "Beskrivelse:"
+
+#: runnerslog.php:683
+#@ runners-log
+msgid "Km per month"
+msgstr "Km pr måned"
+
+#: runnerslog.php:685
+#@ runners-log
+msgid "Miles per month"
+msgstr "Miles per måned"
+
+#: runnerslog.php:709
+#@ runners-log
+msgid "Hours per month"
+msgstr "Timer per måned"
+
+#: runnerslog.php:900
+#: runnerslog.php:962
+#: runnerslog.php:1059
+#: runnerslog.php:1231
+#: runnerslog.php:1425
+#@ runners-log
+msgid "No data available."
+msgstr "Ingen data til rådighed."
+
+#: runnerslog.php:1016
+#@ runners-log
+msgid "The Percentage of Km per Month"
+msgstr "Den procentvise andel af km per måned"
+
+#: runnerslog.php:1018
+#@ runners-log
+msgid "The Percentage of Miles per Month"
+msgstr "Den procentvise andel af mi per måned"
+
+#: runnerslog.php:1113
+#@ runners-log
+msgid "Training Graph Pie Hours"
+msgstr "Træningsgraf lagkage timer"
+
+#: runnerslog.php:1303
+#@ runners-log
+msgid "Training Bar Graph Distance"
+msgstr "Træningsgraf bar-graf distance"
+
+#: runnerslog.php:1486
+#@ runners-log
+msgid "Training Bar Graph Calories"
+msgstr "Træningsgraf bar-graf kalorier"
+
+#: runnerslog_gear.php:73
+#@ runners-log
+msgid "The&nbsp;<b>Brand</b>&nbsp;of the gear must be set."
+msgstr "Der skal angives et &nbsp;<b>brand</b>&nbsp; for dit udstyr."
+
+#: runnerslog_gear.php:162
+#@ runners-log
+msgid "Brand"
+msgstr "Brand"
+
+#: runnerslog_gear.php:163
+#@ runners-log
+msgid "Eg. New Balance"
+msgstr "F.eks. New Balance"
+
+#: runnerslog_gear.php:166
+#@ runners-log
+msgid "Name"
+msgstr "Navn"
+
+#: runnerslog_gear.php:167
+#@ runners-log
+msgid "Eg. NB 1224"
+msgstr "F.eks. NB 1224"
+
+#: runnerslog_gear.php:170
+#@ runners-log
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: runnerslog_gear.php:175
+#@ runners-log
+msgid "Currency isnt supported"
+msgstr "Valuta ikke understøttet"
+
+#: runnerslog_gear.php:179
+#@ runners-log
+msgid "Enter a start distance if the item is used. Further distances is calculated"
+msgstr "Indtast en start afstand, hvis udstyret ikke er nyt. Fremtidige afstande vil blive beregnet"
+
+#: runnerslog_gear.php:182
+#@ runners-log
+msgid "Bought"
+msgstr "Købt"
+
+#: runnerslog_gear.php:209
+#@ runners-log
+msgid "Enter an URL or upload an image for the banner."
+msgstr "Indtast en URL eller uploade et billede."
+
+#: runnerslog_gear.php:219
+#@ runners-log
+msgid "Update"
+msgstr "Update"
+
+#: runnerslog_gear.php:219
+#@ runners-log
+msgid "Add Item"
+msgstr "Tilføj udstyr"
+
+#: runnerslog_gear.php:291
+#@ runners-log
+msgid "Runners Log - Gear List"
+msgstr "Runners Log - Gear List"
+
+#: runnerslog_gear.php:292
+#@ runners-log
+msgid "The Gear Manager is still a beta version. Data might be deleted in a comming release!"
+msgstr "Gear Manageren er stadig i en beta-version. Data kan blive slettet i forbindelse med en kommende version!"
+
+#: runnerslog_gear.php:408
+#@ runners-log
+msgid "Brand New"
+msgstr "Hel ny"
+
+#: runnerslog_tag.php:155
+#@ runners-log
+msgid "Training Graph"
+msgstr "Træningsgraf"
+
+#: runnerslog_tag.php:292
+#@ runners-log
+msgid "Training Graph Distance"
+msgstr "Træningsgraf distance"
+
+#: Includes/runnerslog_training_zones.php:6
+#@ runners-log
+msgid "Runners Log - HR Training Zones Calculator"
+msgstr "Runners Log - Træningszone beregner"
+
+#: Includes/runnerslog_body_mass_index.php:6
+#@ default
+msgid "Runners Log - Body Mass Calculator"
 msgstr ""
+
+#: Includes/runnerslog_converter_toolbox.php:5
+#@ runners-log
+msgid "Runners Log - Coverter Toolbox"
+msgstr "Runners Log - Omregner/værktøjskasse"
+
+#: Includes/runnerslog_stats_graphs.php:6
+#@ default
+msgid "Runners Log - Stats and Graph"
+msgstr ""
+
+#: Includes/runnerslog_v02max.php:2
+#@ runners-log
+msgid "Runners Log - V0<sub>2</sub>max Calculator"
+msgstr "Runners Log - V0<sub>2</sub>max beregner"
+
+#: Includes/runnerslog_vdot_race_time.php:2
+#@ runners-log
+msgid "Runners Log - VDOT Race Time Calculator"
+msgstr "Runners Log - VDOT Race Time Beregner"
+
+#: Includes/runnerslog_vdot_training_pace.php:2
+#@ runners-log
+msgid "Runners Log - VDOT Training Pace Calculator"
+msgstr "Runners Log - VDOT Pace beregner"
+
+#: Includes/runnerslog_weather_settings.php:8
+#@ default
+msgid "Runners Log - Weather Settings"
+msgstr ""
+
+#: Includes/runnerslog_weight_change_effect.php:2
+#@ runners-log
+msgid "Runners Log - Predicted effect of change in weight"
+msgstr "Runners Log - Udregn effekt af vægtab"
+
+#: Includes/runnerslog_stats_graphs.php:7
+#@ runners-log
+msgid "Below the graphs you'll find the code you need to use in a page, post or template to insert a simular graph as shown."
+msgstr "Neden for grafen finder du den kode, som du skal bruge for at få en graf magen til den vidste."
+
+#: runnerslog_admin.php:99
+#@ runners-log
+msgid "Runners Log - Options"
+msgstr "Runners Log - Indstillinger"
+
+#: runnerslog_admin.php:266
+#@ runners-log
+msgid "Your must reload the page eg. by pressing F5 after changing this setting"
+msgstr "Din skal genindlæse siden f.eks. ved at trykke F5 efter ændring af denne indstilling"
+
+#: runnerslog_tag.php:555
+#@ runners-log
+msgid "No data available. Did you specify an id like"
+msgstr "Ingen data til rådighed. Har du angivet et id"
+
+#: Includes/runnerslog_stats_graphs.php:10
+#: Includes/runnerslog_stats_graphs.php:13
+#: Includes/runnerslog_stats_graphs.php:16
+#: Includes/runnerslog_stats_graphs.php:19
+#: Includes/runnerslog_stats_graphs.php:22
+#: Includes/runnerslog_stats_graphs.php:25
+#: Includes/runnerslog_stats_graphs.php:28
+#: Includes/runnerslog_stats_graphs.php:31
+#: Includes/runnerslog_stats_graphs.php:34
+#: Includes/runnerslog_stats_graphs.php:37
+#@ runners-log
+msgid "in a template"
+msgstr "i en skabelon"
 

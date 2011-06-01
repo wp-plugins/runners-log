@@ -3,7 +3,7 @@
 
 load_plugin_textdomain(RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
 
-echo "<h2>" . __( 'Runners Log HR Training Zones Calculator', RUNNERSLOG). "</h2>"; ?>
+echo "<h2>" . __( 'Runners Log - HR Training Zones Calculator', RUNNERSLOG). "</h2>"; ?>
 <?php 
 //Get the hrrest and hrmax
 $hrrest = get_option('runnerslog_hrrest');

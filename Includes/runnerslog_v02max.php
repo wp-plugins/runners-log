@@ -1,5 +1,5 @@
 <div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log V0<sub>2</sub>maxulator Calculator', RUNNERSLOG) . "</h2>"; ?>
+<?php echo "<h2>" . __( 'Runners Log - V0<sub>2</sub>max Calculator', RUNNERSLOG) . "</h2>"; ?>
 <?php
 
 load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');

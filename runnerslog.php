@@ -581,7 +581,7 @@ add_shortcode('runners_log_weather', 'runners_log_weather');
 		$description = get_post_meta($post->ID, "_rl_weather_description_value", $single = true);
 		if ( strlen($description) > 0 ) //should avoid displaying if not set for this post 
 		{
-				echo "<li style='padding:0px 3px;display:inline;'>" .__('Description : ', RUNNERSLOG)."$description</li>";
+				echo "<li style='padding:0px 3px;display:inline;'>" .__('Description :', RUNNERSLOG)."$description</li>";
 			}
 	}
 	echo "</ul>";

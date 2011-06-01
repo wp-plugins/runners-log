@@ -3,7 +3,7 @@ Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.1.0
+Tested up to: 3.1.3
 Stable tag: 2.2.5
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
@@ -11,20 +11,19 @@ This plugin let you convert your blog into a training log and let you track your
 == Description ==
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
-You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
+Using Runners-log you'r able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
-Thanks to TheRealEyeless we now have weather support. And we have started adding a Gear Manager (when it works) you can use this to track the use of your equipment.
+Thanks to TheRealEyeless we have weather support and now having multilanguage support. Other features including a Gear Manager that let you track the use of your equipment when it is fully integrated (a beta function atm).
 
 You can add graphs using Google Chart or pChart see FAQ for howto use it.
-
-Using Google chart you need using a short code syntax like: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
 
 == Installation ==
 This section describes how to install the plugin and get it working.
 
 1. Copy all files to `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Use this short code `[runners_log_basic]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
+3. Use this short code `[runners_log_basic]` in a post or page. 
+Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
     * Meters: 8500
     * Time: 00:49:59
     * Km/hour: 10.2
@@ -81,6 +80,11 @@ This section describes how to install the plugin and get it working.
 
 == Frequently Asked Questions ==
 
+= How to help translating this plugin? =
+We recommand you install the Codestyling Localization plugin and use that to generate a .po file specific for your language. Read more here: http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en
+
+Feel free to share the language by sending me an email.
+
 = The supported short codes for using pChart =
 	`[runners_log]
 	[runners_log_basic]
@@ -95,8 +99,8 @@ This section describes how to install the plugin and get it working.
 	[runners_log_bar_hours]
 	[runners_log_bar_calories]
 	[runners_log_garminmap]
-    [runners_log_weather]
-    [runners_log_weather_footer]`
+    	[runners_log_weather]
+    	[runners_log_weather_footer]`
 
 = Howto use Google Chart =
 Eg: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
@@ -192,8 +196,7 @@ On windows operating system you must add the GD extension in your php.ini file. 
 You can use the following tutorial http://www.e-gineer.com/v1/instructions/install-gd13-for-php-with-apache-on-linux.htm if you don't know how to install it on a linux server.
 
 = Why is my server load high? =
-If you have a very visited blog and using this plugin it could cause high server load as this plugin doesn't use cache for rendering the graphs.
-If that's a problem either uninstall this plugin, help making it work with cache :D or wait for a later release.
+If you have a very visited blog and using this plugin it could cause high server load if you generate graphs using pChart. We then recommand using Google Chart. See faq for how to use.
 
 = Gear Manager =
 I would like to thanks Thomas Genin for his plugin WP-Task-Manager which the Gear Manager is based on.
@@ -361,15 +364,21 @@ Version: 1.2
 * FL - Added Google Chart suppport. See Faq and Screenshots
 
 = 2.2.1 =
-*FL - Google Chart: Better color palettes
-*FL - Google Chart: Markers for the type bar
-*FL - Serious bug fix thanks to salathe @ #php @ freenode: http://wordpress.org/support/topic/plugin-runners-log-shots-screen-of-death-after-plugin-upgrade
+* FL - Google Chart: Better color palettes
+* FL - Google Chart: Markers for the type bar
+* FL - Serious bug fix thanks to salathe @ #php @ freenode: http://wordpress.org/support/topic/plugin-runners-log-shots-screen-of-death-after-plugin-upgrade
 
 = 2.2.2 =
-*FL - Added a new option "Cadence"
+* FL - Added a new option "Cadence"
 
 = 2.2.5 =
-*FL Crash tested with Wordpress 3.1
+* FL - Crash tested with Wordpress 3.1
+
+= 2.3.0 =
+* TR - Multilanguage support
+* TR - German Language files
+* FL - Danish Language files
+* FL - English language fixes
 
 == Upgrade Notice ==
 
@@ -424,10 +433,13 @@ February 11th 2011
 = 2.2.5 =
 Marts 27th
 
+= 2.3.0 =
+Summer 2011
+
 == To Do ==
 	* enable cache (done - not an issue when using google chart)
 	* more graphs (pulse avg?) (done with google chart)
 	* gear list (started)
 	* weather support (done)
-	* multi language support
-    * multi user support
+	* multi language support (done)
+    	* multi user support

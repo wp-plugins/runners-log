@@ -1,4 +1,4 @@
-<div class="wrap">
+﻿<div class="wrap">
 <?php 
 load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
 

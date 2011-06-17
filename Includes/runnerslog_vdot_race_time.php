@@ -1,4 +1,4 @@
-<div class="wrap">
+﻿<div class="wrap">
 <?php echo "<h2>" . __( 'Runners Log - VDOT Race Time Calculator', RUNNERSLOG) . "</h2>"; ?>
 
 <?php

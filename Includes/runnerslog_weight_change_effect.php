@@ -1,4 +1,4 @@
-<div class="wrap">
+﻿<div class="wrap">
 <?php echo "<h2>" . __( 'Runners Log - Predicted effect of change in weight', RUNNERSLOG) . "</h2>"; ?>
 
 <?php

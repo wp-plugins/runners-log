@@ -3,8 +3,8 @@ Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.1.3
-Stable tag: 2.2.5
+Tested up to: 3.4
+Stable tag: 3.0.0
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
@@ -374,11 +374,12 @@ Version: 1.2
 = 2.2.5 =
 * FL - Crash tested with Wordpress 3.1
 
-= 2.3.0 =
+= 3.0.0 =
 * TR - Multilanguage support
 * TR - German Language files
 * FL - Danish Language files
 * FL - English language fixes
+* FL - tested with Wordpress 3.3
 
 == Upgrade Notice ==
 
@@ -433,13 +434,9 @@ February 11th 2011
 = 2.2.5 =
 Marts 27th
 
-= 2.3.0 =
-Summer 2011
+= 3.0.0 =
+Januar 2012
 
 == To Do ==
-	* enable cache (done - not an issue when using google chart)
-	* more graphs (pulse avg?) (done with google chart)
 	* gear list (started)
-	* weather support (done)
-	* multi language support (done)
     	* multi user support

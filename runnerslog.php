@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
-Version: 3.0.0
+Version: 3.0.1
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -757,6 +757,9 @@ add_shortcode('runners_log_graph', 'runners_log_graph');
 	global $wpdb;
 	
 	// Let us get the distancetype for further calculations
+
+
+
 	$distancetype = get_option('runnerslog_distancetype');	
 
 	// Connect to DB and get the distance sum either as km-->runkm or miles-->runmiles and list it per month
@@ -1110,8 +1113,7 @@ add_shortcode('runners_log_pie_distance', 'runners_log_pie_distance');
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-pie-hours.png');
  
 	//Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-hours.png', __FILE__ ) . '" alt="'.__e('Training Graph Pie Hours', RUNNERSLOG).'" />';
-
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-hours.png', __FILE__ ) . '" alt="Training Graph Pie Hours" />';
  
  //End function runners_log_pie_hours()
 }

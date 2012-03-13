@@ -1,5 +1,5 @@
 === Runners Log ===
-Contributors: frold, TheRealEyeless, jaredatch, michaellasmanis
+Contributors: frold, TheRealEyeless, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7

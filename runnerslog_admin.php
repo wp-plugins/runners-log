@@ -27,6 +27,7 @@
 		$show_distance2009 = $_POST['runnerslog_show_distance2009'];
 		$show_distance2010 = $_POST['runnerslog_show_distance2010'];
 		$show_distance2011 = $_POST['runnerslog_show_distance2011'];
+		$show_distance2012 = $_POST['runnerslog_show_distance2012'];
 		$show_distance_sum = $_POST['runnerslog_show_distance_sum'];
 		$show_garminmap = $_POST['runnerslog_show_garminmap'];
 		update_option('runnerslog_distancetype', $distancetype);
@@ -55,6 +56,7 @@
 		update_option('runnerslog_show_distance2009', $show_distance2009);
 		update_option('runnerslog_show_distance2010', $show_distance2010);
 		update_option('runnerslog_show_distance2011', $show_distance2011);
+		update_option('runnerslog_show_distance2012', $show_distance2012);
 		update_option('runnerslog_show_distance_sum', $show_distance_sum);
 		update_option('runnerslog_show_garminmap', $show_garminmap);
 		?>
@@ -88,16 +90,15 @@
 		$show_distance2009 = get_option('runnerslog_show_distance2009');
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
 		$show_distance2011 = get_option('runnerslog_show_distance2011');
+		$show_distance2012 = get_option('runnerslog_show_distance2012');
 		$show_distance_sum = get_option('runnerslog_show_distance_sum');
 		$show_garminmap = get_option('runnerslog_show_garminmap');
 	}
-	
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
 ?>
 
 <div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log - Options', RUNNERSLOG) . "</h2>"; ?>
-<?php echo "<p>". __('Set the options below', RUNNERSLOG).".</p>"?>
+<?php echo "<h2>" . __( 'Runners Log Options', 'runnerslog_ops' ) . "</h2>"; ?>
+<p>Set the options below.</p>
 
 <div class="tool-box">
 <h3 class="title">Standard Options</h3>
@@ -156,16 +157,16 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 			
 			<!-- Your Height: If metric: runnerslog_cm  If english: runnerslog_feets AND runnerslog_inches-->
 			<tr valign="top">
-				<th scope="row"><label for="runnerslog_height"><?php _e('Your Height', RUNNERSLOG) ?></label></th>
+				<th scope="row"><label for="runnerslog_height"><?php _e('Your Height') ?></label></th>
 				<td><?php
 					if ( $unittype == metric ) {
 						echo '<input name="runnerslog_cm" type="text" id="runnerslog_cm"  value="', form_option('runnerslog_cm'), '" class="small-text" />';
-						echo '<span class="description">'.__('Centimeters', RUNNERSLOG).'</span>';
+						echo '<span class="description"> Centimeters</span>';
 							} else {
 						echo '<input name="runnerslog_feets" type="text" id="runnerslog_feets"  value="', form_option('runnerslog_feets'), '" class="small-text" />';
-						echo '<span class="description">'. __(' Feet', RUNNERSLOG).' </span>';
+						echo '<span class="description"> Feet </span>';
 						echo '<input name="runnerslog_inches" type="text" id="runnerslog_inches"  value="', form_option('runnerslog_inches'), '" class="small-text" />';
-						echo '<span class="description">'. __('Inch(es)', RUNNERSLOG).'</span>';
+						echo '<span class="description"> Inc(es)</span>';
 					}
 					?>
 				</td>
@@ -181,7 +182,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 													if ( $unittype == metric ) {
 														_e('Kilograms') ;														;
 													} else {
-														_e('Pounds. Note: 8 ounces = 0.5 pounds', RUNNERSLOG) ; 
+														_e('Pounds. Note: 8 ounces = 0.5 pounds') ; 
 													}
 											  ?></span>
 				</td>
@@ -189,28 +190,28 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 			
 			<!-- Your age: runnerslog_age -->
 			<tr valign="top">
-				<th scope="row"><label for="runnerslog_age"><?php _e('Your age', RUNNERSLOG) ?></label></th>
+				<th scope="row"><label for="runnerslog_age"><?php _e('Your age') ?></label></th>
 				<td>
 					<input name="runnerslog_age" type="text" id="runnerslog_age"  value="<?php form_option('runnerslog_age'); ?>" class="small-text" />
-					<span class="description"><?php _e('Years', RUNNERSLOG) ?></span>
+					<span class="description"><?php _e('Years') ?></span>
 				</td>
 			</tr>
 			
 			<!-- Resting Heart Rate: runnerslog_hrrest -->
 			<tr valign="top">
-				<th scope="row"><label for="runnerslog_hrrest"><?php _e('Resting Heart Rate', RUNNERSLOG) ?></label></th>
+				<th scope="row"><label for="runnerslog_hrrest"><?php _e('Resting Heart Rate') ?></label></th>
 				<td>
 					<input name="runnerslog_hrrest" type="text" id="runnerslog_hrrest"  value="<?php form_option('runnerslog_hrrest'); ?>" class="small-text" />
-					<span class="description"><?php _e('"Resting Heart Rate" is the number of times our heart beats when we are at completely at rest.', RUNNERSLOG) ?></span>
+					<span class="description"><?php _e('"Resting Heart Rate" is the number of times our heart beats when we are at completely at rest.') ?></span>
 				</td>
 			</tr>
 			
 			<!-- Maximum Heart Rate: runnerslog_hrmax -->
 			<tr valign="top">
-				<th scope="row"><label for="runnerslog_hrmax"><?php _e('Maximum Heart Rate', RUNNERSLOG) ?></label></th>
+				<th scope="row"><label for="runnerslog_hrmax"><?php _e('Maximum Heart Rate') ?></label></th>
 				<td>
 					<input name="runnerslog_hrmax" type="text" id="runnerslog_hrmax"  value="<?php form_option('runnerslog_hrmax'); ?>" class="small-text" />
-					<span class="description"><?php _e('"Maximum Heart Rate" is the highest number of times your heart can contract in one minute.', RUNNERSLOG) ?></span>
+					<span class="description"><?php _e('"Maximum Heart Rate" is the highest number of times your heart can contract in one minute.') ?></span>
 				</td>
 			</tr>
 
@@ -219,7 +220,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_pulsavg">
 				<input name="runnerslog_pulsavg" id="runnerslog_pulsavg" value="1"<?php checked('1', get_option('runnerslog_pulsavg')); ?> type="checkbox">
-				<?php _e('Enable Pulse Average', RUNNERSLOG) ?></label>
+				<?php _e('Enable Pulse Average') ?></label>
 				</th>
 			</tr>
 
@@ -228,7 +229,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_garminconnectlink">
 				<input name="runnerslog_garminconnectlink" id="runnerslog_garminconnectlink" value="1"<?php checked('1', get_option('runnerslog_garminconnectlink')); ?> type="checkbox">
-				<?php _e('Enable Link to Garmin Connect', RUNNERSLOG) ?></label>
+				<?php _e('Enable Link to Garmin Connect') ?></label>
 				</th>
 			</tr>
 			
@@ -263,7 +264,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<label for="runnerslog_show_gearmanager">
 				<input name="runnerslog_show_gearmanager" id="runnerslog_show_gearmanager" value="1"<?php checked('1', get_option('runnerslog_show_gearmanager')); ?> type="checkbox">
 				<?php _e('Enable Gear Manager') ?></label>
-				<span class="description"><?php _e('Your must reload the page eg. by pressing F5 after changing this setting', RUNNERSLOG) ?></span>
+				<span class="description"><?php _e('Your must reload the page eg. press F5 after changing this setting') ?></span>
 				</th>
 			</tr>
 		</tbody>
@@ -278,7 +279,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_distance">
 				<input name="runnerslog_show_distance" id="runnerslog_show_distance" value="1"<?php checked('1', get_option('runnerslog_show_distance')); ?> type="checkbox">
-				<?php _e('Show Distance', RUNNERSLOG) ?></label>
+				<?php _e('Show Distance') ?></label>
 				</th>
 			</tr>
 
@@ -287,7 +288,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_time">
 				<input name="runnerslog_show_time" id="runnerslog_show_time" value="1"<?php checked('1', get_option('runnerslog_show_time')); ?> type="checkbox">
-				<?php _e('Show Time', RUNNERSLOG) ?></label>
+				<?php _e('Show Time') ?></label>
 				</th>
 			</tr>
 
@@ -296,7 +297,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_speed">
 				<input name="runnerslog_show_speed" id="runnerslog_show_speed" value="1"<?php checked('1', get_option('runnerslog_show_speed')); ?> type="checkbox">
-				<?php _e('Show Speed', RUNNERSLOG) ?></label>
+				<?php _e('Show Speed') ?></label>
 				</th>
 			</tr>
 
@@ -305,7 +306,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_speedperdistance">
 				<input name="runnerslog_show_speedperdistance" id="runnerslog_show_speedperdistance" value="1"<?php checked('1', get_option('runnerslog_show_speedperdistance')); ?> type="checkbox">
-				<?php _e('Show Speed per Distance', RUNNERSLOG) ?></label>
+				<?php _e('Show Speed per Distance') ?></label>
 				</th>
 			</tr>
 
@@ -314,7 +315,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_pulse">
 				<input name="runnerslog_show_pulse" id="runnerslog_show_pulse" value="1"<?php checked('1', get_option('runnerslog_show_pulse')); ?> type="checkbox">
-				<?php _e('Show Pulse Average', RUNNERSLOG) ?></label>
+				<?php _e('Show Pulse Average') ?></label>
 				</th>
 			</tr>
 
@@ -323,7 +324,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_calories">
 				<input name="runnerslog_show_calories" id="runnerslog_show_calories" value="1"<?php checked('1', get_option('runnerslog_show_calories')); ?> type="checkbox">
-				<?php _e('Show Calories', RUNNERSLOG) ?></label>
+				<?php _e('Show Calories') ?></label>
 				</th>
 			</tr>
 			
@@ -332,7 +333,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_cadence">
 				<input name="runnerslog_show_cadence" id="runnerslog_show_cadence" value="1"<?php checked('1', get_option('runnerslog_show_cadence')); ?> type="checkbox">
-				<?php _e('Show Cadence', RUNNERSLOG) ?></label>
+				<?php _e('Show Cadence') ?></label>
 				</th>
 			</tr>
 
@@ -341,7 +342,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_garminconnect">
 				<input name="runnerslog_show_garminconnect" id="runnerslog_show_garminconnect" value="1"<?php checked('1', get_option('runnerslog_show_garminconnect')); ?> type="checkbox">
-				<?php _e('Show link to Garmin Connect', RUNNERSLOG) ?></label>
+				<?php _e('Show link to Garmin Connect') ?></label>
 				</th>
 			</tr>
 
@@ -350,7 +351,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_distance2009">
 				<input name="runnerslog_show_distance2009" id="runnerslog_show_distance2009" value="1"<?php checked('1', get_option('runnerslog_show_distance2009')); ?> type="checkbox">
-				<?php _e('Show Distance in 2009', RUNNERSLOG) ?></label>
+				<?php _e('Show Distance in 2009') ?></label>
 				</th>
 			</tr>
 
@@ -359,7 +360,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_distance2010">
 				<input name="runnerslog_show_distance2010" id="runnerslog_show_distance2010" value="1"<?php checked('1', get_option('runnerslog_show_distance2010')); ?> type="checkbox">
-				<?php _e('Show Distance in 2010', RUNNERSLOG) ?></label>
+				<?php _e('Show Distance in 2010') ?></label>
 				</th>
 			</tr>
             
@@ -368,7 +369,16 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_distance2011">
 				<input name="runnerslog_show_distance2011" id="runnerslog_show_distance2011" value="1"<?php checked('1', get_option('runnerslog_show_distance2011')); ?> type="checkbox">
-				<?php _e('Show Distance in 2011', RUNNERSLOG) ?></label>
+				<?php _e('Show Distance in 2011') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show distance 2012: runnerslog_show_distance2012 -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_distance2012">
+				<input name="runnerslog_show_distance2012" id="runnerslog_show_distance2012" value="1"<?php checked('1', get_option('runnerslog_show_distance2012')); ?> type="checkbox">
+				<?php _e('Show Distance in 2012') ?></label>
 				</th>
 			</tr>
 
@@ -377,7 +387,7 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_distance_sum">
 				<input name="runnerslog_show_distance_sum" id="runnerslog_show_distance_sum" value="1"<?php checked('1', get_option('runnerslog_show_distance_sum')); ?> type="checkbox">
-				<?php _e('Show Distance at All', RUNNERSLOG) ?></label>
+				<?php _e('Show Distance at All') ?></label>
 				</th>
 			</tr>
 
@@ -386,14 +396,14 @@ load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-lo
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_garminmap">
 				<input name="runnerslog_show_garminmap" id="runnerslog_show_garminmap" value="1"<?php checked('1', get_option('runnerslog_show_garminmap')); ?> type="checkbox">
-				<?php _e('Show embed Garmin Map', RUNNERSLOG) ?></label>
+				<?php _e('Show embed Garmin Map') ?></label>
 				</th>
 			</tr>			
 		</tbody>
 	</table>
 </div>
 	<p class="submit">
-		<input type="submit" name="Submit" value="<?php _e('Save and update options', RUNNERSLOG) ?>" />
+		<input type="submit" name="Submit" value="<?php _e('Save and update options', 'runnerslog_ops' ) ?>" />
 	</p>
 </form>
 </div>

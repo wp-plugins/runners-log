@@ -4,7 +4,7 @@
 
 Type: bar, graph, pie, 3dpie
 Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
-Year: 2009, 2010, 2011
+Year: 2009, 2010, 2011, 2012
 Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
 Color: Is the color scheme used eg: "224499" for the html color #224499
 Width: The width of the chart: Default: 475 pixel
@@ -89,7 +89,7 @@ http://imagecharteditor.appspot.com/
 	extract(shortcode_atts(array(
 		'type' => 'bar',
 		'format' => 'd',
-		'year' => '2011',
+		'year' => '2012',
 		'month' => '',
 		'width' => '470',
 		'height' => '240',

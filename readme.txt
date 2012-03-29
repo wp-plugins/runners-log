@@ -3,19 +3,23 @@ Contributors: frold, TheRealEyeless, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.4
-Stable tag: 3.0.1
+Tested up to: 3.3
+Stable tag: 3.1.0
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
 == Description ==
+ALERT: THIS VERSION NO LONGER SUPPORT MULTI LANGUAGE!
+
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
-Using Runners-log you'r able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
+You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
 
-Thanks to TheRealEyeless we have weather support and now having multilanguage support. Other features including a Gear Manager that let you track the use of your equipment when it is fully integrated (a beta function atm).
+Thanks to TheRealEyeless we now have weather support. And we have started adding a Gear Manager (when it works) you can use this to track the use of your equipment.
 
 You can add graphs using Google Chart or pChart see FAQ for howto use it.
+
+Using Google chart you need using a short code syntax like: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
 
 == Installation ==
 This section describes how to install the plugin and get it working.
@@ -72,18 +76,13 @@ Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runn
 
     *Type: bar, graph, pie, 3dpie
     *Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
-    *Year: 2009, 2010, 2011
+    *Year: 2009, 2010, 2011, 2012
     *Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
     *Color: Is the color scheme used eg: "224499" for the html color #224499
     *Width: The width of the chart: Default: 475 pixel
     *Height: The height of the chart: Default: 250 pixel
 
 == Frequently Asked Questions ==
-
-= How to help translating this plugin? =
-We recommand you install the Codestyling Localization plugin and use that to generate a .po file specific for your language. Read more here: http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en
-
-Feel free to share the language by sending me an email.
 
 = The supported short codes for using pChart =
 	`[runners_log]
@@ -99,15 +98,15 @@ Feel free to share the language by sending me an email.
 	[runners_log_bar_hours]
 	[runners_log_bar_calories]
 	[runners_log_garminmap]
-    	[runners_log_weather]
-    	[runners_log_weather_footer]`
+    [runners_log_weather]
+    [runners_log_weather_footer]`
 
 = Howto use Google Chart =
 Eg: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
 
     *Type: bar, graph, pie, 3dpie
     *Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
-    *Year: 2009, 2010, 2011
+    *Year: 2009, 2010, 2011, 2012
     *Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
     *Color: Is the color scheme used eg: "224499" for the html color #224499
     *Width: The width of the chart: Default: 475 pixel
@@ -364,15 +363,15 @@ Version: 1.2
 * FL - Added Google Chart suppport. See Faq and Screenshots
 
 = 2.2.1 =
-* FL - Google Chart: Better color palettes
-* FL - Google Chart: Markers for the type bar
-* FL - Serious bug fix thanks to salathe @ #php @ freenode: http://wordpress.org/support/topic/plugin-runners-log-shots-screen-of-death-after-plugin-upgrade
+*FL - Google Chart: Better color palettes
+*FL - Google Chart: Markers for the type bar
+*FL - Serious bug fix thanks to salathe @ #php @ freenode: http://wordpress.org/support/topic/plugin-runners-log-shots-screen-of-death-after-plugin-upgrade
 
 = 2.2.2 =
-* FL - Added a new option "Cadence"
+*FL - Added a new option "Cadence"
 
 = 2.2.5 =
-* FL - Crash tested with Wordpress 3.1
+*FL Crash tested with Wordpress 3.1
 
 = 3.0.0 =
 * TR - Multilanguage support
@@ -383,6 +382,10 @@ Version: 1.2
 
 = 3.0.1 =
 * FL - Bugfix http://wordpress.org/support/topic/plugin-runners-log-runners_log_pie_hours?replies=1
+
+= 3.1.0 =
+* FL - Roll back so we no longer supports multi language!
+* FL - Added support for 2012: http://wordpress.org/support/topic/764998
 
 == Upgrade Notice ==
 
@@ -443,6 +446,9 @@ Januar 2012
 = 3.0.1 =
 Februar 2012
 
+= 3.1.0 =
+Ultimo Marts 2012
+
 == To Do ==
 	* gear list (started)
-    	* multi user support
+	* auto import from garmin connect

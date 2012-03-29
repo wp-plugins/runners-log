@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, michaellasmanis
-Version: 3.0.1
+Version: 3.1.0
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -28,17 +28,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 /* Version check */
 global $wp_version;	
-                                
-define(RUNNERSLOG, 'runners-log');
-
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');                                 
 
 $exit_msg='Runners Log requires WordPress 2.7 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please update!</a>';
 
 if (version_compare($wp_version,"2.7","<")) {
 	exit ($exit_msg);
 }
-
 
 include('runnerslog_tag.php');
 include('runnerslog_gchart.php');
@@ -146,6 +141,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		$show_distance2009 = get_option('runnerslog_show_distance2009');
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
 		$show_distance2011 = get_option('runnerslog_show_distance2011');
+		$show_distance2012 = get_option('runnerslog_show_distance2012');
 		$show_distance_sum = get_option('runnerslog_show_distance_sum');
 		$show_garminmap = get_option('runnerslog_show_garminmap');
 	
@@ -198,6 +194,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'	
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+
 			AND year($wpdb->posts.post_date)='2009'"));
 		$km_sum_2009 = round($distance_sum_2009/1000, 1); // Convert distance to km when the user use "meters"
 
@@ -267,6 +264,32 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			$avg_km_per_run_2011 = ROUND(($distance_sum_2011/1000) / $number_of_runs_2011, 2);
 			$avg_miles_per_run_2011 = ROUND(($distance_sum_2011) / $number_of_runs_2011, 2);
 		}
+
+ /* 2 0 1 2 */	
+		// Connect to DB and calculate the sum of distance runned in 2012
+		$distance_sum_2012 = $wpdb->get_var($wpdb->prepare("
+			SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun2012
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2012'"));
+		$km_sum_2012 = round($distance_sum_2012/1000, 1); // Convert distance to km when the user use "meters"
+	
+		//Connect to DB and calculate the number of runs in 2012
+		$number_of_runs_2012 = $wpdb->get_var($wpdb->prepare("
+			SELECT COUNT($wpdb->postmeta.meta_value)
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'	
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2012'"));
+	
+		if ( $distance_sum_2012 ) // Calculate the avg per run in 2012
+		{
+			$avg_km_per_run_2012 = ROUND(($distance_sum_2012/1000) / $number_of_runs_2012, 2);
+			$avg_miles_per_run_2012 = ROUND(($distance_sum_2012) / $number_of_runs_2012, 2);
+		}
 	
  /* S U M  A T  A L L */	
 		// Connect to DB and calculate the sum of distance runned at all
@@ -300,12 +323,12 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			if ($distance > '0') //..let us print the distance in meters but only if distance is greather then 0...
 			{
-				echo "<li><span class='post-meta-key'>". __('Meters:', RUNNERSLOG) ."</span> $distance</li>";
+				echo "<li><span class='post-meta-key'>Meters:</span> $distance</li>";
 			}
 		} else {
 			if ($distance > '0') //..else it must be miles and therefore print the distance in miles but only if distance is greather then 0...
 			{
-				echo "<li><span class='post-meta-key'>". __('Miles:', RUNNERSLOG) ."</span> $distance</li>";
+				echo "<li><span class='post-meta-key'>Miles:</span> $distance</li>";
 			}
 		}
 	}
@@ -313,7 +336,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 	{
 		if ($hms) 
 		{
-			echo "<li><span class='post-meta-key'>". __('Time:', RUNNERSLOG) ."</span> $hms</li>";
+			echo "<li><span class='post-meta-key'>Time:</span> $hms</li>";
 		}
 	}
 	if ($show_speed == '1') // Distance per hours
@@ -322,12 +345,12 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			if ( $km_per_hour > '0') 
 			{
-				echo "<li><span class='post-meta-key'>". __('Km/hour:', RUNNERSLOG)."</span> $km_per_hour</li>";
+				echo "<li><span class='post-meta-key'>Km/hour:</span> $km_per_hour</li>";
 			}
 		} else {
 			if ( $miles_per_hour > '0') //..else it must be miles/hours. (But only if miles/hour is greather then 0...)
 			{
-				echo "<li><span class='post-meta-key'>" .__('Miles/hour:', RUNNERSLOG) ."</span> $miles_per_hour</li>";
+				echo "<li><span class='post-meta-key'>Miles/hour:</span> $miles_per_hour</li>";
 			}
 		}
 	}
@@ -337,12 +360,12 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			if ($minutes > '0') 
 			{
-				echo "<li><span class='post-meta-key'>".__('Min/km:', RUNNERSLOG) ."</span> $minutes:$secondsleft minutes</li>";
+				echo "<li><span class='post-meta-key'>Min/km:</span> $minutes:$secondsleft minutes</li>";
 			}
 		} else {
 			if ($minutes_miles > '0') //..else it must be min per miles. (But only if minutes_miles is greather then 0...)
 			{
-				echo "<li><span class='post-meta-key'>".__('Min/miles:', RUNNERSLOG) ."</span> $minutes_miles:$secondsleft_miles minutes</li>";
+				echo "<li><span class='post-meta-key'>Min/miles:</span> $minutes_miles:$secondsleft_miles minutes</li>";
 			}
 		}
 	}
@@ -350,10 +373,10 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 	{
 		if ($pulsavg) 
 		{
-			echo "<li><span class='post-meta-key'>" . __('Pulse average:', RUNNERSLOG) ."</span> $pulsavg bpm"; 
+			echo "<li><span class='post-meta-key'>Pulse average:</span> $pulsavg bpm"; 
 			if ($procofmaxhr && $procofhrr) 
 			{ 
-			_e(" is $procofmaxhr% of Max HR and $procofhrr% of HRR", RUNNERSLOG); 
+				echo " is $procofmaxhr% of Max HR and $procofhrr% of HRR"; 
 			} 
 			echo "</li>";
 		}
@@ -362,21 +385,21 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 	{	
 		if ($calories) 
 		{
-			echo "<li><span class='post-meta-key'>" . __('Calories:', RUNNERSLOG) ."</span> $calories C</li>";
+			echo "<li><span class='post-meta-key'>Calories:</span> $calories C</li>";
 		}
 	}
 	if ($show_cadence == '1') // Cadence
 	{	
 		if ($cadence) 
 		{
-			echo "<li><span class='post-meta-key'>" .__('Cadence:', RUNNERSLOG) ."</span> $cadence</li>";
+			echo "<li><span class='post-meta-key'>Cadence:</span> $cadence</li>";
 		}
 	}
 	if ($show_garminconnect == '1') //Garmin Connect Link
 	{
 		if ($url) 
 		{
-			echo "<li><span class='post-meta-key'>".__('Garmin Link:', RUNNERSLOG)."</span> <a href='$url' target='_blank'>$url</a></li>";
+			echo "<li><span class='post-meta-key'>Garmin Link:</span> <a href='$url' target='_blank'>$url</a></li>";
 		}
 	}
 	if ($show_distance2009 == '1') // Totals 2009
@@ -385,20 +408,20 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			if ($number_of_runs_2009 == '1')
 			{
-				echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong>" . __('km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km', RUNNERSLOG) ."</li>";
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
 			}
 			if ($number_of_runs_2009 > '1') 
 			{
-				echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong>" . __('km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$km_sum_2009</strong> km based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_km_per_run_2009</strong> km</li>";
 			}
 		} else {
 			if ($number_of_runs_2009 == '1') 
 			{
-				echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong>" . __('miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi', RUNNERSLOG) ."</li>";
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> run with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
 			} 
 			if ($number_of_runs_2009 > '1') 
 			{
-				echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> " . __('miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi', RUNNERSLOG) . "</li>";
+				echo "<li><span class='post-meta-key'>2009:</span> <strong>$distance_sum_2009</strong> miles based on <strong>$number_of_runs_2009</strong> runs with an avg of <strong>$avg_miles_per_run_2009</strong> mi</li>";
 			}
 		}
 	}
@@ -408,20 +431,20 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			if ($number_of_runs_2010 == '1') 
 			{
-				echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong>". __('km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km', RUNNERSLOG). "</li>";
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
 			} 
 			if ($number_of_runs_2010 > '1') 
 			{
-				echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong>" . __('km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$km_sum_2010</strong> km based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_km_per_run_2010</strong> km</li>";
 			}
 		} else {
 			if ($number_of_runs_2010 == '1') 
 			{
-				echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong>".__('miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> run with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
 			} 
 			if ($number_of_runs_2010 > '1') 
 			{		
-				echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong>". __('miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2010:</span> <strong>$distance_sum_2010</strong> miles based on <strong>$number_of_runs_2010</strong> runs with an avg of <strong>$avg_miles_per_run_2010</strong> mi</li>";
 			}
 		}
 	}
@@ -431,20 +454,43 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			if ($number_of_runs_2011 == '1') 
 			{
-				echo "<li><span class='post-meta-key'>2011:</span> <strong>$km_sum_2011</strong>". __('km based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_km_per_run_2011</strong> km' , RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$km_sum_2011</strong> km based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_km_per_run_2011</strong> km</li>";
 			} 
 			if ($number_of_runs_2011 > '1') 
 			{
-				echo "<li><span class='post-meta-key'>2011:</span> <strong>$km_sum_2011</strong>". __('km based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_km_per_run_2011</strong> km', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$km_sum_2011</strong> km based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_km_per_run_2011</strong> km</li>";
 			}
 		} else {
 			if ($number_of_runs_2011 == '1') 
 			{
-				echo "<li><span class='post-meta-key'>2011:</span> <strong>$distance_sum_2011</strong>". __('miles based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_miles_per_run_2011</strong> mi', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$distance_sum_2011</strong> miles based on <strong>$number_of_runs_2011</strong> run with an avg of <strong>$avg_miles_per_run_2011</strong> mi</li>";
 			} 
 			if ($number_of_runs_2011 > '1') 
 			{		
-				echo "<li><span class='post-meta-key'>2011:</span> <strong>$distance_sum_2011</strong>". __('miles based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_miles_per_run_2011</strong> mi', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>2011:</span> <strong>$distance_sum_2011</strong> miles based on <strong>$number_of_runs_2011</strong> runs with an avg of <strong>$avg_miles_per_run_2011</strong> mi</li>";
+			}
+		}
+	}
+	if ($show_distance2012 == '1') // Totals 2012
+	{	
+		if ($distancetype == 'meters') 
+		{
+			if ($number_of_runs_2012 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2012:</span> <strong>$km_sum_2012</strong> km based on <strong>$number_of_runs_2012</strong> run with an avg of <strong>$avg_km_per_run_2012</strong> km</li>";
+			} 
+			if ($number_of_runs_2012 > '1') 
+			{
+				echo "<li><span class='post-meta-key'>2012:</span> <strong>$km_sum_2012</strong> km based on <strong>$number_of_runs_2012</strong> runs with an avg of <strong>$avg_km_per_run_2012</strong> km</li>";
+			}
+		} else {
+			if ($number_of_runs_2012 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2012:</span> <strong>$distance_sum_2012</strong> miles based on <strong>$number_of_runs_2012</strong> run with an avg of <strong>$avg_miles_per_run_2012</strong> mi</li>";
+			} 
+			if ($number_of_runs_2012 > '1') 
+			{		
+				echo "<li><span class='post-meta-key'>2012:</span> <strong>$distance_sum_2012</strong> miles based on <strong>$number_of_runs_2012</strong> runs with an avg of <strong>$avg_miles_per_run_2012</strong> mi</li>";
 			}
 		}
 	}
@@ -454,20 +500,20 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		{
 			if ($number_of_runs == '1') 
 			{
-				echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong>". __('km based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_km_per_run</strong> km', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_km_per_run</strong> km</li>";
 			} 
 			if ($number_of_runs > '1') 
 			{
-				echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong>". __('km based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_km_per_run</strong> km', RUNNERSLOG)."</li>";
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$km_sum</strong> km based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_km_per_run</strong> km</li>";
 			}
 		} else {
 			if ($number_of_runs == '1') 
 			{
-				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong>" . __('miles based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_miles_per_run</strong> mi', RUNNERSLOG) ."</li>";
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> run with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
 			} 
-			if ($number_of_runs_2011 > '1') 
+			if ($number_of_runs > '1') 
 			{		
-				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong>" .__('miles based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_miles_per_run</strong> mi', RUNNERSLOG) ."</li>";
+				echo "<li><span class='post-meta-key'>At all:</span> <strong>$distance_sum</strong> miles based on <strong>$number_of_runs</strong> runs with an avg of <strong>$avg_miles_per_run</strong> mi</li>";
 			}
 		}
 	}
@@ -504,7 +550,7 @@ add_shortcode('runners_log_basic', 'runners_log_basic');
 		$temperature = get_post_meta($post->ID, "_rl_weather_temperature_value", $single = true);
 		if ( $temperature > '0' ) //should avoid displaying if not set for this post 
 		{
-				echo "<li><span class='post-meta-key'>".__('Temperature :', RUNNERSLOG)."</span> $temperature</li>";
+				echo "<li><span class='post-meta-key'>Temperature :</span> $temperature</li>";
 			}
 	}
 	if (get_option('runnerslog_weather_humidity') == '1')
@@ -512,7 +558,7 @@ add_shortcode('runners_log_basic', 'runners_log_basic');
 		$humidity = get_post_meta($post->ID, "_rl_weather_humidity_value", $single = true);
 		if ( $humidity > '0' ) //should avoid displaying if not set for this post 
 		{
-				echo "<li><span class='post-meta-key'>". __('Humidity :', RUNNERSLOG)."</span> $humidity</li>";
+				echo "<li><span class='post-meta-key'>Humidity :</span> $humidity</li>";
 			}
 	}
 	if (get_option('runnerslog_weather_windchill') == '1')
@@ -520,7 +566,7 @@ add_shortcode('runners_log_basic', 'runners_log_basic');
 		$windchill = get_post_meta($post->ID, "_rl_weather_windchill_value", $single = true);
 		if ( $windchill > '0' ) //should avoid displaying if not set for this post 
 		{
-				echo "<li><span class='post-meta-key'>". __('Windchill :', RUNNERSLOG)."</span> $windchill</li>";
+				echo "<li><span class='post-meta-key'>Windchill :</span> $windchill</li>";
 			}
 	}
 	if (get_option('runnerslog_weather_description') == '1')
@@ -528,7 +574,7 @@ add_shortcode('runners_log_basic', 'runners_log_basic');
 		$description = get_post_meta($post->ID, "_rl_weather_description_value", $single = true);
 		if ( strlen($description) > 0 ) //should avoid displaying if not set for this post 
 		{
-				echo "<li><span class='post-meta-key'>" . __('Description :', RUNNERSLOG)."</span> $description</li>";
+				echo "<li><span class='post-meta-key'>Description :</span> $description</li>";
 			}
 	}
 	echo "</ul>";
@@ -557,7 +603,7 @@ add_shortcode('runners_log_weather', 'runners_log_weather');
 		$temperature = get_post_meta($post->ID, "_rl_weather_temperature_value", $single = true);
 		if ( $temperature > '0' ) //should avoid displaying if not set for this post 
 		{
-				echo "<li style='padding:0px 3px;display:inline;'>".__('Temperature :', RUNNERSLOG)."$temperature</li>";
+				echo "<li style='padding:0px 3px;display:inline;'>Temperature : $temperature</li>";
 			}
 	}
 	if (get_option('runnerslog_weather_humidity') == '1')
@@ -565,7 +611,7 @@ add_shortcode('runners_log_weather', 'runners_log_weather');
 		$humidity = get_post_meta($post->ID, "_rl_weather_humidity_value", $single = true);
 		if ( $humidity > '0' ) //should avoid displaying if not set for this post 
 		{
-				echo "<li style='padding:0px 3px;display:inline;'>". __('Humidity :', RUNNERSLOG)." $humidity</li>";
+				echo "<li style='padding:0px 3px;display:inline;'>Humidity : $humidity</li>";
 			}
 	}
 	if (get_option('runnerslog_weather_windchill') == '1')
@@ -573,7 +619,7 @@ add_shortcode('runners_log_weather', 'runners_log_weather');
 		$windchill = get_post_meta($post->ID, "_rl_weather_windchill_value", $single = true);
 		if ( $windchill > '0' ) //should avoid displaying if not set for this post 
 		{
-				echo "<li style='padding:0px 3px;display:inline;'>" .__('Windchill :', RUNNERSLOG)." $windchill</li>";
+				echo "<li style='padding:0px 3px;display:inline;'>Windchill : $windchill</li>";
 			}
 	}
 	if (get_option('runnerslog_weather_description') == '1')
@@ -581,7 +627,7 @@ add_shortcode('runners_log_weather', 'runners_log_weather');
 		$description = get_post_meta($post->ID, "_rl_weather_description_value", $single = true);
 		if ( strlen($description) > 0 ) //should avoid displaying if not set for this post 
 		{
-				echo "<li style='padding:0px 3px;display:inline;'>" .__('Description :', RUNNERSLOG)."$description</li>";
+				echo "<li style='padding:0px 3px;display:inline;'>Description : $description</li>";
 			}
 	}
 	echo "</ul>";
@@ -680,9 +726,9 @@ add_shortcode('runners_log_weather_footer', 'runners_log_weather_footer');
 
 	// Draw the Distance per month graph
 	if ($distancetype == meters) {
-		$DataSet->SetYAxisName(__('Km per month', RUNNERSLOG));
+		$DataSet->SetYAxisName("Km per month");
 	} else {
-		$DataSet->SetYAxisName(__('Miles per month', RUNNERSLOG));
+		$DataSet->SetYAxisName("Miles per month");
 	}	
 	$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,213,217,221,TRUE,0,0);
 	$Test->drawGraphAreaGradient(40,40,40,-50);
@@ -706,7 +752,7 @@ add_shortcode('runners_log_weather_footer', 'runners_log_weather_footer');
 	// Draw the 2nd graph the "Hours per month" graph
 	$DataSet->RemoveSerie("Serie1");
 	$DataSet->AddSerie("Serie2");
-	$DataSet->SetYAxisName(__('Hours per month', RUNNERSLOG));
+	$DataSet->SetYAxisName("Hours per month");
 	$Test->drawRightScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,213,217,221,TRUE,0,0);
 	$Test->drawGrid(4,TRUE,230,230,230,10);
 	$Test->setShadowProperties(3,3,0,0,0,30,4);
@@ -757,9 +803,6 @@ add_shortcode('runners_log_graph', 'runners_log_graph');
 	global $wpdb;
 	
 	// Let us get the distancetype for further calculations
-
-
-
 	$distancetype = get_option('runnerslog_distancetype');	
 
 	// Connect to DB and get the distance sum either as km-->runkm or miles-->runmiles and list it per month
@@ -900,7 +943,7 @@ add_shortcode('runners_log_graphmini_hours', 'runners_log_graphmini_hours');
 	// is there something to do?
 	if (sizeof($calories_per_month) == 0)
 	{
-		_e('No data available.', RUNNERSLOG)."<br/>\n";
+		echo "No data available.<br/>\n";
 		return;
 	}
 
@@ -962,7 +1005,7 @@ add_shortcode('runners_log_graphmini_calories', 'runners_log_graphmini_calories'
 	// is there something to do?
 	if (sizeof($distance_per_month) == 0)
 	{
-		_e('No data available.', RUNNERSLOG)."<br/>\n";
+		echo "No data available.<br/>\n";
 		return;
 	}
 
@@ -1016,9 +1059,9 @@ add_shortcode('runners_log_graphmini_calories', 'runners_log_graphmini_calories'
 	
 	// Draw the Distance per month graph
 	if ($distancetype == meters) {
-		$Test->drawTitle(15,20,__('The Percentage of Km per Month', RUNNERSLOG),0,0,0);
+		$Test->drawTitle(15,20,"The Percentage of Km per Month",0,0,0);
 	} else {
-		$Test->drawTitle(15,20,__('The Percentage of Miles per Month', RUNNERSLOG),0,0,0);
+		$Test->drawTitle(15,20,"The Percentage of Miles per Month",0,0,0);
 	}
  
 	//Draw the title Copyright. Please dont edit this.  
@@ -1059,7 +1102,7 @@ add_shortcode('runners_log_pie_distance', 'runners_log_pie_distance');
 	// is there something to do?
 	if (sizeof($hours_per_month) == 0)
 	{
-		_e('No data available.', RUNNERSLOG)."<br/>\n";
+		echo "No data available.<br/>\n";
 		return;
 	}
 
@@ -1114,6 +1157,7 @@ add_shortcode('runners_log_pie_distance', 'runners_log_pie_distance');
  
 	//Insert the image and give it a absolute path
 	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-pie-hours.png', __FILE__ ) . '" alt="Training Graph Pie Hours" />';
+
  
  //End function runners_log_pie_hours()
 }
@@ -1230,7 +1274,7 @@ add_shortcode('runners_log_pie_calories', 'runners_log_pie_calories');
 	// is there something to do?
 	if (sizeof($distance_per_month) == 0)
 	{
-		_e('No data available.', RUNNERSLOG)."<br/>\n";
+		echo "No data available.<br/>\n";
 		return;
 	}
 
@@ -1302,7 +1346,7 @@ add_shortcode('runners_log_pie_calories', 'runners_log_pie_calories');
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-bar-distance.png');
  
 	//Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-distance.png', __FILE__ ) . '" alt="'.__('Training Bar Graph Distance', RUNNERSLOG).'" />';
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-distance.png', __FILE__ ) . '" alt="Training Bar Graph Distance" />';
 
 //End function runners_log_bar_distance()
 }
@@ -1424,7 +1468,7 @@ add_shortcode('runners_log_bar_hours', 'runners_log_bar_hours');
 	// is there something to do?
 	if (sizeof($calories_per_month) == 0)
 	{
-		_e('No data available.', RUNNERSLOG)."<br/>\n";
+		echo "No data available.<br/>\n";
 		return;
 	}
 
@@ -1485,7 +1529,7 @@ add_shortcode('runners_log_bar_hours', 'runners_log_bar_hours');
 	$Test->Render(ABSPATH.PLUGINDIR.'/runners-log/Cache/runners-log-graph-bar-calories.png');
  
 	//Insert the image and give it a absolute path
-	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-calories.png', __FILE__ ) . '" alt="'.__('Training Bar Graph Calories', RUNNERSLOG).'" />';
+	echo '<img src="' . plugins_url( 'Cache/runners-log-graph-bar-calories.png', __FILE__ ) . '" alt="Training Bar Graph Calories" />';
 
 //End function runners_log_bar_calories()
 }
@@ -1604,6 +1648,7 @@ register_activation_hook( __FILE__, 'runnerslog_activate' );
 		update_option('runnerslog_show_distance2009', '1');
 		update_option('runnerslog_show_distance2010', '1');
 		update_option('runnerslog_show_distance2011', '1');
+		update_option('runnerslog_show_distance2012', '1');
 		update_option('runnerslog_show_distance_sum', '1');
 		update_option('runnerslog_show_garminmap', '1');
 	}

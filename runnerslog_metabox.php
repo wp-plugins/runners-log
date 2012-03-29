@@ -1,6 +1,4 @@
 <?php
-                                                   
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
 
 include_once('Includes/runnerslog_weather_functions.php');
 

@@ -1,5 +1,5 @@
 <div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log V0<sub>2</sub>maxulator Calculator', 'runnerslog_ops' ) . "</h2>"; ?>
+<?php echo "<h2>" . __( 'Runners Log V0<sub>2</sub>maxulator Calculator', 'RUNNERSLOG' ) . "</h2>"; ?>
 <?php
 $distancetype = get_option('runnerslog_distancetype');
 $coopers = get_option('runnerslog_coopers');
@@ -25,7 +25,7 @@ $age = get_option('runnerslog_age');
 
 <h3>The Cooper test is a test of physical fitness. It was designed by Kenneth H. Cooper in 1968 for US military use. In the original form, the point of the test is to run as far as possible within 12 minutes.</h3>
 
-<form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+<form name="RUNNERSLOG_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />
 	<table class="form-table">
 		<tbody>
@@ -45,7 +45,7 @@ $age = get_option('runnerslog_age');
 		</tbody>
 	</table>
 	<p class="submit">
-		<input type="submit" name="Submit" value="<?php _e('Calculate Vo2-max', 'runnerslog_ops' ) ?>" />
+		<input type="submit" name="Submit" value="<?php _e('Calculate Vo2-max', 'RUNNERSLOG' ) ?>" />
 	</p>
 </form>
 </div>

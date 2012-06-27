@@ -1,5 +1,5 @@
 <div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log VDOT Race Time Calculator', 'runnerslog_ops' ) . "</h2>"; ?>
+<?php echo "<h2>" . __( 'Runners Log VDOT Race Time Calculator', 'RUNNERSLOG' ) . "</h2>"; ?>
 
 <?php
 //We have to be sure that we have the variables needed for the calculations
@@ -97,7 +97,7 @@ $vdot30 = array("30", "8:30", "9:11", "17:56", "19:19", "30:40", "50:32", "50:50
 VDOT is an adjusted V02max (which may or may not match a laboratory-generated V02max), which tells you how you might race for other distances associated with the same VDOT.</br>
 A longer race (15K to 25K, for example) will usually be a better marathon predictor than would be a 1-mile or 5K race.</h3>
 
-<form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+<form name="RUNNERSLOG_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />
 	<table class="form-table">
 		<tbody>
@@ -125,7 +125,7 @@ A longer race (15K to 25K, for example) will usually be a better marathon predic
 		</tbody>
 	</table>
 	<p class="submit">
-		<input type="submit" name="Submit" value="<?php _e('Calculate VDOT-value', 'runnerslog_ops' ) ?>" />
+		<input type="submit" name="Submit" value="<?php _e('Calculate VDOT-value', 'RUNNERSLOG' ) ?>" />
 	</p>
 </form>
 

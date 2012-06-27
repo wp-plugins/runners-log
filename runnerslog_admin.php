@@ -162,6 +162,7 @@
 					if ( $unittype == metric ) {
 						echo '<input name="runnerslog_cm" type="text" id="runnerslog_cm"  value="', form_option('runnerslog_cm'), '" class="small-text" />';
 						echo '<span class="description"> Centimeters</span>';
+
 							} else {
 						echo '<input name="runnerslog_feets" type="text" id="runnerslog_feets"  value="', form_option('runnerslog_feets'), '" class="small-text" />';
 						echo '<span class="description"> Feet </span>';

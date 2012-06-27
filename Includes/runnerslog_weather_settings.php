@@ -1,9 +1,6 @@
 <div class="wrap">
 
-
-<p><?php 
-
-load_plugin_textdomain(RUNNERSLOG,PLUGINDIR.'runners-log/languages','rlanguages');
+<p><?php
 
 echo "<h2>" . __( 'Runners Log - Weather Settings' ) . "</h2>"; ?></p>
 

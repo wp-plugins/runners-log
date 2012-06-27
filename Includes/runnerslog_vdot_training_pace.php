@@ -3,8 +3,6 @@
 
 <?php
 
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
-
 //We have to be sure that we have the variables needed for the calculations
 $vdot_distance = get_option('runnerslog_vdot_distance');
 $vdot_time = get_option('runnerslog_vdot_time');

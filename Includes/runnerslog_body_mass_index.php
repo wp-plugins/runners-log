@@ -1,8 +1,6 @@
 <div class="wrap">
 <p><?php 
 
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
-
 echo "<h2>" . __( 'Runners Log - Body Mass Calculator' ) . "</h2>"; ?></p>
 
 <?php 

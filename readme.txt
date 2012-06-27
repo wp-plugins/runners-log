@@ -3,8 +3,8 @@ Contributors: frold, TheRealEyeless, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.3
-Stable tag: 3.1.0
+Tested up to: 3.4
+Stable tag: 3.2.0
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
@@ -28,15 +28,18 @@ This section describes how to install the plugin and get it working.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Use this short code `[runners_log_basic]` in a post or page. 
 Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have basic statistics. It gives you data like: 
-    * Meters: 8500
-    * Time: 00:49:59
-    * Km/hour: 10.2
-    * Min/km: 05:52 minutes
-    * Puls average: 172 bpmis 86% of Max HR and 80% of HRR
-    * Calories: 654 C
-    * Garmin Connect Link: http://connect.garmin.com/activity/id
-    * Km in 2009: 693.7 km based on 122 runs with an avg of 5.69 km
-    * Km in 2010: 100.8 km based on 12 runs with an avg of 8.4 km
+	* Meters: 8500
+    	* Time: 00:49:59
+    	* Km/hour: 10.2
+    	* Min/km: 05:52 minutes
+    	* Puls average: 172 bpmis 86% of Max HR and 80% of HRR
+    	* Calories: 654 C
+    	* Garmin Connect Link: http://connect.garmin.com/activity/id
+	* 2009: 693.7 km based on 122 runs with an avg of 5.69 km
+	* 2010: 727.9 km based on 85 runs with an avg of 8.56 km
+	* 2011: 539.3 km based on 70 runs with an avg of 7.7 km
+	* 2012: 131.4 km based on 30 runs with an avg of 4.38 km
+	* At all: 2292.1 km based on 351 runs with an avg of 6.53 km
 	* ~embed garmin connect map~
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have a chart of your total distance and hours per month.
 5. Runners Log support the following short codes using pChart
@@ -73,14 +76,13 @@ Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runn
 7. You only want to have the chart and stats to show up in the category where the sports data is then see FAQ.
 8. Runners Log support the following short codes when you want to use Google Chart
 	* `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
-
-    *Type: bar, graph, pie, 3dpie
-    *Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"
-    *Year: 2009, 2010, 2011, 2012
-    *Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec
-    *Color: Is the color scheme used eg: "224499" for the html color #224499
-    *Width: The width of the chart: Default: 475 pixel
-    *Height: The height of the chart: Default: 250 pixel
+    	* `Type: bar, graph, pie, 3dpie`
+    	* `Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"`
+    	* `Year: 2009, 2010, 2011, 2012`
+    	* `Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec`
+    	* `Color: Is the color scheme used eg: "224499" for the html color #224499`
+    	* `Width: The width of the chart: Default: 475 pixel`
+    	* `Height: The height of the chart: Default: 250 pixel`
 
 == Frequently Asked Questions ==
 
@@ -98,8 +100,8 @@ Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runn
 	[runners_log_bar_hours]
 	[runners_log_bar_calories]
 	[runners_log_garminmap]
-    [runners_log_weather]
-    [runners_log_weather_footer]`
+    	[runners_log_weather]
+    	[runners_log_weather_footer]`
 
 = Howto use Google Chart =
 Eg: `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
@@ -387,6 +389,12 @@ Version: 1.2
 * FL - Roll back so we no longer supports multi language!
 * FL - Added support for 2012: http://wordpress.org/support/topic/764998
 
+= 3.2.0 =
+* FL - Minor bug fixs regarding the old multilanguage function
+* FL - Fixed bug in runnerslog_stats_graphs.php resulting in not printing all graphs
+* FL - Fixed minor bug in running related calculators
+* FL - Tested in WP 3.4
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -449,6 +457,9 @@ Februar 2012
 = 3.1.0 =
 Ultimo Marts 2012
 
+= 3.2.0 =
+Ultimo June 2012
+
 == To Do ==
-	* gear list (started)
-	* auto import from garmin connect
+* gear list (started)
+* auto import from garmin connect

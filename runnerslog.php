@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, michaellasmanis
-Version: 3.1.0
+Version: 3.2.0
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -1189,6 +1189,7 @@ add_shortcode('runners_log_pie_hours', 'runners_log_pie_hours');
 	{
 		echo "No data available.<br/>\n";
 		return;
+
 	}
 
 	//Convert the Value 1 -> Jan, etc

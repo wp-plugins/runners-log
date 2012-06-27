@@ -1,8 +1,6 @@
 <div class="wrap">
 <?php 
 
-load_plugin_textdomain(RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
-
 echo "<h2>" . __( 'Runners Log - HR Training Zones Calculator', RUNNERSLOG). "</h2>"; ?>
 <?php 
 //Get the hrrest and hrmax
@@ -24,7 +22,7 @@ $hrr95 = ROUND((($hrmax-$hrrest)*0.95)+$hrrest,0);  // 95% of HRR
 $hrr100 = ROUND((($hrmax-$hrrest)*1)+$hrrest,0);	// 100% of HRR
 
 if ( $hrrest AND $hrmax ) {
-echo '<p>'.__('Based on a Resting Heart Rate at <b>', RUNNERSLOG).$hrrest.'</b>'. __('and a Maximum Heart Rate at <b>', RUNNERSLOG) .$hrmax.'</b>'. __('the commanded training zones are:', RUNNERSLOG).'</p>';
+echo '<p>'.__('Based on a Resting Heart Rate at <b>', RUNNERSLOG).$hrrest.'</b> '. __('and a Maximum Heart Rate at <b>', RUNNERSLOG) .$hrmax.'</b> '. __('the commanded training zones are:', RUNNERSLOG).'</p>';
 echo '
 <h2>
 	'. __('Heart Rate Training Zones (Beginner)', RUNNERSLOG).'</h2>

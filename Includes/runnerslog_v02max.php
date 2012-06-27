@@ -1,9 +1,6 @@
 <div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log - V0<sub>2</sub>max Calculator', RUNNERSLOG) . "</h2>"; ?>
+<?php echo "<h2>" . __( 'Runners Log V0<sub>2</sub>maxulator Calculator', 'runnerslog_ops' ) . "</h2>"; ?>
 <?php
-
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
-
 $distancetype = get_option('runnerslog_distancetype');
 $coopers = get_option('runnerslog_coopers');
 $unittype = get_option('runnerslog_unittype');
@@ -26,7 +23,7 @@ $age = get_option('runnerslog_age');
 	}
 ?>
 
-<h3><?php _e('The Cooper test is a test of physical fitness. It was designed by Kenneth H. Cooper in 1968 for US military use. In the original form, the point of the test is to run as far as possible within 12 minutes.', RUNNERSLOG) ?></h3>
+<h3>The Cooper test is a test of physical fitness. It was designed by Kenneth H. Cooper in 1968 for US military use. In the original form, the point of the test is to run as far as possible within 12 minutes.</h3>
 
 <form name="runnerslog_ops_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="runnerslog_op_hidden" value="Y" />
@@ -48,7 +45,7 @@ $age = get_option('runnerslog_age');
 		</tbody>
 	</table>
 	<p class="submit">
-		<input type="submit" name="Submit" value="<?php _e('Calculate Vo2-max', RUNNERSLOG) ?>" />
+		<input type="submit" name="Submit" value="<?php _e('Calculate Vo2-max', 'runnerslog_ops' ) ?>" />
 	</p>
 </form>
 </div>
@@ -85,12 +82,12 @@ if ($unittype == metric) {
 }
  
 if ( $coopers && $gender && $weight ) {
-	echo __('Based on your gender <b>', RUNNERSLOG),$gender,__e('</b> and your weight <b>', RUNNERSLOG),$weight,'</b> <b>',$weightlang,__('</b> and the distance <b>', RUNNERSLOG),$coopers,'</b> <b>',$distancelang,__('</b> in 12min gives you the following "V0<sub>2</sub>max" and "absorption of oxygen value".', RUNNERSLOG);
+	echo 'Based on your gender <b>',$gender,'</b> and your weight <b>',$weight,'</b> <b>',$weightlang,'</b> and the distance <b>',$coopers,'</b> <b>',$distancelang,'</b> in 12min gives you the following "V0<sub>2</sub>max" and "absorption of oxygen value".';
 	echo '<p>V0<sub>2</sub>max <b>',ROUND($v02max,1),'</b> ml/kg/min</p>';
-	echo '<p>'.__('Absorption of oxygen', RUNNERSLOG).' <b>',ROUND($absorption02,1),'</b> l/min</p>';
-	echo '<p>'.__('Below you can compare the V0<sub>2</sub>max with your age. You find a chart for men, women and elite.', RUNNERSLOG).'</p>';
+	echo '<p>Absorption of oxygen <b>',ROUND($absorption02,1),'</b> l/min</p>';
+	echo '<p>Below you can compare the V0<sub>2</sub>max with your age. You find a chart for men, women and elite.</p>';
 		} else {
-	_e('To calculate your "V0<sub>2</sub>max" and "Absorption of oxygen value" you need to specify your weight and gender in the settings. And a distance above.', RUNNERSLOG);
+	echo 'To calculate your "V0<sub>2</sub>max" and "Absorption of oxygen value" you need to specify your weight and gender in the settings. And a distance above.';
 }
 ?>
 
@@ -513,5 +510,3 @@ if ( $coopers && $gender && $weight ) {
 		</tr>
 	</tbody>
 </table>
-
-</div>

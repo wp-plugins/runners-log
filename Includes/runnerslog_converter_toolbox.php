@@ -1,6 +1,5 @@
 ﻿<div class="wrap">
 <?php 
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
 
 echo "<h2>" . __( 'Runners Log - Coverter Toolbox', RUNNERSLOG) . "</h2>"; ?>
 

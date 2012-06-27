@@ -1,10 +1,7 @@
-﻿<div class="wrap">
-<?php echo "<h2>" . __( 'Runners Log - VDOT Race Time Calculator', RUNNERSLOG) . "</h2>"; ?>
+<div class="wrap">
+<?php echo "<h2>" . __( 'Runners Log VDOT Race Time Calculator', 'runnerslog_ops' ) . "</h2>"; ?>
 
 <?php
-
-load_plugin_textdomain( RUNNERSLOG,PLUGINDIR.'runners-log/languages','runners-log/languages');
-
 //We have to be sure that we have the variables needed for the calculations
 $vdot_distance = get_option('runnerslog_vdot_distance');
 $vdot_time = get_option('runnerslog_vdot_time');
@@ -128,7 +125,7 @@ A longer race (15K to 25K, for example) will usually be a better marathon predic
 		</tbody>
 	</table>
 	<p class="submit">
-		<input type="submit" name="Submit" value="<?php _e('Calculate VDOT-value', RUNNERSLOG) ?>" />
+		<input type="submit" name="Submit" value="<?php _e('Calculate VDOT-value', 'runnerslog_ops' ) ?>" />
 	</p>
 </form>
 

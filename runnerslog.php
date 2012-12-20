@@ -6,7 +6,7 @@ Description: This plugin let you convert your blog into a training log and let y
 Author: Frederik Liljefred
 Author URI: http://www.liljefred.dk
 Contributors: frold, TheRealEyeless, michaellasmanis
-Version: 3.2.0
+Version: 3.5.0
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Requires WordPress 2.7 or later.
 
@@ -142,6 +142,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
 		$show_distance2011 = get_option('runnerslog_show_distance2011');
 		$show_distance2012 = get_option('runnerslog_show_distance2012');
+		$show_distance2013 = get_option('runnerslog_show_distance2013');
 		$show_distance_sum = get_option('runnerslog_show_distance_sum');
 		$show_garminmap = get_option('runnerslog_show_garminmap');
 	
@@ -195,7 +196,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			AND $wpdb->posts.post_status = 'publish'	
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
 
-			AND year($wpdb->posts.post_date)='2009'"));
+			AND year($wpdb->posts.post_date)='2009'",0,0));
 		$km_sum_2009 = round($distance_sum_2009/1000, 1); // Convert distance to km when the user use "meters"
 
 		// Connect to DB and calculate the number of runs in 2009
@@ -205,7 +206,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'	
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-			AND year($wpdb->posts.post_date)='2009'"));
+			AND year($wpdb->posts.post_date)='2009'",0,0));
 	
 		if ($distance_sum_2009) // Calculate the avg per run in 2009
 		{
@@ -221,7 +222,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-			AND year($wpdb->posts.post_date)='2010'"));
+			AND year($wpdb->posts.post_date)='2010'",0,0));
 		$km_sum_2010 = round($distance_sum_2010/1000, 1); // Convert distance to km when the user use "meters"
 	
 		//Connect to DB and calculate the number of runs in 2010
@@ -231,7 +232,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'	
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-			AND year($wpdb->posts.post_date)='2010'"));
+			AND year($wpdb->posts.post_date)='2010'",0,0));
 	
 		if ( $distance_sum_2010 ) // Calculate the avg per run in 2010
 		{
@@ -247,7 +248,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-			AND year($wpdb->posts.post_date)='2011'"));
+			AND year($wpdb->posts.post_date)='2011'",0,0));
 		$km_sum_2011 = round($distance_sum_2011/1000, 1); // Convert distance to km when the user use "meters"
 	
 		//Connect to DB and calculate the number of runs in 2011
@@ -257,7 +258,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'	
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-			AND year($wpdb->posts.post_date)='2011'"));
+			AND year($wpdb->posts.post_date)='2011'",0,0));
 	
 		if ( $distance_sum_2011 ) // Calculate the avg per run in 2011
 		{
@@ -273,7 +274,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-			AND year($wpdb->posts.post_date)='2012'"));
+			AND year($wpdb->posts.post_date)='2012'",0,0));
 		$km_sum_2012 = round($distance_sum_2012/1000, 1); // Convert distance to km when the user use "meters"
 	
 		//Connect to DB and calculate the number of runs in 2012
@@ -283,12 +284,38 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'	
 			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
-			AND year($wpdb->posts.post_date)='2012'"));
+			AND year($wpdb->posts.post_date)='2012'",0,0));
 	
 		if ( $distance_sum_2012 ) // Calculate the avg per run in 2012
 		{
 			$avg_km_per_run_2012 = ROUND(($distance_sum_2012/1000) / $number_of_runs_2012, 2);
 			$avg_miles_per_run_2012 = ROUND(($distance_sum_2012) / $number_of_runs_2012, 2);
+		}
+
+ /* 2 0 1 3 */	
+		// Connect to DB and calculate the sum of distance runned in 2013
+		$distance_sum_2013 = $wpdb->get_var($wpdb->prepare("
+			SELECT SUM($wpdb->postmeta.meta_value), COUNT($wpdb->postmeta.meta_value) as numberofrun2013
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2013'",0,0));
+		$km_sum_2013 = round($distance_sum_2013/1000, 1); // Convert distance to km when the user use "meters"
+	
+		//Connect to DB and calculate the number of runs in 2013
+		$number_of_runs_2013 = $wpdb->get_var($wpdb->prepare("
+			SELECT COUNT($wpdb->postmeta.meta_value)
+			FROM $wpdb->postmeta, $wpdb->posts 
+			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
+			AND $wpdb->posts.post_status = 'publish'	
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id  
+			AND year($wpdb->posts.post_date)='2013'",0,0));
+	
+		if ( $distance_sum_2013 ) // Calculate the avg per run in 2013
+		{
+			$avg_km_per_run_2013 = ROUND(($distance_sum_2013/1000) / $number_of_runs_2013, 2);
+			$avg_miles_per_run_2013 = ROUND(($distance_sum_2013) / $number_of_runs_2013, 2);
 		}
 	
  /* S U M  A T  A L L */	
@@ -298,7 +325,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			FROM $wpdb->postmeta, $wpdb->posts 
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'
-			AND $wpdb->postmeta.post_id=$wpdb->posts.id"));
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id",0,0));
 		$km_sum = round($distance_sum/1000, 1); // Convert distance to km when the user use "meters"
 	
 		//Connect to DB and calculate the number of runs at all
@@ -307,7 +334,7 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			FROM $wpdb->postmeta, $wpdb->posts 
 			WHERE $wpdb->postmeta.meta_key='_rl_distance_value'
 			AND $wpdb->posts.post_status = 'publish'	
-			AND $wpdb->postmeta.post_id=$wpdb->posts.id"));
+			AND $wpdb->postmeta.post_id=$wpdb->posts.id",0,0));
 	
 		if ( $distance_sum ) // Calculate the avg per run at all
 		{
@@ -491,6 +518,29 @@ register_activation_hook(__FILE__, 'wp_gear_manager_install');
 			if ($number_of_runs_2012 > '1') 
 			{		
 				echo "<li><span class='post-meta-key'>2012:</span> <strong>$distance_sum_2012</strong> miles based on <strong>$number_of_runs_2012</strong> runs with an avg of <strong>$avg_miles_per_run_2012</strong> mi</li>";
+			}
+		}
+	}
+	if ($show_distance2013 == '1') // Totals 2013
+	{	
+		if ($distancetype == 'meters') 
+		{
+			if ($number_of_runs_2013 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2013:</span> <strong>$km_sum_2013</strong> km based on <strong>$number_of_runs_2013</strong> run with an avg of <strong>$avg_km_per_run_2013</strong> km</li>";
+			} 
+			if ($number_of_runs_2013 > '1') 
+			{
+				echo "<li><span class='post-meta-key'>2013:</span> <strong>$km_sum_2013</strong> km based on <strong>$number_of_runs_2013</strong> runs with an avg of <strong>$avg_km_per_run_2013</strong> km</li>";
+			}
+		} else {
+			if ($number_of_runs_2013 == '1') 
+			{
+				echo "<li><span class='post-meta-key'>2013:</span> <strong>$distance_sum_2013</strong> miles based on <strong>$number_of_runs_2013</strong> run with an avg of <strong>$avg_miles_per_run_2013</strong> mi</li>";
+			} 
+			if ($number_of_runs_2013 > '1') 
+			{		
+				echo "<li><span class='post-meta-key'>2013:</span> <strong>$distance_sum_2013</strong> miles based on <strong>$number_of_runs_2013</strong> runs with an avg of <strong>$avg_miles_per_run_2032</strong> mi</li>";
 			}
 		}
 	}
@@ -1190,6 +1240,7 @@ add_shortcode('runners_log_pie_hours', 'runners_log_pie_hours');
 		echo "No data available.<br/>\n";
 		return;
 
+
 	}
 
 	//Convert the Value 1 -> Jan, etc
@@ -1650,6 +1701,7 @@ register_activation_hook( __FILE__, 'runnerslog_activate' );
 		update_option('runnerslog_show_distance2010', '1');
 		update_option('runnerslog_show_distance2011', '1');
 		update_option('runnerslog_show_distance2012', '1');
+		update_option('runnerslog_show_distance2013', '1');
 		update_option('runnerslog_show_distance_sum', '1');
 		update_option('runnerslog_show_garminmap', '1');
 	}

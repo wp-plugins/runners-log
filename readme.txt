@@ -3,14 +3,12 @@ Contributors: frold, TheRealEyeless, michaellasmanis
 Donate link: http://www.liljefred.dk
 Tags: plugin, sport, training, running, activity log, fitness, stats, statistics, garmin, VDOT, BMI, calculator, Training Zones, Race Time Calculator, Training Pace, Body Mass Index, gear, gear management
 Requires at least: 2.7
-Tested up to: 3.4
-Stable tag: 3.2.0
+Tested up to: 3.5
+Stable tag: 3.5.0
 
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
 == Description ==
-ALERT: THIS VERSION NO LONGER SUPPORT MULTI LANGUAGE!
-
 This plugin let you convert your blog into a training log and let you track your activities. You get advance statistics and running related calculators. See screenshots.
 
 You'r now able to use a variety of calculators; Training Zones Calculator, VDOT calculator, V02max-Calculator, Race Time Calculator, Training Pace Calculator, Body Mass Index Calculator, Calculate Predicted effect of change in weight.
@@ -39,6 +37,7 @@ Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runn
 	* 2010: 727.9 km based on 85 runs with an avg of 8.56 km
 	* 2011: 539.3 km based on 70 runs with an avg of 7.7 km
 	* 2012: 131.4 km based on 30 runs with an avg of 4.38 km
+	* 2013: 100.0 km based on 10 runs with an avg of 10.00 km
 	* At all: 2292.1 km based on 351 runs with an avg of 6.53 km
 	* ~embed garmin connect map~
 4. Use this short code `[runners_log_graph]` in a post or page. Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runners_log_basic(); ?>` in your templates to have a chart of your total distance and hours per month.
@@ -78,7 +77,7 @@ Alternativly place this `<?php if (function_exists(runners_log_basic)) echo runn
 	* `[runners_log_gchart type="pie" format="d" year="2010" month="May" color="224499" width="600" height="300"]`
     	* `Type: bar, graph, pie, 3dpie`
     	* `Format: d="distance", ds="distance sum", ts="time sum",  cs="calories sum", p="pulse average"`
-    	* `Year: 2009, 2010, 2011, 2012`
+    	* `Year: 2009, 2010, 2011, 2012, 2013`
     	* `Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec`
     	* `Color: Is the color scheme used eg: "224499" for the html color #224499`
     	* `Width: The width of the chart: Default: 475 pixel`
@@ -395,6 +394,10 @@ Version: 1.2
 * FL - Fixed minor bug in running related calculators
 * FL - Tested in WP 3.4
 
+= 3.5.0 =
+* FL - Tested in WP 3.5
+* FL - Added support for 2013
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -459,6 +462,9 @@ Ultimo Marts 2012
 
 = 3.2.0 =
 Ultimo June 2012
+
+= 3.5.0 =
+Ultimo December 2012
 
 == To Do ==
 * gear list (started)

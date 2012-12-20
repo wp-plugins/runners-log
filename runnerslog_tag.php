@@ -2,7 +2,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Eg: [runners_log year="2010" month="May" type="pie"]					//
-// Year: 2009, 2010, 2011, 2012								//
+// Year: 2009, 2010, 2011, 2012, 2013							//
 // Month: Jan, Feb, Marts, April, May, June, July, Aug, Sep, Oct, Nov, Dec		//
 // Type: graph, bar, pie, mini								//
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -10,7 +10,7 @@
 //Let us start the function and set the default values, if not set in the [runners_log]-tag
 function runners_log_func($atts) {
 	extract(shortcode_atts(array(
-		'year' => '2011',
+		'year' => '2012',
 		'month' => '',
 		'type' => 'bar',
 	), $atts));

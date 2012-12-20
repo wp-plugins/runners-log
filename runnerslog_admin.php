@@ -28,6 +28,7 @@
 		$show_distance2010 = $_POST['runnerslog_show_distance2010'];
 		$show_distance2011 = $_POST['runnerslog_show_distance2011'];
 		$show_distance2012 = $_POST['runnerslog_show_distance2012'];
+		$show_distance2013 = $_POST['runnerslog_show_distance2013'];
 		$show_distance_sum = $_POST['runnerslog_show_distance_sum'];
 		$show_garminmap = $_POST['runnerslog_show_garminmap'];
 		update_option('runnerslog_distancetype', $distancetype);
@@ -57,6 +58,7 @@
 		update_option('runnerslog_show_distance2010', $show_distance2010);
 		update_option('runnerslog_show_distance2011', $show_distance2011);
 		update_option('runnerslog_show_distance2012', $show_distance2012);
+		update_option('runnerslog_show_distance2013', $show_distance2013);
 		update_option('runnerslog_show_distance_sum', $show_distance_sum);
 		update_option('runnerslog_show_garminmap', $show_garminmap);
 		?>
@@ -91,6 +93,7 @@
 		$show_distance2010 = get_option('runnerslog_show_distance2010');
 		$show_distance2011 = get_option('runnerslog_show_distance2011');
 		$show_distance2012 = get_option('runnerslog_show_distance2012');
+		$show_distance2013 = get_option('runnerslog_show_distance2013');
 		$show_distance_sum = get_option('runnerslog_show_distance_sum');
 		$show_garminmap = get_option('runnerslog_show_garminmap');
 	}
@@ -162,6 +165,7 @@
 					if ( $unittype == metric ) {
 						echo '<input name="runnerslog_cm" type="text" id="runnerslog_cm"  value="', form_option('runnerslog_cm'), '" class="small-text" />';
 						echo '<span class="description"> Centimeters</span>';
+
 
 							} else {
 						echo '<input name="runnerslog_feets" type="text" id="runnerslog_feets"  value="', form_option('runnerslog_feets'), '" class="small-text" />';
@@ -351,6 +355,7 @@
 			<tr>
 				<th scope="row" colspan="2" class="th-full">
 				<label for="runnerslog_show_distance2009">
+
 				<input name="runnerslog_show_distance2009" id="runnerslog_show_distance2009" value="1"<?php checked('1', get_option('runnerslog_show_distance2009')); ?> type="checkbox">
 				<?php _e('Show Distance in 2009') ?></label>
 				</th>
@@ -380,6 +385,15 @@
 				<label for="runnerslog_show_distance2012">
 				<input name="runnerslog_show_distance2012" id="runnerslog_show_distance2012" value="1"<?php checked('1', get_option('runnerslog_show_distance2012')); ?> type="checkbox">
 				<?php _e('Show Distance in 2012') ?></label>
+				</th>
+			</tr>
+
+			<!-- Show distance 2013: runnerslog_show_distance2013 -->
+			<tr>
+				<th scope="row" colspan="2" class="th-full">
+				<label for="runnerslog_show_distance2013">
+				<input name="runnerslog_show_distance2013" id="runnerslog_show_distance2013" value="1"<?php checked('1', get_option('runnerslog_show_distance2013')); ?> type="checkbox">
+				<?php _e('Show Distance in 2013') ?></label>
 				</th>
 			</tr>
 
